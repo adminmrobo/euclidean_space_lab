@@ -35,4 +35,10 @@ assert ok(d(A, 10), 50.01) and ok(d(B, 10), 12.21) and ok(d(C, 10), 50.49)
 assert ok(d(A, .2, .2), 1.02) and ok(d(B, .2, .2), 1.41) and ok(d(C, .2, .2), 1.72)
 R = 6371
 assert round(R*pi/2) == 10008 and round(2*R*sin(pi/4)) == 9010 and round(R*pi) == 20015 and 2*R == 12742
+N = (158, 49)
+dd = lambda a, f=1, g=1: hypot((a[0]-N[0])*f, (a[1]-N[1])*g)
+L_, M_, B_ = (155, 51), (159, 43), (163, 48)
+assert ok(dd(L_, 10), 30.07) and ok(dd(M_, 10), 11.66) and ok(dd(B_, 10), 50.01)
+assert ok(dd(L_, .2, .2), 0.72) and ok(dd(M_, .2, .2), 1.22) and ok(dd(B_, .2, .2), 1.02)
+assert min([L_, M_, B_], key=lambda a: dd(a, 10)) == M_ and min([L_, M_, B_], key=lambda a: dd(a, .2, .2)) == L_
 print("검산 통과")

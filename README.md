@@ -36,7 +36,7 @@ docs/                 공간 좌표 해설 제작 지침서, 기획안
 숫자 계산 오류는 없었습니다.
 
 ## 남은 일
-- 표지·장면 그림(지금은 CSS 대체 표지) — 프롬프트는 `docs/PLAN_euclidean_space.md` §11
+- 표지·장면 그림(지금은 CSS 대체 표지) — 요청 목록·프롬프트는 `docs/IMAGE_PROMPTS.md`
 - 번역(언어팩 en·zh·ja·uz·ru·vi), ahnboat_lab_cover_status 명부 등록
 
 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.

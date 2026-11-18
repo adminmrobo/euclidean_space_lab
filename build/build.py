@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from content_rooms import ROOMS
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VER = "v1.0"
+VER = "v1.1"
 DATE = "2026-11-19"
 SITE = "https://adminmrobo.github.io/euclidean_space_lab/"
 AUTHOR_URL = "https://adminmrobo.github.io/who_am_i/who_am_i.html"
@@ -232,7 +232,7 @@ def footer(extra_links):
 <tr><td>[2]</td><td>안상선, 「공간 좌표 해설 제작 지침서」 v1.0 (docs/SPACE_COORDINATE_GUIDE.md)</td><td>용어 대조표, 공간 사다리, 방 짜임</td></tr>
 </tbody></table></div>
 <h3>예시값·설명용 숫자</h3>
-<p>시아·모아의 키·몸무게·허리, 취향표, 키 세 번 잰 값, 편의점 위치, 고객 가·나·다와 새 고객의 키·몸무게는 설명을 위해 만든 예시값입니다.</p>
+<p>시아·모아의 키·몸무게·허리, 취향표, 키 세 번 잰 값, 편의점 위치, 고객 가~바와 새 고객의 키·몸무게는 설명을 위해 만든 예시값입니다.</p>
 <p>캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다. 캐릭터 그림: fruitfly-lab-expressions.</p>
 <p>글 · 안상선 ((주)M-Robo 대표) · <a href="{AUTHOR_URL}">저자 소개</a> · {DATE} · {VER}</p>
 <p>{links}</p>
@@ -293,7 +293,7 @@ def build_orient():
      ("bag2", "가방 속 ② 자 — 피타고라스 정리", ["직각삼각형에서 빗변² = 가로² + 세로²입니다.", "가로 3, 세로 4면 빗변은 5입니다.", "3번 방의 \"두 점 사이 거리\"가 바로 이 식입니다."],
       "o2", "파란 꼭짓점을 끌어 보세요", "", "학교 수학 복습(중학교 피타고라스 정리)"),
      ("bag3", "가방 속 ③ 각도기 — sin·cos", ["반지름 1인 원 위의 점은 (cos θ, sin θ)입니다.", "cos θ는 가로로 얼마나 갔나, sin θ는 세로로 얼마나 갔나입니다.", "4번 방의 각도, 10번 방의 호와 현에 씁니다."],
-      "o3", "각도를 바꿔 보세요", '<label>θ <input type="range" min="0" max="360" step="15" value="45" aria-label="각도"></label>', f'<a href="{BOWL}3_arrow_field.html">좌표축 위의 그릇 ③편 — 화살표 밭(방향과 크기)</a>'),
+      "o3", "각도를 바꿔 보세요", '<label>θ <input type="range" min="0" max="360" step="15" value="45" aria-label="각도"></label>', '<a href="01_ruler_rooms.html#r04">①편 4번 방 — 겹침 점수와 각도</a>(학교 수학 복습: 삼각함수)'),
     ]
     for bid, title, lines, key, note, ctrl, link in bags:
         li = "".join(f"<li>{E(x)}</li>" for x in lines)
@@ -368,7 +368,7 @@ def build_part(no):
 def duel_section():
     return f"""<section class="room" id="duel"><div class="wrap"><div class="roomno">대결</div><h2>가장 가까운 이웃 찾기 대결</h2>
 <p class="muted">심판: 조수 하루 · 같은 고객 데이터에서 새 고객과 가장 닮은 사람을 누가 맞히나</p>
-{talk([("haru","e07","새 고객은 165cm, 55kg! 후보는 고객 가·나·다 세 명입니다. 옷 치수가 같을 사람을 맞혀 주세요."),
+{talk([("haru","e07","이번엔 10번 방과 다른 손님입니다. 새 고객은 158cm, 49kg! 후보는 고객 라·마·바 세 명입니다. 옷 치수가 같을 사람을 맞혀 주세요."),
        ("sia","e19","측정 장비가 키를 mm로 줬으니 그대로 재면 되죠! 빠른 게 최고!"),
        ("moa","e09","저는 키는 5cm를, 몸무게는 5kg을 한 칸으로 맞춘 다음 잴게요."),
        ("jupanbot","e16","어차피 같은 사람들이니 답도 같겠죠!"),
@@ -378,8 +378,9 @@ def duel_section():
 <div class="ctrl"><button type="button" data-duel="sia">시아의 답 열기</button><button type="button" data-duel="moa">모아의 답 열기</button><button type="button" data-duel="ans">정답 공개</button></div>
 <div class="readout" aria-live="polite"></div></div>
 <div class="solve"><h4>심판 판정</h4>
-<p>시아 방식은 키 차이가 50(mm)처럼 크게 잡혀, 몸무게 차이 7을 거의 무시합니다. 그래서 키만 비슷한 고객 나를 골랐습니다.</p>
-<p>모아 방식은 두 열을 같은 크기의 칸으로 맞춰, 키와 몸무게를 함께 봤습니다. 고객 가와 거리 1.02로 가장 가깝습니다.</p>
+<p>시아 방식은 키 차이를 mm로 재서 30·10·50처럼 크게 잡습니다. 몸무게 차이 2·6·1kg은 거의 묻힙니다. 그래서 키만 가까운 고객 마를 골랐습니다.</p>
+<p>모아 방식의 "5cm·5kg"은 이 고객들의 키와 몸무게가 보통 그만큼씩 퍼져 있다는 뜻입니다(예시값). 퍼진 만큼을 한 칸으로 삼으니 두 열이 공평해졌습니다. 고객 라와 거리 0.72로 가장 가깝습니다.</p>
+<p>실무에서는 이 "퍼진 정도"를 데이터에서 직접 계산합니다. 10번 방 코드 상자의 표준화가 바로 그 일입니다.</p>
 <p>10번 방의 교훈 그대로입니다. 단위를 맞추지 않으면 숫자가 큰 열이 거리를 독차지합니다.</p></div>
 {talk([("haru","e10","판정! 이번 대결은 모아의 승리입니다."),("moa","e16","단위만 맞췄을 뿐인데요."),("sia","e14","빠른 게 최고는 아니었네요… 다음엔 단위부터 볼게요.")])}
 </div></section>
@@ -402,7 +403,7 @@ def outro_section():
 <p>자(거리)로 얼마나 먼지, 각도기(겹침 점수)로 얼마나 닮았는지, 그림자로 가장 가까운 답이 어디인지 쟀습니다.</p>
 <h3>② 이 방이 못 하는 것</h3>
 <p>칸 수가 정해져 있어야 합니다. 소리·센서 곡선·주가 흐름처럼 끝없이 이어지는 데이터는 담지 못합니다.</p>
-<p>1초짜리 음악 파일만 해도 숫자가 4만 4천 개입니다. 그래도 곡선 자체는 끝없이 이어집니다.</p>
+<p>1초짜리 음악만 해도 CD 음질로 받아 적으면 숫자가 4만 4천 1백 개입니다. 그래도 소리 곡선 자체는 끝없이 이어집니다.</p>
 <h3>③ 힐베르트 공간이란</h3>
 <div class="three" style="border-color:var(--orange);background:var(--orange-soft)"><ul>
 <li>자와 각도기는 그대로 두고, 방을 <b>끝없이</b> 넓힌 것입니다.</li>

@@ -18,7 +18,7 @@ function dash(s,x1,y1,x2,y2,c){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:
 /* 좌표평면 */
 function plane(s,o){var W=o.W,H=o.H,p=o.pad||36;var sx=(W-2*p)/(o.x1-o.x0),sy=(H-2*p)/(o.y1-o.y0);
   if(o.equal){var k=Math.min(sx,sy);sx=sy=k;}
-  var ox=p-o.x0*sx,oy=H-p+o.y0*sy;
+  var ox=p-o.x0*sx,oy=H-p+o.y0*sy;s._sx=sx;
   var P={X:function(x){return ox+x*sx;},Y:function(y){return oy-y*sy;},inv:function(px,py){return[(px-ox)/sx,(oy-py)/sy];},sx:sx,sy:sy};
   var g=el('g',{},s);var st=o.step||1;
   if(o.grid!==false){for(var x=Math.ceil(o.x0/st)*st;x<=o.x1+1e-9;x+=st)el('line',{x1:P.X(x),y1:P.Y(o.y0),x2:P.X(x),y2:P.Y(o.y1),stroke:C.grid},g);
@@ -34,12 +34,16 @@ function plane(s,o){var W=o.W,H=o.H,p=o.pad||36;var sx=(W-2*p)/(o.x1-o.x0),sy=(H
   if(o.x0<=0&&o.y0<=0)txt(g,P.X(0)-14,P.Y(0)+18,'0',{size:12.5,italic:false,fill:C.muted});}
   return P;}
 /* 끌기 */
-function drag(s,node,onMove){var on=false;
+function drag(s,node,onMove){var on=false;var host=s.parentNode;var idx=s.querySelectorAll('g.drag').length;
+  node.setAttribute('tabindex','0');node.setAttribute('role','slider');node.setAttribute('aria-label','끌어서 옮기는 점 (화살표 키로도 움직입니다)');
+  node.addEventListener('keydown',function(e){var k={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];if(!k)return;e.preventDefault();
+    var c=node.querySelector('circle');var st=(s._sx||24)*(+(host.dataset.ksnap||1));host.dataset.kf=idx;onMove(+c.getAttribute('cx')+k[0]*st,+c.getAttribute('cy')+k[1]*st);});
   function pt(e){var m=s.getScreenCTM().inverse();var q=s.createSVGPoint();q.x=e.clientX;q.y=e.clientY;q=q.matrixTransform(m);return q;}
   node.classList.add('drag');
   node.addEventListener('pointerdown',function(e){on=true;node.setPointerCapture(e.pointerId);e.preventDefault();});
   node.addEventListener('pointermove',function(e){if(!on)return;var q=pt(e);onMove(q.x,q.y);});
-  node.addEventListener('pointerup',function(){on=false;});node.addEventListener('pointercancel',function(){on=false;});}
+  node.addEventListener('pointerup',function(){on=false;});node.addEventListener('pointercancel',function(){on=false;});
+  if(host.dataset.kf!=null&&+host.dataset.kf===idx)node.focus({preventScroll:true});}
 function handle(s,x,y,c,label){var g=el('g',{},s);el('circle',{cx:x,cy:y,r:16,fill:C[c],'fill-opacity':.14},g);el('circle',{cx:x,cy:y,r:8,fill:C[c],stroke:'#fff','stroke-width':2},g);return g;}
 function dot(s,x,y,c,r){return el('circle',{cx:x,cy:y,r:r||6,fill:C[c]||c,stroke:'#fff','stroke-width':1.5},s);}
 function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
@@ -109,7 +113,7 @@ P.p01=function(h){var W=600,H=360;var inp=h.parentNode.querySelector('input');va
   inp.addEventListener('input',draw);draw();};
 
 /* ===== 2번 방: 점과 화살표 ===== */
-P.p02=function(h){var W=520,H=440,A=[1,1],B=[4,3];var out=readout(h);
+P.p02=function(h){h.dataset.ksnap='0.5';var W=520,H=440,A=[1,1],B=[4,3];var out=readout(h);
   function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:5,y0:0,y1:4.5,equal:true});
     dash(s,p.X(B[0]),p.Y(B[1]),p.X(B[0]),p.Y(0),'#8a96a3');dash(s,p.X(B[0]),p.Y(B[1]),p.X(0),p.Y(B[1]),'#8a96a3');
     arrow(s,p.X(0),p.Y(0),p.X(A[0]),p.Y(A[1]),'blue',2.5);arrow(s,p.X(0),p.Y(0),p.X(B[0]),p.Y(B[1]),'blue',2);
@@ -142,7 +146,7 @@ P.p03=function(h){var W=520,H=440,A=[1,1],B=[4,5];var out=readout(h);
   draw();};
 
 /* ===== 4번 방: 겹침 점수와 각도 ===== */
-P.p04=function(h){var W=540,H=420,u=[3,0],v=[2,2];var out=readout(h);
+P.p04=function(h){h.dataset.ksnap='0.5';var W=540,H=420,u=[3,0],v=[2,2];var out=readout(h);
   function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-3,x1:4,y0:-2,y1:3.5,equal:true});
     var dt=u[0]*v[0]+u[1]*v[1],nu=3,nv=Math.hypot(v[0],v[1]);
     if(nv>0){var th=Math.acos(clamp(dt/(nu*nv),-1,1));var ang=Math.atan2(v[1],v[0]);var r=34;
@@ -206,7 +210,7 @@ P.p07=function(h){var W=560,H=440;var ins=h.parentNode.querySelectorAll('input')
     dash(s,b0[0],b0[1],pp[0],pp[1],'#9aa5b1');
     if(Math.abs(t)>1e-9)el('line',{x1:pp[0],y1:pp[1],x2:ff[0],y2:ff[1],stroke:C.orange,'stroke-width':2.5,'stroke-dasharray':'2 3'},s);
     var col=sc>6?'blue':(sc<6?'red':'green');dot(s,pp[0],pp[1],col,8);txt(s,pp[0]+10,pp[1]-8,'P('+P_.join(', ')+')',{fill:C[col],size:14});
-    var side=sc>6?'칸막이 <b>위쪽</b>(예: 스팸)':(sc<6?'칸막이 <b>아래쪽</b>(예: 정상 메일)':'<b>칸막이 위</b>(판단 보류)');
+    var side=sc>6?'<b>원점 반대편</b>(예: 스팸)':(sc<6?'<b>원점 쪽</b>(예: 정상 메일)':'<b>칸막이 위(경계)</b> — 판단 보류');
     out.innerHTML='점수 x₁ + 2x₂ + 2x₃ = '+P_[0]+' + '+(2*P_[1])+' + '+(2*P_[2])+' = <b>'+sc+'</b> → 6과 비교하면 '+side+' · 칸막이까지 거리 = |'+sc+' − 6| ÷ 3 = <b>'+fmt(Math.abs(sc-6)/3)+'</b>';}
   ins.forEach(function(i){i.addEventListener('input',draw);});draw();};
 
@@ -281,16 +285,17 @@ P.p10b=function(h){var W=520,H=400;var inp=h.parentNode.querySelector('input');v
   inp.addEventListener('input',draw);draw();};
 
 /* ===== 대결: 가장 가까운 이웃 찾기 ===== */
+var DUELC=[{n:'고객 라',h:155,w:51},{n:'고객 마',h:159,w:43},{n:'고객 바',h:163,w:48}],DUELN={h:158,w:49};
 P.duel=function(h){var host=h.parentNode;var out=readout(h);var shown={sia:false,moa:false,ans:false};
   host.querySelectorAll('[data-duel]').forEach(function(b){b.addEventListener('click',function(){shown[b.getAttribute('data-duel')]=true;b.classList.add('on');draw();});});
-  function draw(){var rows=CUST.map(function(c){var s1=Math.hypot((c.h-NEWC.h)*10,c.w-NEWC.w),s2=Math.hypot((c.h-NEWC.h)/5,(c.w-NEWC.w)/5);return[c,s1,s2];});
+  function draw(){var rows=DUELC.map(function(c){var s1=Math.hypot((c.h-DUELN.h)*10,c.w-DUELN.w),s2=Math.hypot((c.h-DUELN.h)/5,(c.w-DUELN.w)/5);return[c,s1,s2];});
     var b1=0,b2=0;rows.forEach(function(r,i){if(r[1]<rows[b1][1])b1=i;if(r[2]<rows[b2][2])b2=i;});
     var t='<div class="tbl"><table><thead><tr><th>후보</th><th>키·몸무게</th><th>시아 방식 (키 mm, 몸무게 kg 그대로)</th><th>모아 방식 (키 ÷ 5cm, 몸무게 ÷ 5kg)</th></tr></thead><tbody>';
     rows.forEach(function(r,i){t+='<tr><td>'+r[0].n+'</td><td>'+r[0].h+'cm · '+r[0].w+'kg</td><td>'+(shown.sia?fmt(r[1])+(i===b1?' ★':''):'?')+'</td><td>'+(shown.moa?fmt(r[2])+(i===b2?' ★':''):'?')+'</td></tr>';});
     t+='</tbody></table></div>';h.innerHTML=t;
-    var m='새 고객: 165cm · 55kg. ';
-    if(shown.sia)m+='시아의 답: <b>'+CUST[b1].n+'</b>. ';if(shown.moa)m+='모아의 답: <b>'+CUST[b2].n+'</b>. ';
-    if(shown.ans)m+='<br>정답(예시 데이터): 새 고객이 실제로 고른 옷 치수는 <b>고객 가</b>와 같았습니다 → <span class="alert">모아 승!</span> 단위를 맞추지 않으면 숫자가 큰 열(키 mm)이 거리를 독차지합니다.';
+    var m='새 고객: 158cm · 49kg. ';
+    if(shown.sia)m+='시아의 답: <b>'+DUELC[b1].n+'</b>. ';if(shown.moa)m+='모아의 답: <b>'+DUELC[b2].n+'</b>. ';
+    if(shown.ans)m+='<br>정답(예시 데이터): 새 고객이 실제로 고른 옷 치수는 <b>고객 라</b>와 같았습니다 → <span class="alert">모아 승!</span> 단위를 맞추지 않으면 숫자가 큰 열(키 mm)이 거리를 독차지합니다.';
     out.innerHTML=m;}
   draw();};
 
