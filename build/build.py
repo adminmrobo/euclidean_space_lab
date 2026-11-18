@@ -188,9 +188,12 @@ KG_NODES = [
  ("application/least-squares", "Application", "예측선 긋기(최소제곱)", "Least squares", "#r06", "정답의 그림자를 고른다", "02_shadow_rooms"),
  ("application/linear-classifier", "Application", "분류기의 결정 경계", "Linear classifier", "#r07", "칸막이로 스팸·정상을 가른다", "02_shadow_rooms"),
  ("analogy/shadow", "Analogy", "정오의 막대 그림자", "Noon shadow", "#r06", "그림자 = 가장 가까운 답", "02_shadow_rooms"),
+ ("concept/coordinate-plane", "Concept", "좌표평면 — 숫자 두 개 = 점 하나", "Coordinate plane", "#bag1", "가로·세로 숫자로 점의 자리를 정한다", "00_orientation"),
+ ("concept/pythagoras", "Concept", "피타고라스 정리", "Pythagorean theorem", "#bag2", "빗변² = 가로² + 세로² — 3번 방 거리의 바탕", "00_orientation"),
+ ("concept/sin-cos", "Concept", "sin·cos — 원 위의 가로·세로", "Sine and cosine", "#bag3", "반지름 1인 원 위의 점 (cos θ, sin θ)", "00_orientation"),
  ("open/hilbert", "OpenQuestion", "칸 수가 끝없으면? 곡선이라면?", "Infinite dimensions → Hilbert space", "#outro", "다음 편 힐베르트 공간에서 다룬다", "02_shadow_rooms"),
 ]
-KG_EDGES = [("concept/euclidean-space","motivates","concept/point-vector"),("concept/point-vector","motivates","concept/distance"),
+KG_EDGES = [("concept/coordinate-plane","motivates","concept/euclidean-space"),("concept/pythagoras","explains","concept/distance"),("concept/sin-cos","explains","concept/dot-product"),("concept/euclidean-space","motivates","concept/point-vector"),("concept/point-vector","motivates","concept/distance"),
  ("concept/distance","motivates","concept/dot-product"),("concept/dot-product","motivates","concept/orthonormal-basis"),
  ("concept/orthonormal-basis","motivates","concept/projection"),("concept/projection","motivates","concept/hyperplane"),
  ("concept/hyperplane","motivates","concept/isometry"),("concept/isometry","motivates","concept/ball"),
@@ -270,6 +273,7 @@ def build_index():
 <p>숫자는 모두 검산했습니다. 계산 오류는 없었고, 기호가 겹치거나 빠진 곳 네 군데만 고쳐 썼습니다(각 방의 📝 표시).</p>
 <p>좌표축 위의 그릇 시리즈를 먼저 보면 좋습니다: <a href="{BOWL}">좌표축 위의 그릇 — 3D 지도로 본 모델 최적화</a></p></div></section>
 """
+    s += kg_block("index", ["00_orientation","01_ruler_rooms","02_shadow_rooms"])
     s += footer(FOOT_LINKS)
     open(os.path.join(ROOT, "index.html"), "w").write(s)
 
@@ -311,6 +315,7 @@ def build_orient():
 <div class="next"><span></span><a href="01_ruler_rooms.html#r01">①편 1번 방으로 →</a></div></div></section>
 <script>(function(){{var g=document.getElementById('gate');function c(){{var n=document.querySelectorAll('#check .quiz button.ok').length;g.innerHTML=n===3?'<span class="alert">🔓 1번 방 문이 열립니다!</span> <a href="01_ruler_rooms.html#r01">들어가기 →</a>':'맞힌 문제 '+n+' / 3';}}document.querySelectorAll('#check .quiz button').forEach(function(b){{b.addEventListener('click',function(){{setTimeout(c,0);}});}});}})();</script>
 """
+    s += kg_block("00_orientation", ["00_orientation"])
     s += footer(FOOT_LINKS)
     open(os.path.join(ROOT, "00_orientation.html"), "w").write(s)
 

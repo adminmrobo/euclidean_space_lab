@@ -1,0 +1,106 @@
+{
+  "series_ko": "공간 좌표 해설 · 유클리드 공간",
+  "title_ko": "자와 각도기의 방 — 시아·모아의 유클리드 공간",
+  "site_url": "https://adminmrobo.github.io/euclidean_space_lab/",
+  "site_title": "자와 각도기의 방 — 시아·모아의 유클리드 공간",
+  "ontology": {
+    "pages": [
+      {
+        "path": "index.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "00_orientation.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "01_ruler_rooms.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "02_shadow_rooms.html",
+        "kg": true,
+        "export": true
+      }
+    ],
+    "files": []
+  },
+  "i18n": {
+    "langs": [
+      "ko"
+    ],
+    "pages": {
+      "ko": 4
+    },
+    "readme_langs": [
+      "ko"
+    ]
+  },
+  "languages": [
+    "ko"
+  ],
+  "items": [
+    {
+      "id": "og_index",
+      "role": "og",
+      "path": "assets/og/og_index.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "characters": [],
+      "robot": "none",
+      "prompt_en": "Bright daytime research lab corridor, clean white walls, ten numbered doors (1–10), each engraved with a geometry symbol (ruler, protractor, right-angle mark, circle, dashed projection line). Two young female interns in maid-style lab outfits — black hair with a transparent ruler, beige hair with a protractor and notebook — in front of door 1. Cute anime style, teal/orange/navy accents, white background, empty space on the right for title. 16:9.",
+      "source_of": null,
+      "status": "redraw"
+    },
+    {
+      "id": "og_00",
+      "role": "og",
+      "path": "assets/og/og_00.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "characters": [],
+      "robot": "none",
+      "prompt_en": "White lab corridor entrance, a doctor in a lab coat with glasses opening two backpacks on a white table; graph paper, a ruler and a protractor come out. Black-haired intern smiling, beige-haired intern curious. White background, 16:9.",
+      "source_of": null,
+      "status": "redraw"
+    },
+    {
+      "id": "og_01",
+      "role": "og",
+      "path": "assets/og/og_01.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "characters": [
+        "jupanbot"
+      ],
+      "robot": "jupanbot-v2",
+      "prompt_en": "White lab room with a large floor grid, two glowing points joined by a teal straight line and dashed right-triangle legs (3 and 4), soft orange angle arc; black-haired intern points, beige-haired intern measures with a ruler. Minimal, white background, 16:9.",
+      "source_of": null,
+      "status": "redraw"
+    },
+    {
+      "id": "og_02",
+      "role": "og",
+      "path": "assets/og/og_02.jpg",
+      "size": [
+        1200,
+        630
+      ],
+      "characters": [],
+      "robot": "none",
+      "prompt_en": "White lab room, an orange arrow casting a sharp shadow straight down onto a translucent teal plane, a thin dividing panel splitting blue dots into two groups; beige-haired intern proud, black-haired intern sheepish. Minimal, white background, 16:9.",
+      "source_of": null,
+      "status": "redraw"
+    }
+  ],
+  "updated": "2026-11-19"
+}
