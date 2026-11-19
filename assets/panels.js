@@ -84,6 +84,17 @@ P.o3=function(h){var W=520,H=400;var inp=h.parentNode.querySelector('input');var
     out.innerHTML='θ = '+t+'° → 가로 cos θ = <b>'+num(cx)+'</b>, 세로 sin θ = <b>'+num(sy)+'</b> (둘의 제곱합은 늘 1)';}
   inp.addEventListener('input',draw);draw();};
 
+P.o4=function(h){var W=520,H=400,u=[1,2],v=[3,1];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:6,y0:0,y1:4.5,equal:true});var w=[u[0]+v[0],u[1]+v[1]];
+    dash(s,p.X(u[0]),p.Y(u[1]),p.X(w[0]),p.Y(w[1]),'teal');dash(s,p.X(v[0]),p.Y(v[1]),p.X(w[0]),p.Y(w[1]),'blue');
+    arrow(s,p.X(0),p.Y(0),p.X(u[0]),p.Y(u[1]),'blue',3.5);arrow(s,p.X(0),p.Y(0),p.X(v[0]),p.Y(v[1]),'teal',3.5);
+    if(w[0]<=6&&w[1]<=4.5)arrow(s,p.X(0),p.Y(0),p.X(w[0]),p.Y(w[1]),'orange',4);
+    txt(s,p.X(u[0])-8,p.Y(u[1])-8,'u = ('+u[0]+', '+u[1]+')',{fill:C.blue,anchor:'end'});txt(s,p.X(w[0])+8,p.Y(w[1])-8,'u + v',{fill:C.orange,size:16});
+    var g=handle(s,p.X(v[0]),p.Y(v[1]),'teal');txt(s,p.X(v[0])+12,p.Y(v[1])+20,'v = ('+v[0]+', '+v[1]+')',{fill:C.teal});
+    drag(s,g,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],1),0,5),clamp(snap(q[1],1),0,2)];if(n[0]!==v[0]||n[1]!==v[1]){v=n;draw();}});
+    out.innerHTML='u + v = ('+u[0]+' + '+v[0]+', '+u[1]+' + '+v[1]+') = <b>('+w[0]+', '+w[1]+')</b> · 2배 늘리면 2u = <b>('+2*u[0]+', '+2*u[1]+')</b> — 자리끼리 더하고, 자리마다 곱합니다.';}
+  draw();};
+
 /* ===== 1번 방: 칸 수 1·2·3 ===== */
 P.p01=function(h){var W=600,H=360;var inp=h.parentNode.querySelector('input');var out=readout(h);
   var A=[160,50,64],B=[163,54,76],names=['키','몸무게','허리'],units=['cm','kg','cm'];

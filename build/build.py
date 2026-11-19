@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from content_rooms import ROOMS
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VER = "v1.2"
+VER = "v1.3"
 DATE = "2026-11-19"
 SITE = "https://adminmrobo.github.io/euclidean_space_lab/"
 AUTHOR_URL = "https://adminmrobo.github.io/who_am_i/who_am_i.html"
@@ -191,9 +191,10 @@ KG_NODES = [
  ("concept/coordinate-plane", "Concept", "좌표평면 — 숫자 두 개 = 점 하나", "Coordinate plane", "#bag1", "가로·세로 숫자로 점의 자리를 정한다", "00_orientation"),
  ("concept/pythagoras", "Concept", "피타고라스 정리", "Pythagorean theorem", "#bag2", "빗변² = 가로² + 세로² — 3번 방 거리의 바탕", "00_orientation"),
  ("concept/sin-cos", "Concept", "sin·cos — 원 위의 가로·세로", "Sine and cosine", "#bag3", "반지름 1인 원 위의 점 (cos θ, sin θ)", "00_orientation"),
+ ("concept/vector-add", "Concept", "화살표 더하기·늘리기", "Vector addition and scaling", "#bag4", "자리끼리 더하고 자리마다 곱한다", "00_orientation"),
  ("open/hilbert", "OpenQuestion", "칸 수가 끝없으면? 곡선이라면?", "Infinite dimensions → Hilbert space", "#outro", "다음 편 힐베르트 공간에서 다룬다", "02_shadow_rooms"),
 ]
-KG_EDGES = [("concept/coordinate-plane","motivates","concept/euclidean-space"),("concept/pythagoras","explains","concept/distance"),("concept/sin-cos","explains","concept/dot-product"),("concept/euclidean-space","motivates","concept/point-vector"),("concept/point-vector","motivates","concept/distance"),
+KG_EDGES = [("concept/coordinate-plane","motivates","concept/euclidean-space"),("concept/pythagoras","explains","concept/distance"),("concept/sin-cos","explains","concept/dot-product"),("concept/vector-add","explains","concept/point-vector"),("concept/euclidean-space","motivates","concept/point-vector"),("concept/point-vector","motivates","concept/distance"),
  ("concept/distance","motivates","concept/dot-product"),("concept/dot-product","motivates","concept/orthonormal-basis"),
  ("concept/orthonormal-basis","motivates","concept/projection"),("concept/projection","motivates","concept/hyperplane"),
  ("concept/hyperplane","motivates","concept/isometry"),("concept/isometry","motivates","concept/ball"),
@@ -227,6 +228,7 @@ def kg_block(page, pages):
 """
 
 def footer(extra_links):
+    JS = open(os.path.join(ROOT, "assets", "panels.js")).read().replace("</", "<\\/")
     links = " · ".join(f'<a href="{h}">{E(t)}</a>' for h, t in extra_links)
     return f"""<footer><div class="wrap">
 <h3>출처</h3>
@@ -240,7 +242,9 @@ def footer(extra_links):
 <p>글 · 안상선 ((주)M-Robo 대표) · <a href="{AUTHOR_URL}">저자 소개</a> · {DATE} · {VER}</p>
 <p>{links}</p>
 </div></footer>
-<script src="assets/panels.js"></script>
+<script>
+{JS}
+</script>
 </body></html>
 """
 
@@ -261,7 +265,7 @@ def build_index():
 <section id="parts"><div class="wrap"><h2>편 목록</h2>
 <p class="muted">박사가 연구실 복도에 방 10개를 만들었습니다. 문마다 원자료 카드 한 장이 붙어 있고, 실험 패널로 답을 맞혀야 다음 문이 열립니다.</p>
 <div class="cards">
-<a class="card" href="00_orientation.html">{face("doctor","e08")}<span class="n">0편 · 오리엔테이션</span><h3>가방 점검</h3><p>좌표평면·피타고라스·sin·cos를 3장으로 짧게 복습합니다. 건너뛰어도 됩니다.</p></a>
+<a class="card" href="00_orientation.html">{face("doctor","e08")}<span class="n">0편 · 오리엔테이션</span><h3>가방 점검</h3><p>좌표평면·피타고라스·sin·cos·화살표를 4장으로 짧게 복습합니다. 건너뛰어도 됩니다.</p></a>
 <a class="card" href="01_ruler_rooms.html">{face("sia","e01")}<span class="n">①편 · 1~5번 방</span><h3>자와 각도기의 방</h3><p>점·이동·거리·겹침 점수·자 세트. 데이터를 점으로 놓고 재는 법.</p></a>
 <a class="card" href="02_shadow_rooms.html">{face("moa","e16")}<span class="n">②편 · 6~10번 방 + 대결</span><h3>그림자와 칸막이의 방</h3><p>그림자·칸막이·움직임·공·단위 맞추기. 가장 가까운 이웃 찾기 대결.</p></a>
 <div class="card soon">{face("haru","e09")}<span class="n">다음 편 · 곧 열립니다</span><h3>끝없는 방 — 힐베르트 공간</h3><p>칸 수가 끝없으면? 곡선이라면? ②편 끝맺음에서 미리 소개합니다.</p></div>
@@ -280,12 +284,12 @@ def build_index():
 # ======================================================== 0편
 def build_orient():
     t = "자와 각도기의 방 0편 — 가방 점검 (오리엔테이션)"
-    d = "방에 들어가기 전 좌표평면·피타고라스·sin·cos를 실험 3개로 짧게 복습합니다. 건너뛰어도 됩니다."
+    d = "방에 들어가기 전 좌표평면·피타고라스·sin·cos·화살표를 실험 4개로 짧게 복습합니다. 건너뛰어도 됩니다."
     s = head(t, d, "og_00.jpg", "00_orientation.html")
-    s += nav([("#bag1", "점 찍기"), ("#bag2", "피타고라스"), ("#bag3", "sin·cos"), ("#check", "확인"), ("01_ruler_rooms.html", "①편으로")])
+    s += nav([("#bag1", "점 찍기"), ("#bag2", "피타고라스"), ("#bag3", "sin·cos"), ("#bag4", "화살표"), ("#symbols", "기호"), ("#check", "확인"), ("01_ruler_rooms.html", "①편으로")])
     s += cover("복도 입구 · 가방 점검", [("sia","e13"),("doctor","e08"),("moa","e09")])
     s += f"""<header class="hero"><div class="wrap"><span class="kicker">0편 · 오리엔테이션</span><h1>가방 점검</h1>
-<p class="lead">복도에 들어가기 전, 박사가 시아·모아의 가방을 엽니다. 꺼낸 물건은 세 개 — 모두 학교에서 배운 것입니다.</p>
+<p class="lead">복도에 들어가기 전, 박사가 시아·모아의 가방을 엽니다. 꺼낸 물건은 네 개 — 모두 학교에서 배운 것입니다.</p>
 <p>좌표축 위의 그릇 시리즈를 먼저 보고 오시면 좋습니다. 처음이라면 이 쪽만 읽어도 따라올 수 있습니다.</p>
 <a class="skip" href="01_ruler_rooms.html#r01">건너뛰고 바로 1번 방으로 →</a>
 <p class="byline" style="margin-top:12px">글 · 안상선 ((주)M-Robo 대표) · <a href="{AUTHOR_URL}">저자 소개</a> · {DATE} · {VER}</p></div></header>
@@ -298,6 +302,8 @@ def build_orient():
       "o2", "파란 꼭짓점을 끌어 보세요", "", "학교 수학 복습(중학교 피타고라스 정리)"),
      ("bag3", "가방 속 ③ 각도기 — sin·cos", ["반지름 1인 원 위의 점은 (cos θ, sin θ)입니다.", "cos θ는 가로로 얼마나 갔나, sin θ는 세로로 얼마나 갔나입니다.", "4번 방의 각도, 10번 방의 호와 현에 씁니다."],
       "o3", "각도를 바꿔 보세요", '<label>θ <input type="range" min="0" max="360" step="15" value="45" aria-label="각도"></label>', '<a href="01_ruler_rooms.html#r04">①편 4번 방 — 겹침 점수와 각도</a>(학교 수학 복습: 삼각함수)'),
+     ("bag4", "가방 속 ④ 화살표 — 더하기와 늘리기", ["화살표(벡터)는 자리끼리 더합니다: (1, 2) + (3, 1) = (4, 3).", "늘리기는 자리마다 같은 수를 곱합니다: 2 × (1, 2) = (2, 4).", "2번 방의 이동, 6번 방의 그림자가 이 두 계산으로 됩니다."],
+      "o4", "초록 화살표 v의 끝을 끌어 보세요", "", f'<a href="{BOWL}1_math_map.html">좌표축 위의 그릇 ①편 — 화살표와 좌표축</a>'),
     ]
     for bid, title, lines, key, note, ctrl, link in bags:
         li = "".join(f"<li>{E(x)}</li>" for x in lines)
@@ -306,14 +312,27 @@ def build_orient():
 <div class="panel"><div class="ph"><b>실험</b><small>{E(note)}</small></div><div id="pp-{key}" data-panel="{key}" data-label="{E(note)}"></div><div class="ctrl">{ctrl}</div><div class="readout" aria-live="polite"></div></div>
 <p class="muted">더 보기: {link}</p></div></section>
 """
+    s += """<section id="symbols"><div class="wrap"><h2>기호 읽는 법 — 방에서 만날 기호 7개</h2>
+<p class="muted">방마다 처음 나올 때 다시 풀어 줍니다. 여기서는 소리 내어 읽는 법만 익혀 둡니다.</p>
+<div class="tbl"><table><thead><tr><th>기호</th><th>읽는 법</th><th>뜻</th><th>처음 나오는 방</th></tr></thead><tbody>
+<tr><td class="m">ℝ, ℝⁿ</td><td>알(R), 알 엔</td><td>보통 숫자 전체 / 숫자 n개짜리 줄 전체</td><td>1번</td></tr>
+<tr><td class="m">v⃗, OA⃗</td><td>벡터 v, 벡터 OA</td><td>화살표(이동)</td><td>2번</td></tr>
+<tr><td class="m">√</td><td>루트</td><td>제곱하기 전으로 되돌리기</td><td>3번</td></tr>
+<tr><td class="m">Σ</td><td>시그마</td><td>모두 더하기</td><td>4번</td></tr>
+<tr><td class="m">u·v</td><td>u 점 v</td><td>겹침 점수(같은 자리끼리 곱해 더한 값)</td><td>4번</td></tr>
+<tr><td class="m">‖v‖</td><td>v의 길이</td><td>화살표 길이</td><td>4번</td></tr>
+<tr><td class="m">θ</td><td>세타</td><td>각도 이름</td><td>4번</td></tr>
+</tbody></table></div></div></section>
+"""
     qs = [("점 (3, 4)와 원점 사이 거리는?", ["7", "5", "12"], 1, "√(9 + 16) = 5입니다.", "피타고라스: √(3² + 4²)."),
           ("θ = 90°일 때 원 위의 점 (cos θ, sin θ)는?", ["(1, 0)", "(0, 1)", "(1, 1)"], 1, "90°면 가로 0, 세로 1입니다.", "실험 ③에서 θ를 90°로 놓아 보세요."),
-          ("키·몸무게·나이 세 숫자로 된 기록 한 줄은?", ["공간좌표의 점 하나", "좌표평면의 점 세 개", "수직선의 점 하나"], 0, "숫자 셋 = 공간좌표의 점 하나입니다.", "숫자 묶음 하나가 점 하나입니다.")]
+          ("키·몸무게·나이 세 숫자로 된 기록 한 줄은?", ["공간좌표의 점 하나", "좌표평면의 점 세 개", "수직선의 점 하나"], 0, "숫자 셋 = 공간좌표의 점 하나입니다.", "숫자 묶음 하나가 점 하나입니다."),
+          ("u = (2, 1), v = (1, 3)일 때 u + v는?", ["(3, 4)", "(2, 3)", "(1, −2)"], 0, "자리끼리 더해 (2 + 1, 1 + 3) = (3, 4)입니다.", "같은 자리끼리 더합니다: 가로끼리, 세로끼리.")]
     qh = "".join(quiz(*q[:1], q[2], q[3], q[4], q[1]) for q in qs)
-    s += f"""<section id="check"><div class="wrap"><h2>가방 확인 퀴즈 3문항</h2>{qh}
-<p id="gate" class="readout">세 문제를 모두 맞히면 1번 방 문이 열립니다.</p>
+    s += f"""<section id="check"><div class="wrap"><h2>가방 확인 퀴즈 4문항</h2>{qh}
+<p id="gate" class="readout">네 문제를 모두 맞히면 1번 방 문이 열립니다.</p>
 <div class="next"><span></span><a href="01_ruler_rooms.html#r01">①편 1번 방으로 →</a></div></div></section>
-<script>(function(){{var g=document.getElementById('gate');function c(){{var n=document.querySelectorAll('#check .quiz button.ok').length;g.innerHTML=n===3?'<span class="alert">🔓 1번 방 문이 열립니다!</span> <a href="01_ruler_rooms.html#r01">들어가기 →</a>':'맞힌 문제 '+n+' / 3';}}document.querySelectorAll('#check .quiz button').forEach(function(b){{b.addEventListener('click',function(){{setTimeout(c,0);}});}});}})();</script>
+<script>(function(){{var g=document.getElementById('gate');function c(){{var n=document.querySelectorAll('#check .quiz button.ok').length;g.innerHTML=n===4?'<span class="alert">🔓 1번 방 문이 열립니다!</span> <a href="01_ruler_rooms.html#r01">들어가기 →</a>':'맞힌 문제 '+n+' / 4';}}document.querySelectorAll('#check .quiz button').forEach(function(b){{b.addEventListener('click',function(){{setTimeout(c,0);}});}});}})();</script>
 """
     s += kg_block("00_orientation", ["00_orientation"])
     s += footer(FOOT_LINKS)
