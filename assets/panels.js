@@ -10,7 +10,7 @@ function r2(v){return Math.round(v*100)/100;}
 function r1(v){return Math.round(v*10)/10;}
 function fmt(v,d){d=d==null?2:d;var s=(Math.round(v*Math.pow(10,d))/Math.pow(10,d)).toFixed(d);s=s.replace(/\.?0+$/,'');if(s==='-0')s='0';return s;}
 function num(v){return v<0?'−'+fmt(-v):fmt(v);}
-function svgOf(host,W,H){host.innerHTML='';var s=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'실험 패널 그림: '+(host.getAttribute('data-label')||'')},host);var d=el('defs',{},s);
+function svgOf(host,W,H){host.innerHTML='';var s=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'실험 패널 그림: '+(function(){var n=host.parentNode&&host.parentNode.querySelector('.ph small');return n?n.textContent:'';})()},host);var d=el('defs',{},s);
   ['teal','orange','navy','blue','green','red'].forEach(function(c){var m=el('marker',{id:'ah-'+c+'-'+host.id,viewBox:'0 0 10 10',refX:8.5,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'},d);el('path',{d:'M0,0 L10,5 L0,10 z',fill:C[c]},m);});
   s._id=host.id;return s;}
 function arrow(s,x1,y1,x2,y2,c,w){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:C[c],'stroke-width':w||3,'marker-end':'url(#ah-'+c+'-'+s._id+')'},s);}
@@ -324,16 +324,18 @@ P.outro=function(h){var W=600,H=320;var inp=h.parentNode.querySelector('input');
   inp.addEventListener('input',draw);draw();};
 
 /* ===== 퀴즈 ===== */
-function quiz(q){var ans=+q.getAttribute('data-ans');var fb=q.querySelector('.fb');q.querySelectorAll('button').forEach(function(b,i){b.addEventListener('click',function(){q.querySelectorAll('button').forEach(function(x){x.classList.remove('ok','no');});b.classList.add(i===ans?'ok':'no');fb.innerHTML=i===ans?'⭕ '+q.getAttribute('data-ok'):'❌ '+q.getAttribute('data-no');});});}
+function quiz(q){var ans=+q.getAttribute('data-ans');var fb=q.querySelector('.fb');var OK=q.querySelector('.qok'),NO=q.querySelector('.qno');q.querySelectorAll('.opts button').forEach(function(b,i){b.addEventListener('click',function(){q.querySelectorAll('.opts button').forEach(function(x){x.classList.remove('ok','no');});b.classList.add(i===ans?'ok':'no');fb.innerHTML=i===ans?'⭕ '+(OK?OK.innerHTML:q.getAttribute('data-ok')):'❌ '+(NO?NO.innerHTML:q.getAttribute('data-no'));});});}
 
 /* ===== 지식 색인·꾸러미 ===== */
 function kg(){var raw=document.getElementById('kg-raw');var mount=document.getElementById('kg-mount');if(!raw||!mount)return;var K=JSON.parse(raw.textContent);
-  mount.innerHTML='<input class="kg-search" type="search" placeholder="개념 찾기 (예: 거리, 그림자, 칸막이)" aria-label="지식 색인 검색"><div class="kg-list"></div>';
-  var list=mount.querySelector('.kg-list'),inp=mount.querySelector('input');
+  mount.innerHTML='<input class="kg-search" type="search"><div class="kg-list"></div>';
+  var list=mount.querySelector('.kg-list'),inp=mount.querySelector('input');inp.placeholder='개념 찾기 (예: 거리, 그림자, 칸막이)';inp.setAttribute('aria-label','지식 색인 검색');
   var TY={Concept:'개념',Method:'방법',Analogy:'비유',Application:'쓰임',OpenQuestion:'열린 질문'};
-  function render(){var q=inp.value.trim().toLowerCase();list.innerHTML=K.nodes.filter(function(n){return !q||(n.label.ko+' '+n.label.en+' '+(n.desc||'')).toLowerCase().indexOf(q)>=0;}).map(function(n){
-    var nb=K.edges.filter(function(e){return e.s===n.id||e.o===n.id;}).map(function(e){var o=e.s===n.id?e.o:e.s;var m=K.nodes.filter(function(x){return x.id===o;})[0];return m?m.label.ko:'';}).filter(Boolean);
-    return '<div class="kg-item"><span class="t">'+(TY[n.type]||n.type)+'</span><b>'+n.label.ko+'</b><span class="muted">'+n.label.en+'</span><div>'+(n.desc||'')+'</div>'+(nb.length?'<div class="muted" style="font-size:12.5px">이웃: '+nb.join(', ')+'</div>':'')+'<a href="'+(n.page?n.page+'.html':'')+n.anchor+'">설명 보러 가기 →</a></div>';}).join('');}
+  var LG=(document.documentElement.lang||'ko').slice(0,2);function L_(o){return o?(o[LG]||o.en||o.ko||''):'';}
+  K.nodes.forEach(function(n){if(n.desc&&!n.definition)n.definition={ko:n.desc};});
+  function render(){var q=inp.value.trim().toLowerCase();list.innerHTML=K.nodes.filter(function(n){return !q||(L_(n.label)+' '+n.label.en+' '+n.label.ko+' '+L_(n.definition)).toLowerCase().indexOf(q)>=0;}).map(function(n){
+    var nb=K.edges.filter(function(e){return e.s===n.id||e.o===n.id;}).map(function(e){var o=e.s===n.id?e.o:e.s;var m=K.nodes.filter(function(x){return x.id===o;})[0];return m?L_(m.label):'';}).filter(Boolean);
+    return '<div class="kg-item"><span class="t">'+(TY[n.type]||n.type)+'</span><b>'+L_(n.label)+'</b><span class="muted">'+(LG==='en'?'':n.label.en)+'</span><div>'+L_(n.definition)+'</div>'+(nb.length?'<div class="muted" style="font-size:12.5px">이웃: '+nb.join(', ')+'</div>':'')+'<a href="'+(n.page?n.page+'.html':'')+n.anchor+'">설명 보러 가기 →</a></div>';}).join('');}
   inp.addEventListener('input',render);render();
   var ex=document.getElementById('export-mount');if(!ex)return;
   ex.innerHTML='<div class="exp-btns"><button class="btn" data-x="json">kg.json</button><button class="btn" data-x="ld">JSON-LD</button><button class="btn" data-x="ttl">Turtle (Protégé)</button><button class="btn" data-x="csv">CSV (Neo4j·Gephi)</button><button class="btn" data-x="bib">BibTeX</button><button class="btn" data-x="ris">RIS</button></div>';
@@ -343,7 +345,7 @@ function kg(){var raw=document.getElementById('kg-raw');var mount=document.getEl
     if(x==='json')dl(base+'.kg.json',JSON.stringify(K,null,2),'application/json');
     if(x==='ld')dl(base+'.jsonld',document.getElementById('kg-ld').textContent,'application/ld+json');
     if(x==='ttl'){var t='@prefix lab: <urn:lab:> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix skos: <http://www.w3.org/2004/02/skos/core#> .\n\n';
-      K.nodes.forEach(function(n){t+='<urn:'+n.id+'> a lab:'+n.type+' ;\n  skos:prefLabel "'+n.label.ko+'"@ko , "'+n.label.en+'"@en ;\n  rdfs:comment "'+(n.desc||'').replace(/"/g,'\\"')+'"@ko .\n\n';});
+      K.nodes.forEach(function(n){t+='<urn:'+n.id+'> a lab:'+n.type+' ;\n  skos:prefLabel "'+n.label.ko+'"@ko , "'+n.label.en+'"@en ;\n  rdfs:comment "'+L_(n.definition).replace(/"/g,'\\"')+'"@ko .\n\n';});
       K.edges.forEach(function(e){t+='<urn:'+e.s+'> lab:'+e.p+' <urn:'+e.o+'> .\n';});dl(base+'.ttl',t,'text/turtle');}
     if(x==='csv'){var c='id,type,label_ko,label_en,anchor\n'+K.nodes.map(function(n){return [n.id,n.type,n.label.ko,n.label.en,(n.page||base)+'.html'+n.anchor].map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
       c+='\n\nsource,relation,target\n'+K.edges.map(function(e){return [e.s,e.p,e.o].join(',');}).join('\n');dl(base+'.csv',c,'text/csv');}

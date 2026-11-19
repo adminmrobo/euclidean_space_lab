@@ -184,3 +184,8 @@ details.code p{font-size:14px;color:var(--muted);margin:0 0 6px}
 
 footer{border-top:1px solid var(--rule);padding:28px 0 70px;color:var(--muted);font-size:14px;margin-top:40px}
 footer table{font-size:13.5px}
+/* 언어 선택 상자가 들어와도 좁은 화면에서 넘치지 않게 */
+nav.top .logo{min-width:0;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto}
+nav.top .i18n-pick{flex:none;max-width:42vw}
+nav.top .i18n-pick select{max-width:34vw}
+@media (max-width:480px){nav.top .logo{font-size:14px} nav.top .row{gap:8px}}

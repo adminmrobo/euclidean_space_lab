@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><!-- i18n:switcher --><style data-i18n-sw>.i18n-pick{display:inline-flex;align-items:center;gap:4px;margin:0 8px;font:inherit;font-size:13px;white-space:nowrap}.i18n-pick select{font:inherit;font-size:13px;padding:3px 6px;border-radius:8px;border:1px solid var(--rule,rgba(128,128,128,.5));background:var(--panel,Canvas);color:var(--text,CanvasText)}.i18n-pick.float{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));right:max(8px,env(safe-area-inset-right,0px));z-index:9998}#i18nBanner{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));z-index:9999;font:14px/1.3 var(--font,system-ui,sans-serif)}#i18nBanner>button{border-radius:999px;padding:9px 14px;border:1px solid var(--rule,#363a52);background:var(--panel,#1c1e2d);color:var(--text,#eceaf3);box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;font:inherit}#i18nBanner ul{position:absolute;right:0;bottom:calc(100% + 8px);margin:0;padding:6px;list-style:none;min-width:150px;border-radius:12px;border:1px solid var(--rule,#363a52);background:var(--panel,#1c1e2d);box-shadow:0 8px 24px rgba(0,0,0,.4)}#i18nBanner ul[hidden]{display:none}#i18nBanner a{display:block;padding:7px 10px;border-radius:8px;color:var(--text,#eceaf3);text-decoration:none}#i18nBanner a:hover,#i18nBanner a:focus-visible{background:var(--panel2,#25283a)}#i18nBanner a[aria-current]{color:var(--amber,#f1b646);font-weight:700}@media print{#i18nBanner,.i18n-pick{display:none!important}}</style><script data-i18n-skip>(function(){var C={"langs": [["ko", "한국어"], ["en", "English"], ["zh", "中文"], ["ja", "日本語"], ["uz", "Oʻzbekcha"], ["ru", "Русский"], ["vi", "Tiếng Việt"]], "urls": {"ko": "02_shadow_rooms.html", "en": "02_shadow_rooms.en.html", "zh": "02_shadow_rooms.zh.html", "ja": "02_shadow_rooms.ja.html", "uz": "02_shadow_rooms.uz.html", "ru": "02_shadow_rooms.ru.html", "vi": "02_shadow_rooms.vi.html"}, "cur": "vi", "auto": true, "key": "euclid_lab_lang", "hosts": [["nav.top .logo", "after"], ["#langSw", "append"], ["nav.top .brand", "after"], ["nav .in", "append"], ["nav", "append"]], "banner": true, "select": true},cur=C.cur,ok={},de=document.documentElement;C.langs.forEach(function(l){ok[l[0]]=1});
+function U(l){return C.urls[l]}
+function save(l){try{localStorage.setItem(C.key,l)}catch(e){}}
+function saved(){try{return localStorage.getItem(C.key)}catch(e){return null}}
+function go(l){location.replace(U(l)+'?lang='+l+location.hash)}
+var shown=function(){de.style.visibility=''};
+function tryGo(l){if(location.protocol==='file:'){go(l);return}
+ de.style.visibility='hidden';var t=setTimeout(shown,2500);
+ try{fetch(U(l),{method:'HEAD',cache:'no-store'}).then(function(r){if(r.ok)go(l);else{clearTimeout(t);shown()}},function(){clearTimeout(t);shown()})}catch(e){clearTimeout(t);shown()}}
+var q=null;try{q=new URLSearchParams(location.search).get('lang')}catch(e){}
+if(q&&ok[q]){save(q);if(q!==cur){tryGo(q);}}
+else if(cur==='ko'&&C.auto){var s=saved(),to=null;
+ if(s&&ok[s]){if(s!=='ko')to=s;}
+ else if(location.protocol!=='file:'){var same=false;try{same=!!document.referrer&&new URL(document.referrer).origin===location.origin}catch(e){}
+  if(!same){var nav=(navigator.languages||[navigator.language||'']).map(function(x){return String(x).slice(0,2).toLowerCase()});
+   for(var i=0;i<nav.length;i++){if(nav[i]==='ko')break;if(ok[nav[i]]){to=nav[i];break;}}}}
+ if(to)tryGo(to);}
+function pick(l){save(l);location.href=U(l)+'?lang='+l+location.hash;}
+function name(l){for(var i=0;i<C.langs.length;i++)if(C.langs[i][0]===l)return C.langs[i][1];return l}
+function mount(){if(document.getElementById('i18nSel'))return;
+ if(C.select){var w=document.createElement('span');w.className='i18n-pick';w.innerHTML='<span aria-hidden="true">🌐</span>';
+  var s=document.createElement('select');s.id='i18nSel';s.setAttribute('aria-label','Language');
+  C.langs.forEach(function(l){var o=document.createElement('option');o.value=l[0];o.textContent=l[1];if(l[0]===cur)o.selected=true;s.appendChild(o);});
+  s.addEventListener('change',function(){pick(s.value)});w.appendChild(s);var put=false;
+  for(var i=0;i<C.hosts.length&&!put;i++){var h=document.querySelector(C.hosts[i][0]);if(!h)continue;var m=C.hosts[i][1];
+   if(m==='after')h.insertAdjacentElement('afterend',w);else if(m==='before')h.insertAdjacentElement('beforebegin',w);else h.appendChild(w);put=true;}
+  if(!put){w.classList.add('float');document.body.appendChild(w);}}
+ if(C.banner&&!document.getElementById('i18nBanner')){var b=document.createElement('div');b.id='i18nBanner';
+  var bt=document.createElement('button');bt.type='button';bt.setAttribute('aria-haspopup','true');bt.setAttribute('aria-expanded','false');bt.textContent='🌐 '+name(cur);
+  var ul=document.createElement('ul');ul.hidden=true;ul.setAttribute('role','menu');
+  C.langs.forEach(function(l){var li=document.createElement('li'),a=document.createElement('a');a.href=U(l[0])+'?lang='+l[0];a.textContent=l[1];a.lang=l[0];a.setAttribute('role','menuitem');
+   if(l[0]===cur)a.setAttribute('aria-current','true');a.addEventListener('click',function(e){e.preventDefault();pick(l[0])});li.appendChild(a);ul.appendChild(li);});
+  function close(){ul.hidden=true;bt.setAttribute('aria-expanded','false')}
+  bt.addEventListener('click',function(e){e.stopPropagation();ul.hidden=!ul.hidden;bt.setAttribute('aria-expanded',String(!ul.hidden))});
+  document.addEventListener('click',function(e){if(!b.contains(e.target))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){close();bt.focus&&!ul.hidden&&bt.focus()}});
+  b.appendChild(ul);b.appendChild(bt);document.body.appendChild(b);}}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();})();</script><!-- /i18n:switcher -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Căn phòng của thước kẻ và thước đo góc Phần ② — Bóng · vách ngăn · chuyển động · quả cầu · đồng bộ đơn vị</title>
+<meta name="description" content="Phòng 6~10 và phần đối đầu: dùng bóng để chọn câu trả lời gần nhất, dùng vách ngăn để chia phe, đồng bộ đơn vị để tìm láng giềng. Phần kết giới thiệu không gian Hilbert.">
+<meta property="og:type" content="article"><meta property="og:title" content="Căn phòng của thước kẻ và thước đo góc Phần ② — Bóng · vách ngăn · chuyển động · quả cầu · đồng bộ đơn vị"><meta property="og:description" content="Phòng 6~10 và phần đối đầu: dùng bóng để chọn câu trả lời gần nhất, dùng vách ngăn để chia phe, đồng bộ đơn vị để tìm láng giềng. Phần kết giới thiệu không gian Hilbert.">
+<meta property="og:image" content="https://adminmrobo.github.io/euclidean_space_lab/assets/og/og_02.jpg"><meta property="og:url" content="https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html"><meta name="twitter:card" content="summary_large_image">
+<meta name="author" content="Ahn Sangsun">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lab.css">
+<link rel="alternate" hreflang="ko" href="02_shadow_rooms.html"><link rel="alternate" hreflang="en" href="02_shadow_rooms.en.html"><link rel="alternate" hreflang="zh-CN" href="02_shadow_rooms.zh.html"><link rel="alternate" hreflang="ja" href="02_shadow_rooms.ja.html"><link rel="alternate" hreflang="uz" href="02_shadow_rooms.uz.html"><link rel="alternate" hreflang="ru" href="02_shadow_rooms.ru.html"><link rel="alternate" hreflang="vi" href="02_shadow_rooms.vi.html"><link rel="alternate" hreflang="x-default" href="02_shadow_rooms.html"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap"><style data-i18n-font>body,button,input,select,textarea{font-family:"IBM Plex Sans",system-ui,sans-serif}</style>
+</head>
+<body>
+<div id="prog"></div>
+<nav class="top"><div class="row"><a class="logo" href="index.html">Thước kẻ và thước đo góc: <i>Căn phòng</i></a><div class="links"><a href="#r06">Phòng 6</a><a href="#r07">Phòng 7</a><a href="#r08">Phòng 8</a><a href="#r09">Phòng 9</a><a href="#r10">Phòng 10</a><a href="#duel">Đối đầu</a><a href="#outro">Phần kết</a></div></div></nav>
+<div class="cover"><div class="frame"><svg class="grid" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><line x1="0" y1="0" x2="0" y2="900" stroke="#dbe5ee"/><line x1="80" y1="0" x2="80" y2="900" stroke="#dbe5ee"/><line x1="160" y1="0" x2="160" y2="900" stroke="#dbe5ee"/><line x1="240" y1="0" x2="240" y2="900" stroke="#dbe5ee"/><line x1="320" y1="0" x2="320" y2="900" stroke="#dbe5ee"/><line x1="400" y1="0" x2="400" y2="900" stroke="#dbe5ee"/><line x1="480" y1="0" x2="480" y2="900" stroke="#dbe5ee"/><line x1="560" y1="0" x2="560" y2="900" stroke="#dbe5ee"/><line x1="640" y1="0" x2="640" y2="900" stroke="#dbe5ee"/><line x1="720" y1="0" x2="720" y2="900" stroke="#dbe5ee"/><line x1="800" y1="0" x2="800" y2="900" stroke="#dbe5ee"/><line x1="880" y1="0" x2="880" y2="900" stroke="#dbe5ee"/><line x1="960" y1="0" x2="960" y2="900" stroke="#dbe5ee"/><line x1="1040" y1="0" x2="1040" y2="900" stroke="#dbe5ee"/><line x1="1120" y1="0" x2="1120" y2="900" stroke="#dbe5ee"/><line x1="1200" y1="0" x2="1200" y2="900" stroke="#dbe5ee"/><line x1="1280" y1="0" x2="1280" y2="900" stroke="#dbe5ee"/><line x1="1360" y1="0" x2="1360" y2="900" stroke="#dbe5ee"/><line x1="1440" y1="0" x2="1440" y2="900" stroke="#dbe5ee"/><line x1="1520" y1="0" x2="1520" y2="900" stroke="#dbe5ee"/><line x1="1600" y1="0" x2="1600" y2="900" stroke="#dbe5ee"/><line x1="0" y1="0" x2="1600" y2="0" stroke="#dbe5ee"/><line x1="0" y1="80" x2="1600" y2="80" stroke="#dbe5ee"/><line x1="0" y1="160" x2="1600" y2="160" stroke="#dbe5ee"/><line x1="0" y1="240" x2="1600" y2="240" stroke="#dbe5ee"/><line x1="0" y1="320" x2="1600" y2="320" stroke="#dbe5ee"/><line x1="0" y1="400" x2="1600" y2="400" stroke="#dbe5ee"/><line x1="0" y1="480" x2="1600" y2="480" stroke="#dbe5ee"/><line x1="0" y1="560" x2="1600" y2="560" stroke="#dbe5ee"/><line x1="0" y1="640" x2="1600" y2="640" stroke="#dbe5ee"/><line x1="0" y1="720" x2="1600" y2="720" stroke="#dbe5ee"/><line x1="0" y1="800" x2="1600" y2="800" stroke="#dbe5ee"/><line x1="0" y1="880" x2="1600" y2="880" stroke="#dbe5ee"/><line x1="160" y1="740" x2="1440" y2="740" stroke="#1e2f6e" stroke-width="4"/><line x1="160" y1="740" x2="160" y2="120" stroke="#1e2f6e" stroke-width="4"/><line x1="400" y1="560" x2="1100" y2="240" stroke="#2458d6" stroke-width="6"/><line x1="400" y1="560" x2="1100" y2="560" stroke="#13733a" stroke-width="4" stroke-dasharray="14 10"/><line x1="1100" y1="560" x2="1100" y2="240" stroke="#13733a" stroke-width="4" stroke-dasharray="14 10"/><path d="M1070 560 L1070 530 L1100 530" fill="none" stroke="#e8731a" stroke-width="4"/><circle cx="400" cy="560" r="16" fill="#0f8f84"/><circle cx="1100" cy="240" r="16" fill="#e8731a"/><path d="M470 560 A70 70 0 0 0 464 528" fill="none" stroke="#e8731a" stroke-width="5"/></svg>
+<span class="cap">Hành lang phòng thí nghiệm · Phần ② · Phòng 6~10 + Đối đầu</span><span class="badge">Hình bìa đang chuẩn bị</span><div class="cast"><img src="assets/chars/moa_e16.webp" alt="Moa" width="96" height="96" loading="lazy" class=s><img src="assets/chars/doctor_e10.webp" alt="Tiến sĩ" width="96" height="96" loading="lazy"><img src="assets/chars/sia_e14.webp" alt="Sia" width="96" height="96" loading="lazy"><img src="assets/chars/haru_e07.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy" class=s></div></div></div>
+<header class="hero"><div class="wrap"><span class="kicker">Phần ② · Phòng 6~10 + Đối đầu</span><h1>Căn phòng của bóng và vách ngăn</h1><p class="lead">Câu trả lời gần nhất (bóng), chia phe (vách ngăn), phạm vi láng giềng (quả cầu), cho đến đồng bộ đơn vị. Cuối cùng là màn đối đầu tìm láng giềng gần nhất.</p>
+<p class="byline">Bài viết · Ahn Sangsun (Giám đốc điều hành M-Robo) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">Giới thiệu tác giả</a> · 2026-11-19 · v1.3</p></div></header>
+<section><div class="wrap"><div class="three"><h2>Dành cho người mới — trang này trong 3 dòng</h2><ul>
+<li><b>Học gì</b>: Dùng bóng để chọn câu trả lời ít sai nhất, dùng vách ngăn để chia phe, đồng bộ đơn vị để tìm láng giềng.</li><li><b>Vì sao quan trọng</b>: Vẽ đường dự đoán, phân loại thư rác, đồng bộ đơn vị trước khi gợi ý đều là quy tắc của các phòng này.</li><li><b>Trong công việc</b>: Biết cách chọn "câu trả lời gần đáp án nhất trong số những gì mô hình có thể đưa ra" và "khoảng cách công bằng".</li></ul>
+<p>Bạn không cần biết code hay công thức. Trang này chỉ dùng số thực (những con số bình thường).</p>
+<details class="abbr"><summary>Giải nghĩa thuật ngữ gốc và viết tắt (mở ra)</summary><dl><dt>ℝⁿ</dt><dd>Toàn bộ các dãy gồm n số thực — căn phòng n ô có thước kẻ và thước đo góc (không gian Euclid)</dd><dt>tích vô hướng</dt><dd>Điểm chồng khớp — nhân các vị trí tương ứng rồi cộng lại</dd><dt>Chuẩn ‖x‖</dt><dd>Độ dài của mũi tên</dd><dt>Cơ sở trực chuẩn</dt><dd>Bộ thước dài 1 và vuông góc với nhau</dd><dt>Hình chiếu vuông góc</dt><dd>Bóng — chân đường thẳng hạ thẳng từ điểm xuống đường thẳng hay mặt phẳng</dd><dt>Siêu phẳng · pháp tuyến</dt><dd>Vách ngăn (tấm có ít hơn một ô so với phòng n ô) · mũi tên cắm trên vách ngăn</dd><dt>Phép đẳng cự</dt><dd>Đẩy · xoay · lật — chuyển động giữ nguyên khoảng cách</dd><dt>KNN</dt><dd>Tìm láng giềng gần nhất</dd><dt>MSE</dt><dd>Sai số bình phương — trung bình bình phương độ lệch</dd><dt>Chuẩn hóa đặc trưng</dt><dd>Đồng bộ đơn vị</dd></dl></details></div>
+</div></section>
+<section><div class="wrap"><div class="talk"><div class="line"><img src="assets/chars/doctor_e07.webp" alt="Tiến sĩ" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">Tiến sĩ</b>Ở Phần ① các em đã quen tay với thước kẻ và thước đo góc. Giờ dùng chúng để chọn câu trả lời.</div></div><div class="line r"><img src="assets/chars/moa_e09.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Chọn câu trả lời bằng bóng nghĩa là sao ạ?</div></div><div class="line"><img src="assets/chars/sia_e19.webp" alt="Sia" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">Sia</b>Vào phòng 6 là biết thôi!</div></div></div></div></section>
+<section class="room" id="r06"><div class="wrap">
+<div class="roomno">Phòng 6</div>
+<h2>Bóng là câu trả lời gần nhất</h2><p class="muted">Chân đường hạ thẳng từ điểm xuống đường thẳng</p>
+<div class="tags"><span class="tag src">Thẻ tài liệu gốc 06/10 · @eeanimation</span><span class="tag how">Phương pháp: tìm bóng (hình chiếu vuông góc)</span><span class="tag day">Đời thường: bóng cây gậy lúc giữa trưa</span></div>
+<div class="duo">
+<div class="box why"><h4>Vì sao dùng phương pháp này</h4><ol><li><b>Vấn đề</b> — Khi những câu trả lời mô hình có thể đưa ra chỉ nằm trên một đường (đường thẳng), đáp án thường nằm ngoài đường đó.</li><li><b>Giới hạn của phòng trước</b> — Ở phòng 5 đã đọc được tọa độ, nhưng chưa biết điểm nào trên đường gần đáp án nhất.</li><li><b>Lời giải</b> — Chân đường hạ vuông góc từ đáp án xuống đường (bóng) là điểm gần nhất.</li></ol><div class="easy"><b>Nói đơn giản</b> — Hạ xiên thì thành cạnh huyền nên luôn dài hơn. Chân đường hạ thẳng là ngắn nhất.</div></div>
+<div class="box mathbox"><h4>Trợ lý, người ngại công thức toán, sẽ hỏi thay bạn</h4>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy"><div><b>Trợ lý</b> proj_u(v) = (v·u ÷ u·u) u… trong phân số có tận hai dấu chấm!</div></div>
+<p><b>Nhìn bằng toán phổ thông</b> — hình chiếu vuông góc, chân đường vuông góc</p>
+<table><thead><tr><th>Mảnh công thức</th><th>Nghĩa</th></tr></thead><tbody><tr><td class='m'>v·u</td><td>Điểm chồng khớp của v và u</td></tr><tr><td class='m'>u·u</td><td>Bình phương độ dài u</td></tr><tr><td class='m'>v·u ÷ u·u</td><td>Kéo dài u bao nhiêu lần thì thành bóng</td></tr><tr><td class='m'>p</td><td>Bóng (điểm gần nhất)</td></tr><tr><td class='m'>r = v − p</td><td>Phần lệch — luôn vuông góc với u</td></tr></tbody></table>
+<div class="try"><b>Thử tính bằng số</b><div>v = (3, 2), u = (1, 0) → 3 ÷ 1 = 3 lần → p = (3, 0), r = (0, 2), r·u = 0</div><div>u = (2, 1) → v·u = 8, u·u = 5 → p = 1.6 × (2, 1) = (3.2, 1.6), r = (−0.2, 0.4), r·u = 0</div><div>Gói chiều cao 160·162·164 vào một số: chọn 162 thì tổng bình phương sai số 4 + 0 + 4 = 8, chọn 161 thì 1 + 1 + 9 = 11 → trung bình 162 là bóng</div></div>
+<div class="q"><img src="assets/chars/haru_e16.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy"><div><b>Trợ lý</b> Điểm mấu chốt là phần lệch luôn vuông góc. Vì vậy nó ngắn nhất.</div></div></div>
+</div>
+<div class="pair"><div class="box"><h4>Trong đời thường</h4><p>Dựng cây gậy lúc giữa trưa thì bóng nằm ngay dưới chân. Mặt trời càng xiên thì bóng càng dài.</p></div><div class="box ml"><h4>Trong học máy</h4><p>Vẽ đường dự đoán (hồi quy bình phương tối thiểu) là việc chiếu đáp án thành bóng lên &quot;những câu trả lời mô hình có thể đưa ra&quot;. Trung bình của nhiều giá trị cũng là một cái bóng.</p></div></div>
+<div class="talk"><div class="line"><img src="assets/chars/doctor_e09.webp" alt="Tiến sĩ" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">Tiến sĩ</b>Trên đường thẳng, điểm nào gần v nhất?</div></div><div class="line"><img src="assets/chars/jupanbot_e16.webp" alt="AbaBot" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-robo)">AbaBot</b>Cứ áng chừng vạch gần đầu v nhất, đặt cược vào 3 là được!</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="Nhà nghiên cứu Ruồi giấm" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">Nhà nghiên cứu Ruồi giấm</b>Xoay hướng u của đường thử xem. Lúc đó còn là 3 không?</div></div></div>
+<div class="panel"><div class="ph"><b>Bảng thí nghiệm 6</b><small>Vẽ lại thẻ gốc 06 · hãy xoay hướng u của đường thẳng</small></div><div id="pp-p06" data-panel="p06"></div><div class="ctrl"><label>Hướng của đường thẳng <input type="range" min="0" max="80" step="0.5" value="0" aria-label="Góc hướng đường thẳng"></label> <button type="button" data-preset>Theo hướng u = (2, 1)</button></div><div class="readout" aria-live="polite"></div></div>
+<div class="solve"><h4>Lời giải</h4><p>Xoay u thế nào thì r·u vẫn luôn bằng 0. Phần lệch vuông góc với đường thẳng.</p><p>Như kết luận của tài liệu gốc, bóng là điểm gần nhất trên đường thẳng đi qua u.</p><p>&quot;Áng chừng 3&quot; của AbaBot chỉ đúng khi u nằm ngang.</p></div>
+<p class="hint">📝 Chỗ viết khác tài liệu gốc — tài liệu gốc viết u lẫn lộn giữa chữ đậm và chữ nghiêng. Trang này thống nhất một kiểu chữ.</p>
+<div class="limit"><b>Giới hạn của phòng này</b> — &quot;Mặt nền&quot; để chiếu bóng chỉ có một đường thẳng. Mặt phẳng hay mặt nền lớn hơn, và tấm chia phe thì viết thế nào? → Phòng 7</div>
+<details class="code"><summary>Xem bằng code Python trong giáo trình (không biết cũng không sao)</summary><pre><code>p = (v @ u) / (u @ u) * u</code></pre><p>Kéo dài u theo tỉ lệ điểm chồng khớp để tạo bóng.</p></details>
+<div class="quiz" data-ans="1"><div class="qq">Câu đố kiểm tra — Đo chiều cao ba lần được 170·172·177. Giá trị đại diện (bóng) có tổng bình phương sai số nhỏ nhất là?</div><div class="opts"><button type="button">172 (giá trị ở giữa)</button><button type="button">173 (trung bình)</button><button type="button">177 (giá trị lớn nhất)</button></div><div class="fb" aria-live="polite"></div><span class="qok" hidden>Trung bình 173 là cái bóng. Tổng bình phương sai số 9 + 1 + 16 = 26 là nhỏ nhất.</span><span class="qno" hidden>Với 172 là 4 + 0 + 25 = 29, với 173 là 9 + 1 + 16 = 26. Trung bình chính là cái bóng.</span></div>
+</div></section>
+<section class="room" id="r07"><div class="wrap">
+<div class="roomno">Phòng 7</div>
+<h2>Đường thẳng · mặt phẳng · vách ngăn</h2><p class="muted">Vách ngăn của phòng n ô là tấm ít hơn một ô</p>
+<div class="tags"><span class="tag src">Thẻ tài liệu gốc 07/10 · @eeanimation</span><span class="tag how">Phương pháp: chia phe bằng phương trình vách ngăn</span><span class="tag day">Đời thường: vạch giữa sân vận động</span></div>
+<div class="duo">
+<div class="box why"><h4>Vì sao dùng phương pháp này</h4><ol><li><b>Vấn đề</b> — Để tách thư rác và thư bình thường, phải dựng một vách ngăn trong phòng.</li><li><b>Giới hạn của phòng trước</b> — Mặt nền ở phòng 6 chỉ là một đường thẳng. Cần mặt nền rộng hơn và tấm chia phe.</li><li><b>Lời giải</b> — Dùng điểm chồng khớp với mũi tên cắm trên vách ngăn (pháp tuyến) n để phán định &quot;ở phía nào&quot;.</li></ol><div class="easy"><b>Nói đơn giản</b> — Giống như dùng vạch giữa sân vận động để chia đội xanh và đội trắng.</div></div>
+<div class="box mathbox"><h4>Trợ lý, người ngại công thức toán, sẽ hỏi thay bạn</h4>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy"><div><b>Trợ lý</b> n·(x − p) = 0, siêu phẳng của ℝⁿ có n − 1 chiều… chữ n xuất hiện với hai nghĩa luôn!</div></div>
+<p><b>Nhìn bằng toán phổ thông</b> — phương trình đường thẳng · mặt phẳng, khoảng cách giữa điểm và mặt phẳng</p>
+<table><thead><tr><th>Mảnh công thức</th><th>Nghĩa</th></tr></thead><tbody><tr><td class='m'>x = p + tv</td><td>Từ điểm xuất phát p đi t theo hướng v = đường thẳng</td></tr><tr><td class='m'>n</td><td>Mũi tên cắm trên vách ngăn (pháp tuyến)</td></tr><tr><td class='m'>n·(x − p) = 0</td><td>Mọi điểm trên vách ngăn đều vuông góc với n</td></tr><tr><td class='m'>x₁ + 2x₂ + 2x₃ = 6</td><td>Vách ngăn có n = (1, 2, 2)</td></tr><tr><td class='m'>n − 1</td><td>Vách ngăn của phòng có n ô thì ít hơn một ô</td></tr></tbody></table>
+<div class="try"><b>Thử tính bằng số</b><div>Giao điểm với các trục: (6, 0, 0), (0, 3, 0), (0, 0, 3) — giống tài liệu gốc</div><div>Điểm (2, 2, 2): 2 + 4 + 4 = 10 &gt; 6 → phía bên kia gốc tọa độ, tới vách ngăn (10 − 6) ÷ 3 ≈ 1.33</div><div>Gốc tọa độ: 0 &lt; 6 → phía gốc tọa độ, tới vách ngăn 6 ÷ 3 = 2 (độ dài n là √(1 + 4 + 4) = 3)</div></div>
+<div class="q"><img src="assets/chars/haru_e16.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy"><div><b>Trợ lý</b> Chỉ cần so điểm với 6 là xong. Bộ lọc thư rác đơn giản hơn em tưởng.</div></div></div>
+</div>
+<div class="pair"><div class="box"><h4>Trong đời thường</h4><p>Bên trái vạch sân vận động là đội xanh, bên phải là đội trắng. Càng xa vạch thì càng chắc chắn thuộc phe đó.</p></div><div class="box ml"><h4>Trong học máy</h4><p>Các bộ phân loại như hồi quy logistic · SVM dựng vách ngăn (ranh giới quyết định). Điểm càng xa vách ngăn thì phán định càng chắc chắn.</p></div></div>
+<div class="talk"><div class="line"><img src="assets/chars/sia_e01.webp" alt="Sia" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">Sia</b>Một vách ngăn mà chia được phe, đúng là vạch giữa sân!</div></div><div class="line r"><img src="assets/chars/moa_e09.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Điểm nằm sát ngay trên vách ngăn thì thuộc phe nào ạ?</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="Nhà nghiên cứu Ruồi giấm" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">Nhà nghiên cứu Ruồi giấm</b>Đổi ba tọa độ của điểm P, tìm chỗ điểm bằng 6 xem.</div></div></div>
+<div class="panel"><div class="ph"><b>Bảng thí nghiệm 7</b><small>Vẽ lại vách ngăn của thẻ gốc 07 · hãy thay đổi tọa độ điểm P</small></div><div id="pp-p07" data-panel="p07"></div><div class="ctrl"><label>x₁ <input type="range" min="0" max="6" step="1" value="2" aria-label="x1"></label><label>x₂ <input type="range" min="0" max="4" step="1" value="2" aria-label="x2"></label><label>x₃ <input type="range" min="0" max="4" step="1" value="2" aria-label="x3"></label></div><div class="readout" aria-live="polite"></div></div>
+<div class="solve"><h4>Lời giải</h4><p>Điểm lớn hơn 6 thì ở phía bên kia gốc tọa độ, nhỏ hơn thì ở phía gốc tọa độ, bằng thì nằm trên vách ngăn (ranh giới).</p><p>Điểm trên vách ngăn thì tạm hoãn phán đoán. Bộ phân loại thực tế cũng bối rối nhất với các điểm gần ranh giới.</p><p>Vách ngăn của phòng 3 ô là mặt phẳng (2 ô). Phòng n ô thì là tấm n − 1 ô.</p></div>
+<p class="hint">📝 Chỗ viết khác tài liệu gốc — tài liệu gốc dùng trùng tên trục x và tên điểm x (x = p + tv và trục x). Trang này đổi trục thành x₁·x₂·x₃, và viết phương trình vách ngăn là x₁ + 2x₂ + 2x₃ = 6. &quot;Hyperplane in ℝ³&quot; của tài liệu gốc trong phòng 3 ô chính là mặt phẳng.</p>
+<div class="limit"><b>Giới hạn của phòng này</b> — Đẩy hay xoay các điểm thì vách ngăn và khoảng cách có thay đổi không? Trước hết phải kiểm tra xem có được di chuyển dữ liệu không. → Phòng 8</div>
+
+<div class="quiz" data-ans="0"><div class="qq">Câu đố kiểm tra — Với vách ngăn x₁ + 2x₂ + 2x₃ = 6, điểm (0, 0, 3) ở đâu?</div><div class="opts"><button type="button">Trên vách ngăn (ranh giới) — tạm hoãn phán đoán</button><button type="button">Phía bên kia gốc tọa độ</button><button type="button">Phía gốc tọa độ</button></div><div class="fb" aria-live="polite"></div><span class="qok" hidden>0 + 0 + 6 = 6 → nằm trên vách ngăn (ranh giới). Đó là điểm (0, 0, 3) nơi vách ngăn gặp trục của dữ liệu gốc.</span><span class="qno" hidden>Bạn thử tính điểm: 0 + 2×0 + 2×3 = 6. Bằng 6 thì nằm trên vách ngăn.</span></div>
+</div></section>
+<section class="room" id="r08"><div class="wrap">
+<div class="roomno">Phòng 8</div>
+<h2>Đẩy, xoay, lật thì khoảng cách vẫn giữ nguyên</h2><p class="muted">Chuyển động không đổi hình dạng và chuyển động làm đổi hình dạng</p>
+<div class="tags"><span class="tag src">Thẻ tài liệu gốc 08/10 · @eeanimation</span><span class="tag how">Phương pháp: chọn chuyển động giữ khoảng cách</span><span class="tag day">Đời thường: xoay ảnh</span></div>
+<div class="duo">
+<div class="box why"><h4>Vì sao dùng phương pháp này</h4><ol><li><b>Vấn đề</b> — Xoay ảnh hay dời gốc tọa độ thì quan hệ giữa các dữ liệu vẫn phải như cũ.</li><li><b>Giới hạn của phòng trước</b> — Tới phòng 7 ta chỉ đo khi để điểm yên tại chỗ. Chưa biết di chuyển thì sẽ ra sao.</li><li><b>Lời giải</b> — Đẩy · xoay · lật giữ nguyên khoảng cách và góc. Chỉ kéo dài làm thay đổi khoảng cách.</li></ol><div class="easy"><b>Nói đơn giản</b> — Tam giác trên giấy dù đẩy, xoay, lật vẫn là cùng một tam giác. Chỉ phóng to khi photo mới đổi kích thước.</div></div>
+<div class="box mathbox"><h4>Trợ lý, người ngại công thức toán, sẽ hỏi thay bạn</h4>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy"><div><b>Trợ lý</b> x′ = Qx + t, QᵀQ = I… chữ T nhỏ phía trên với chữ I lại là gì nữa ạ?</div></div>
+<p><b>Nhìn bằng toán phổ thông</b> — phép tịnh tiến, phép quay, phép đối xứng, phép đồng dạng</p>
+<table><thead><tr><th>Mảnh công thức</th><th>Nghĩa</th></tr></thead><tbody><tr><td class='m'>t</td><td>Đẩy — cộng cùng một mũi tên vào mọi điểm</td></tr><tr><td class='m'>Q</td><td>Bảng xoay · lật</td></tr><tr><td class='m'>QᵀQ = I</td><td>Điều kiện của bảng xoay · lật: không làm đổi độ dài và góc</td></tr><tr><td class='m'>Kéo dài s lần</td><td>Mọi khoảng cách thành |s| lần</td></tr><tr><td class='m'>|s| = 1</td><td>Chỉ khi đó kéo dài mới giữ khoảng cách</td></tr></tbody></table>
+<div class="try"><b>Thử tính bằng số</b><div>Từ (0, 0) đến (3, 4) dài 5 → xoay 90° thì từ (0, 0) đến (−4, 3) dài 5</div><div>Đẩy: cộng (−2, 1) như nhau vào hai điểm thì hiệu B − A giữ nguyên → khoảng cách giữ nguyên</div><div>Kéo dài gấp 2: độ dài 5 → 10</div></div>
+<div class="q"><img src="assets/chars/haru_e16.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy"><div><b>Trợ lý</b> Hóa ra bảng xoay là chỉ chọn những bảng giữ khoảng cách.</div></div></div>
+</div>
+<div class="pair"><div class="box"><h4>Trong đời thường</h4><p>Xoay ảnh trên điện thoại thì khuôn mặt vẫn là khuôn mặt đó. Phóng to thì chỉ kích thước thay đổi.</p></div><div class="box ml"><h4>Trong học máy</h4><p>Xoay và lật ảnh để tăng dữ liệu huấn luyện (tăng cường dữ liệu). Hình dạng giữ nguyên nên nhãn đáp án cũng giữ nguyên.</p></div></div>
+<div class="talk"><div class="line"><img src="assets/chars/doctor_e07.webp" alt="Tiến sĩ" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">Tiến sĩ</b>Có chuyển động được phép và chuyển động phải cẩn thận.</div></div><div class="line"><img src="assets/chars/jupanbot_e16.webp" alt="AbaBot" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-robo)">AbaBot</b>Kéo dài thì hình dạng vẫn vậy, nên khoảng cách cũng giữ nguyên, gỡ vốn chắc luôn!</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="Nhà nghiên cứu Ruồi giấm" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">Nhà nghiên cứu Ruồi giấm</b>Bấm nút kéo dài rồi nhìn độ dài ba cạnh.</div></div></div>
+<div class="panel"><div class="ph"><b>Bảng thí nghiệm 8</b><small>Vẽ lại thẻ gốc 08 · dùng nút và thanh trượt để di chuyển tam giác</small></div><div id="pp-p08" data-panel="p08"></div><div class="ctrl"><button type="button" data-op="slide">Đẩy</button><button type="button" data-op="mirror">Lật</button><button type="button" data-op="scale">Kéo dài gấp 2</button><label>Xoay <input type="range" min="0" max="360" step="15" value="0" aria-label="Góc xoay"></label><button type="button" data-op="reset">Về như cũ</button></div><div class="readout" aria-live="polite"></div></div>
+<div class="solve"><h4>Lời giải</h4><p>Dù trộn đẩy · xoay · lật bao nhiêu lần, ba cạnh vẫn là 3 · 4 · 5.</p><p>Bật kéo dài thì thành 6 · 8 · 10. Hình dạng (góc) giữ nguyên nhưng khoảng cách thay đổi.</p><p>Đúng như tài liệu gốc nói, kéo dài chỉ giữ khoảng cách khi |s| = 1.</p></div>
+
+<div class="limit"><b>Giới hạn của phòng này</b> — Đã biết di chuyển mà khoảng cách vẫn giữ nguyên. Giờ phải xác định phạm vi &quot;trong khoảng cách nào thì coi là láng giềng&quot;. → Phòng 9</div>
+
+<div class="quiz" data-ans="2"><div class="qq">Câu đố kiểm tra — Chuyển động nào dưới đây làm thay đổi khoảng cách giữa hai điểm?</div><div class="opts"><button type="button">Đẩy mọi điểm sang phải 2 ô</button><button type="button">Xoay 30° quanh gốc tọa độ</button><button type="button">Nhân mọi tọa độ lên 3 lần</button></div><div class="fb" aria-live="polite"></div><span class="qok" hidden>Kéo giãn 3 lần làm mọi khoảng cách tăng gấp 3.</span><span class="qno" hidden>Tịnh tiến và xoay giữ nguyên khoảng cách. Chỉ kéo giãn mới làm thay đổi khoảng cách.</span></div>
+</div></section>
+<section class="room" id="r09"><div class="wrap">
+<div class="roomno">Phòng 9</div>
+<h2>Bên trong bán kính r = láng giềng</h2><p class="muted">Hình tròn · mặt cầu · quả cầu, và chuyện xảy ra khi số ô tăng lên</p>
+<div class="tags"><span class="tag src">Thẻ tài liệu gốc 09/10 · @eeanimation</span><span class="tag how">Phương pháp: xác định phạm vi láng giềng bằng bán kính</span><span class="tag day">Đời thường: bán kính 1km quanh nhà</span></div>
+<div class="duo">
+<div class="box why"><h4>Vì sao dùng phương pháp này</h4><ol><li><b>Vấn đề</b> — Đôi khi ta muốn tìm &quot;mọi khách hàng trong khoảng cách r&quot; chứ không phải &quot;vài khách hàng gần nhất&quot;.</li><li><b>Giới hạn của phòng trước</b> — Tới phòng 8 ta chỉ đo khoảng cách giữa hai điểm. Chưa vẽ phạm vi.</li><li><b>Lời giải</b> — Gom các điểm cách tâm không quá r thì trong phòng 2 ô được hình tròn, trong phòng 3 ô được quả cầu.</li></ol><div class="easy"><b>Nói đơn giản</b> — Vẽ vòng tròn bán kính 1km quanh nhà thì các cửa hàng bên trong là &quot;cửa hàng trong khu phố&quot;.</div></div>
+<div class="box mathbox"><h4>Trợ lý, người ngại công thức toán, sẽ hỏi thay bạn</h4>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy"><div><b>Trợ lý</b> ‖x − c‖ = r và ‖x − c‖ ≤ r… chỉ khác một dấu bằng mà tên gọi cũng khác ạ?</div></div>
+<p><b>Nhìn bằng toán phổ thông</b> — phương trình đường tròn, phương trình mặt cầu, lũy thừa</p>
+<table><thead><tr><th>Mảnh công thức</th><th>Nghĩa</th></tr></thead><tbody><tr><td class='m'>c</td><td>Tâm</td></tr><tr><td class='m'>‖x − c‖ = r</td><td>Các điểm cách tâm đúng r = lớp vỏ ngoài (đường tròn · mặt cầu)</td></tr><tr><td class='m'>‖x − c‖ ≤ r</td><td>Toàn bộ phần bên trong r = quả cầu đặc</td></tr><tr><td class='m'>x² + y² = r²</td><td>Đường tròn khi tâm ở gốc tọa độ</td></tr><tr><td class='m'>0.9ⁿ</td><td>Tỉ lệ thể tích phần bên trong bán kính 0.9 của quả cầu n ô</td></tr></tbody></table>
+<div class="try"><b>Thử tính bằng số</b><div>Bán kính 1: diện tích hình tròn π × 1² ≈ 3.14, thể tích quả cầu 4π ÷ 3 ≈ 4.19</div><div>Tỉ lệ phần bên trong bán kính 0.9: 2 ô 0.81 (81%), 3 ô 0.729 (73%)</div><div>10 ô 0.9¹⁰ ≈ 0.349 (35%), 100 ô 0.9¹⁰⁰ ≈ 0.0000266 — gần như toàn bộ là lớp vỏ ngoài</div></div>
+<div class="q"><img src="assets/chars/haru_e16.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy"><div><b>Trợ lý</b> Nhiều ô thì ruột quả cầu như rỗng tuếch. Lạ thật.</div></div></div>
+</div>
+<div class="pair"><div class="box"><h4>Trong đời thường</h4><p>&quot;Cửa hàng trong bán kính 2km&quot; của ứng dụng giao đồ ăn chính là hình tròn này.</p></div><div class="box ml"><h4>Trong học máy</h4><p>Dùng để tìm láng giềng theo bán kính, tìm giá trị bất thường (không có láng giềng trong bán kính thì đáng ngờ). Khi có rất nhiều ô, mọi điểm đều xa nhau như nhau (lời nguyền chiều dữ liệu).</p></div></div>
+<div class="talk"><div class="line"><img src="assets/chars/sia_e01.webp" alt="Sia" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">Sia</b>Tăng bán kính thì láng giềng nhiều lên đúng không? Nhìn hình là thấy liền.</div></div><div class="line r"><img src="assets/chars/moa_e09.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Tiêu đề tài liệu gốc có n-Balls nhưng không nói gì về quả cầu n ô.</div></div><div class="line"><img src="assets/chars/doctor_e10.webp" alt="Tiến sĩ" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">Tiến sĩ</b>Vì vậy trang này thêm một thí nghiệm. Hãy xem bảng thứ hai.</div></div></div>
+<div class="panel"><div class="ph"><b>Bảng thí nghiệm 9-①</b><small>Vẽ lại thẻ gốc 09 · hãy thay đổi bán kính</small></div><div id="pp-p09a" data-panel="p09a"></div><div class="ctrl"><label>Bán kính r <input type="range" min="0" max="2.3" step="0.1" value="1" aria-label="Bán kính"></label></div><div class="readout" aria-live="polite"></div></div><div class="panel"><div class="ph"><b>Bảng thí nghiệm 9-②</b><small>Thí nghiệm do trang này thêm vào · hãy tăng số ô</small></div><div id="pp-p09b" data-panel="p09b"></div><div class="ctrl"><label>Số ô <input type="range" min="0" max="7" step="1" value="1" aria-label="Số ô"></label></div><div class="readout" aria-live="polite"></div></div>
+<div class="solve"><h4>Lời giải</h4><p>Tăng bán kính thì số láng giềng tăng lên. Nếu cửa hàng phân bố đều, số lượng tăng tỉ lệ với diện tích hình tròn πr².</p><p>Tăng số ô thì phần lớn thể tích dồn ra lớp vỏ ngoài. Ở quả cầu 100 ô, phần bên trong bán kính 0.9 chỉ còn 0.003%.</p><p>Thẻ gốc dùng tâm c trong hộp tiêu đề, còn công thức bên dưới là khi tâm ở gốc tọa độ. Trang này ghi rõ là &quot;trường hợp đặt tâm ở gốc tọa độ&quot;.</p></div>
+<p class="hint">📝 Chỗ viết khác tài liệu gốc — hộp tiêu đề của tài liệu gốc dùng tâm c. Nhưng công thức x² + y² = r² bên dưới là khi tâm ở gốc tọa độ. Trang này ghi rõ &quot;trường hợp đặt tâm ở gốc tọa độ&quot;. Thí nghiệm tỉ lệ lớp vỏ theo số ô (0.9ⁿ) là do trang này thêm vào.</p>
+<div class="limit"><b>Giới hạn của phòng này</b> — Khoảng cách đo bằng thước thẳng cho đáp án sai khi đơn vị lẫn lộn hoặc bề mặt cong. → Phòng 10</div>
+<details class="code"><summary>Xem bằng code Python trong giáo trình (không biết cũng không sao)</summary><pre><code>np.sum(np.linalg.norm(X - c, axis=1) &lt;= r)</code></pre><p>Đếm số điểm nằm trong khoảng cách r tính từ tâm c.</p></details>
+<div class="quiz" data-ans="0"><div class="qq">Câu đố kiểm tra — Vì sao trong phòng có rất nhiều ô thì khó tìm &quot;láng giềng gần nhất&quot;?</div><div class="opts"><button type="button">Vì mọi điểm đều xa nhau như nhau</button><button type="button">Vì công thức khoảng cách thay đổi</button><button type="button">Vì không tính được diện tích hình tròn</button></div><div class="fb" aria-live="polite"></div><span class="qok" hidden>Thể tích dồn ra lớp vỏ ngoài nên chênh lệch khoảng cách nhỏ đi (lời nguyền chiều dữ liệu).</span><span class="qno" hidden>Công thức vẫn vậy. Vấn đề là mọi điểm đều dồn về gần lớp vỏ ngoài.</span></div>
+</div></section>
+<section class="room" id="r10"><div class="wrap">
+<div class="roomno">Phòng 10</div>
+<h2>Nơi dùng căn phòng này và giới hạn của thước thẳng</h2><p class="muted">Phải đồng bộ đơn vị, và trên bề mặt cong thước thẳng đo ngắn hơn</p>
+<div class="tags"><span class="tag src">Thẻ tài liệu gốc 10/10 · @eeanimation</span><span class="tag how">Phương pháp: đồng bộ đơn vị, so sánh cung và dây cung</span><span class="tag day">Đời thường: đường bay của máy bay</span></div>
+<div class="duo">
+<div class="box why"><h4>Vì sao dùng phương pháp này</h4><ol><li><b>Vấn đề</b> — Kỹ thuật (vị trí), đồ họa (xoay), phân tích dữ liệu (láng giềng gần nhất) đều dùng khoảng cách của căn phòng này.</li><li><b>Giới hạn của phòng trước</b> — Nhưng tới phòng 9 ta đã giả định mọi ô có cùng đơn vị.</li><li><b>Lời giải</b> — Đồng bộ đơn vị (chuẩn hóa đặc trưng), và trên bề mặt cong thì đo dọc theo bề mặt.</li></ol><div class="easy"><b>Nói đơn giản</b> — Ghi chiều cao bằng mm thì con số chiều cao lớn gấp 10 lần và một mình chiếm trọn khoảng cách.</div></div>
+<div class="box mathbox"><h4>Trợ lý, người ngại công thức toán, sẽ hỏi thay bạn</h4>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy"><div><b>Trợ lý</b> d_surf = Rθ, d_Euc = 2R sin(θ/2)… sao tự nhiên lại có sin vậy ạ?</div></div>
+<p><b>Nhìn bằng toán phổ thông</b> — đổi đơn vị, độ dài cung, hàm lượng giác</p>
+<table><thead><tr><th>Mảnh công thức</th><th>Nghĩa</th></tr></thead><tbody><tr><td class='m'>‖x − y‖₂</td><td>Khoảng cách thước thẳng của phòng 3</td></tr><tr><td class='m'>y* = argmin</td><td>Chọn y có khoảng cách nhỏ nhất (láng giềng gần nhất)</td></tr><tr><td class='m'>Rθ</td><td>Độ dài đi dọc bề mặt (cung) — bán kính × góc ở tâm</td></tr><tr><td class='m'>2R sin(θ/2)</td><td>Độ dài đào thẳng xuyên lòng đất (dây cung)</td></tr></tbody></table>
+<div class="try"><b>Thử tính bằng số</b><div>Khách mới (165cm, 55kg) và Khách A (160, 56): theo cm √(5² + 1²) ≈ 5.10, Khách B (166, 48): √(1² + 7²) ≈ 7.07 → láng giềng gần nhất là A</div><div>Chiều cao theo mm: A √(50² + 1²) ≈ 50.01, B √(10² + 7²) ≈ 12.21 → láng giềng đổi thành B</div><div>Trái Đất R = 6,371km, góc ở tâm 90°: cung ≈ 10,008km, dây cung ≈ 9,010km</div></div>
+<div class="q"><img src="assets/chars/haru_e16.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy"><div><b>Trợ lý</b> Cùng những người đó mà chỉ một đơn vị đã đổi láng giềng, thật đáng sợ.</div></div></div>
+</div>
+<div class="pair"><div class="box"><h4>Trong đời thường</h4><p>Máy bay từ Seoul đến New York không bay theo đường thẳng trên bản đồ mà đi dọc theo bề mặt Trái Đất.</p></div><div class="box ml"><h4>Trong học máy</h4><p>Trước khi tìm láng giềng gần nhất · phân cụm, đồng bộ đơn vị cho từng cột (chuẩn hóa). Với dữ liệu mà hướng quan trọng như các điểm từ ngữ, dùng cosin của phòng 4 thay cho khoảng cách.</p></div></div>
+<div class="talk"><div class="line r"><img src="assets/chars/moa_e09.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Chiều cao là cm, cân nặng là kg, cứ cộng chung vào được ạ?</div></div><div class="line"><img src="assets/chars/jupanbot_e16.webp" alt="AbaBot" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-robo)">AbaBot</b>Số là số thôi! Đơn vị chẳng ảnh hưởng gì, tôi dồn hết vào đây!</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="Nhà nghiên cứu Ruồi giấm" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">Nhà nghiên cứu Ruồi giấm</b>Đổi đơn vị chiều cao sang mm thử. Xem lại láng giềng gần nhất là ai.</div></div></div>
+<div class="panel"><div class="ph"><b>Bảng thí nghiệm 10-①</b><small>Ô phân tích dữ liệu của thẻ gốc 10 · hãy đổi đơn vị chiều cao</small></div><div id="pp-p10a" data-panel="p10a"></div><div class="ctrl"><button type="button" data-unit="cm">Chiều cao cm</button><button type="button" data-unit="mm">Chiều cao mm</button></div><div class="readout" aria-live="polite"></div></div><div class="panel"><div class="ph"><b>Bảng thí nghiệm 10-②</b><small>Vẽ lại cung và dây cung của thẻ gốc 10 · hãy thay đổi góc ở tâm</small></div><div id="pp-p10b" data-panel="p10b"></div><div class="ctrl"><label>Góc ở tâm <input type="range" min="0" max="180" step="5" value="90" aria-label="Góc ở tâm"></label></div><div class="readout" aria-live="polite"></div></div>
+<div class="solve"><h4>Lời giải</h4><p>Trái với lời AbaBot, đơn vị làm thay đổi khoảng cách. Tài liệu gốc cũng ghi &quot;chuẩn hóa đặc trưng là quan trọng&quot;.</p><p>Góc ở tâm nhỏ thì cung và dây cung gần như bằng nhau. Góc càng lớn, thước thẳng đo càng ngắn hơn đường thực tế.</p><p>Ở 180°, cung là 20,015km, dây cung là đường kính 12,742km.</p><p>Ô kỹ thuật (vị trí · dịch chuyển) của thẻ gốc 10 đã bàn ở phòng 2, ô đồ họa (xoay · đẩy) đã bàn ở phòng 8.</p></div>
+
+<div class="limit"><b>Giới hạn của phòng này</b> — Thước kẻ và thước đo góc của phòng này chỉ dùng được cho dữ liệu có số ô cố định. Không chứa được dữ liệu nối dài vô tận như âm thanh hay đường cong cảm biến. → Cuối hành lang</div>
+<details class="code"><summary>Xem bằng code Python trong giáo trình (không biết cũng không sao)</summary><pre><code>(X - X.mean(axis=0)) / X.std(axis=0)</code></pre><p>Trừ trung bình của từng cột rồi chia cho độ phân tán để đồng bộ đơn vị (chuẩn hóa).</p></details>
+<div class="quiz" data-ans="1"><div class="qq">Câu đố kiểm tra — Tìm đồng nghiệp gần nhất theo chiều cao (cm) và lương năm (won). Việc cần làm trước tiên là?</div><div class="opts"><button type="button">Đo khoảng cách nguyên như vậy</button><button type="button">Đồng bộ đơn vị cho từng cột</button><button type="button">Xóa cột chiều cao</button></div><div class="fb" aria-live="polite"></div><span class="qok" hidden>Con số lương lớn hơn nhiều nên chiếm trọn khoảng cách. Trước hết hãy đưa các đơn vị về cùng thang đo.</span><span class="qno" hidden>Nếu trộn nguyên lương (hàng chục triệu) với chiều cao (khoảng 100 mấy), bạn sẽ chỉ chọn dựa vào lương.</span></div>
+</div></section>
+<section class="room" id="duel"><div class="wrap"><div class="roomno">Đối đầu</div><h2>Đối đầu tìm láng giềng gần nhất</h2>
+<p class="muted">Trọng tài: Trợ lý Haru · Trên cùng dữ liệu khách hàng, ai đoán đúng người giống khách mới nhất</p>
+<div class="talk"><div class="line"><img src="assets/chars/haru_e07.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-asst)">Trợ lý Haru</b>Lần này là những vị khách khác với phòng 10. Khách mới cao 158cm, nặng 49kg! Ứng viên là ba người: Khách D · E · F. Hãy đoán người có cùng cỡ quần áo.</div></div><div class="line"><img src="assets/chars/sia_e19.webp" alt="Sia" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">Sia</b>Thiết bị đo cho chiều cao bằng mm, cứ thế mà đo thôi! Nhanh là nhất!</div></div><div class="line r"><img src="assets/chars/moa_e09.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Em sẽ quy 5cm chiều cao và 5kg cân nặng thành một ô rồi mới đo.</div></div><div class="line"><img src="assets/chars/jupanbot_e16.webp" alt="AbaBot" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-robo)">AbaBot</b>Đằng nào cũng cùng những người đó, đáp án chắc cũng như nhau, khỏi lo lỗ!</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="Nhà nghiên cứu Ruồi giấm" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">Nhà nghiên cứu Ruồi giấm</b>Thật không? Mở lần lượt câu trả lời của hai người xem.</div></div></div>
+<div class="panel"><div class="ph"><b>Bảng đối đầu</b><small>Hãy bấm lần lượt các nút · dữ liệu ví dụ</small></div>
+<div id="pp-duel" data-panel="duel"></div>
+<div class="ctrl"><button type="button" data-duel="sia">Mở câu trả lời của Sia</button><button type="button" data-duel="moa">Mở câu trả lời của Moa</button><button type="button" data-duel="ans">Công bố đáp án</button></div>
+<div class="readout" aria-live="polite"></div></div>
+<div class="solve"><h4>Phán quyết của trọng tài</h4>
+<p>Cách của Sia đo chênh lệch chiều cao bằng mm nên ra số lớn như 30·10·50. Chênh lệch cân nặng 2·6·1kg gần như bị lấn át. Vì vậy đã chọn Khách E, người chỉ gần về chiều cao.</p>
+<p>"5cm · 5kg" trong cách của Moa nghĩa là chiều cao và cân nặng của các khách này thường phân tán khoảng chừng đó (giá trị ví dụ). Lấy độ phân tán làm một ô nên hai cột trở nên công bằng. Khách D gần nhất với khoảng cách 0.72.</p>
+<p>Trong thực tế, "độ phân tán" này được tính trực tiếp từ dữ liệu. Chuẩn hóa trong hộp code ở phòng 10 chính là việc đó.</p>
+<p>Đúng như bài học của phòng 10. Nếu không đồng bộ đơn vị, cột có con số lớn sẽ chiếm trọn khoảng cách.</p></div>
+<div class="talk"><div class="line"><img src="assets/chars/haru_e10.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-asst)">Trợ lý Haru</b>Phán quyết! Moa thắng màn đối đầu này.</div></div><div class="line r"><img src="assets/chars/moa_e16.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Em chỉ đồng bộ đơn vị thôi mà.</div></div><div class="line"><img src="assets/chars/sia_e14.webp" alt="Sia" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">Sia</b>Hóa ra nhanh chưa chắc là nhất… lần sau em sẽ xem đơn vị trước.</div></div></div>
+</div></section>
+<section id="sum"><div class="wrap"><h2>Tổng kết Phần ②</h2>
+<div class="tbl"><table><thead><tr><th>Phòng</th><th>Công cụ</th><th>Một dòng</th><th>Trong học máy</th></tr></thead><tbody>
+<tr><td>6</td><td>Bóng</td><td>Chân đường hạ thẳng là câu trả lời gần nhất</td><td>Vẽ đường dự đoán, trung bình</td></tr>
+<tr><td>7</td><td>Vách ngăn</td><td>Chia phe bằng điểm với mũi tên cắm trên vách</td><td>Ranh giới quyết định của bộ phân loại</td></tr>
+<tr><td>8</td><td>Đẩy · xoay · lật</td><td>Chuyển động giữ khoảng cách</td><td>Tăng cường dữ liệu</td></tr>
+<tr><td>9</td><td>Quả cầu</td><td>Bên trong bán kính = láng giềng / nhiều ô thì dồn ra lớp vỏ ngoài</td><td>Láng giềng theo bán kính, cái bẫy khi có nhiều ô (lời nguyền chiều dữ liệu)</td></tr>
+<tr><td>10</td><td>Đồng bộ đơn vị · cung và dây cung</td><td>Để thước thẳng công bằng thì phải đồng bộ đơn vị</td><td>Chuẩn hóa</td></tr></tbody></table></div></div></section>
+<section class="room" id="outro"><div class="wrap"><div class="roomno">Phần kết · Giới thiệu phần tiếp theo</div><h2>Căn phòng vô tận ở cuối hành lang</h2>
+<p class="muted">Phần tiếp theo là không gian Hilbert. Ở đây chưa dạy, chỉ giới thiệu nó là gì và vì sao cần.</p>
+<h3>① Tổng kết căn phòng hôm nay</h3>
+<p>Ta đã đo xa bao nhiêu bằng thước kẻ (khoảng cách), giống bao nhiêu bằng thước đo góc (điểm chồng khớp), và câu trả lời gần nhất ở đâu bằng bóng.</p>
+<h3>② Điều căn phòng này không làm được</h3>
+<p>Số ô phải cố định. Nó không chứa được dữ liệu nối dài vô tận như âm thanh, đường cong cảm biến hay diễn biến giá cổ phiếu.</p>
+<p>Chỉ 1 giây nhạc, nếu ghi lại với chất lượng CD, cũng đã là 44100 con số. Nhưng bản thân đường cong âm thanh thì kéo dài không dứt.</p>
+<h3>③ Không gian Hilbert là gì</h3>
+<div class="three" style="border-color:var(--orange);background:var(--orange-soft)"><ul>
+<li>Là giữ nguyên thước kẻ và thước đo góc, rồi mở rộng căn phòng ra <b>vô tận</b>.</li>
+<li>Coi một đường cong là một điểm, và giữa các đường cong cũng đo "xa bao nhiêu · giống bao nhiêu · bóng".</li>
+<li>Các quy tắc học hôm nay gần như vẫn dùng được nguyên vẹn. Chỉ có số ô là thay đổi.</li></ul>
+<details class="abbr"><summary>Thuật ngữ gốc (mở ra)</summary><dl><dt>Hilbert space</dt><dd>Không gian Hilbert — căn phòng vô tận nơi độ dài · góc · bóng · giới hạn đều dùng được</dd></dl></details></div>
+<h3>④ Dùng ở đâu (chỉ nêu tên)</h3>
+<div class="cards">
+<div class="card"><span class="n">Nhận dạng giọng nói</span><h3>Chia âm thanh thành các mảnh sóng</h3><p>Tách âm thanh thành cường độ của các mảnh âm trầm · âm cao.</p></div>
+<div class="card"><span class="n">Nén</span><h3>MP3</h3><p>Chỉ giữ vài mảnh lớn và bỏ các mảnh nhỏ.</p></div>
+<div class="card"><span class="n">Phương pháp hạt nhân</span><h3>SVM</h3><p>Chỉ với bảng điểm độ giống nhau mà dựng được vách ngăn trong căn phòng vô tận.</p></div></div>
+<h3>⑤ Thí nghiệm — số ô đến vô tận</h3>
+<div class="talk"><div class="line r"><img src="assets/chars/moa_e09.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Cứ tăng số ô mãi thì sẽ thế nào ạ?</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="Nhà nghiên cứu Ruồi giấm" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">Nhà nghiên cứu Ruồi giấm</b>Đẩy tới cùng đi. Tới &quot;vô tận&quot; luôn.</div></div></div>
+<div class="panel"><div class="ph"><b>Thí nghiệm kết</b><small>Hãy đổi số ô 2 → 3 → 10 → 100 → vô tận</small></div>
+<div id="pp-outro" data-panel="outro"></div>
+<div class="ctrl"><label>Số ô <input type="range" min="0" max="4" step="1" value="0" aria-label="Số ô"></label><span class="hint">2 · 3 · 10 · 100 · vô tận</span></div>
+<div class="readout" aria-live="polite"></div></div>
+<h3>⑥ Sang phần tiếp theo</h3>
+<div class="talk"><div class="line"><img src="assets/chars/doctor_e08.webp" alt="Tiến sĩ" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">Tiến sĩ</b>Hành lang tiếp theo có mười căn phòng vô tận. Hãy mang theo nguyên thước kẻ và thước đo góc.</div></div><div class="line"><img src="assets/chars/sia_e19.webp" alt="Sia" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">Sia</b>Một đường cong là một điểm, em muốn vào xem ngay!</div></div><div class="line r"><img src="assets/chars/moa_e10.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Em sẽ kiểm tra xem cái bóng học hôm nay có dùng được ở đó không.</div></div></div>
+<div class="cards"><div class="card soon door"><img src="assets/chars/haru_e19.webp" alt="Trợ lý Haru" width="96" height="96" loading="lazy"><span class="n">Phần tiếp theo · Sắp mở</span><h3>Thước kẻ và thước đo góc của căn phòng vô tận — Không gian Hilbert</h3><p>Khi công khai, thẻ này sẽ mở. Kho mã: <a href="https://github.com/adminmrobo/hilbert_space_lab">hilbert_space_lab</a></p></div></div>
+<div class="next"><a href="01_ruler_rooms.html">← Phần ①</a><a href="index.html">Về mục lục</a></div>
+</div></section>
+<style>.door.open{opacity:1;border:2px solid var(--orange);box-shadow:0 0 0 6px rgba(232,115,26,.12)}</style>
+<section id="kg"><div class="wrap"><h2>Chỉ mục tri thức — tra cứu trong trang này</h2>
+<p class="muted">Tập hợp các khái niệm, phương pháp, phép so sánh và ứng dụng xuất hiện trong trang này. Hãy tìm kiếm, rồi bấm "Xem giải thích" để quay lại phần nội dung.</p><div id="kg-mount"></div></div></section>
+<section id="export"><div class="wrap"><h2>Gói bản thể học · thư mục — mang tri thức của trang này đi</h2>
+<p class="muted">Tải chỉ mục tri thức kèm nguồn về dưới dạng tệp. Quản lý tài liệu tham khảo dùng BibTeX·RIS, chỉnh sửa ontology dùng Turtle. Công cụ đồ thị dùng CSV, gộp nhiều trang dùng kg.json.</p><div id="export-mount"></div></div></section>
+<script type="application/json" id="kg-raw">{"version": "1.3", "page": "02_shadow_rooms", "series": "자와 각도기의 방", "nodes": [{"id": "lab:concept/projection", "type": "Concept", "label": {"ko": "그림자(정사영)", "en": "Orthogonal projection", "vi": "Bóng (hình chiếu vuông góc)"}, "anchor": "#r06", "definition": {"ko": "점에서 선으로 똑바로 내린 발밑이 가장 가까운 점", "vi": "Chân đường thẳng góc hạ từ điểm xuống đường thẳng là điểm gần nhất"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/hyperplane", "type": "Concept", "label": {"ko": "선·평면·칸막이", "en": "Lines, planes, hyperplanes", "vi": "Đường thẳng · mặt phẳng · vách ngăn"}, "anchor": "#r07", "definition": {"ko": "n칸 방의 칸막이는 n − 1칸. 꽂힌 화살표와의 점수로 편을 가른다", "vi": "Vách ngăn của phòng n ô có n − 1 ô. Điểm số với mũi tên cắm trên đó quyết định phía"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/isometry", "type": "Concept", "label": {"ko": "밀고·돌리고·뒤집기", "en": "Isometry", "vi": "Đẩy · xoay · lật"}, "anchor": "#r08", "definition": {"ko": "거리와 각도를 지키는 움직임. 늘리기는 거리를 바꾼다", "vi": "Những chuyển động giữ nguyên khoảng cách và góc. Kéo giãn làm thay đổi khoảng cách"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/ball", "type": "Concept", "label": {"ko": "원·구·공", "en": "Circles, spheres, n-balls", "vi": "Hình tròn · mặt cầu · quả cầu"}, "anchor": "#r09", "definition": {"ko": "중심에서 r 안쪽 = 이웃 범위", "vi": "Trong bán kính r tính từ tâm = phạm vi hàng xóm"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/curse-of-dimensionality", "type": "Concept", "label": {"ko": "칸이 너무 많으면 모두 비슷하게 멀어진다", "en": "Curse of dimensionality", "vi": "Quá nhiều ô thì mọi thứ đều xa nhau như nhau"}, "anchor": "#r09", "definition": {"ko": "n칸 공의 부피가 겉껍질에 몰린다(0.9ⁿ)", "vi": "Trong quả cầu n ô, thể tích dồn ra lớp vỏ ngoài (0.9ⁿ)"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:method/feature-scaling", "type": "Method", "label": {"ko": "단위 맞추기", "en": "Feature scaling", "vi": "Đồng bộ đơn vị"}, "anchor": "#r10", "definition": {"ko": "열마다 단위를 맞춰야 거리가 공정해진다", "vi": "Phải thống nhất đơn vị theo từng cột thì khoảng cách mới công bằng"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/arc-chord", "type": "Concept", "label": {"ko": "호와 현", "en": "Intrinsic vs Euclidean distance", "vi": "Cung và dây cung"}, "anchor": "#r10", "definition": {"ko": "휜 표면에서는 곧은 자가 실제 길보다 짧게 잰다", "vi": "Trên bề mặt cong, thước thẳng đo ngắn hơn đường đi thực"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:application/least-squares", "type": "Application", "label": {"ko": "예측선 긋기(최소제곱)", "en": "Least squares", "vi": "Vẽ đường dự đoán (bình phương tối thiểu)"}, "anchor": "#r06", "definition": {"ko": "정답의 그림자를 고른다", "vi": "Chọn bóng của đáp án"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:application/linear-classifier", "type": "Application", "label": {"ko": "분류기의 결정 경계", "en": "Linear classifier", "vi": "Ranh giới quyết định của bộ phân loại"}, "anchor": "#r07", "definition": {"ko": "칸막이로 스팸·정상을 가른다", "vi": "Dùng vách ngăn tách thư rác và thư thường"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:analogy/shadow", "type": "Analogy", "label": {"ko": "정오의 막대 그림자", "en": "Noon shadow", "vi": "Bóng của cây gậy lúc giữa trưa"}, "anchor": "#r06", "definition": {"ko": "그림자 = 가장 가까운 답", "vi": "Bóng = đáp án gần nhất"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:open/hilbert", "type": "OpenQuestion", "label": {"ko": "칸 수가 끝없으면? 곡선이라면?", "en": "Infinite dimensions → Hilbert space", "vi": "Nếu số ô là vô tận thì sao? Nếu là đường cong thì sao?"}, "anchor": "#outro", "definition": {"ko": "다음 편 힐베르트 공간에서 다룬다", "vi": "Được bàn ở phần sau, không gian Hilbert"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}], "edges": [{"s": "lab:concept/projection", "p": "motivates", "o": "lab:concept/hyperplane"}, {"s": "lab:concept/hyperplane", "p": "motivates", "o": "lab:concept/isometry"}, {"s": "lab:concept/isometry", "p": "motivates", "o": "lab:concept/ball"}, {"s": "lab:concept/ball", "p": "motivates", "o": "lab:method/feature-scaling"}, {"s": "lab:concept/ball", "p": "hasPart", "o": "lab:concept/curse-of-dimensionality"}, {"s": "lab:method/feature-scaling", "p": "motivates", "o": "lab:open/hilbert"}, {"s": "lab:concept/arc-chord", "p": "motivates", "o": "lab:open/hilbert"}, {"s": "lab:concept/projection", "p": "usedIn", "o": "lab:application/least-squares"}, {"s": "lab:concept/hyperplane", "p": "usedIn", "o": "lab:application/linear-classifier"}, {"s": "lab:analogy/shadow", "p": "explains", "o": "lab:concept/projection"}]}</script>
+<script type="application/ld+json" id="kg-ld">{"@context": {"@vocab": "urn:lab:", "skos": "http://www.w3.org/2004/02/skos/core#", "schema": "https://schema.org/"}, "@graph": [{"@id": "urn:lab:concept/projection", "@type": "Concept", "skos:prefLabel": [{"@value": "그림자(정사영)", "@language": "ko"}, {"@value": "Orthogonal projection", "@language": "en"}], "skos:definition": "점에서 선으로 똑바로 내린 발밑이 가장 가까운 점", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r06"}, {"@id": "urn:lab:concept/hyperplane", "@type": "Concept", "skos:prefLabel": [{"@value": "선·평면·칸막이", "@language": "ko"}, {"@value": "Lines, planes, hyperplanes", "@language": "en"}], "skos:definition": "n칸 방의 칸막이는 n − 1칸. 꽂힌 화살표와의 점수로 편을 가른다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r07"}, {"@id": "urn:lab:concept/isometry", "@type": "Concept", "skos:prefLabel": [{"@value": "밀고·돌리고·뒤집기", "@language": "ko"}, {"@value": "Isometry", "@language": "en"}], "skos:definition": "거리와 각도를 지키는 움직임. 늘리기는 거리를 바꾼다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r08"}, {"@id": "urn:lab:concept/ball", "@type": "Concept", "skos:prefLabel": [{"@value": "원·구·공", "@language": "ko"}, {"@value": "Circles, spheres, n-balls", "@language": "en"}], "skos:definition": "중심에서 r 안쪽 = 이웃 범위", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r09"}, {"@id": "urn:lab:concept/curse-of-dimensionality", "@type": "Concept", "skos:prefLabel": [{"@value": "칸이 너무 많으면 모두 비슷하게 멀어진다", "@language": "ko"}, {"@value": "Curse of dimensionality", "@language": "en"}], "skos:definition": "n칸 공의 부피가 겉껍질에 몰린다(0.9ⁿ)", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r09"}, {"@id": "urn:lab:method/feature-scaling", "@type": "Method", "skos:prefLabel": [{"@value": "단위 맞추기", "@language": "ko"}, {"@value": "Feature scaling", "@language": "en"}], "skos:definition": "열마다 단위를 맞춰야 거리가 공정해진다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r10"}, {"@id": "urn:lab:concept/arc-chord", "@type": "Concept", "skos:prefLabel": [{"@value": "호와 현", "@language": "ko"}, {"@value": "Intrinsic vs Euclidean distance", "@language": "en"}], "skos:definition": "휜 표면에서는 곧은 자가 실제 길보다 짧게 잰다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r10"}, {"@id": "urn:lab:application/least-squares", "@type": "Application", "skos:prefLabel": [{"@value": "예측선 긋기(최소제곱)", "@language": "ko"}, {"@value": "Least squares", "@language": "en"}], "skos:definition": "정답의 그림자를 고른다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r06"}, {"@id": "urn:lab:application/linear-classifier", "@type": "Application", "skos:prefLabel": [{"@value": "분류기의 결정 경계", "@language": "ko"}, {"@value": "Linear classifier", "@language": "en"}], "skos:definition": "칸막이로 스팸·정상을 가른다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r07"}, {"@id": "urn:lab:analogy/shadow", "@type": "Analogy", "skos:prefLabel": [{"@value": "정오의 막대 그림자", "@language": "ko"}, {"@value": "Noon shadow", "@language": "en"}], "skos:definition": "그림자 = 가장 가까운 답", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r06"}, {"@id": "urn:lab:open/hilbert", "@type": "OpenQuestion", "skos:prefLabel": [{"@value": "칸 수가 끝없으면? 곡선이라면?", "@language": "ko"}, {"@value": "Infinite dimensions → Hilbert space", "@language": "en"}], "skos:definition": "다음 편 힐베르트 공간에서 다룬다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#outro"}]}</script>
+<script type="application/json" id="refs-csl">[{"id": "eeanimation_euclidean_space", "type": "graphic", "title": "EUCLIDEAN SPACE 01–10 (infographic series)", "author": [{"literal": "@eeanimation"}], "accessed": {"date-parts": [[2026, 11, 19]]}, "note": "사용자 제공 이미지. 차트를 SVG로 다시 그려 실험 패널로 바꿈"}]</script>
+<script type="application/json" id="page-meta">{"title": "02_shadow_rooms", "series": "Căn phòng của thước kẻ và thước đo góc", "creator": [{"name": "안상선", "role": "author", "affiliation": "(주)M-Robo"}], "date": "2026-11-19", "version": "v1.3", "license": "캐릭터·그림 무단 사용 금지", "series_ko": "자와 각도기의 방", "language": ["vi"], "translationOf": "02_shadow_rooms.html"}</script>
+<footer><div class="wrap">
+<h3>Nguồn</h3>
+<div class="tbl"><table><thead><tr><th>#</th><th>Tài liệu</th><th>Chỗ dùng trong trang này</th></tr></thead><tbody>
+<tr><td>[1]</td><td>@eeanimation, infographic 「EUCLIDEAN SPACE 01~10」 (hình ảnh do người dùng cung cấp, xác nhận ngày 2026-11-19)</td><td>Thẻ tài liệu gốc của phòng 1~10. Vẽ lại bằng SVG, giữ bố cục, màu sắc, ký hiệu và tên trục, rồi chuyển thành dạng có thể tự tay điều khiển. Không dán hình ảnh gốc</td></tr>
+<tr><td>[2]</td><td>Ahn Sangsun, 「Hướng dẫn biên soạn bài giải thích tọa độ không gian」 v1.0 (docs/SPACE_COORDINATE_GUIDE.md)</td><td>Bảng đối chiếu thuật ngữ, thang không gian, cấu trúc căn phòng</td></tr>
+</tbody></table></div>
+<h3>Giá trị ví dụ · con số minh họa</h3>
+<p>Mọi con số về người, cửa hàng và khách hàng trong trang này đều là giá trị ví dụ để minh họa. Chiều cao, cân nặng, vòng eo của Sia và Moa, bảng sở thích, và ba lần đo chiều cao đều như vậy. Vị trí cửa hàng tiện lợi cùng chiều cao và cân nặng của Khách A~F cũng thế.</p>
+<p>Không được sử dụng tên, thiết lập và hình vẽ nhân vật khi chưa có sự cho phép của chủ sở hữu bản quyền Ahn Sangsun. Hình nhân vật: fruitfly-lab-expressions.</p>
+<p>Bài viết · Ahn Sangsun (Giám đốc điều hành M-Robo) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">Giới thiệu tác giả</a> · 2026-11-19 · v1.3</p>
+<p><a href="index.html">Mục lục</a> · <a href="00_orientation.html">Phần 0 Kiểm tra ba lô</a> · <a href="01_ruler_rooms.html">Phần ① Căn phòng của thước kẻ và thước đo góc</a> · <a href="02_shadow_rooms.html">Phần ② Căn phòng của bóng và vách ngăn</a> · <a href="https://github.com/adminmrobo/euclidean_space_lab">Kho mã</a></p>
+</div></footer>
+<script>
+/* 자와 각도기의 방 — 실험 패널 모음. 원자료 @eeanimation 「EUCLIDEAN SPACE 01~10」의 차트를 다시 그려 손으로 움직이게 만든 것 */
+(function(){
+'use strict';
+var NS='http://www.w3.org/2000/svg';
+var C={teal:'#0f8f84',orange:'#e8731a',navy:'#1e2f6e',blue:'#2458d6',green:'#13733a',red:'#c9302c',grid:'#e3e8ee',axis:'#1e2f6e',muted:'#5b6874'};
+function el(tag,a,parent){var e=document.createElementNS(NS,tag);for(var k in a){if(a[k]!=null)e.setAttribute(k,a[k]);}if(parent)parent.appendChild(e);return e;}
+function txt(parent,x,y,s,a){a=a||{};var t=el('text',Object.assign({x:x,y:y,'font-size':a.size||14,fill:a.fill||C.navy,'font-family':a.font||'"Cambria Math","Times New Roman",serif','font-style':a.italic===false?'normal':'italic','text-anchor':a.anchor||'start','font-weight':a.weight||'normal'},{}),parent);t.textContent=s;return t;}
+function ktxt(parent,x,y,s,a){a=a||{};a.font='"IBM Plex Sans KR","Malgun Gothic","Noto Sans KR",sans-serif';a.italic=false;return txt(parent,x,y,s,a);}
+function r2(v){return Math.round(v*100)/100;}
+function r1(v){return Math.round(v*10)/10;}
+function fmt(v,d){d=d==null?2:d;var s=(Math.round(v*Math.pow(10,d))/Math.pow(10,d)).toFixed(d);s=s.replace(/\.?0+$/,'');if(s==='-0')s='0';return s;}
+function num(v){return v<0?'−'+fmt(-v):fmt(v);}
+function svgOf(host,W,H){host.innerHTML='';var s=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Hình bảng thí nghiệm: '+(function(){var n=host.parentNode&&host.parentNode.querySelector('.ph small');return n?n.textContent:'';})()},host);var d=el('defs',{},s);
+  ['teal','orange','navy','blue','green','red'].forEach(function(c){var m=el('marker',{id:'ah-'+c+'-'+host.id,viewBox:'0 0 10 10',refX:8.5,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'},d);el('path',{d:'M0,0 L10,5 L0,10 z',fill:C[c]},m);});
+  s._id=host.id;return s;}
+function arrow(s,x1,y1,x2,y2,c,w){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:C[c],'stroke-width':w||3,'marker-end':'url(#ah-'+c+'-'+s._id+')'},s);}
+function dash(s,x1,y1,x2,y2,c){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:C[c]||c,'stroke-width':1.6,'stroke-dasharray':'5 4'},s);}
+/* 좌표평면 */
+function plane(s,o){var W=o.W,H=o.H,p=o.pad||36;var sx=(W-2*p)/(o.x1-o.x0),sy=(H-2*p)/(o.y1-o.y0);
+  if(o.equal){var k=Math.min(sx,sy);sx=sy=k;}
+  var ox=p-o.x0*sx,oy=H-p+o.y0*sy;s._sx=sx;
+  var P={X:function(x){return ox+x*sx;},Y:function(y){return oy-y*sy;},inv:function(px,py){return[(px-ox)/sx,(oy-py)/sy];},sx:sx,sy:sy};
+  var g=el('g',{},s);var st=o.step||1;
+  if(o.grid!==false){for(var x=Math.ceil(o.x0/st)*st;x<=o.x1+1e-9;x+=st)el('line',{x1:P.X(x),y1:P.Y(o.y0),x2:P.X(x),y2:P.Y(o.y1),stroke:C.grid},g);
+  for(var y=Math.ceil(o.y0/st)*st;y<=o.y1+1e-9;y+=st)el('line',{x1:P.X(o.x0),y1:P.Y(y),x2:P.X(o.x1),y2:P.Y(y),stroke:C.grid},g);}
+  var ax0=Math.max(o.x0,Math.min(0,o.x1)),ay0=Math.max(o.y0,Math.min(0,o.y1));
+  if(o.ax!==undefined)ax0=o.ax;if(o.ay!==undefined)ay0=o.ay;
+  el('line',{x1:P.X(o.x0),y1:P.Y(ay0),x2:P.X(o.x1)+14,y2:P.Y(ay0),stroke:C.axis,'stroke-width':2,'marker-end':'url(#ah-navy-'+s._id+')'},g);
+  el('line',{x1:P.X(ax0),y1:P.Y(o.y0),x2:P.X(ax0),y2:P.Y(o.y1)-14,stroke:C.axis,'stroke-width':2,'marker-end':'url(#ah-navy-'+s._id+')'},g);
+  if(/[^\x00-\x7f]/.test((o.xl||'')+(o.yl||''))){ktxt(g,P.X(o.x1)+14,P.Y(ay0)-12,o.xl,{size:13,anchor:'end'});ktxt(g,P.X(ax0)+12,P.Y(o.y1)-2,o.yl,{size:13});}else{txt(g,P.X(o.x1)+10,P.Y(ay0)+20,o.xl||'x',{size:16});txt(g,P.X(ax0)-22,P.Y(o.y1)-8,o.yl||'y',{size:16});}
+  var ls=o.label||st;
+  if(o.ticks!==false){for(var a=Math.ceil(o.x0/ls)*ls;a<=o.x1+1e-9;a+=ls){if(Math.abs(a-ax0)<1e-9&&!o.zeroX)continue;txt(g,P.X(a),P.Y(ay0)+18,fmt(a),{size:12.5,anchor:'middle',italic:false,fill:C.muted});}
+  for(var b=Math.ceil(o.y0/ls)*ls;b<=o.y1+1e-9;b+=ls){if(Math.abs(b-ay0)<1e-9)continue;txt(g,P.X(ax0)-8,P.Y(b)+4,fmt(b),{size:12.5,anchor:'end',italic:false,fill:C.muted});}
+  if(o.x0<=0&&o.y0<=0)txt(g,P.X(0)-14,P.Y(0)+18,'0',{size:12.5,italic:false,fill:C.muted});}
+  return P;}
+/* 끌기 */
+function drag(s,node,onMove){var on=false;var host=s.parentNode;var idx=s.querySelectorAll('g.drag').length;
+  node.setAttribute('tabindex','0');node.setAttribute('role','slider');node.setAttribute('aria-label','Điểm kéo thả được (cũng di chuyển bằng phím mũi tên)');
+  node.addEventListener('keydown',function(e){var k={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];if(!k)return;e.preventDefault();
+    var c=node.querySelector('circle');var st=(s._sx||24)*(+(host.dataset.ksnap||1));host.dataset.kf=idx;onMove(+c.getAttribute('cx')+k[0]*st,+c.getAttribute('cy')+k[1]*st);});
+  function pt(e){var m=s.getScreenCTM().inverse();var q=s.createSVGPoint();q.x=e.clientX;q.y=e.clientY;q=q.matrixTransform(m);return q;}
+  node.classList.add('drag');
+  node.addEventListener('pointerdown',function(e){on=true;node.setPointerCapture(e.pointerId);e.preventDefault();});
+  node.addEventListener('pointermove',function(e){if(!on)return;var q=pt(e);onMove(q.x,q.y);});
+  node.addEventListener('pointerup',function(){on=false;});node.addEventListener('pointercancel',function(){on=false;});
+  if(host.dataset.kf!=null&&+host.dataset.kf===idx)node.focus({preventScroll:true});}
+function handle(s,x,y,c,label){var g=el('g',{},s);el('circle',{cx:x,cy:y,r:16,fill:C[c],'fill-opacity':.14},g);el('circle',{cx:x,cy:y,r:8,fill:C[c],stroke:'#fff','stroke-width':2},g);return g;}
+function dot(s,x,y,c,r){return el('circle',{cx:x,cy:y,r:r||6,fill:C[c]||c,stroke:'#fff','stroke-width':1.5},s);}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function snap(v,st){return Math.round(v/st)*st;}
+function readout(host){var d=host.parentNode.querySelector('.readout');return d;}
+function rightMark(s,x,y,ux,uy,vx,vy,k){k=k||10;el('path',{d:'M'+(x+ux*k)+','+(y+uy*k)+' L'+(x+ux*k+vx*k)+','+(y+uy*k+vy*k)+' L'+(x+vx*k)+','+(y+vy*k),fill:'none',stroke:C.orange,'stroke-width':1.5},s);}
+
+var P={};
+
+/* ===== 0편 ===== */
+P.o1=function(h){var W=520,H=400,pt=[3,2];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:6,y0:0,y1:4.5,equal:true});
+    var bg=el('rect',{x:0,y:0,width:W,height:H,fill:'transparent'},s);
+    dash(s,p.X(pt[0]),p.Y(pt[1]),p.X(pt[0]),p.Y(0),'teal');dash(s,p.X(pt[0]),p.Y(pt[1]),p.X(0),p.Y(pt[1]),'teal');
+    dot(s,p.X(pt[0]),p.Y(pt[1]),'orange',8);txt(s,p.X(pt[0])+10,p.Y(pt[1])-10,'P('+fmt(pt[0])+', '+fmt(pt[1])+')',{size:16});
+    bg.addEventListener('pointerdown',function(e){var m=s.getScreenCTM().inverse();var q=s.createSVGPoint();q.x=e.clientX;q.y=e.clientY;q=q.matrixTransform(m);var v=p.inv(q.x,q.y);pt=[clamp(snap(v[0],.5),0,6),clamp(snap(v[1],.5),0,4.5)];draw();});
+    out.innerHTML='Điểm P nằm ở vị trí <b>sang ngang '+fmt(pt[0])+', dọc '+fmt(pt[1])+'</b> (tính theo ô). Hai số = một điểm.';}
+  draw();};
+P.o2=function(h){var W=520,H=400,B=[4,3];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:8,y0:0,y1:6,equal:true});
+    el('line',{x1:p.X(0),y1:p.Y(0),x2:p.X(B[0]),y2:p.Y(0),stroke:C.green,'stroke-width':3},s);
+    el('line',{x1:p.X(B[0]),y1:p.Y(0),x2:p.X(B[0]),y2:p.Y(B[1]),stroke:C.green,'stroke-width':3},s);
+    el('line',{x1:p.X(0),y1:p.Y(0),x2:p.X(B[0]),y2:p.Y(B[1]),stroke:C.blue,'stroke-width':3},s);
+    rightMark(s,p.X(B[0]),p.Y(0),-1,0,0,-1,12);
+    txt(s,p.X(B[0]/2),p.Y(0)-8,'a = '+B[0],{anchor:'middle',fill:C.orange,size:15});txt(s,p.X(B[0])+8,p.Y(B[1]/2),'b = '+B[1],{fill:C.orange,size:15});
+    var g=handle(s,p.X(B[0]),p.Y(B[1]),'blue');drag(s,g,function(x,y){var v=p.inv(x,y);var nb=[clamp(snap(v[0],1),1,8),clamp(snap(v[1],1),1,6)];if(nb[0]!==B[0]||nb[1]!==B[1]){B=nb;draw();}});
+    var c=Math.sqrt(B[0]*B[0]+B[1]*B[1]);var ok=Math.abs(c-Math.round(c))<1e-9;
+    out.innerHTML=B[0]+'² + '+B[1]+'² = '+(B[0]*B[0]+B[1]*B[1])+' → cạnh huyền c = √'+(B[0]*B[0]+B[1]*B[1])+' = <b>'+fmt(c)+'</b>'+(ok?' <span class="alert">Một cặp số tròn trịa!</span>':'');}
+  draw();};
+P.o3=function(h){var W=520,H=400;var inp=h.parentNode.querySelector('input');var out=readout(h);
+  function draw(){var t=+inp.value;var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-1.3,x1:1.3,y0:-1.3,y1:1.3,equal:true,step:.5,label:.5,grid:true});
+    el('circle',{cx:p.X(0),cy:p.Y(0),r:p.sx,fill:'none',stroke:C.teal,'stroke-width':2},s);
+    var a=t*Math.PI/180,cx=Math.cos(a),sy=Math.sin(a);
+    arrow(s,p.X(0),p.Y(0),p.X(cx),p.Y(sy),'blue');
+    el('line',{x1:p.X(0),y1:p.Y(0),x2:p.X(cx),y2:p.Y(0),stroke:C.orange,'stroke-width':4},s);
+    el('line',{x1:p.X(cx),y1:p.Y(0),x2:p.X(cx),y2:p.Y(sy),stroke:C.green,'stroke-width':4},s);
+    txt(s,p.X(cx/2),p.Y(0)+(sy>=0?20:-8),'cos θ',{anchor:'middle',fill:C.orange});txt(s,p.X(cx)+6,p.Y(sy/2),'sin θ',{fill:C.green});
+    out.innerHTML='θ = '+t+'° → ngang cos θ = <b>'+num(cx)+'</b>, dọc sin θ = <b>'+num(sy)+'</b> (tổng bình phương của hai số luôn bằng 1)';}
+  inp.addEventListener('input',draw);draw();};
+
+P.o4=function(h){var W=520,H=400,u=[1,2],v=[3,1];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:6,y0:0,y1:4.5,equal:true});var w=[u[0]+v[0],u[1]+v[1]];
+    dash(s,p.X(u[0]),p.Y(u[1]),p.X(w[0]),p.Y(w[1]),'teal');dash(s,p.X(v[0]),p.Y(v[1]),p.X(w[0]),p.Y(w[1]),'blue');
+    arrow(s,p.X(0),p.Y(0),p.X(u[0]),p.Y(u[1]),'blue',3.5);arrow(s,p.X(0),p.Y(0),p.X(v[0]),p.Y(v[1]),'teal',3.5);
+    if(w[0]<=6&&w[1]<=4.5)arrow(s,p.X(0),p.Y(0),p.X(w[0]),p.Y(w[1]),'orange',4);
+    txt(s,p.X(u[0])-8,p.Y(u[1])-8,'u = ('+u[0]+', '+u[1]+')',{fill:C.blue,anchor:'end'});txt(s,p.X(w[0])+8,p.Y(w[1])-8,'u + v',{fill:C.orange,size:16});
+    var g=handle(s,p.X(v[0]),p.Y(v[1]),'teal');txt(s,p.X(v[0])+12,p.Y(v[1])+20,'v = ('+v[0]+', '+v[1]+')',{fill:C.teal});
+    drag(s,g,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],1),0,5),clamp(snap(q[1],1),0,2)];if(n[0]!==v[0]||n[1]!==v[1]){v=n;draw();}});
+    out.innerHTML='u + v = ('+u[0]+' + '+v[0]+', '+u[1]+' + '+v[1]+') = <b>('+w[0]+', '+w[1]+')</b> · kéo giãn 2 lần thì 2u = <b>('+2*u[0]+', '+2*u[1]+')</b> — cộng theo từng vị trí, nhân vào từng vị trí.';}
+  draw();};
+
+/* ===== 1번 방: 칸 수 1·2·3 ===== */
+P.p01=function(h){var W=600,H=360;var inp=h.parentNode.querySelector('input');var out=readout(h);
+  var A=[160,50,64],B=[163,54,76],names=['Chiều cao','Cân nặng','Vòng eo'],units=['cm','kg','cm'];
+  function draw(){var n=+inp.value;var s=svgOf(h,W,H);
+    if(n===1){var y=H/2;el('line',{x1:40,y1:y,x2:W-40,y2:y,stroke:C.navy,'stroke-width':2,'marker-end':'url(#ah-navy-'+h.id+')','marker-start':'url(#ah-navy-'+h.id+')'},s);
+      for(var v=155;v<=170;v++){var X=40+(v-155)*(W-80)/15;el('line',{x1:X,y1:y-5,x2:X,y2:y+5,stroke:C.navy},s);if(v%5===0)txt(s,X,y+24,v,{anchor:'middle',italic:false,size:13,fill:C.muted});}
+      var xa=40+5*(W-80)/15,xb=40+8*(W-80)/15;el('line',{x1:xa,y1:y-18,x2:xb,y2:y-18,stroke:C.orange,'stroke-width':3},s);
+      dot(s,xa,y,'teal',8);dot(s,xb,y,'orange',8);ktxt(s,xa,y+48,'Sia 160',{anchor:'middle',fill:C.teal});ktxt(s,xb,y+48,'Moa 163',{anchor:'middle',fill:C.orange});
+      txt(s,(xa+xb)/2,y-28,'|163 − 160| = 3',{anchor:'middle',size:15});ktxt(s,W-40,y-14,'Chiều cao (cm)',{anchor:'end',size:13,fill:C.muted});
+    }else if(n===2){var p=plane(s,{W:W,H:H,x0:158,x1:166,y0:48,y1:56,ax:158,ay:48,xl:'Chiều cao (cm)',yl:'Cân nặng (kg)',equal:true,zeroX:true,pad:54});
+      el('line',{x1:p.X(160),y1:p.Y(50),x2:p.X(163),y2:p.Y(50),stroke:C.green,'stroke-width':2.5,'stroke-dasharray':'6 4'},s);
+      el('line',{x1:p.X(163),y1:p.Y(50),x2:p.X(163),y2:p.Y(54),stroke:C.green,'stroke-width':2.5,'stroke-dasharray':'6 4'},s);
+      el('line',{x1:p.X(160),y1:p.Y(50),x2:p.X(163),y2:p.Y(54),stroke:C.blue,'stroke-width':3},s);
+      dot(s,p.X(160),p.Y(50),'teal',8);dot(s,p.X(163),p.Y(54),'orange',8);
+      ktxt(s,p.X(160)-10,p.Y(50)-12,'Sia (160, 50)',{fill:C.teal,size:13,anchor:'end'});ktxt(s,p.X(163)+10,p.Y(54)-8,'Moa (163, 54)',{fill:C.orange,size:13});
+      txt(s,p.X(161.5),p.Y(50)+18,'3',{fill:C.orange,anchor:'middle'});txt(s,p.X(163)+8,p.Y(52),'4',{fill:C.orange});txt(s,p.X(161.3)-10,p.Y(52.5),'5',{fill:C.blue,size:16});
+    }else{var o=[W*0.42,H*0.70],k=12;function pr(x,y,z){return[o[0]-x*k*0.62+y*k*1.25,o[1]+x*k*0.48-z*k*1.25*0.55];}
+      var ax=[[6,0,0,'Chiều cao'],[0,10,0,'Cân nặng'],[0,0,16,'Vòng eo']];ax.forEach(function(a){var q=pr(a[0],a[1],a[2]);el('line',{x1:o[0],y1:o[1],x2:q[0],y2:q[1],stroke:C.navy,'stroke-width':2,'marker-end':'url(#ah-navy-'+h.id+')'},s);ktxt(s,q[0]+(a[0]?-10:6),q[1]+(a[2]?-6:14),a[3],{size:13,fill:C.navy,anchor:a[0]?'end':'start'});});
+      var path=[[0,0,0],[3,0,0],[3,4,0],[3,4,12]];for(var i=0;i<3;i++){var a1=pr.apply(null,path[i]),b1=pr.apply(null,path[i+1]);el('line',{x1:a1[0],y1:a1[1],x2:b1[0],y2:b1[1],stroke:C.green,'stroke-width':2.5,'stroke-dasharray':'6 4'},s);}
+      var a0=pr(0,0,0),b0=pr(3,4,12);el('line',{x1:a0[0],y1:a0[1],x2:b0[0],y2:b0[1],stroke:C.blue,'stroke-width':3},s);
+      dot(s,a0[0],a0[1],'teal',8);dot(s,b0[0],b0[1],'orange',8);ktxt(s,a0[0]-10,a0[1]+20,'Sia',{anchor:'end',fill:C.teal,size:13});ktxt(s,b0[0]+10,b0[1],'Moa',{fill:C.orange,size:13});
+      var m1=pr(1.5,0,0),m2=pr(3,2,0),m3=pr(3,4,6);txt(s,m1[0]-8,m1[1]+16,'3',{fill:C.orange,anchor:'end'});txt(s,m2[0],m2[1]+18,'4',{fill:C.orange});txt(s,m3[0]+8,m3[1],'12',{fill:C.orange});
+      ktxt(s,14,22,'Hiệu số vẽ với Sia đặt ở gốc tọa độ (ngang 3 · dọc 4 · cao 12)',{size:12.5,fill:C.muted});}
+    var terms=[],sum=0,diff=[3,4,12];for(var i=0;i<n;i++){terms.push(diff[i]+'²');sum+=diff[i]*diff[i];}
+    var used=[];for(var j=0;j<n;j++)used.push(names[j]);
+    out.innerHTML='Số ô '+n+'D ('+used.join('·')+') → khoảng cách = √('+terms.join(' + ')+') = √'+sum+' = <b>'+fmt(Math.sqrt(sum))+'</b>. Mỗi khi thêm một ô, lại có thêm một số hạng bình phương.';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 2번 방: 점과 화살표 ===== */
+P.p02=function(h){h.dataset.ksnap='0.5';var W=520,H=440,A=[1,1],B=[4,3];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:5,y0:0,y1:4.5,equal:true});
+    dash(s,p.X(B[0]),p.Y(B[1]),p.X(B[0]),p.Y(0),'#8a96a3');dash(s,p.X(B[0]),p.Y(B[1]),p.X(0),p.Y(B[1]),'#8a96a3');
+    arrow(s,p.X(0),p.Y(0),p.X(A[0]),p.Y(A[1]),'blue',2.5);arrow(s,p.X(0),p.Y(0),p.X(B[0]),p.Y(B[1]),'blue',2);
+    if(B[0]!==A[0]||B[1]!==A[1])arrow(s,p.X(A[0]),p.Y(A[1]),p.X(B[0]),p.Y(B[1]),'teal',3.5);
+    dot(s,p.X(0),p.Y(0),'navy',5);txt(s,p.X(0)-18,p.Y(0)+20,'O',{size:16});
+    dot(s,p.X(A[0]),p.Y(A[1]),'blue',7);txt(s,p.X(A[0])-8,p.Y(A[1])-12,'A = (1, 1)',{anchor:'end',fill:C.blue});
+    var v=[B[0]-A[0],B[1]-A[1]];
+    txt(s,(p.X(A[0])+p.X(B[0]))/2-6,(p.Y(A[1])+p.Y(B[1]))/2-12,'v = ('+num(v[0])+', '+num(v[1])+')',{fill:C.teal,anchor:'end',size:15});
+    var g=handle(s,p.X(B[0]),p.Y(B[1]),'blue');txt(s,p.X(B[0])+12,p.Y(B[1])-12,'B = ('+fmt(B[0])+', '+fmt(B[1])+')',{fill:C.blue});
+    drag(s,g,function(x,y){var q=p.inv(x,y);var nb=[clamp(snap(q[0],.5),0,5),clamp(snap(q[1],.5),0,4.5)];if(nb[0]!==B[0]||nb[1]!==B[1]){B=nb;draw();}});
+    out.innerHTML='B − A = ('+fmt(B[0])+' − 1, '+fmt(B[1])+' − 1) = <b>('+num(v[0])+', '+num(v[1])+')</b> → từ nhà (A) đi về phía đông '+num(v[0])+', về phía bắc '+num(v[1])+' là tới B.';}
+  draw();};
+
+/* ===== 3번 방: 거리 ===== */
+P.p03=function(h){var W=520,H=440,A=[1,1],B=[4,5];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:6,y0:0,y1:6,equal:true});
+    var dx=B[0]-A[0],dy=B[1]-A[1];
+    el('line',{x1:p.X(A[0]),y1:p.Y(A[1]),x2:p.X(B[0]),y2:p.Y(A[1]),stroke:C.green,'stroke-width':3},s);
+    el('line',{x1:p.X(B[0]),y1:p.Y(A[1]),x2:p.X(B[0]),y2:p.Y(B[1]),stroke:C.green,'stroke-width':3},s);
+    if(dx&&dy)rightMark(s,p.X(B[0]),p.Y(A[1]),dx>0?-1:1,0,0,dy>0?-1:1,11);
+    el('line',{x1:p.X(A[0]),y1:p.Y(A[1]),x2:p.X(B[0]),y2:p.Y(B[1]),stroke:C.blue,'stroke-width':3.5},s);
+    if(dx)txt(s,p.X((A[0]+B[0])/2),p.Y(A[1])+(dy>=0?22:-10),fmt(Math.abs(dx)),{fill:C.orange,anchor:'middle',size:17});
+    if(dy)txt(s,p.X(B[0])+(dx>=0?10:-10),p.Y((A[1]+B[1])/2),fmt(Math.abs(dy)),{fill:C.orange,anchor:dx>=0?'start':'end',size:17});
+    var gA=handle(s,p.X(A[0]),p.Y(A[1]),'blue'),gB=handle(s,p.X(B[0]),p.Y(B[1]),'blue');
+    txt(s,p.X(A[0])-10,p.Y(A[1])+24,'A = ('+A[0]+', '+A[1]+')',{anchor:'end',size:14});txt(s,p.X(B[0])+12,p.Y(B[1])-12,'B = ('+B[0]+', '+B[1]+')',{size:14});
+    drag(s,gA,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],1),0,6),clamp(snap(q[1],1),0,6)];if(n[0]!==A[0]||n[1]!==A[1]){A=n;draw();}});
+    drag(s,gB,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],1),0,6),clamp(snap(q[1],1),0,6)];if(n[0]!==B[0]||n[1]!==B[1]){B=n;draw();}});
+    var d2=dx*dx+dy*dy,d=Math.sqrt(d2);
+    out.innerHTML='Chênh lệch ngang '+Math.abs(dx)+', chênh lệch dọc '+Math.abs(dy)+' → khoảng cách = √('+(dx*dx)+' + '+(dy*dy)+') = √'+d2+' = <b>'+fmt(d)+'</b> · đi theo ngõ (ngang + dọc), số ô phải đi: '+(Math.abs(dx)+Math.abs(dy))+'.';}
+  draw();};
+
+/* ===== 4번 방: 겹침 점수와 각도 ===== */
+P.p04=function(h){h.dataset.ksnap='0.5';var W=540,H=420,u=[3,0],v=[2,2];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-3,x1:4,y0:-2,y1:3.5,equal:true});
+    var dt=u[0]*v[0]+u[1]*v[1],nu=3,nv=Math.hypot(v[0],v[1]);
+    if(nv>0){var th=Math.acos(clamp(dt/(nu*nv),-1,1));var ang=Math.atan2(v[1],v[0]);var r=34;
+      var large=th>Math.PI?1:0,sw=ang>=0?0:1;
+      el('path',{d:'M'+(p.X(0)+r)+','+p.Y(0)+' A'+r+','+r+' 0 0,'+sw+' '+(p.X(0)+r*Math.cos(ang))+','+(p.Y(0)-r*Math.sin(ang))+' L'+p.X(0)+','+p.Y(0)+' Z',fill:C.orange,'fill-opacity':.18,stroke:C.orange},s);
+      txt(s,p.X(0)+r+10,p.Y(0)+(ang>=0?-12:22),'θ = '+fmt(th*180/Math.PI,1)+'°',{fill:C.orange,size:15});}
+    if(Math.abs(dt)<1e-9&&nv>0)rightMark(s,p.X(0),p.Y(0),1,0,0,v[1]>0?-1:1,14);
+    arrow(s,p.X(0),p.Y(0),p.X(3),p.Y(0),'blue',3.5);txt(s,p.X(3)+6,p.Y(0)-12,'u = (3, 0)',{fill:C.blue});
+    if(nv>0)arrow(s,p.X(0),p.Y(0),p.X(v[0]),p.Y(v[1]),'teal',3.5);
+    var g=handle(s,p.X(v[0]),p.Y(v[1]),'teal');txt(s,p.X(v[0])+12,p.Y(v[1])-12,'v = ('+num(v[0])+', '+num(v[1])+')',{fill:C.teal});
+    drag(s,g,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],.5),-3,4),clamp(snap(q[1],.5),-2,3.5)];if(n[0]!==v[0]||n[1]!==v[1]){v=n;draw();}});
+    var msg='Điểm chồng khớp u·v = 3×'+num(v[0])+' + 0×'+num(v[1])+' = <b>'+num(dt)+'</b>';
+    if(nv>0){msg+=' · độ dài ‖v‖ = '+fmt(nv)+' · cos θ = '+num(dt)+' ÷ (3 × '+fmt(nv)+') = <b>'+num(dt/(nu*nv))+'</b>';
+      if(Math.abs(dt)<1e-9)msg+=' <span class="alert">→ vuông góc! Hai hướng không ảnh hưởng đến nhau</span>';else if(dt<0)msg+=' → nhìn về phía ngược lại (điểm âm)';}
+    out.innerHTML=msg;}
+  draw();};
+
+/* ===== 5번 방: 자 세트 돌리기 ===== */
+P.p05=function(h){var W=520,H=420,v=[3,2];var inp=h.parentNode.querySelector('input');var out=readout(h);
+  function draw(){var f=+inp.value*Math.PI/180;var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-1.5,x1:4,y0:-1,y1:3.5,equal:true,grid:false});
+    var e1=[Math.cos(f),Math.sin(f)],e2=[-Math.sin(f),Math.cos(f)];
+    for(var k=-6;k<=6;k++){el('line',{x1:p.X(k*e1[0]-8*e2[0]),y1:p.Y(k*e1[1]-8*e2[1]),x2:p.X(k*e1[0]+8*e2[0]),y2:p.Y(k*e1[1]+8*e2[1]),stroke:'#dfe6f0'},s);
+      el('line',{x1:p.X(k*e2[0]-8*e1[0]),y1:p.Y(k*e2[1]-8*e1[1]),x2:p.X(k*e2[0]+8*e1[0]),y2:p.Y(k*e2[1]+8*e1[1]),stroke:'#dfe6f0'},s);}
+    var c1=v[0]*e1[0]+v[1]*e1[1],c2=v[0]*e2[0]+v[1]*e2[1];
+    dash(s,p.X(v[0]),p.Y(v[1]),p.X(c1*e1[0]),p.Y(c1*e1[1]),'teal');dash(s,p.X(v[0]),p.Y(v[1]),p.X(c2*e2[0]),p.Y(c2*e2[1]),'teal');
+    arrow(s,p.X(0),p.Y(0),p.X(e1[0]),p.Y(e1[1]),'blue',4);arrow(s,p.X(0),p.Y(0),p.X(e2[0]),p.Y(e2[1]),'blue',4);
+    rightMark(s,p.X(0),p.Y(0),e1[0],-e1[1],e2[0],-e2[1],12);
+    txt(s,p.X(e1[0]*1.15)+4,p.Y(e1[1]*1.15)+18,'e₁',{fill:C.blue,size:17});txt(s,p.X(e2[0]*1.1)+8,p.Y(e2[1]*1.1),'e₂',{fill:C.blue,size:17});
+    arrow(s,p.X(0),p.Y(0),p.X(v[0]),p.Y(v[1]),'teal',3.5);dot(s,p.X(v[0]),p.Y(v[1]),'teal',6);txt(s,p.X(v[0])+8,p.Y(v[1])-10,'v',{fill:C.teal,size:17});
+    out.innerHTML='Xoay bộ thước '+inp.value+'° → v = <b>'+num(c1)+'</b> e₁ + <b>'+num(c2)+'</b> e₂ · các số tọa độ có thay đổi nhưng '+fmt(c1)+'² + '+num(c2)+'² = <b>'+fmt(c1*c1+c2*c2)+'</b> (= 3² + 2² = 13, độ dài '+fmt(Math.sqrt(13))+' giữ nguyên)';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 6번 방: 그림자 ===== */
+P.p06=function(h){var W=520,H=420,v=[3,2];var inp=h.parentNode.querySelector('input');var out=readout(h);
+  var pre=h.parentNode.querySelector('[data-preset]');if(pre)pre.addEventListener('click',function(){inp.value=(Math.atan2(1,2)*180/Math.PI).toFixed(1);draw();});
+  function draw(){var a=+inp.value*Math.PI/180;var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-.5,x1:4,y0:-.5,y1:3.2,equal:true});
+    var u=[Math.cos(a),Math.sin(a)];var c=v[0]*u[0]+v[1]*u[1];var pp=[c*u[0],c*u[1]],r=[v[0]-pp[0],v[1]-pp[1]];
+    el('line',{x1:p.X(-1*u[0]),y1:p.Y(-1*u[1]),x2:p.X(5*u[0]),y2:p.Y(5*u[1]),stroke:C.orange,'stroke-width':2,'stroke-opacity':.5},s);
+    el('line',{x1:p.X(0),y1:p.Y(0),x2:p.X(pp[0]),y2:p.Y(pp[1]),stroke:C.orange,'stroke-width':5},s);
+    arrow(s,p.X(0),p.Y(0),p.X(u[0]),p.Y(u[1]),'green',3.5);
+    arrow(s,p.X(0),p.Y(0),p.X(v[0]),p.Y(v[1]),'blue',3.5);
+    if(Math.hypot(r[0],r[1])>0.05){arrow(s,p.X(pp[0]),p.Y(pp[1]),p.X(v[0]),p.Y(v[1]),'green',3);var rl=Math.hypot(r[0],r[1]);rightMark(s,p.X(pp[0]),p.Y(pp[1]),-u[0],u[1],r[0]/rl,-r[1]/rl,11);}
+    dot(s,p.X(pp[0]),p.Y(pp[1]),'orange',7);
+    txt(s,p.X(v[0])+8,p.Y(v[1])-8,'v = (3, 2)',{fill:C.blue});txt(s,p.X(pp[0])+(a<0.3?0:12),p.Y(pp[1])+(a<0.3?24:14),'p',{fill:C.orange,size:17});
+    txt(s,p.X(u[0])-4,p.Y(u[1])+(a<0.3?24:-10),'u',{fill:C.green,size:16,anchor:'end'});txt(s,p.X((pp[0]+v[0])/2)+8,p.Y((pp[1]+v[1])/2),'r',{fill:C.green,size:17});
+    var dot_=r[0]*u[0]+r[1]*u[1];
+    out.innerHTML='Bóng p = (<b>'+num(pp[0])+', '+num(pp[1])+'</b>) · phần lệch r = ('+num(r[0])+', '+num(r[1])+'), độ dài <b>'+fmt(Math.hypot(r[0],r[1]))+'</b> · r·u = '+num(Math.abs(dot_)<5e-3?0:dot_)+' <span class="alert">(vuông góc)</span>';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 7번 방: 칸막이 x₁+2x₂+2x₃=6 ===== */
+P.p07=function(h){var W=560,H=440;var ins=h.parentNode.querySelectorAll('input');var out=readout(h);
+  var o=[W*0.40,H*0.70],k=30;function pr(x,y,z){return[o[0]-x*k*0.62+y*k*1.15,o[1]+x*k*0.46-z*k*1.0];}
+  function draw(){var P_=[+ins[0].value,+ins[1].value,+ins[2].value];var s=svgOf(h,W,H);
+    [[6.6,0,0,'x₁'],[0,5,0,'x₂'],[0,0,5,'x₃']].forEach(function(a){var q=pr(a[0],a[1],a[2]);var q0=pr(0,0,0);el('line',{x1:q0[0],y1:q0[1],x2:q[0],y2:q[1],stroke:C.navy,'stroke-width':2,'marker-end':'url(#ah-navy-'+h.id+')'},s);txt(s,q[0]+(a[0]?-14:8),q[1]+(a[3]==='x₃'?-4:16),a[3],{size:16});});
+    var t1=pr(6,0,0),t2=pr(0,3,0),t3=pr(0,0,3);
+    el('path',{d:'M'+t1+' L'+t2+' L'+t3+' Z',fill:C.teal,'fill-opacity':.22,stroke:C.teal,'stroke-width':2},s);
+    [[6,0,0],[0,3,0],[0,0,3]].forEach(function(q){var z=pr(q[0],q[1],q[2]);dot(s,z[0],z[1],'orange',5);});
+    var sc=P_[0]+2*P_[1]+2*P_[2];var t=(sc-6)/9;var F=[P_[0]-t,P_[1]-2*t,P_[2]-2*t];
+    var cpt=pr(4,0.5,0.5);var ntip=pr(4+0.6,0.5+1.2,0.5+1.2);arrow(s,cpt[0],cpt[1],ntip[0],ntip[1],'orange',2.5);txt(s,ntip[0]+6,ntip[1],'n = (1, 2, 2)',{fill:C.orange,size:14});
+    var b0=pr(P_[0],P_[1],0),pp=pr(P_[0],P_[1],P_[2]),ff=pr(F[0],F[1],F[2]);
+    dash(s,b0[0],b0[1],pp[0],pp[1],'#9aa5b1');
+    if(Math.abs(t)>1e-9)el('line',{x1:pp[0],y1:pp[1],x2:ff[0],y2:ff[1],stroke:C.orange,'stroke-width':2.5,'stroke-dasharray':'2 3'},s);
+    var col=sc>6?'blue':(sc<6?'red':'green');dot(s,pp[0],pp[1],col,8);txt(s,pp[0]+10,pp[1]-8,'P('+P_.join(', ')+')',{fill:C[col],size:14});
+    var side=sc>6?'<b>Phía đối diện gốc tọa độ</b> (ví dụ: thư rác)':(sc<6?'<b>Phía gốc tọa độ</b> (ví dụ: thư bình thường)':'<b>Nằm trên vách ngăn (ranh giới)</b> — tạm hoãn phán đoán');
+    out.innerHTML='Điểm x₁ + 2x₂ + 2x₃ = '+P_[0]+' + '+(2*P_[1])+' + '+(2*P_[2])+' = <b>'+sc+'</b> → so với 6 thì '+side+' · khoảng cách tới vách ngăn = |'+sc+' − 6| ÷ 3 = <b>'+fmt(Math.abs(sc-6)/3)+'</b>';}
+  ins.forEach(function(i){i.addEventListener('input',draw);});draw();};
+
+/* ===== 8번 방: 밀고 돌리고 뒤집기 ===== */
+P.p08=function(h){var W=540,H=440;var host=h.parentNode;var ang=host.querySelector('input');var out=readout(h);
+  var st={t:[0,0],m:1,s:1};var T=[[0,0],[3,0],[3,4]];
+  host.querySelectorAll('[data-op]').forEach(function(b){b.addEventListener('click',function(){var op=b.getAttribute('data-op');
+    if(op==='reset'){st={t:[0,0],m:1,s:1};ang.value=0;}if(op==='slide'){st.t=[st.t[0]-2,st.t[1]+1];if(st.t[0]<-6)st.t=[0,0];}
+    if(op==='mirror')st.m*=-1;if(op==='scale')st.s=st.s===1?2:1;draw();});});
+  function tr(q){var a=+ang.value*Math.PI/180;var x=q[0]*st.m,y=q[1];var rx=x*Math.cos(a)-y*Math.sin(a),ry=x*Math.sin(a)+y*Math.cos(a);return[st.s*rx+st.t[0],st.s*ry+st.t[1]];}
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-10,x1:10,y0:-9,y1:9,equal:true,step:2,label:4});
+    el('path',{d:'M'+T.map(function(q){return p.X(q[0])+','+p.Y(q[1]);}).join(' L')+' Z',fill:'#9db7f0','fill-opacity':.35,stroke:C.blue,'stroke-dasharray':'5 4'},s);
+    var U=T.map(tr);el('path',{d:'M'+U.map(function(q){return p.X(q[0])+','+p.Y(q[1]);}).join(' L')+' Z',fill:C.teal,'fill-opacity':.3,stroke:C.teal,'stroke-width':2.5},s);
+    U.forEach(function(q){dot(s,p.X(q[0]),p.Y(q[1]),'teal',4);});
+    var L=[0,1,2].map(function(i){var a=U[i],b=U[(i+1)%3];return Math.hypot(a[0]-b[0],a[1]-b[1]);});L.sort(function(a,b){return a-b;});
+    host.querySelectorAll('[data-op]').forEach(function(b){var op=b.getAttribute('data-op');b.classList.toggle('on',(op==='mirror'&&st.m<0)||(op==='scale'&&st.s===2));});
+    out.innerHTML='Độ dài ba cạnh: <b>'+L.map(function(x){return fmt(x);}).join(' · ')+'</b> (ban đầu 3 · 4 · 5) → '+(st.s===1?'<span class="alert">Khoảng cách giữ nguyên — đẩy, xoay, lật đều không làm đổi hình dạng</span>':'Mọi khoảng cách đều <b>gấp 2 lần</b> — kéo giãn làm thay đổi khoảng cách');}
+  ang.addEventListener('input',draw);draw();};
+
+/* ===== 9번 방 ①: 반지름 안 이웃 ===== */
+P.p09a=function(h){var W=500,H=440;var inp=h.parentNode.querySelector('input');var out=readout(h);
+  var pts=[[0.3,0.4],[-0.6,0.2],[0.9,-0.5],[-0.2,-1.1],[1.3,0.9],[-1.4,-0.3],[0.5,1.6],[-1.0,1.3],[1.7,-0.4],[-1.6,-1.4],[1.2,-1.5],[0.0,-1.9],[-0.4,0.9],[2.0,1.2]];
+  function draw(){var r=+inp.value;var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-2.3,x1:2.3,y0:-2.3,y1:2.3,equal:true,step:.5,label:1});
+    el('circle',{cx:p.X(0),cy:p.Y(0),r:r*p.sx,fill:C.teal,'fill-opacity':.13,stroke:C.teal,'stroke-width':2},s);
+    var inn=0,ds=pts.map(function(q){return Math.hypot(q[0],q[1]);});
+    pts.forEach(function(q,i){var ins_=ds[i]<=r+1e-9;if(ins_)inn++;el('rect',{x:p.X(q[0])-6,y:p.Y(q[1])-6,width:12,height:12,rx:2,fill:ins_?C.orange:'#b6c0cb'},s);});
+    dot(s,p.X(0),p.Y(0),'navy',7);ktxt(s,p.X(0)+8,p.Y(0)+20,'Nhà',{size:13});
+    if(r>0){arrow(s,p.X(0),p.Y(0),p.X(r*Math.cos(.6)),p.Y(r*Math.sin(.6)),'orange',2);txt(s,p.X(r*Math.cos(.6)/2)-4,p.Y(r*Math.sin(.6)/2)-8,'r',{fill:C.orange,size:16});}
+    var mn=Math.min.apply(null,ds);
+    out.innerHTML='Bán kính r = '+fmt(r,1)+'km, số cửa hàng tiện lợi: <b>'+inn+'</b> (diện tích hình tròn πr² = '+fmt(Math.PI*r*r)+'km²) · gần nhất là '+fmt(mn)+'km';}
+  inp.addEventListener('input',draw);draw();};
+/* ===== 9번 방 ②: 칸이 늘면 껍질로 ===== */
+P.p09b=function(h){var W=560,H=230;var inp=h.parentNode.querySelector('input');var out=readout(h);var ns=[1,2,3,5,10,20,50,100];
+  function draw(){var n=ns[+inp.value];var f=Math.pow(0.9,n);var s=svgOf(h,W,H);
+    var x0=30,w=W-60,y=60,bh=46;el('rect',{x:x0,y:y,width:w,height:bh,fill:C.orange,'fill-opacity':.85,rx:6},s);
+    el('rect',{x:x0,y:y,width:Math.max(w*f,1),height:bh,fill:C.teal,rx:6},s);
+    ktxt(s,x0,y-12,'Bên trong (trong bán kính 0.9)',{size:13,fill:C.teal});ktxt(s,x0+w,y-12,'Lớp vỏ ngoài (0.9 ~ 1)',{size:13,fill:C.orange,anchor:'end'});
+    ktxt(s,x0,y+bh+30,'Số ô n = '+n,{size:16,fill:C.navy,weight:'bold'});
+    var ins=(f*100),sh=100-ins;
+    ktxt(s,x0+w,y+bh+30,'Bên trong '+(ins>=1?fmt(ins,1):ins.toPrecision(2))+'% · lớp vỏ '+fmt(sh,ins>=1?1:4)+'%',{size:15,fill:C.navy,anchor:'end'});
+    ktxt(s,x0,y+bh+62,'Tỉ lệ thể tích phần bên trong bán kính 0.9 của quả cầu bán kính 1 = 0.9ⁿ',{size:13,fill:C.muted});
+    out.innerHTML=n+'D: 0.9<sup>'+n+'</sup> = <b>'+(f>=0.01?fmt(f,3):f.toExponential(2))+'</b> → phần thể tích nằm ở lớp vỏ ngoài: '+(sh>=99?'<b>gần như toàn bộ</b>':'<b>'+fmt(sh,1)+'%</b>')+'.';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 10번 방 ①: 단위 맞추기 ===== */
+var CUST=[{n:'Khách A',h:160,w:56},{n:'Khách B',h:166,w:48},{n:'Khách C',h:170,w:62}],NEWC={h:165,w:55};
+P.p10a=function(h){var W=520,H=440;var host=h.parentNode;var mode='cm';var out=readout(h);
+  host.querySelectorAll('[data-unit]').forEach(function(b){b.addEventListener('click',function(){mode=b.getAttribute('data-unit');draw();});});
+  function draw(){host.querySelectorAll('[data-unit]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-unit')===mode);});
+    var f=mode==='cm'?1:10;var s=svgOf(h,W,H);var p;
+    if(mode==='cm')p=plane(s,{W:W,H:H,x0:155,x1:175,y0:45,y1:65,equal:true,step:5,ax:155,ay:45,xl:'Chiều cao (cm)',yl:'Cân nặng (kg)',zeroX:true});
+    else p=plane(s,{W:W,H:H,x0:1550,x1:1750,y0:0,y1:200,equal:true,step:50,ax:1550,ay:0,xl:'Chiều cao (mm)',yl:'Cân nặng (kg)',zeroX:true});
+    var ds=CUST.map(function(c){return Math.hypot((c.h-NEWC.h)*f,c.w-NEWC.w);});var best=ds.indexOf(Math.min.apply(null,ds));
+    el('circle',{cx:p.X(NEWC.h*f),cy:p.Y(NEWC.w),r:ds[best]*p.sx,fill:C.orange,'fill-opacity':.08,stroke:C.orange,'stroke-dasharray':'5 4'},s);
+    CUST.forEach(function(c,i){var X=p.X(c.h*f),Y=p.Y(c.w);dot(s,X,Y,i===best?'orange':'blue',i===best?8:6);ktxt(s,X+(i===1?-8:9),Y+(i===1?18:-8),c.n,{size:12.5,anchor:i===1?'end':'start',fill:i===best?C.orange:C.blue});});
+    dot(s,p.X(NEWC.h*f),p.Y(NEWC.w),'navy',7);ktxt(s,p.X(NEWC.h*f)+8,p.Y(NEWC.w)+18,'Khách mới',{size:12.5});
+    out.innerHTML='Ghi chiều cao bằng <b>'+(mode==='cm'?'cm':'mm')+'</b> thì khoảng cách là: '+CUST.map(function(c,i){return c.n+' '+fmt(ds[i])+(i===best?' ★':'');}).join(' · ')+' → láng giềng gần nhất là <b>'+CUST[best].n+'</b>'+(mode==='mm'?' (con số chiều cao lớn gấp 10 lần nên chiếm trọn khoảng cách)':'');}
+  draw();};
+/* ===== 10번 방 ②: 호와 현 ===== */
+P.p10b=function(h){var W=520,H=400;var inp=h.parentNode.querySelector('input');var out=readout(h);var R=6371;
+  function draw(){var t=+inp.value*Math.PI/180;var s=svgOf(h,W,H);var cx=W/2,cy=H/2+20,rr=150;
+    el('circle',{cx:cx,cy:cy,r:rr,fill:'#e8f0fd',stroke:C.blue,'stroke-width':2},s);
+    for(var i=-2;i<=2;i++)el('ellipse',{cx:cx,cy:cy-i*rr*0.33,rx:rr*Math.sqrt(1-Math.pow(i*0.33,2)),ry:12,fill:'none',stroke:'#c8d6f2'},s);
+    var a0=Math.PI/2+t/2,a1=Math.PI/2-t/2;var A=[cx+rr*Math.cos(a0),cy-rr*Math.sin(a0)],B=[cx+rr*Math.cos(a1),cy-rr*Math.sin(a1)];
+    dash(s,cx,cy,A[0],A[1],'#8a96a3');dash(s,cx,cy,B[0],B[1],'#8a96a3');
+    if(t>0){el('path',{d:'M'+A[0]+','+A[1]+' A'+rr+','+rr+' 0 '+(t>Math.PI?1:0)+',1 '+B[0]+','+B[1],fill:'none',stroke:C.orange,'stroke-width':4},s);
+      el('line',{x1:A[0],y1:A[1],x2:B[0],y2:B[1],stroke:C.teal,'stroke-width':3.5},s);}
+    dot(s,A[0],A[1],'navy',7);dot(s,B[0],B[1],'navy',7);dot(s,cx,cy,'navy',4);
+    txt(s,A[0]-10,A[1]-8,'A',{anchor:'end',size:17});txt(s,B[0]+10,B[1]-8,'B',{size:17});txt(s,cx+6,cy+20,'O',{size:15});
+    var arc=R*t,ch=2*R*Math.sin(t/2);
+    out.innerHTML='Góc ở tâm '+inp.value+'° · bán kính Trái Đất 6,371km → theo bề mặt (cung) <b>'+Math.round(arc).toLocaleString()+'km</b>, đường thẳng xuyên lòng đất (dây cung) <b>'+Math.round(ch).toLocaleString()+'km</b> · chênh lệch '+Math.round(arc-ch).toLocaleString()+'km';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 대결: 가장 가까운 이웃 찾기 ===== */
+var DUELC=[{n:'Khách D',h:155,w:51},{n:'Khách E',h:159,w:43},{n:'Khách F',h:163,w:48}],DUELN={h:158,w:49};
+P.duel=function(h){var host=h.parentNode;var out=readout(h);var shown={sia:false,moa:false,ans:false};
+  host.querySelectorAll('[data-duel]').forEach(function(b){b.addEventListener('click',function(){shown[b.getAttribute('data-duel')]=true;b.classList.add('on');draw();});});
+  function draw(){var rows=DUELC.map(function(c){var s1=Math.hypot((c.h-DUELN.h)*10,c.w-DUELN.w),s2=Math.hypot((c.h-DUELN.h)/5,(c.w-DUELN.w)/5);return[c,s1,s2];});
+    var b1=0,b2=0;rows.forEach(function(r,i){if(r[1]<rows[b1][1])b1=i;if(r[2]<rows[b2][2])b2=i;});
+    var t='<div class="tbl"><table><thead><tr><th>Ứng viên</th><th>Chiều cao · cân nặng</th><th>Cách của Sia (chiều cao mm, cân nặng kg giữ nguyên)</th><th>Cách của Moa (chiều cao ÷ 5cm, cân nặng ÷ 5kg)</th></tr></thead><tbody>';
+    rows.forEach(function(r,i){t+='<tr><td>'+r[0].n+'</td><td>'+r[0].h+'cm · '+r[0].w+'kg</td><td>'+(shown.sia?fmt(r[1])+(i===b1?' ★':''):'?')+'</td><td>'+(shown.moa?fmt(r[2])+(i===b2?' ★':''):'?')+'</td></tr>';});
+    t+='</tbody></table></div>';h.innerHTML=t;
+    var m='Khách mới: 158cm · 49kg. ';
+    if(shown.sia)m+='Câu trả lời của Sia: <b>'+DUELC[b1].n+'</b>. ';if(shown.moa)m+='Câu trả lời của Moa: <b>'+DUELC[b2].n+'</b>. ';
+    if(shown.ans)m+='<br>Đáp án (dữ liệu ví dụ): cỡ quần áo mà khách mới thực sự chọn trùng với <b>khách D</b> → <span class="alert">Moa thắng!</span> Nếu không đồng bộ đơn vị, cột có số lớn (chiều cao mm) sẽ chiếm trọn khoảng cách.';
+    out.innerHTML=m;}
+  draw();};
+
+/* ===== 끝맺음: 칸 수 → 끝없이 ===== */
+P.outro=function(h){var W=600,H=320;var inp=h.parentNode.querySelector('input');var out=readout(h);var ns=[2,3,10,100,Infinity];
+  function f(x){return 0.55*Math.sin(2*Math.PI*x)+0.3*Math.sin(6*Math.PI*x+0.6)+0.15*Math.cos(10*Math.PI*x);}
+  function draw(){var n=ns[+inp.value];var s=svgOf(h,W,H);var x0=40,x1=W-40,y0=H/2,amp=110;
+    el('line',{x1:x0,y1:y0,x2:x1,y2:y0,stroke:C.grid,'stroke-width':1.5},s);
+    if(isFinite(n)){var bw=(x1-x0)/n;for(var i=0;i<n;i++){var x=(i+.5)/n,v=f(x);el('rect',{x:x0+i*bw+bw*0.15,y:v>0?y0-v*amp:y0,width:Math.max(bw*0.7,1),height:Math.abs(v)*amp,fill:C.teal,'fill-opacity':.8},s);if(n<=10)dot(s,x0+(i+.5)*bw,y0-v*amp,'orange',5);}
+      ktxt(s,x0,28,'Phòng có '+n+': căn phòng tương ứng = số cột: '+n+'.',{size:14,fill:C.navy});}
+    else{var d='';for(var j=0;j<=400;j++){var xx=j/400;d+=(j?'L':'M')+(x0+xx*(x1-x0))+','+(y0-f(xx)*amp);}el('path',{d:d,fill:'none',stroke:C.orange,'stroke-width':3.5},s);
+      ktxt(s,x0,28,'Căn phòng vô tận — một đường cong là một điểm',{size:14,fill:C.orange,weight:'bold'});}
+    var door=h.parentNode.parentNode.querySelector('.door');if(door)door.classList.toggle('open',!isFinite(n));
+    out.innerHTML=isFinite(n)?'Số ô '+n+': ghi lại đường cong bằng '+n+'. Càng nhiều ô thì càng giống, nhưng đó vẫn chưa phải chính đường cong.':'Số ô <b>vô tận</b>: cả đường cong được xem như một điểm. Thước kẻ và thước đo góc vẫn giữ nguyên — đây chính là <b>không gian Hilbert</b>. Cánh cửa cuối hành lang đã mở.';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 퀴즈 ===== */
+function quiz(q){var ans=+q.getAttribute('data-ans');var fb=q.querySelector('.fb');var OK=q.querySelector('.qok'),NO=q.querySelector('.qno');q.querySelectorAll('.opts button').forEach(function(b,i){b.addEventListener('click',function(){q.querySelectorAll('.opts button').forEach(function(x){x.classList.remove('ok','no');});b.classList.add(i===ans?'ok':'no');fb.innerHTML=i===ans?'⭕ '+(OK?OK.innerHTML:q.getAttribute('data-ok')):'❌ '+(NO?NO.innerHTML:q.getAttribute('data-no'));});});}
+
+/* ===== 지식 색인·꾸러미 ===== */
+function kg(){var raw=document.getElementById('kg-raw');var mount=document.getElementById('kg-mount');if(!raw||!mount)return;var K=JSON.parse(raw.textContent);
+  mount.innerHTML='<input class="kg-search" type="search"><div class="kg-list"></div>';
+  var list=mount.querySelector('.kg-list'),inp=mount.querySelector('input');inp.placeholder='Tìm khái niệm (ví dụ: khoảng cách, bóng, vách ngăn)';inp.setAttribute('aria-label','Tìm trong chỉ mục tri thức');
+  var TY={Concept:'Khái niệm',Method:'Phương pháp',Analogy:'Phép ví',Application:'Ứng dụng',OpenQuestion:'Câu hỏi mở'};
+  var LG=(document.documentElement.lang||'ko').slice(0,2);function L_(o){return o?(o[LG]||o.en||o.ko||''):'';}
+  K.nodes.forEach(function(n){if(n.desc&&!n.definition)n.definition={ko:n.desc};});
+  function render(){var q=inp.value.trim().toLowerCase();list.innerHTML=K.nodes.filter(function(n){return !q||(L_(n.label)+' '+n.label.en+' '+n.label.ko+' '+L_(n.definition)).toLowerCase().indexOf(q)>=0;}).map(function(n){
+    var nb=K.edges.filter(function(e){return e.s===n.id||e.o===n.id;}).map(function(e){var o=e.s===n.id?e.o:e.s;var m=K.nodes.filter(function(x){return x.id===o;})[0];return m?L_(m.label):'';}).filter(Boolean);
+    return '<div class="kg-item"><span class="t">'+(TY[n.type]||n.type)+'</span><b>'+L_(n.label)+'</b><span class="muted">'+(LG==='en'?'':n.label.en)+'</span><div>'+L_(n.definition)+'</div>'+(nb.length?'<div class="muted" style="font-size:12.5px">Láng giềng: '+nb.join(', ')+'</div>':'')+'<a href="'+(n.page?n.page+'.html':'')+n.anchor+'">Xem giải thích →</a></div>';}).join('');}
+  inp.addEventListener('input',render);render();
+  var ex=document.getElementById('export-mount');if(!ex)return;
+  ex.innerHTML='<div class="exp-btns"><button class="btn" data-x="json">kg.json</button><button class="btn" data-x="ld">JSON-LD</button><button class="btn" data-x="ttl">Turtle (Protégé)</button><button class="btn" data-x="csv">CSV (Neo4j·Gephi)</button><button class="btn" data-x="bib">BibTeX</button><button class="btn" data-x="ris">RIS</button></div>';
+  function dl(name,text,type){var b=new Blob([text],{type:type||'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);}
+  var base=K.page;var refs=JSON.parse((document.getElementById('refs-csl')||{textContent:'[]'}).textContent);
+  ex.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){var x=b.getAttribute('data-x');
+    if(x==='json')dl(base+'.kg.json',JSON.stringify(K,null,2),'application/json');
+    if(x==='ld')dl(base+'.jsonld',document.getElementById('kg-ld').textContent,'application/ld+json');
+    if(x==='ttl'){var t='@prefix lab: <urn:lab:> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix skos: <http://www.w3.org/2004/02/skos/core#> .\n\n';
+      K.nodes.forEach(function(n){t+='<urn:'+n.id+'> a lab:'+n.type+' ;\n  skos:prefLabel "'+n.label.ko+'"@ko , "'+n.label.en+'"@en ;\n  rdfs:comment "'+L_(n.definition).replace(/"/g,'\\"')+'"@ko .\n\n';});
+      K.edges.forEach(function(e){t+='<urn:'+e.s+'> lab:'+e.p+' <urn:'+e.o+'> .\n';});dl(base+'.ttl',t,'text/turtle');}
+    if(x==='csv'){var c='id,type,label_ko,label_en,anchor\n'+K.nodes.map(function(n){return [n.id,n.type,n.label.ko,n.label.en,(n.page||base)+'.html'+n.anchor].map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+      c+='\n\nsource,relation,target\n'+K.edges.map(function(e){return [e.s,e.p,e.o].join(',');}).join('\n');dl(base+'.csv',c,'text/csv');}
+    if(x==='bib')dl(base+'.bib',refs.map(function(r){return '@misc{'+r.id+',\n  title = {'+r.title+'},\n  author = {'+r.author[0].literal+'},\n  howpublished = {'+(r.note||'')+'},\n  note = {accessed '+r.accessed['date-parts'][0].join('-')+'}\n}';}).join('\n\n'));
+    if(x==='ris')dl(base+'.ris',refs.map(function(r){return 'TY  - GEN\nTI  - '+r.title+'\nAU  - '+r.author[0].literal+'\nN1  - '+(r.note||'')+'\nER  - ';}).join('\n'));});});}
+
+function boot(){document.querySelectorAll('[data-panel]').forEach(function(h){var k=h.getAttribute('data-panel');if(P[k])P[k](h);});
+  document.querySelectorAll('.quiz').forEach(quiz);kg();
+  var pr=document.getElementById('prog');if(pr)window.addEventListener('scroll',function(){var d=document.documentElement;pr.style.width=(100*d.scrollTop/Math.max(1,d.scrollHeight-d.clientHeight))+'%';},{passive:true});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+
+</script>
+</body></html>

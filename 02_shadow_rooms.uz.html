@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8"><!-- i18n:switcher --><style data-i18n-sw>.i18n-pick{display:inline-flex;align-items:center;gap:4px;margin:0 8px;font:inherit;font-size:13px;white-space:nowrap}.i18n-pick select{font:inherit;font-size:13px;padding:3px 6px;border-radius:8px;border:1px solid var(--rule,rgba(128,128,128,.5));background:var(--panel,Canvas);color:var(--text,CanvasText)}.i18n-pick.float{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));right:max(8px,env(safe-area-inset-right,0px));z-index:9998}#i18nBanner{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));z-index:9999;font:14px/1.3 var(--font,system-ui,sans-serif)}#i18nBanner>button{border-radius:999px;padding:9px 14px;border:1px solid var(--rule,#363a52);background:var(--panel,#1c1e2d);color:var(--text,#eceaf3);box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;font:inherit}#i18nBanner ul{position:absolute;right:0;bottom:calc(100% + 8px);margin:0;padding:6px;list-style:none;min-width:150px;border-radius:12px;border:1px solid var(--rule,#363a52);background:var(--panel,#1c1e2d);box-shadow:0 8px 24px rgba(0,0,0,.4)}#i18nBanner ul[hidden]{display:none}#i18nBanner a{display:block;padding:7px 10px;border-radius:8px;color:var(--text,#eceaf3);text-decoration:none}#i18nBanner a:hover,#i18nBanner a:focus-visible{background:var(--panel2,#25283a)}#i18nBanner a[aria-current]{color:var(--amber,#f1b646);font-weight:700}@media print{#i18nBanner,.i18n-pick{display:none!important}}</style><script data-i18n-skip>(function(){var C={"langs": [["ko", "한국어"], ["en", "English"], ["zh", "中文"], ["ja", "日本語"], ["uz", "Oʻzbekcha"], ["ru", "Русский"], ["vi", "Tiếng Việt"]], "urls": {"ko": "02_shadow_rooms.html", "en": "02_shadow_rooms.en.html", "zh": "02_shadow_rooms.zh.html", "ja": "02_shadow_rooms.ja.html", "uz": "02_shadow_rooms.uz.html", "ru": "02_shadow_rooms.ru.html", "vi": "02_shadow_rooms.vi.html"}, "cur": "uz", "auto": true, "key": "euclid_lab_lang", "hosts": [["nav.top .logo", "after"], ["#langSw", "append"], ["nav.top .brand", "after"], ["nav .in", "append"], ["nav", "append"]], "banner": true, "select": true},cur=C.cur,ok={},de=document.documentElement;C.langs.forEach(function(l){ok[l[0]]=1});
+function U(l){return C.urls[l]}
+function save(l){try{localStorage.setItem(C.key,l)}catch(e){}}
+function saved(){try{return localStorage.getItem(C.key)}catch(e){return null}}
+function go(l){location.replace(U(l)+'?lang='+l+location.hash)}
+var shown=function(){de.style.visibility=''};
+function tryGo(l){if(location.protocol==='file:'){go(l);return}
+ de.style.visibility='hidden';var t=setTimeout(shown,2500);
+ try{fetch(U(l),{method:'HEAD',cache:'no-store'}).then(function(r){if(r.ok)go(l);else{clearTimeout(t);shown()}},function(){clearTimeout(t);shown()})}catch(e){clearTimeout(t);shown()}}
+var q=null;try{q=new URLSearchParams(location.search).get('lang')}catch(e){}
+if(q&&ok[q]){save(q);if(q!==cur){tryGo(q);}}
+else if(cur==='ko'&&C.auto){var s=saved(),to=null;
+ if(s&&ok[s]){if(s!=='ko')to=s;}
+ else if(location.protocol!=='file:'){var same=false;try{same=!!document.referrer&&new URL(document.referrer).origin===location.origin}catch(e){}
+  if(!same){var nav=(navigator.languages||[navigator.language||'']).map(function(x){return String(x).slice(0,2).toLowerCase()});
+   for(var i=0;i<nav.length;i++){if(nav[i]==='ko')break;if(ok[nav[i]]){to=nav[i];break;}}}}
+ if(to)tryGo(to);}
+function pick(l){save(l);location.href=U(l)+'?lang='+l+location.hash;}
+function name(l){for(var i=0;i<C.langs.length;i++)if(C.langs[i][0]===l)return C.langs[i][1];return l}
+function mount(){if(document.getElementById('i18nSel'))return;
+ if(C.select){var w=document.createElement('span');w.className='i18n-pick';w.innerHTML='<span aria-hidden="true">🌐</span>';
+  var s=document.createElement('select');s.id='i18nSel';s.setAttribute('aria-label','Language');
+  C.langs.forEach(function(l){var o=document.createElement('option');o.value=l[0];o.textContent=l[1];if(l[0]===cur)o.selected=true;s.appendChild(o);});
+  s.addEventListener('change',function(){pick(s.value)});w.appendChild(s);var put=false;
+  for(var i=0;i<C.hosts.length&&!put;i++){var h=document.querySelector(C.hosts[i][0]);if(!h)continue;var m=C.hosts[i][1];
+   if(m==='after')h.insertAdjacentElement('afterend',w);else if(m==='before')h.insertAdjacentElement('beforebegin',w);else h.appendChild(w);put=true;}
+  if(!put){w.classList.add('float');document.body.appendChild(w);}}
+ if(C.banner&&!document.getElementById('i18nBanner')){var b=document.createElement('div');b.id='i18nBanner';
+  var bt=document.createElement('button');bt.type='button';bt.setAttribute('aria-haspopup','true');bt.setAttribute('aria-expanded','false');bt.textContent='🌐 '+name(cur);
+  var ul=document.createElement('ul');ul.hidden=true;ul.setAttribute('role','menu');
+  C.langs.forEach(function(l){var li=document.createElement('li'),a=document.createElement('a');a.href=U(l[0])+'?lang='+l[0];a.textContent=l[1];a.lang=l[0];a.setAttribute('role','menuitem');
+   if(l[0]===cur)a.setAttribute('aria-current','true');a.addEventListener('click',function(e){e.preventDefault();pick(l[0])});li.appendChild(a);ul.appendChild(li);});
+  function close(){ul.hidden=true;bt.setAttribute('aria-expanded','false')}
+  bt.addEventListener('click',function(e){e.stopPropagation();ul.hidden=!ul.hidden;bt.setAttribute('aria-expanded',String(!ul.hidden))});
+  document.addEventListener('click',function(e){if(!b.contains(e.target))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){close();bt.focus&&!ul.hidden&&bt.focus()}});
+  b.appendChild(ul);b.appendChild(bt);document.body.appendChild(b);}}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();})();</script><!-- /i18n:switcher -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chizgʻich va transportir xonasi, ②-qism — soya, toʻsiq, harakat, shar, birliklarni moslashtirish</title>
+<meta name="description" content="6–10-xonalar va Bellashuv: soya bilan eng yaqin javobni tanlaymiz, toʻsiq bilan tomonlarga ajratamiz, birliklarni moslashtirib qoʻshnilarni topamiz. Yakunda Hilbert fazosi bilan tanishtiramiz.">
+<meta property="og:type" content="article"><meta property="og:title" content="Chizgʻich va transportir xonasi, ②-qism — soya, toʻsiq, harakat, shar, birliklarni moslashtirish"><meta property="og:description" content="6–10-xonalar va Bellashuv: soya bilan eng yaqin javobni tanlaymiz, toʻsiq bilan tomonlarga ajratamiz, birliklarni moslashtirib qoʻshnilarni topamiz. Yakunda Hilbert fazosi bilan tanishtiramiz.">
+<meta property="og:image" content="https://adminmrobo.github.io/euclidean_space_lab/assets/og/og_02.jpg"><meta property="og:url" content="https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html"><meta name="twitter:card" content="summary_large_image">
+<meta name="author" content="Ahn Sangsun">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lab.css">
+<link rel="alternate" hreflang="ko" href="02_shadow_rooms.html"><link rel="alternate" hreflang="en" href="02_shadow_rooms.en.html"><link rel="alternate" hreflang="zh-CN" href="02_shadow_rooms.zh.html"><link rel="alternate" hreflang="ja" href="02_shadow_rooms.ja.html"><link rel="alternate" hreflang="uz" href="02_shadow_rooms.uz.html"><link rel="alternate" hreflang="ru" href="02_shadow_rooms.ru.html"><link rel="alternate" hreflang="vi" href="02_shadow_rooms.vi.html"><link rel="alternate" hreflang="x-default" href="02_shadow_rooms.html"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap"><style data-i18n-font>body,button,input,select,textarea{font-family:"IBM Plex Sans",system-ui,sans-serif}</style>
+</head>
+<body>
+<div id="prog"></div>
+<nav class="top"><div class="row"><a class="logo" href="index.html">Chizgʻich va transportir <i>xonasi</i></a><div class="links"><a href="#r06">6-xona</a><a href="#r07">7-xona</a><a href="#r08">8-xona</a><a href="#r09">9-xona</a><a href="#r10">10-xona</a><a href="#duel">Bellashuv</a><a href="#outro">Yakun</a></div></div></nav>
+<div class="cover"><div class="frame"><svg class="grid" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><line x1="0" y1="0" x2="0" y2="900" stroke="#dbe5ee"/><line x1="80" y1="0" x2="80" y2="900" stroke="#dbe5ee"/><line x1="160" y1="0" x2="160" y2="900" stroke="#dbe5ee"/><line x1="240" y1="0" x2="240" y2="900" stroke="#dbe5ee"/><line x1="320" y1="0" x2="320" y2="900" stroke="#dbe5ee"/><line x1="400" y1="0" x2="400" y2="900" stroke="#dbe5ee"/><line x1="480" y1="0" x2="480" y2="900" stroke="#dbe5ee"/><line x1="560" y1="0" x2="560" y2="900" stroke="#dbe5ee"/><line x1="640" y1="0" x2="640" y2="900" stroke="#dbe5ee"/><line x1="720" y1="0" x2="720" y2="900" stroke="#dbe5ee"/><line x1="800" y1="0" x2="800" y2="900" stroke="#dbe5ee"/><line x1="880" y1="0" x2="880" y2="900" stroke="#dbe5ee"/><line x1="960" y1="0" x2="960" y2="900" stroke="#dbe5ee"/><line x1="1040" y1="0" x2="1040" y2="900" stroke="#dbe5ee"/><line x1="1120" y1="0" x2="1120" y2="900" stroke="#dbe5ee"/><line x1="1200" y1="0" x2="1200" y2="900" stroke="#dbe5ee"/><line x1="1280" y1="0" x2="1280" y2="900" stroke="#dbe5ee"/><line x1="1360" y1="0" x2="1360" y2="900" stroke="#dbe5ee"/><line x1="1440" y1="0" x2="1440" y2="900" stroke="#dbe5ee"/><line x1="1520" y1="0" x2="1520" y2="900" stroke="#dbe5ee"/><line x1="1600" y1="0" x2="1600" y2="900" stroke="#dbe5ee"/><line x1="0" y1="0" x2="1600" y2="0" stroke="#dbe5ee"/><line x1="0" y1="80" x2="1600" y2="80" stroke="#dbe5ee"/><line x1="0" y1="160" x2="1600" y2="160" stroke="#dbe5ee"/><line x1="0" y1="240" x2="1600" y2="240" stroke="#dbe5ee"/><line x1="0" y1="320" x2="1600" y2="320" stroke="#dbe5ee"/><line x1="0" y1="400" x2="1600" y2="400" stroke="#dbe5ee"/><line x1="0" y1="480" x2="1600" y2="480" stroke="#dbe5ee"/><line x1="0" y1="560" x2="1600" y2="560" stroke="#dbe5ee"/><line x1="0" y1="640" x2="1600" y2="640" stroke="#dbe5ee"/><line x1="0" y1="720" x2="1600" y2="720" stroke="#dbe5ee"/><line x1="0" y1="800" x2="1600" y2="800" stroke="#dbe5ee"/><line x1="0" y1="880" x2="1600" y2="880" stroke="#dbe5ee"/><line x1="160" y1="740" x2="1440" y2="740" stroke="#1e2f6e" stroke-width="4"/><line x1="160" y1="740" x2="160" y2="120" stroke="#1e2f6e" stroke-width="4"/><line x1="400" y1="560" x2="1100" y2="240" stroke="#2458d6" stroke-width="6"/><line x1="400" y1="560" x2="1100" y2="560" stroke="#13733a" stroke-width="4" stroke-dasharray="14 10"/><line x1="1100" y1="560" x2="1100" y2="240" stroke="#13733a" stroke-width="4" stroke-dasharray="14 10"/><path d="M1070 560 L1070 530 L1100 530" fill="none" stroke="#e8731a" stroke-width="4"/><circle cx="400" cy="560" r="16" fill="#0f8f84"/><circle cx="1100" cy="240" r="16" fill="#e8731a"/><path d="M470 560 A70 70 0 0 0 464 528" fill="none" stroke="#e8731a" stroke-width="5"/></svg>
+<span class="cap">Laboratoriya yoʻlagi · ②-qism · 6–10-xonalar + Bellashuv</span><span class="badge">Muqova rasmi tayyorlanmoqda</span><div class="cast"><img src="assets/chars/moa_e16.webp" alt="Moa" width="96" height="96" loading="lazy" class=s><img src="assets/chars/doctor_e10.webp" alt="Doktor" width="96" height="96" loading="lazy"><img src="assets/chars/sia_e14.webp" alt="Sia" width="96" height="96" loading="lazy"><img src="assets/chars/haru_e07.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy" class=s></div></div></div>
+<header class="hero"><div class="wrap"><span class="kicker">②-qism · 6–10-xonalar + Bellashuv</span><h1>Soya va toʻsiq xonasi</h1><p class="lead">Eng yaqin javob (soya), tomonlarga ajratish (toʻsiq), qoʻshnilar doirasi (shar) va birliklarni moslashtirishgacha. Oxirida eng yaqin qoʻshnini topish bellashuvi bor.</p>
+<p class="byline">Matn · Ahn Sangsun (M-Robo kompaniyasi rahbari) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">Muallif haqida</a> · 2026-11-19 · v1.3</p></div></header>
+<section><div class="wrap"><div class="three"><h2>Birinchi marta kelganlar uchun — bu sahifa 3 qatorda</h2><ul>
+<li><b>Nima</b>: soya bilan eng kam xato javobni tanlaymiz, toʻsiq bilan tomonlarga ajratamiz, birliklarni moslashtirib qoʻshnilarni topamiz.</li><li><b>Nega muhim</b>: bashorat chizigʻini chizish, spamni tasniflash, tavsiyadan oldin birliklarni moslashtirish — barchasi shu xonalarning qoidalari.</li><li><b>Ishda</b>: "model bera oladigan javoblar ichida toʻgʻri javobga eng yaqini" va "adolatli masofa"ni tanlashni bilib olasiz.</li></ul>
+<p>Kod yoki formulalarni bilmasangiz ham boʻladi. Bu sahifa faqat haqiqiy sonlar (oddiy sonlar) bilan ishlaydi.</p>
+<details class="abbr"><summary>Asl atamalar va qisqartmalar izohi (ochish)</summary><dl><dt>ℝⁿ</dt><dd>n ta haqiqiy sondan iborat barcha qatorlar — chizgʻich va transportiri bor n katakli xona (Yevklid fazosi)</dd><dt>skalyar koʻpaytma</dt><dd>Moslik balli — bir xil oʻrindagilarni koʻpaytirib qoʻshilgan qiymat</dd><dt>Norma ‖x‖</dt><dd>Strelkaning uzunligi</dd><dt>Ortonormal bazis</dt><dd>Uzunligi 1 va oʻzaro perpendikulyar chizgʻichlar toʻplami</dd><dt>Ortogonal proyeksiya</dt><dd>Soya — nuqtadan chiziq yoki tekislikka tik tushirilgan asos</dd><dt>Gipertekislik · normal</dt><dd>Toʻsiq (n katakli xonada bir katak kam boʻlgan taxta) · toʻsiqqa sanchilgan strelka</dd><dt>Izometriya</dt><dd>Surish, burish, agʻdarish — masofa oʻzgarmaydigan harakatlar</dd><dt>KNN</dt><dd>Eng yaqin qoʻshnini topish</dd><dt>MSE</dt><dd>Kvadratik xato — xatolik masofasi kvadratlarining oʻrtachasi</dd><dt>Xususiyatlarni masshtablash</dt><dd>Birliklarni moslashtirish</dd></dl></details></div>
+</div></section>
+<section><div class="wrap"><div class="talk"><div class="line"><img src="assets/chars/doctor_e07.webp" alt="Doktor" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">Doktor</b>①-qismda chizgʻich va transportirga qoʻlingiz oʻrgandi. Endi ular bilan javob tanlaymiz.</div></div><div class="line r"><img src="assets/chars/moa_e09.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Soya bilan javob tanlash nima degani?</div></div><div class="line"><img src="assets/chars/sia_e19.webp" alt="Sia" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">Sia</b>6-xonaga borsak bilamiz-da!</div></div></div></div></section>
+<section class="room" id="r06"><div class="wrap">
+<div class="roomno">6-xona</div>
+<h2>Soya — eng yaqin javob</h2><p class="muted">Nuqtadan chiziqqa tik tushirilgan asos</p>
+<div class="tags"><span class="tag src">Asl manba kartasi 06/10 · @eeanimation</span><span class="tag how">Usul: soyani (ortogonal proyeksiya) topish</span><span class="tag day">Kundalik hayot: tush paytidagi tayoq soyasi</span></div>
+<div class="duo">
+<div class="box why"><h4>Nega bu usul?</h4><ol><li><b>Muammo</b> — model bera oladigan javoblar faqat bitta chiziq (toʻgʻri chiziq) ustida boʻlsa, toʻgʻri javob odatda shu chiziqdan tashqarida boʻladi.</li><li><b>Oldingi xonaning chegarasi</b> — 5-xonada koordinatalarni oʻqidik, lekin chiziqdagi qaysi nuqta toʻgʻri javobga eng yaqinligini bilmaymiz.</li><li><b>Yechim</b> — toʻgʻri javobdan chiziqqa perpendikulyar tushirilgan asos (soya) eng yaqin nuqtadir.</li></ol><div class="easy"><b>Oddiy qilib aytganda</b> — qiya tushirsangiz, gipotenuza hosil boʻlib, doimo uzunroq boʻladi. Tik tushirilgan asos eng qisqa.</div></div>
+<div class="box mathbox"><h4>Matematik formulalardan choʻchiydigan yordamchi siz uchun soʻraydi</h4>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy"><div><b>Yordamchi</b> proj_u(v) = (v·u ÷ u·u) u… kasr ichida ikkita nuqta bor-a!</div></div>
+<p><b>Maktab matematikasida</b> — ortogonal proyeksiya, perpendikulyar asosi</p>
+<table><thead><tr><th>Formula boʻlagi</th><th>Maʼnosi</th></tr></thead><tbody><tr><td class='m'>v·u</td><td>v va u ning moslik balli</td></tr><tr><td class='m'>u·u</td><td>u uzunligining kvadrati</td></tr><tr><td class='m'>v·u ÷ u·u</td><td>u ni necha marta choʻzsak soya boʻladi</td></tr><tr><td class='m'>p</td><td>Soya (eng yaqin nuqta)</td></tr><tr><td class='m'>r = v − p</td><td>Chetga ogʻish — doimo u ga perpendikulyar</td></tr></tbody></table>
+<div class="try"><b>Raqamlar bilan sinab koʻraylik</b><div>v = (3, 2), u = (1, 0) → 3 ÷ 1 = 3 marta → p = (3, 0), r = (0, 2), r·u = 0</div><div>u = (2, 1) → v·u = 8, u·u = 5 → p = 1.6 × (2, 1) = (3.2, 1.6), r = (−0.2, 0.4), r·u = 0</div><div>Boʻylar 160·162·164 ni bitta son bilan: 162 boʻlsa xato kvadratlari yigʻindisi 4 + 0 + 4 = 8, 161 boʻlsa 1 + 1 + 9 = 11 → oʻrtacha 162 — soya</div></div>
+<div class="q"><img src="assets/chars/haru_e16.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy"><div><b>Yordamchi</b> Asosiysi — chetga ogʻish doimo perpendikulyar ekan. Shuning uchun eng qisqa ham.</div></div></div>
+</div>
+<div class="pair"><div class="box"><h4>Kundalik hayotda</h4><p>Tush paytida tayoqni tik qoʻysangiz, soya aynan uning tagida hosil boʻladi. Quyosh qanchalik qiya boʻlsa, soya shunchalik uzun.</p></div><div class="box ml"><h4>Mashinaviy oʻqitishda</h4><p>Bashorat chizigʻini chizish (eng kichik kvadratlar regressiyasi) — toʻgʻri javobni &quot;model bera oladigan javoblar&quot;ga soya qilib tushirish. Bir nechta qiymatning oʻrtachasi ham soya.</p></div></div>
+<div class="talk"><div class="line"><img src="assets/chars/doctor_e09.webp" alt="Doktor" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">Doktor</b>Chiziqda v ga eng yaqin nuqta qayerda deb oʻylaysiz?</div></div><div class="line"><img src="assets/chars/jupanbot_e16.webp" alt="AbaBot" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-robo)">AbaBot</b>v uchiga eng yaqin boʻlinma — 3 ga taxminan yopishtirib qoʻyamiz, tamom! Shunga tikaman!</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="Meva pashshasi tadqiqotchisi" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">Meva pashshasi tadqiqotchisi</b>Chiziq yoʻnalishi u ni burib koʻr. Unda ham 3 boʻlarmikin?</div></div></div>
+<div class="panel"><div class="ph"><b>Tajriba paneli 6</b><small>Asl manba kartasi 06 qayta chizilgan · chiziq yoʻnalishi u ni burib koʻring</small></div><div id="pp-p06" data-panel="p06"></div><div class="ctrl"><label>Chiziq yoʻnalishi <input type="range" min="0" max="80" step="0.5" value="0" aria-label="Chiziq yoʻnalishi burchagi"></label> <button type="button" data-preset>u = (2, 1) yoʻnalishida</button></div><div class="readout" aria-live="polite"></div></div>
+<div class="solve"><h4>Izoh</h4><p>u ni bursangiz ham r·u doimo 0. Chetga ogʻish chiziqqa perpendikulyar.</p><p>Asl manba xulosasidagidek, soya — u orqali oʻtuvchi chiziqdagi eng yaqin nuqta.</p><p>AbaBotning &quot;taxminan 3&quot;i faqat u gorizontal boʻlganda toʻgʻri.</p></div>
+<p class="hint">📝 Asl manbadan farqli yozilgan joy — asl manbada u goh qalin, goh kursiv yozilgan. Bu sahifada bitta shriftga keltirdik.</p>
+<div class="limit"><b>Bu xonaning chegarasi</b> — soyani tushiradigan &quot;asos&quot; faqat bitta chiziq edi. Tekislik yoki kattaroq asosni, shuningdek, tomonlarga ajratuvchi taxtani qanday ishlatamiz? → 7-xona</div>
+<details class="code"><summary>Darslikdagi Python kodi bilan koʻrsak (bilmasangiz ham boʻladi)</summary><pre><code>p = (v @ u) / (u @ u) * u</code></pre><p>Moslik balli nisbatida u ni choʻzib, soya hosil qilamiz.</p></details>
+<div class="quiz" data-ans="1"><div class="qq">Tekshiruv savoli — boʻy uch marta oʻlchanganda 170·172·177 chiqdi. Xato kvadratlari yigʻindisi eng kichik boʻlgan vakil qiymat (soya) qaysi?</div><div class="opts"><button type="button">172 (oʻrta qiymat)</button><button type="button">173 (oʻrtacha)</button><button type="button">177 (eng katta qiymat)</button></div><div class="fb" aria-live="polite"></div><span class="qok" hidden>Oʻrtacha 173 — bu soya. Xatolar kvadratlari yigʻindisi 9 + 1 + 16 = 26 boʻlib, eng kichigi.</span><span class="qno" hidden>172 boʻlsa 4 + 0 + 25 = 29, 173 boʻlsa 9 + 1 + 16 = 26. Oʻrtacha — bu soya.</span></div>
+</div></section>
+<section class="room" id="r07"><div class="wrap">
+<div class="roomno">7-xona</div>
+<h2>Chiziq, tekislik, toʻsiq</h2><p class="muted">n katakli xonaning toʻsigʻi — bir katak kam boʻlgan taxta</p>
+<div class="tags"><span class="tag src">Asl manba kartasi 07/10 · @eeanimation</span><span class="tag how">Usul: toʻsiq tenglamasi bilan tomonlarga ajratish</span><span class="tag day">Kundalik hayot: stadion oʻrtasidagi chiziq</span></div>
+<div class="duo">
+<div class="box why"><h4>Nega bu usul?</h4><ol><li><b>Muammo</b> — spam xatlarni oddiy xatlardan ajratish uchun xona ichida toʻsiq oʻrnatish kerak.</li><li><b>Oldingi xonaning chegarasi</b> — 6-xonadagi asos bitta chiziq edi. Kengroq asos va tomonlarga ajratuvchi taxta kerak.</li><li><b>Yechim</b> — toʻsiqqa sanchilgan strelka (normal) n bilan moslik balli orqali &quot;qaysi tomonda&quot; ekanini aniqlaymiz.</li></ol><div class="easy"><b>Oddiy qilib aytganda</b> — stadion oʻrtasidagi bitta chiziq bilan koʻk va oq jamoalarni ajratishga oʻxshaydi.</div></div>
+<div class="box mathbox"><h4>Matematik formulalardan choʻchiydigan yordamchi siz uchun soʻraydi</h4>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy"><div><b>Yordamchi</b> n·(x − p) = 0, ℝⁿ dagi gipertekislik n − 1 oʻlchamli… n ikki xil maʼnoda kelyapti!</div></div>
+<p><b>Maktab matematikasida</b> — toʻgʻri chiziq va tekislik tenglamalari, nuqtadan tekislikkacha masofa</p>
+<table><thead><tr><th>Formula boʻlagi</th><th>Maʼnosi</th></tr></thead><tbody><tr><td class='m'>x = p + tv</td><td>Boshlangʻich nuqta p dan v yoʻnalishida t qadar yurish = toʻgʻri chiziq</td></tr><tr><td class='m'>n</td><td>Toʻsiqqa sanchilgan strelka (normal)</td></tr><tr><td class='m'>n·(x − p) = 0</td><td>Toʻsiqdagi barcha nuqtalar n ga perpendikulyar</td></tr><tr><td class='m'>x₁ + 2x₂ + 2x₃ = 6</td><td>n = (1, 2, 2) boʻlgan toʻsiq</td></tr><tr><td class='m'>n − 1</td><td>Kataklar soni n boʻlgan xonaning toʻsigʻi bir katak kam</td></tr></tbody></table>
+<div class="try"><b>Raqamlar bilan sinab koʻraylik</b><div>Oʻqlar bilan kesishish nuqtalari: (6, 0, 0), (0, 3, 0), (0, 0, 3) — asl manba bilan bir xil</div><div>(2, 2, 2) nuqta: 2 + 4 + 4 = 10 &gt; 6 → koordinata boshining qarama-qarshi tomoni, toʻsiqqacha (10 − 6) ÷ 3 ≈ 1.33</div><div>Koordinata boshi: 0 &lt; 6 → koordinata boshi tomoni, toʻsiqqacha 6 ÷ 3 = 2 (n ning uzunligi √(1 + 4 + 4) = 3)</div></div>
+<div class="q"><img src="assets/chars/haru_e16.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy"><div><b>Yordamchi</b> Ballni 6 bilan solishtirsak tamom ekan. Spam aniqlagich oʻylaganimdan soddaroq ekan.</div></div></div>
+</div>
+<div class="pair"><div class="box"><h4>Kundalik hayotda</h4><p>Stadion chizigʻining chap tomoni — koʻk jamoa, oʻng tomoni — oq jamoa. Chiziqdan qanchalik uzoq boʻlsa, tomoni shunchalik aniq.</p></div><div class="box ml"><h4>Mashinaviy oʻqitishda</h4><p>Logistik regressiya, SVM kabi tasniflagichlar toʻsiq (qaror chegarasi) oʻrnatadi. Nuqta toʻsiqdan qanchalik uzoq boʻlsa, qaror shunchalik ishonchli.</p></div></div>
+<div class="talk"><div class="line"><img src="assets/chars/sia_e01.webp" alt="Sia" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">Sia</b>Bitta toʻsiq bilan tomonlar ajralarkan — xuddi oʻrtadagi chiziqdek!</div></div><div class="line r"><img src="assets/chars/moa_e09.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Toʻsiqqa yopishib turgan nuqta qaysi tomonga tegishli?</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="Meva pashshasi tadqiqotchisi" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">Meva pashshasi tadqiqotchisi</b>P nuqtaning uchta koordinatasini oʻzgartirib, ball 6 boʻladigan joyni top.</div></div></div>
+<div class="panel"><div class="ph"><b>Tajriba paneli 7</b><small>Asl manba kartasi 07 dagi toʻsiq qayta chizilgan · P nuqtaning koordinatalarini oʻzgartirib koʻring</small></div><div id="pp-p07" data-panel="p07"></div><div class="ctrl"><label>x₁ <input type="range" min="0" max="6" step="1" value="2" aria-label="x1"></label><label>x₂ <input type="range" min="0" max="4" step="1" value="2" aria-label="x2"></label><label>x₃ <input type="range" min="0" max="4" step="1" value="2" aria-label="x3"></label></div><div class="readout" aria-live="polite"></div></div>
+<div class="solve"><h4>Izoh</h4><p>Ball 6 dan katta boʻlsa — koordinata boshining qarama-qarshi tomoni, kichik boʻlsa — koordinata boshi tomoni, teng boʻlsa — toʻsiq ustida (chegara).</p><p>Toʻsiq ustidagi nuqta uchun qaror kechiktiriladi. Haqiqiy tasniflagichlar ham chegaraga yaqin nuqtalarda eng koʻp chalkashadi.</p><p>3 katakli xonaning toʻsigʻi — tekislik (2 katak). n katakli xonada esa n − 1 katakli taxta.</p></div>
+<p class="hint">📝 Asl manbadan farqli yozilgan joy — asl manbada oʻq nomi x va nuqta nomi x ustma-ust tushadi (x = p + tv va x oʻqi). Bu sahifada oʻqlarni x₁·x₂·x₃ ga almashtirdik va toʻsiq tenglamasini ham x₁ + 2x₂ + 2x₃ = 6 deb yozdik. Asl manbadagi &quot;Hyperplane in ℝ³&quot; 3 katakli xonada tekislik bilan bir xil narsa.</p>
+<div class="limit"><b>Bu xonaning chegarasi</b> — nuqtalarni sursak yoki bursak, toʻsiq va masofalar oʻzgaradimi? Avval maʼlumotlarni koʻchirish mumkinmi, shuni tekshirish kerak. → 8-xona</div>
+
+<div class="quiz" data-ans="0"><div class="qq">Tekshiruv savoli — x₁ + 2x₂ + 2x₃ = 6 toʻsigʻiga nisbatan (0, 0, 3) nuqta qayerda?</div><div class="opts"><button type="button">Toʻsiq ustida (chegara) — qaror kechiktiriladi</button><button type="button">Koordinata boshining qarama-qarshi tomoni</button><button type="button">Koordinata boshi tomoni</button></div><div class="fb" aria-live="polite"></div><span class="qok" hidden>0 + 0 + 6 = 6 → toʻsiq ustida (chegarada). Bu toʻsiq dastlabki maʼlumotlar oʻqi bilan kesishgan (0, 0, 3) nuqtasi.</span><span class="qno" hidden>Ballni hisoblab koʻring: 0 + 2×0 + 2×3 = 6. 6 ga teng boʻlsa, nuqta toʻsiq ustida.</span></div>
+</div></section>
+<section class="room" id="r08"><div class="wrap">
+<div class="roomno">8-xona</div>
+<h2>Sursangiz, bursangiz, agʻdarsangiz ham masofa oʻzgarmaydi</h2><p class="muted">Shaklni oʻzgartirmaydigan va oʻzgartiradigan harakatlar</p>
+<div class="tags"><span class="tag src">Asl manba kartasi 08/10 · @eeanimation</span><span class="tag how">Usul: masofani saqlaydigan harakatlarni tanlash</span><span class="tag day">Kundalik hayot: rasmni burish</span></div>
+<div class="duo">
+<div class="box why"><h4>Nega bu usul?</h4><ol><li><b>Muammo</b> — rasmni bursak yoki koordinata boshini koʻchirsak ham, maʼlumotlar orasidagi munosabat bir xil qolishi kerak.</li><li><b>Oldingi xonaning chegarasi</b> — 7-xonagacha nuqtalarni joyida qoldirib oʻlchadik. Koʻchirilsa nima boʻlishini bilmaymiz.</li><li><b>Yechim</b> — surish, burish, agʻdarish masofa va burchakni saqlaydi. Faqat choʻzish masofani oʻzgartiradi.</li></ol><div class="easy"><b>Oddiy qilib aytganda</b> — qogʻozdagi uchburchakni sursangiz, bursangiz, agʻdarsangiz ham, oʻsha uchburchak. Faqat kattalashtirib nusxalashda oʻlchami oʻzgaradi.</div></div>
+<div class="box mathbox"><h4>Matematik formulalardan choʻchiydigan yordamchi siz uchun soʻraydi</h4>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy"><div><b>Yordamchi</b> x′ = Qx + t, QᵀQ = I… yuqori indeks T va I yana nima?</div></div>
+<p><b>Maktab matematikasida</b> — parallel koʻchirish, burish, simmetriya, oʻxshashlik</p>
+<table><thead><tr><th>Formula boʻlagi</th><th>Maʼnosi</th></tr></thead><tbody><tr><td class='m'>t</td><td>Surish — barcha nuqtalarga bir xil strelka qoʻshiladi</td></tr><tr><td class='m'>Q</td><td>Burish va agʻdarish jadvali</td></tr><tr><td class='m'>QᵀQ = I</td><td>Burish va agʻdarish jadvalining sharti: uzunlik va burchakni oʻzgartirmaydi</td></tr><tr><td class='m'>s marta choʻzish</td><td>Barcha masofalar |s| marta</td></tr><tr><td class='m'>|s| = 1</td><td>Faqat shunda choʻzish ham masofani saqlaydi</td></tr></tbody></table>
+<div class="try"><b>Raqamlar bilan sinab koʻraylik</b><div>(0, 0) dan (3, 4) gacha uzunlik 5 → 90° bursak, (0, 0) dan (−4, 3) gacha uzunlik 5</div><div>Surish: ikki nuqtaga (−2, 1) ni bir xil qoʻshsak, B − A ayirma oʻzgarmaydi → masofa oʻzgarmaydi</div><div>2 marta choʻzish: uzunlik 5 → 10</div></div>
+<div class="q"><img src="assets/chars/haru_e16.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy"><div><b>Yordamchi</b> Burish jadvali sifatida faqat masofani saqlaydigan jadvallar tanlab olinarkan-da.</div></div></div>
+</div>
+<div class="pair"><div class="box"><h4>Kundalik hayotda</h4><p>Telefondagi rasmni bursangiz ham, yuz oʻsha yuz. Kattalashtirsangiz, faqat oʻlchami oʻzgaradi.</p></div><div class="box ml"><h4>Mashinaviy oʻqitishda</h4><p>Rasmlarni burib, agʻdarib, oʻqitish maʼlumotlarini koʻpaytiramiz (maʼlumotlarni koʻpaytirish). Shakl oʻzgarmagani uchun toʻgʻri javob yorligʻi ham oʻzgarmaydi.</p></div></div>
+<div class="talk"><div class="line"><img src="assets/chars/doctor_e07.webp" alt="Doktor" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">Doktor</b>Bemalol qilsa boʻladigan harakatlar ham, ehtiyot boʻlish kerak boʻlgan harakatlar ham bor.</div></div><div class="line"><img src="assets/chars/jupanbot_e16.webp" alt="AbaBot" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-robo)">AbaBot</b>Choʻzsang ham shakli bir xil, demak masofa ham oʻzgarmaydi! Hammasini shunga tikaman!</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="Meva pashshasi tadqiqotchisi" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">Meva pashshasi tadqiqotchisi</b>Choʻzish tugmasini bosib, uch tomon uzunligiga qara.</div></div></div>
+<div class="panel"><div class="ph"><b>Tajriba paneli 8</b><small>Asl manba kartasi 08 qayta chizilgan · tugmalar va slayder bilan uchburchakni harakatlantirib koʻring</small></div><div id="pp-p08" data-panel="p08"></div><div class="ctrl"><button type="button" data-op="slide">Surish</button><button type="button" data-op="mirror">Agʻdarish</button><button type="button" data-op="scale">2 marta choʻzish</button><label>Burish <input type="range" min="0" max="360" step="15" value="0" aria-label="Burish burchagi"></label><button type="button" data-op="reset">Asliga qaytarish</button></div><div class="readout" aria-live="polite"></div></div>
+<div class="solve"><h4>Izoh</h4><p>Surish, burish, agʻdarishni qanchalik aralashtirmang, uch tomon 3 · 4 · 5 boʻlib qolaveradi.</p><p>Choʻzishni yoqsangiz, 6 · 8 · 10 boʻladi. Shakl (burchaklar) bir xil boʻlsa ham, masofa oʻzgaradi.</p><p>Asl manbada aytilganidek, choʻzish faqat |s| = 1 boʻlganda masofani saqlaydi.</p></div>
+
+<div class="limit"><b>Bu xonaning chegarasi</b> — harakatlantirganda ham masofa oʻzgarmasligini bildik. Endi &quot;qaysi masofa ichidagilarni qoʻshni deb hisoblash&quot; doirasini belgilash kerak. → 9-xona</div>
+
+<div class="quiz" data-ans="2"><div class="qq">Tekshiruv savoli — quyidagilardan qaysi harakat ikki nuqta orasidagi masofani oʻzgartiradi?</div><div class="opts"><button type="button">Barcha nuqtalarni oʻngga 2 katak surish</button><button type="button">Koordinata boshi atrofida 30° burish</button><button type="button">Barcha koordinatalarni 3 ga koʻpaytirish</button></div><div class="fb" aria-live="polite"></div><span class="qok" hidden>3 marta choʻzish barcha masofalarni 3 marta oshiradi.</span><span class="qno" hidden>Siljitish va aylantirish masofani saqlaydi. Faqat choʻzish masofani oʻzgartiradi.</span></div>
+</div></section>
+<section class="room" id="r09"><div class="wrap">
+<div class="roomno">9-xona</div>
+<h2>Radius r ichi = qoʻshnilar</h2><p class="muted">Aylana, sfera, shar va kataklar koʻpayganda nima sodir boʻladi</p>
+<div class="tags"><span class="tag src">Asl manba kartasi 09/10 · @eeanimation</span><span class="tag how">Usul: radius bilan qoʻshnilar doirasini belgilash</span><span class="tag day">Kundalik hayot: uydan 1km radius</span></div>
+<div class="duo">
+<div class="box why"><h4>Nega bu usul?</h4><ol><li><b>Muammo</b> — baʼzan &quot;eng yaqin bir nechta mijoz&quot; emas, &quot;r masofa ichidagi barcha mijozlar&quot;ni topgimiz keladi.</li><li><b>Oldingi xonaning chegarasi</b> — 8-xonagacha faqat ikki nuqta orasidagi masofani oʻlchadik. Doirani chizmadik.</li><li><b>Yechim</b> — markazdan r masofadan oshmaydigan nuqtalarni yigʻsak, 2 katakli xonada doira, 3 katakli xonada shar hosil boʻladi.</li></ol><div class="easy"><b>Oddiy qilib aytganda</b> — uyni markaz qilib 1km radiusli doira chizsangiz, uning ichidagi doʻkonlar — &quot;mahalla doʻkonlari&quot;.</div></div>
+<div class="box mathbox"><h4>Matematik formulalardan choʻchiydigan yordamchi siz uchun soʻraydi</h4>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy"><div><b>Yordamchi</b> ‖x − c‖ = r va ‖x − c‖ ≤ r… bitta belgi farqi bilan nomi oʻzgaradimi?</div></div>
+<p><b>Maktab matematikasida</b> — aylana tenglamasi, sfera tenglamasi, daraja</p>
+<table><thead><tr><th>Formula boʻlagi</th><th>Maʼnosi</th></tr></thead><tbody><tr><td class='m'>c</td><td>Markaz</td></tr><tr><td class='m'>‖x − c‖ = r</td><td>Markazdan aynan r masofadagi nuqtalar = tashqi qobiq (aylana, sfera sirti)</td></tr><tr><td class='m'>‖x − c‖ ≤ r</td><td>r ichidagi hammasi = toʻla shar</td></tr><tr><td class='m'>x² + y² = r²</td><td>Markazi koordinata boshida boʻlgan aylana</td></tr><tr><td class='m'>0.9ⁿ</td><td>n katakli sharda radius 0.9 ichki qismi egallagan hajm ulushi</td></tr></tbody></table>
+<div class="try"><b>Raqamlar bilan sinab koʻraylik</b><div>Radius 1: doira yuzi π × 1² ≈ 3.14, shar hajmi 4π ÷ 3 ≈ 4.19</div><div>Radius 0.9 ichki qismi ulushi: 2 katak 0.81 (81%), 3 katak 0.729 (73%)</div><div>10 katak 0.9¹⁰ ≈ 0.349 (35%), 100 katak 0.9¹⁰⁰ ≈ 0.0000266 — deyarli hammasi tashqi qobiqda</div></div>
+<div class="q"><img src="assets/chars/haru_e16.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy"><div><b>Yordamchi</b> Kataklar koʻp boʻlsa, sharning ichi boʻm-boʻsh boʻlib qolgandek boʻlarkan. Qiziq.</div></div></div>
+</div>
+<div class="pair"><div class="box"><h4>Kundalik hayotda</h4><p>Yetkazib berish ilovasidagi &quot;2km radiusdagi doʻkonlar&quot; — shu doira.</p></div><div class="box ml"><h4>Mashinaviy oʻqitishda</h4><p>Radius boʻyicha qoʻshnilarni topish, gʻalati qiymatlarni topish (radius ichida qoʻshni boʻlmasa, shubhali) uchun ishlatiladi. Kataklar juda koʻp boʻlsa, barcha nuqtalar deyarli bir xil uzoqlashadi (oʻlchamlar laʼnati).</p></div></div>
+<div class="talk"><div class="line"><img src="assets/chars/sia_e01.webp" alt="Sia" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">Sia</b>Radiusni kattalashtirsak, qoʻshnilar koʻpayadi, toʻgʻrimi? Rasmda yaqqol koʻrinyapti.</div></div><div class="line r"><img src="assets/chars/moa_e09.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Asl manba sarlavhasida n-Balls bor, lekin n katakli shar haqida hech narsa yoʻq.</div></div><div class="line"><img src="assets/chars/doctor_e10.webp" alt="Doktor" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">Doktor</b>Shuning uchun bu sahifaga yana bitta tajriba qoʻshdim. Ikkinchi panelga qarang.</div></div></div>
+<div class="panel"><div class="ph"><b>Tajriba paneli 9-①</b><small>Asl manba kartasi 09 qayta chizilgan · radiusni oʻzgartirib koʻring</small></div><div id="pp-p09a" data-panel="p09a"></div><div class="ctrl"><label>Radius r <input type="range" min="0" max="2.3" step="0.1" value="1" aria-label="Radius"></label></div><div class="readout" aria-live="polite"></div></div><div class="panel"><div class="ph"><b>Tajriba paneli 9-②</b><small>Bu sahifada qoʻshilgan tajriba · kataklar sonini koʻpaytirib koʻring</small></div><div id="pp-p09b" data-panel="p09b"></div><div class="ctrl"><label>Kataklar soni <input type="range" min="0" max="7" step="1" value="1" aria-label="Kataklar soni"></label></div><div class="readout" aria-live="polite"></div></div>
+<div class="solve"><h4>Izoh</h4><p>Radiusni kattalashtirsangiz, qoʻshnilar soni koʻpayadi. Doʻkonlar bir tekis tarqalgan boʻlsa, doira yuzi πr² ga mutanosib ravishda koʻpayadi.</p><p>Kataklar sonini koʻpaytirsangiz, hajmning katta qismi tashqi qobiqqa oʻtadi. 100 katakli sharda radius 0.9 ichki qismi atigi 0.003%.</p><p>Asl manba kartasida sarlavha qutisi markaz c bilan yozilgan, quyidagi formula esa markaz koordinata boshida boʻlgan hol uchun. Bu sahifada &quot;markazi koordinata boshiga qoʻyilgan hol&quot; deb aniq yozamiz.</p></div>
+<p class="hint">📝 Asl manbadan farqli yozilgan joy — asl manbadagi sarlavha qutisi markaz c dan foydalanadi. Lekin quyidagi x² + y² = r² formulasi markaz koordinata boshida boʻlgan hol uchun. Bu sahifada &quot;markazi koordinata boshiga qoʻyilgan hol&quot; deb aniq koʻrsatamiz. Kataklar soniga qarab qobiq ulushi tajribasi (0.9ⁿ) bu sahifada qoʻshilgan.</p>
+<div class="limit"><b>Bu xonaning chegarasi</b> — toʻgʻri chizgʻich bilan oʻlchangan masofa birliklar aralashsa yoki sirt egilsa, notoʻgʻri javob beradi. → 10-xona</div>
+<details class="code"><summary>Darslikdagi Python kodi bilan koʻrsak (bilmasangiz ham boʻladi)</summary><pre><code>np.sum(np.linalg.norm(X - c, axis=1) &lt;= r)</code></pre><p>Markaz c dan r masofa ichidagi nuqtalar sonini sanaymiz.</p></details>
+<div class="quiz" data-ans="0"><div class="qq">Tekshiruv savoli — kataklar soni juda koʻp boʻlgan xonada &quot;eng yaqin qoʻshni&quot;ni topish nega qiyinlashadi?</div><div class="opts"><button type="button">Chunki barcha nuqtalar deyarli bir xil uzoqlashadi</button><button type="button">Chunki masofa formulasi oʻzgaradi</button><button type="button">Chunki doira yuzini hisoblab boʻlmaydi</button></div><div class="fb" aria-live="polite"></div><span class="qok" hidden>Hajm tashqi qobiqqa toʻplanib, masofalar orasidagi farq kichrayadi (oʻlchovlar laʼnati).</span><span class="qno" hidden>Formula oʻsha-oʻsha. Muammo shundaki, barcha nuqtalar tashqi qobiq yoniga toʻplanadi.</span></div>
+</div></section>
+<section class="room" id="r10"><div class="wrap">
+<div class="roomno">10-xona</div>
+<h2>Bu xona qoʻllanadigan joylar va toʻgʻri chizgʻichning chegarasi</h2><p class="muted">Birliklarni moslashtirish kerak, egilgan sirtda esa toʻgʻri chizgʻich qisqaroq oʻlchaydi</p>
+<div class="tags"><span class="tag src">Asl manba kartasi 10/10 · @eeanimation</span><span class="tag how">Usul: birliklarni moslashtirish, yoy va vatarni solishtirish</span><span class="tag day">Kundalik hayot: samolyot yoʻnalishi</span></div>
+<div class="duo">
+<div class="box why"><h4>Nega bu usul?</h4><ol><li><b>Muammo</b> — muhandislik (joylashuv), grafika (burish), maʼlumotlar tahlili (eng yaqin qoʻshni) — barchasi shu xonadagi masofadan foydalanadi.</li><li><b>Oldingi xonaning chegarasi</b> — ammo 9-xonagacha barcha kataklarning birligi bir xil deb faraz qildik.</li><li><b>Yechim</b> — birliklarni moslashtiramiz (xususiyatlarni masshtablash), egilgan sirtda esa sirt boʻylab oʻlchaymiz.</li></ol><div class="easy"><b>Oddiy qilib aytganda</b> — boʻyni mm da yozsangiz, boʻy sonlari 10 barobar kattalashib, masofani yolgʻiz egallab oladi.</div></div>
+<div class="box mathbox"><h4>Matematik formulalardan choʻchiydigan yordamchi siz uchun soʻraydi</h4>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy"><div><b>Yordamchi</b> d_surf = Rθ, d_Euc = 2R sin(θ/2)… sinus nega birdan chiqib qoldi?</div></div>
+<p><b>Maktab matematikasida</b> — birliklarni oʻzgartirish, yoy uzunligi, trigonometrik funksiyalar</p>
+<table><thead><tr><th>Formula boʻlagi</th><th>Maʼnosi</th></tr></thead><tbody><tr><td class='m'>‖x − y‖₂</td><td>3-xonadagi toʻgʻri chizgʻich masofasi</td></tr><tr><td class='m'>y* = argmin</td><td>Masofasi eng kichik y ni tanlaydi (eng yaqin qoʻshni)</td></tr><tr><td class='m'>Rθ</td><td>Sirt boʻylab yurilgan uzunlik (yoy) — radius × markaziy burchak</td></tr><tr><td class='m'>2R sin(θ/2)</td><td>Yer ostidan toʻgʻri teshib oʻtilgan uzunlik (vatar)</td></tr></tbody></table>
+<div class="try"><b>Raqamlar bilan sinab koʻraylik</b><div>Yangi mijoz (165cm, 55kg) va Mijoz A (160, 56): cm da √(5² + 1²) ≈ 5.10, Mijoz B (166, 48): √(1² + 7²) ≈ 7.07 → eng yaqin qoʻshni — A</div><div>Boʻyni mm da: A √(50² + 1²) ≈ 50.01, B √(10² + 7²) ≈ 12.21 → qoʻshni B ga oʻzgaradi</div><div>Yer R = 6,371km, markaziy burchak 90°: yoy ≈ 10,008km, vatar ≈ 9,010km</div></div>
+<div class="q"><img src="assets/chars/haru_e16.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy"><div><b>Yordamchi</b> Odamlar oʻsha-oʻsha, bitta birlik tufayli qoʻshni oʻzgarib qolishi — qoʻrqinchli-ku.</div></div></div>
+</div>
+<div class="pair"><div class="box"><h4>Kundalik hayotda</h4><p>Seuldan Nyu-Yorkka samolyot xaritadagi toʻgʻri chiziq boʻylab emas, Yer sirti boʻylab uchadi.</p></div><div class="box ml"><h4>Mashinaviy oʻqitishda</h4><p>Eng yaqin qoʻshnini topish va klasterlashdan oldin har bir ustunning birligini moslashtiramiz (standartlashtirish). Soʻz nuqtalari kabi yoʻnalishi muhim maʼlumotlar uchun masofa oʻrniga 4-xonadagi kosinusdan foydalaniladi.</p></div></div>
+<div class="talk"><div class="line r"><img src="assets/chars/moa_e09.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Boʻy cm da, vazn kg da — shunchaki birga qoʻshib yuboraversak boʻladimi?</div></div><div class="line"><img src="assets/chars/jupanbot_e16.webp" alt="AbaBot" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-robo)">AbaBot</b>Son — son-da! Birlikning ahamiyati yoʻq! Hammasini shunga tikaman!</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="Meva pashshasi tadqiqotchisi" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">Meva pashshasi tadqiqotchisi</b>Boʻy birligini mm ga oʻzgartirib koʻr. Eng yaqin qoʻshni kim ekanini qayta koʻraylik.</div></div></div>
+<div class="panel"><div class="ph"><b>Tajriba paneli 10-①</b><small>Asl manba kartasi 10 dagi maʼlumotlar tahlili qismi · boʻy birligini oʻzgartirib koʻring</small></div><div id="pp-p10a" data-panel="p10a"></div><div class="ctrl"><button type="button" data-unit="cm">Boʻy cm</button><button type="button" data-unit="mm">Boʻy mm</button></div><div class="readout" aria-live="polite"></div></div><div class="panel"><div class="ph"><b>Tajriba paneli 10-②</b><small>Asl manba kartasi 10 dagi yoy va vatar qayta chizilgan · markaziy burchakni oʻzgartirib koʻring</small></div><div id="pp-p10b" data-panel="p10b"></div><div class="ctrl"><label>Markaziy burchak <input type="range" min="0" max="180" step="5" value="90" aria-label="Markaziy burchak"></label></div><div class="readout" aria-live="polite"></div></div>
+<div class="solve"><h4>Izoh</h4><p>AbaBot aytganidan farqli oʻlaroq, birlik masofani oʻzgartiradi. Asl manbada ham &quot;xususiyatlarni masshtablash muhim&quot; deb yozilgan.</p><p>Markaziy burchak kichik boʻlsa, yoy va vatar deyarli teng. Burchak qanchalik katta boʻlsa, toʻgʻri chizgʻich haqiqiy yoʻldan shunchalik qisqa oʻlchaydi.</p><p>180° boʻlsa, yoy 20,015km, vatar esa diametr — 12,742km.</p><p>Asl manba kartasi 10 dagi muhandislik (joylashuv, siljish) qismi 2-xonada, grafika (burish, surish) qismi 8-xonada allaqachon koʻrib chiqilgan.</p></div>
+
+<div class="limit"><b>Bu xonaning chegarasi</b> — bu xonadagi chizgʻich va transportirni faqat kataklar soni belgilangan maʼlumotlarga qoʻllash mumkin. Tovush yoki sensor egri chiziqlari kabi cheksiz davom etadigan maʼlumotlarni sigʻdira olmaydi. → Yoʻlak oxiri</div>
+<details class="code"><summary>Darslikdagi Python kodi bilan koʻrsak (bilmasangiz ham boʻladi)</summary><pre><code>(X - X.mean(axis=0)) / X.std(axis=0)</code></pre><p>Har bir ustundan oʻrtachani ayirib, tarqalish darajasiga boʻlib, birliklarni moslashtiramiz (standartlashtirish).</p></details>
+<div class="quiz" data-ans="1"><div class="qq">Tekshiruv savoli — boʻy (cm) va yillik maosh (von) boʻyicha eng yaqin hamkasbni qidiramiz. Avval nima qilish kerak?</div><div class="opts"><button type="button">Masofani boricha oʻlchaymiz</button><button type="button">Har bir ustunning birligini moslashtiramiz</button><button type="button">Boʻy ustunini oʻchiramiz</button></div><div class="fb" aria-live="polite"></div><span class="qok" hidden>Maosh sonlari ancha katta, shuning uchun masofani butunlay egallab oladi. Avval birliklarni bir xil masshtabga keltiring.</span><span class="qno" hidden>Maosh (oʻnlab million) va boʻyni (100 atrofida) shundayicha aralashtirsangiz, faqat maoshga qarab tanlab qolasiz.</span></div>
+</div></section>
+<section class="room" id="duel"><div class="wrap"><div class="roomno">Bellashuv</div><h2>Eng yaqin qoʻshnini topish bellashuvi</h2>
+<p class="muted">Hakam: Yordamchi Haru · bir xil mijozlar maʼlumotida yangi mijozga eng oʻxshash odamni kim topadi</p>
+<div class="talk"><div class="line"><img src="assets/chars/haru_e07.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-asst)">Yordamchi Haru</b>Bu safar 10-xonadagidan boshqa mijozlar. Yangi mijoz 158cm, 49kg! Nomzodlar — Mijoz D, E, F, uch kishi. Kiyim oʻlchami bir xil boʻladigan odamni toping.</div></div><div class="line"><img src="assets/chars/sia_e19.webp" alt="Sia" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">Sia</b>Oʻlchov asbobi boʻyni mm da berdi, demak shundayligicha oʻlchasak boʻldi! Tezligi eng yaxshisi!</div></div><div class="line r"><img src="assets/chars/moa_e09.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Men boʻyda 5cm ni, vaznda 5kg ni bitta katak qilib moslashtirib, keyin oʻlchayman.</div></div><div class="line"><img src="assets/chars/jupanbot_e16.webp" alt="AbaBot" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-robo)">AbaBot</b>Baribir odamlar oʻsha-oʻsha, javob ham bir xil boʻladi! Bunga tikaman!</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="Meva pashshasi tadqiqotchisi" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">Meva pashshasi tadqiqotchisi</b>Rostdanmi? Ikkalasining javobini navbatma-navbat ochib koʻr.</div></div></div>
+<div class="panel"><div class="ph"><b>Bellashuv paneli</b><small>Tugmalarni navbat bilan bosing · misol maʼlumotlar</small></div>
+<div id="pp-duel" data-panel="duel"></div>
+<div class="ctrl"><button type="button" data-duel="sia">Sianing javobini ochish</button><button type="button" data-duel="moa">Moaning javobini ochish</button><button type="button" data-duel="ans">Toʻgʻri javobni koʻrsatish</button></div>
+<div class="readout" aria-live="polite"></div></div>
+<div class="solve"><h4>Hakam qarori</h4>
+<p>Sia usuli boʻy farqini mm da oʻlchab, 30·10·50 kabi katta oladi. Vazn farqi 2·6·1kg deyarli koʻmilib ketadi. Shuning uchun faqat boʻyi yaqin boʻlgan Mijoz E tanlandi.</p>
+<p>Moa usulidagi "5cm·5kg" bu mijozlarning boʻyi va vazni odatda shuncha tarqalganini bildiradi (misol qiymatlar). Tarqalish miqdorini bitta katak qilib olgani uchun ikki ustun adolatli boʻldi. Mijoz D bilan masofa 0.72 — eng yaqin.</p>
+<p>Amaliyotda bu "tarqalish darajasi" maʼlumotlardan bevosita hisoblanadi. 10-xonaning kod qutisidagi standartlashtirish aynan shu ishni bajaradi.</p>
+<p>Bu — 10-xonaning saboqi. Birliklar moslashtirilmasa, sonlari katta ustun masofani yolgʻiz egallab oladi.</p></div>
+<div class="talk"><div class="line"><img src="assets/chars/haru_e10.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-asst)">Yordamchi Haru</b>Qaror! Bu bellashuvda Moa gʻolib.</div></div><div class="line r"><img src="assets/chars/moa_e16.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Men faqat birliklarni moslashtirdim, xolos.</div></div><div class="line"><img src="assets/chars/sia_e14.webp" alt="Sia" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">Sia</b>Tezlik har doim ham eng yaxshisi emas ekan… Keyingi safar avval birliklarga qarayman.</div></div></div>
+</div></section>
+<section id="sum"><div class="wrap"><h2>②-qism xulosasi</h2>
+<div class="tbl"><table><thead><tr><th>Xona</th><th>Vosita</th><th>Bir qatorda</th><th>Mashinaviy oʻqitishda</th></tr></thead><tbody>
+<tr><td>6</td><td>Soya</td><td>Tik tushirilgan asos — eng yaqin javob</td><td>Bashorat chizigʻini chizish, oʻrtacha qiymat</td></tr>
+<tr><td>7</td><td>Toʻsiq</td><td>Sanchilgan strelka bilan ball orqali tomonlarga ajratish</td><td>Tasniflagichning qaror chegarasi</td></tr>
+<tr><td>8</td><td>Surish, burish, agʻdarish</td><td>Masofani saqlaydigan harakat</td><td>Maʼlumotlarni koʻpaytirish</td></tr>
+<tr><td>9</td><td>Shar</td><td>Radius ichi = qoʻshnilar / kataklar koʻp boʻlsa, tashqi qobiqqa toʻplanadi</td><td>Radius boʻyicha qoʻshnilar, kataklar koʻp boʻlgandagi tuzoq (oʻlchamlar laʼnati)</td></tr>
+<tr><td>10</td><td>Birliklarni moslashtirish · yoy va vatar</td><td>Toʻgʻri chizgʻich adolatli boʻlishi uchun birliklarni moslashtiramiz</td><td>Standartlashtirish</td></tr></tbody></table></div></div></section>
+<section class="room" id="outro"><div class="wrap"><div class="roomno">Yakun · keyingi qism eʼloni</div><h2>Yoʻlak oxiridagi cheksiz xona</h2>
+<p class="muted">Keyingi qism — Hilbert fazosi. Bu yerda oʻrgatmaymiz, faqat u nima ekani va nega kerakligini tanishtiramiz.</p>
+<h3>① Bugungi xonalar xulosasi</h3>
+<p>Chizgʻich (masofa) bilan qanchalik uzoqligini, transportir (moslik balli) bilan qanchalik oʻxshashligini, soya bilan eng yaqin javob qayerdaligini oʻlchadik.</p>
+<h3>② Bu xona nimani qila olmaydi</h3>
+<p>Kataklar soni belgilangan boʻlishi kerak. Tovush, sensor egri chiziqlari, aksiya narxlari oqimi kabi cheksiz davom etadigan maʼlumotlarni sigʻdira olmaydi.</p>
+<p>Atigi 1 soniyalik musiqani CD sifatida yozib olsangiz ham, 44100 ta son boʻladi. Lekin tovush egri chizigʻining oʻzi cheksiz davom etadi.</p>
+<h3>③ Hilbert fazosi nima</h3>
+<div class="three" style="border-color:var(--orange);background:var(--orange-soft)"><ul>
+<li>Chizgʻich va transportirni oʻz holicha qoldirib, xonani <b>cheksiz</b> kengaytirilgani.</li>
+<li>Bitta egri chiziqni bitta nuqta deb qarab, egri chiziqlar orasida ham "qanchalik uzoq, qanchalik oʻxshash, soya"ni oʻlchaymiz.</li>
+<li>Bugun oʻrgangan qoidalar deyarli oʻzgarishsiz ishlaydi. Faqat kataklar soni oʻzgaradi.</li></ul>
+<details class="abbr"><summary>Asl atama (ochish)</summary><dl><dt>Hilbert space</dt><dd>Hilbert fazosi — uzunlik, burchak, soya va limit — hammasi ishlaydigan cheksiz xona</dd></dl></details></div>
+<h3>④ Qayerda qoʻllanadi (faqat nomlari)</h3>
+<div class="cards">
+<div class="card"><span class="n">Nutqni tanish</span><h3>Tovushni toʻlqin boʻlaklariga</h3><p>Tovushni past va baland tovush boʻlaklarining kuchiga ajratib koʻramiz.</p></div>
+<div class="card"><span class="n">Siqish</span><h3>MP3</h3><p>Bir nechta katta boʻlaklarni qoldirib, kichik boʻlaklarni tashlab yuboramiz.</p></div>
+<div class="card"><span class="n">Yadro usullari</span><h3>SVM</h3><p>Faqat oʻxshashlik ballari jadvali bilan cheksiz xonaga toʻsiq oʻrnatamiz.</p></div></div>
+<h3>⑤ Tajriba — kataklar sonini cheksizgacha</h3>
+<div class="talk"><div class="line r"><img src="assets/chars/moa_e09.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Kataklarni koʻpaytiraversak nima boʻladi?</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="Meva pashshasi tadqiqotchisi" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">Meva pashshasi tadqiqotchisi</b>Oxirigacha sur. &quot;Cheksiz&quot;gacha.</div></div></div>
+<div class="panel"><div class="ph"><b>Yakuniy tajriba</b><small>Kataklar sonini 2 → 3 → 10 → 100 → cheksiz qilib oʻzgartirib koʻring</small></div>
+<div id="pp-outro" data-panel="outro"></div>
+<div class="ctrl"><label>Kataklar soni <input type="range" min="0" max="4" step="1" value="0" aria-label="Kataklar soni"></label><span class="hint">2 · 3 · 10 · 100 · cheksiz</span></div>
+<div class="readout" aria-live="polite"></div></div>
+<h3>⑥ Keyingi qismga</h3>
+<div class="talk"><div class="line"><img src="assets/chars/doctor_e08.webp" alt="Doktor" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">Doktor</b>Keyingi yoʻlakda oʻnta cheksiz xona bor. Chizgʻich va transportirni oʻzingiz bilan olib boring.</div></div><div class="line"><img src="assets/chars/sia_e19.webp" alt="Sia" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">Sia</b>Egri chiziq bitta nuqta ekan — tezroq kirib koʻrgim kelyapti!</div></div><div class="line r"><img src="assets/chars/moa_e10.webp" alt="Moa" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">Moa</b>Bugun oʻrgangan soya u yerda ham ishlaydimi, tekshirib koʻraman.</div></div></div>
+<div class="cards"><div class="card soon door"><img src="assets/chars/haru_e19.webp" alt="Yordamchi Haru" width="96" height="96" loading="lazy"><span class="n">Keyingi qism · Tez orada ochiladi</span><h3>Cheksiz xonaning chizgʻichi va transportiri — Hilbert fazosi</h3><p>Eʼlon qilinganda bu karta ochiladi. Repozitoriy: <a href="https://github.com/adminmrobo/hilbert_space_lab">hilbert_space_lab</a></p></div></div>
+<div class="next"><a href="01_ruler_rooms.html">← ①-qism</a><a href="index.html">Mundarijaga</a></div>
+</div></section>
+<style>.door.open{opacity:1;border:2px solid var(--orange);box-shadow:0 0 0 6px rgba(232,115,26,.12)}</style>
+<section id="kg"><div class="wrap"><h2>Bilimlar indeksi — bu sahifadan izlab topish</h2>
+<p class="muted">Bu sahifadagi tushunchalar, usullar, oʻxshatishlar va qoʻllanishlar jamlangan. Qidiring va "Tushuntirishga oʻtish" orqali matnga qayting.</p><div id="kg-mount"></div></div></section>
+<section id="export"><div class="wrap"><h2>Ontologiya va bibliografiya toʻplami — bu sahifadagi bilimni olib ketish</h2>
+<p class="muted">Bilimlar indeksini manbalari bilan birga fayl sifatida yuklab oling. Bibliografiya uchun BibTeX va RIS, ontologiya tahriri uchun Turtle ishlatiladi. Graf vositalari uchun CSV, bir nechta sahifani birlashtirish uchun kg.json.</p><div id="export-mount"></div></div></section>
+<script type="application/json" id="kg-raw">{"version": "1.3", "page": "02_shadow_rooms", "series": "자와 각도기의 방", "nodes": [{"id": "lab:concept/projection", "type": "Concept", "label": {"ko": "그림자(정사영)", "en": "Orthogonal projection", "uz": "Soya (ortogonal proyeksiya)"}, "anchor": "#r06", "definition": {"ko": "점에서 선으로 똑바로 내린 발밑이 가장 가까운 점", "uz": "Nuqtadan chiziqqa toʻgʻri tushirilgan asos eng yaqin nuqtadir"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/hyperplane", "type": "Concept", "label": {"ko": "선·평면·칸막이", "en": "Lines, planes, hyperplanes", "uz": "Chiziq, tekislik, toʻsiq"}, "anchor": "#r07", "definition": {"ko": "n칸 방의 칸막이는 n − 1칸. 꽂힌 화살표와의 점수로 편을 가른다", "uz": "n katakli xonaning toʻsigʻi n − 1 katakli. Tomonni sanchilgan oʻq bilan ball hal qiladi"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/isometry", "type": "Concept", "label": {"ko": "밀고·돌리고·뒤집기", "en": "Isometry", "uz": "Surish, burish, agʻdarish"}, "anchor": "#r08", "definition": {"ko": "거리와 각도를 지키는 움직임. 늘리기는 거리를 바꾼다", "uz": "Masofa va burchakni saqlaydigan harakatlar. Choʻzish masofani oʻzgartiradi"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/ball", "type": "Concept", "label": {"ko": "원·구·공", "en": "Circles, spheres, n-balls", "uz": "Aylana, sfera, shar"}, "anchor": "#r09", "definition": {"ko": "중심에서 r 안쪽 = 이웃 범위", "uz": "Markazdan r ichida = qoʻshnilar doirasi"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/curse-of-dimensionality", "type": "Concept", "label": {"ko": "칸이 너무 많으면 모두 비슷하게 멀어진다", "en": "Curse of dimensionality", "uz": "Kataklar juda koʻp boʻlsa, hammasi deyarli bir xil uzoqlashadi"}, "anchor": "#r09", "definition": {"ko": "n칸 공의 부피가 겉껍질에 몰린다(0.9ⁿ)", "uz": "n katakli sharda hajm tashqi qobiqqa toʻplanadi (0.9ⁿ)"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:method/feature-scaling", "type": "Method", "label": {"ko": "단위 맞추기", "en": "Feature scaling", "uz": "Birliklarni moslashtirish"}, "anchor": "#r10", "definition": {"ko": "열마다 단위를 맞춰야 거리가 공정해진다", "uz": "Masofa adolatli boʻlishi uchun har bir ustun birligini moslang"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/arc-chord", "type": "Concept", "label": {"ko": "호와 현", "en": "Intrinsic vs Euclidean distance", "uz": "Yoy va vatar"}, "anchor": "#r10", "definition": {"ko": "휜 표면에서는 곧은 자가 실제 길보다 짧게 잰다", "uz": "Egri sirtda toʻgʻri chizgʻich haqiqiy yoʻldan qisqaroq oʻlchaydi"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:application/least-squares", "type": "Application", "label": {"ko": "예측선 긋기(최소제곱)", "en": "Least squares", "uz": "Bashorat chizigʻini chizish (eng kichik kvadratlar)"}, "anchor": "#r06", "definition": {"ko": "정답의 그림자를 고른다", "uz": "Toʻgʻri javobning soyasini tanlaydi"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:application/linear-classifier", "type": "Application", "label": {"ko": "분류기의 결정 경계", "en": "Linear classifier", "uz": "Tasniflagichning qaror chegarasi"}, "anchor": "#r07", "definition": {"ko": "칸막이로 스팸·정상을 가른다", "uz": "Toʻsiq bilan spam va oddiy xatni ajratadi"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:analogy/shadow", "type": "Analogy", "label": {"ko": "정오의 막대 그림자", "en": "Noon shadow", "uz": "Tush paytidagi tayoq soyasi"}, "anchor": "#r06", "definition": {"ko": "그림자 = 가장 가까운 답", "uz": "Soya = eng yaqin javob"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:open/hilbert", "type": "OpenQuestion", "label": {"ko": "칸 수가 끝없으면? 곡선이라면?", "en": "Infinite dimensions → Hilbert space", "uz": "Kataklar soni cheksiz boʻlsa-chi? Egri chiziq boʻlsa-chi?"}, "anchor": "#outro", "definition": {"ko": "다음 편 힐베르트 공간에서 다룬다", "uz": "Keyingi qism — Gilbert fazosida koʻriladi"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}], "edges": [{"s": "lab:concept/projection", "p": "motivates", "o": "lab:concept/hyperplane"}, {"s": "lab:concept/hyperplane", "p": "motivates", "o": "lab:concept/isometry"}, {"s": "lab:concept/isometry", "p": "motivates", "o": "lab:concept/ball"}, {"s": "lab:concept/ball", "p": "motivates", "o": "lab:method/feature-scaling"}, {"s": "lab:concept/ball", "p": "hasPart", "o": "lab:concept/curse-of-dimensionality"}, {"s": "lab:method/feature-scaling", "p": "motivates", "o": "lab:open/hilbert"}, {"s": "lab:concept/arc-chord", "p": "motivates", "o": "lab:open/hilbert"}, {"s": "lab:concept/projection", "p": "usedIn", "o": "lab:application/least-squares"}, {"s": "lab:concept/hyperplane", "p": "usedIn", "o": "lab:application/linear-classifier"}, {"s": "lab:analogy/shadow", "p": "explains", "o": "lab:concept/projection"}]}</script>
+<script type="application/ld+json" id="kg-ld">{"@context": {"@vocab": "urn:lab:", "skos": "http://www.w3.org/2004/02/skos/core#", "schema": "https://schema.org/"}, "@graph": [{"@id": "urn:lab:concept/projection", "@type": "Concept", "skos:prefLabel": [{"@value": "그림자(정사영)", "@language": "ko"}, {"@value": "Orthogonal projection", "@language": "en"}], "skos:definition": "점에서 선으로 똑바로 내린 발밑이 가장 가까운 점", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r06"}, {"@id": "urn:lab:concept/hyperplane", "@type": "Concept", "skos:prefLabel": [{"@value": "선·평면·칸막이", "@language": "ko"}, {"@value": "Lines, planes, hyperplanes", "@language": "en"}], "skos:definition": "n칸 방의 칸막이는 n − 1칸. 꽂힌 화살표와의 점수로 편을 가른다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r07"}, {"@id": "urn:lab:concept/isometry", "@type": "Concept", "skos:prefLabel": [{"@value": "밀고·돌리고·뒤집기", "@language": "ko"}, {"@value": "Isometry", "@language": "en"}], "skos:definition": "거리와 각도를 지키는 움직임. 늘리기는 거리를 바꾼다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r08"}, {"@id": "urn:lab:concept/ball", "@type": "Concept", "skos:prefLabel": [{"@value": "원·구·공", "@language": "ko"}, {"@value": "Circles, spheres, n-balls", "@language": "en"}], "skos:definition": "중심에서 r 안쪽 = 이웃 범위", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r09"}, {"@id": "urn:lab:concept/curse-of-dimensionality", "@type": "Concept", "skos:prefLabel": [{"@value": "칸이 너무 많으면 모두 비슷하게 멀어진다", "@language": "ko"}, {"@value": "Curse of dimensionality", "@language": "en"}], "skos:definition": "n칸 공의 부피가 겉껍질에 몰린다(0.9ⁿ)", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r09"}, {"@id": "urn:lab:method/feature-scaling", "@type": "Method", "skos:prefLabel": [{"@value": "단위 맞추기", "@language": "ko"}, {"@value": "Feature scaling", "@language": "en"}], "skos:definition": "열마다 단위를 맞춰야 거리가 공정해진다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r10"}, {"@id": "urn:lab:concept/arc-chord", "@type": "Concept", "skos:prefLabel": [{"@value": "호와 현", "@language": "ko"}, {"@value": "Intrinsic vs Euclidean distance", "@language": "en"}], "skos:definition": "휜 표면에서는 곧은 자가 실제 길보다 짧게 잰다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r10"}, {"@id": "urn:lab:application/least-squares", "@type": "Application", "skos:prefLabel": [{"@value": "예측선 긋기(최소제곱)", "@language": "ko"}, {"@value": "Least squares", "@language": "en"}], "skos:definition": "정답의 그림자를 고른다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r06"}, {"@id": "urn:lab:application/linear-classifier", "@type": "Application", "skos:prefLabel": [{"@value": "분류기의 결정 경계", "@language": "ko"}, {"@value": "Linear classifier", "@language": "en"}], "skos:definition": "칸막이로 스팸·정상을 가른다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r07"}, {"@id": "urn:lab:analogy/shadow", "@type": "Analogy", "skos:prefLabel": [{"@value": "정오의 막대 그림자", "@language": "ko"}, {"@value": "Noon shadow", "@language": "en"}], "skos:definition": "그림자 = 가장 가까운 답", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r06"}, {"@id": "urn:lab:open/hilbert", "@type": "OpenQuestion", "skos:prefLabel": [{"@value": "칸 수가 끝없으면? 곡선이라면?", "@language": "ko"}, {"@value": "Infinite dimensions → Hilbert space", "@language": "en"}], "skos:definition": "다음 편 힐베르트 공간에서 다룬다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#outro"}]}</script>
+<script type="application/json" id="refs-csl">[{"id": "eeanimation_euclidean_space", "type": "graphic", "title": "EUCLIDEAN SPACE 01–10 (infographic series)", "author": [{"literal": "@eeanimation"}], "accessed": {"date-parts": [[2026, 11, 19]]}, "note": "사용자 제공 이미지. 차트를 SVG로 다시 그려 실험 패널로 바꿈"}]</script>
+<script type="application/json" id="page-meta">{"title": "02_shadow_rooms", "series": "Chizgʻich va transportir xonasi", "creator": [{"name": "안상선", "role": "author", "affiliation": "(주)M-Robo"}], "date": "2026-11-19", "version": "v1.3", "license": "캐릭터·그림 무단 사용 금지", "series_ko": "자와 각도기의 방", "language": ["uz"], "translationOf": "02_shadow_rooms.html"}</script>
+<footer><div class="wrap">
+<h3>Manba</h3>
+<div class="tbl"><table><thead><tr><th>#</th><th>Manba</th><th>Bu sahifada qayerda ishlatilgan</th></tr></thead><tbody>
+<tr><td>[1]</td><td>@eeanimation, infografika 「EUCLIDEAN SPACE 01~10」 (foydalanuvchi bergan rasmlar, 2026-11-19 da tekshirildi)</td><td>1–10-xonalarning asl manba kartalari. Kompozitsiya, rang, belgilar va oʻq nomlarini saqlab SVG da qayta chizildi va qoʻl bilan harakatlanadigan qilindi. Rasmlarning oʻzi joylashtirilmagan</td></tr>
+<tr><td>[2]</td><td>Ahn Sangsun, 「Fazo koordinatalari tushuntirishini tayyorlash qoʻllanmasi」 v1.0 (docs/SPACE_COORDINATE_GUIDE.md)</td><td>Atamalar jadvali, fazolar zinapoyasi, xonalar tuzilishi</td></tr>
+</tbody></table></div>
+<h3>Misol qiymatlar va tushuntirish uchun sonlar</h3>
+<p>Bu sahifadagi odamlar, doʻkonlar va mijozlarga oid barcha sonlar tushuntirish uchun misol qiymatlardir. Sia va Moaning boʻyi, vazni, bel oʻlchami, didlar jadvali, boʻyni uch marta oʻlchash natijalari shular jumlasidan. Doʻkonlar joylashuvi hamda Mijoz A–F ning boʻyi va vazni ham xuddi shunday.</p>
+<p>Qahramonlarning ismlari, tavsifi va rasmlaridan mualliflik huquqi egasi Ahn Sangsun ruxsatisiz foydalanish mumkin emas. Qahramonlar rasmlari: fruitfly-lab-expressions.</p>
+<p>Matn · Ahn Sangsun (M-Robo kompaniyasi rahbari) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">Muallif haqida</a> · 2026-11-19 · v1.3</p>
+<p><a href="index.html">Mundarija</a> · <a href="00_orientation.html">0-qism Sumkani tekshirish</a> · <a href="01_ruler_rooms.html">①-qism Chizgʻich va transportir xonasi</a> · <a href="02_shadow_rooms.html">②-qism Soya va toʻsiq xonasi</a> · <a href="https://github.com/adminmrobo/euclidean_space_lab">Repozitoriy</a></p>
+</div></footer>
+<script>
+/* 자와 각도기의 방 — 실험 패널 모음. 원자료 @eeanimation 「EUCLIDEAN SPACE 01~10」의 차트를 다시 그려 손으로 움직이게 만든 것 */
+(function(){
+'use strict';
+var NS='http://www.w3.org/2000/svg';
+var C={teal:'#0f8f84',orange:'#e8731a',navy:'#1e2f6e',blue:'#2458d6',green:'#13733a',red:'#c9302c',grid:'#e3e8ee',axis:'#1e2f6e',muted:'#5b6874'};
+function el(tag,a,parent){var e=document.createElementNS(NS,tag);for(var k in a){if(a[k]!=null)e.setAttribute(k,a[k]);}if(parent)parent.appendChild(e);return e;}
+function txt(parent,x,y,s,a){a=a||{};var t=el('text',Object.assign({x:x,y:y,'font-size':a.size||14,fill:a.fill||C.navy,'font-family':a.font||'"Cambria Math","Times New Roman",serif','font-style':a.italic===false?'normal':'italic','text-anchor':a.anchor||'start','font-weight':a.weight||'normal'},{}),parent);t.textContent=s;return t;}
+function ktxt(parent,x,y,s,a){a=a||{};a.font='"IBM Plex Sans KR","Malgun Gothic","Noto Sans KR",sans-serif';a.italic=false;return txt(parent,x,y,s,a);}
+function r2(v){return Math.round(v*100)/100;}
+function r1(v){return Math.round(v*10)/10;}
+function fmt(v,d){d=d==null?2:d;var s=(Math.round(v*Math.pow(10,d))/Math.pow(10,d)).toFixed(d);s=s.replace(/\.?0+$/,'');if(s==='-0')s='0';return s;}
+function num(v){return v<0?'−'+fmt(-v):fmt(v);}
+function svgOf(host,W,H){host.innerHTML='';var s=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Tajriba paneli rasmi: '+(function(){var n=host.parentNode&&host.parentNode.querySelector('.ph small');return n?n.textContent:'';})()},host);var d=el('defs',{},s);
+  ['teal','orange','navy','blue','green','red'].forEach(function(c){var m=el('marker',{id:'ah-'+c+'-'+host.id,viewBox:'0 0 10 10',refX:8.5,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'},d);el('path',{d:'M0,0 L10,5 L0,10 z',fill:C[c]},m);});
+  s._id=host.id;return s;}
+function arrow(s,x1,y1,x2,y2,c,w){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:C[c],'stroke-width':w||3,'marker-end':'url(#ah-'+c+'-'+s._id+')'},s);}
+function dash(s,x1,y1,x2,y2,c){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:C[c]||c,'stroke-width':1.6,'stroke-dasharray':'5 4'},s);}
+/* 좌표평면 */
+function plane(s,o){var W=o.W,H=o.H,p=o.pad||36;var sx=(W-2*p)/(o.x1-o.x0),sy=(H-2*p)/(o.y1-o.y0);
+  if(o.equal){var k=Math.min(sx,sy);sx=sy=k;}
+  var ox=p-o.x0*sx,oy=H-p+o.y0*sy;s._sx=sx;
+  var P={X:function(x){return ox+x*sx;},Y:function(y){return oy-y*sy;},inv:function(px,py){return[(px-ox)/sx,(oy-py)/sy];},sx:sx,sy:sy};
+  var g=el('g',{},s);var st=o.step||1;
+  if(o.grid!==false){for(var x=Math.ceil(o.x0/st)*st;x<=o.x1+1e-9;x+=st)el('line',{x1:P.X(x),y1:P.Y(o.y0),x2:P.X(x),y2:P.Y(o.y1),stroke:C.grid},g);
+  for(var y=Math.ceil(o.y0/st)*st;y<=o.y1+1e-9;y+=st)el('line',{x1:P.X(o.x0),y1:P.Y(y),x2:P.X(o.x1),y2:P.Y(y),stroke:C.grid},g);}
+  var ax0=Math.max(o.x0,Math.min(0,o.x1)),ay0=Math.max(o.y0,Math.min(0,o.y1));
+  if(o.ax!==undefined)ax0=o.ax;if(o.ay!==undefined)ay0=o.ay;
+  el('line',{x1:P.X(o.x0),y1:P.Y(ay0),x2:P.X(o.x1)+14,y2:P.Y(ay0),stroke:C.axis,'stroke-width':2,'marker-end':'url(#ah-navy-'+s._id+')'},g);
+  el('line',{x1:P.X(ax0),y1:P.Y(o.y0),x2:P.X(ax0),y2:P.Y(o.y1)-14,stroke:C.axis,'stroke-width':2,'marker-end':'url(#ah-navy-'+s._id+')'},g);
+  if(/[^\x00-\x7f]/.test((o.xl||'')+(o.yl||''))){ktxt(g,P.X(o.x1)+14,P.Y(ay0)-12,o.xl,{size:13,anchor:'end'});ktxt(g,P.X(ax0)+12,P.Y(o.y1)-2,o.yl,{size:13});}else{txt(g,P.X(o.x1)+10,P.Y(ay0)+20,o.xl||'x',{size:16});txt(g,P.X(ax0)-22,P.Y(o.y1)-8,o.yl||'y',{size:16});}
+  var ls=o.label||st;
+  if(o.ticks!==false){for(var a=Math.ceil(o.x0/ls)*ls;a<=o.x1+1e-9;a+=ls){if(Math.abs(a-ax0)<1e-9&&!o.zeroX)continue;txt(g,P.X(a),P.Y(ay0)+18,fmt(a),{size:12.5,anchor:'middle',italic:false,fill:C.muted});}
+  for(var b=Math.ceil(o.y0/ls)*ls;b<=o.y1+1e-9;b+=ls){if(Math.abs(b-ay0)<1e-9)continue;txt(g,P.X(ax0)-8,P.Y(b)+4,fmt(b),{size:12.5,anchor:'end',italic:false,fill:C.muted});}
+  if(o.x0<=0&&o.y0<=0)txt(g,P.X(0)-14,P.Y(0)+18,'0',{size:12.5,italic:false,fill:C.muted});}
+  return P;}
+/* 끌기 */
+function drag(s,node,onMove){var on=false;var host=s.parentNode;var idx=s.querySelectorAll('g.drag').length;
+  node.setAttribute('tabindex','0');node.setAttribute('role','slider');node.setAttribute('aria-label','Sudrab koʻchiriladigan nuqta (strelka tugmalari bilan ham harakatlanadi)');
+  node.addEventListener('keydown',function(e){var k={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];if(!k)return;e.preventDefault();
+    var c=node.querySelector('circle');var st=(s._sx||24)*(+(host.dataset.ksnap||1));host.dataset.kf=idx;onMove(+c.getAttribute('cx')+k[0]*st,+c.getAttribute('cy')+k[1]*st);});
+  function pt(e){var m=s.getScreenCTM().inverse();var q=s.createSVGPoint();q.x=e.clientX;q.y=e.clientY;q=q.matrixTransform(m);return q;}
+  node.classList.add('drag');
+  node.addEventListener('pointerdown',function(e){on=true;node.setPointerCapture(e.pointerId);e.preventDefault();});
+  node.addEventListener('pointermove',function(e){if(!on)return;var q=pt(e);onMove(q.x,q.y);});
+  node.addEventListener('pointerup',function(){on=false;});node.addEventListener('pointercancel',function(){on=false;});
+  if(host.dataset.kf!=null&&+host.dataset.kf===idx)node.focus({preventScroll:true});}
+function handle(s,x,y,c,label){var g=el('g',{},s);el('circle',{cx:x,cy:y,r:16,fill:C[c],'fill-opacity':.14},g);el('circle',{cx:x,cy:y,r:8,fill:C[c],stroke:'#fff','stroke-width':2},g);return g;}
+function dot(s,x,y,c,r){return el('circle',{cx:x,cy:y,r:r||6,fill:C[c]||c,stroke:'#fff','stroke-width':1.5},s);}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function snap(v,st){return Math.round(v/st)*st;}
+function readout(host){var d=host.parentNode.querySelector('.readout');return d;}
+function rightMark(s,x,y,ux,uy,vx,vy,k){k=k||10;el('path',{d:'M'+(x+ux*k)+','+(y+uy*k)+' L'+(x+ux*k+vx*k)+','+(y+uy*k+vy*k)+' L'+(x+vx*k)+','+(y+vy*k),fill:'none',stroke:C.orange,'stroke-width':1.5},s);}
+
+var P={};
+
+/* ===== 0편 ===== */
+P.o1=function(h){var W=520,H=400,pt=[3,2];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:6,y0:0,y1:4.5,equal:true});
+    var bg=el('rect',{x:0,y:0,width:W,height:H,fill:'transparent'},s);
+    dash(s,p.X(pt[0]),p.Y(pt[1]),p.X(pt[0]),p.Y(0),'teal');dash(s,p.X(pt[0]),p.Y(pt[1]),p.X(0),p.Y(pt[1]),'teal');
+    dot(s,p.X(pt[0]),p.Y(pt[1]),'orange',8);txt(s,p.X(pt[0])+10,p.Y(pt[1])-10,'P('+fmt(pt[0])+', '+fmt(pt[1])+')',{size:16});
+    bg.addEventListener('pointerdown',function(e){var m=s.getScreenCTM().inverse();var q=s.createSVGPoint();q.x=e.clientX;q.y=e.clientY;q=q.matrixTransform(m);var v=p.inv(q.x,q.y);pt=[clamp(snap(v[0],.5),0,6),clamp(snap(v[1],.5),0,4.5)];draw();});
+    out.innerHTML='P nuqta — <b>gorizontal boʻyicha '+fmt(pt[0])+', vertikal boʻyicha '+fmt(pt[1])+'</b> (katakda). Ikki son = bitta nuqta.';}
+  draw();};
+P.o2=function(h){var W=520,H=400,B=[4,3];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:8,y0:0,y1:6,equal:true});
+    el('line',{x1:p.X(0),y1:p.Y(0),x2:p.X(B[0]),y2:p.Y(0),stroke:C.green,'stroke-width':3},s);
+    el('line',{x1:p.X(B[0]),y1:p.Y(0),x2:p.X(B[0]),y2:p.Y(B[1]),stroke:C.green,'stroke-width':3},s);
+    el('line',{x1:p.X(0),y1:p.Y(0),x2:p.X(B[0]),y2:p.Y(B[1]),stroke:C.blue,'stroke-width':3},s);
+    rightMark(s,p.X(B[0]),p.Y(0),-1,0,0,-1,12);
+    txt(s,p.X(B[0]/2),p.Y(0)-8,'a = '+B[0],{anchor:'middle',fill:C.orange,size:15});txt(s,p.X(B[0])+8,p.Y(B[1]/2),'b = '+B[1],{fill:C.orange,size:15});
+    var g=handle(s,p.X(B[0]),p.Y(B[1]),'blue');drag(s,g,function(x,y){var v=p.inv(x,y);var nb=[clamp(snap(v[0],1),1,8),clamp(snap(v[1],1),1,6)];if(nb[0]!==B[0]||nb[1]!==B[1]){B=nb;draw();}});
+    var c=Math.sqrt(B[0]*B[0]+B[1]*B[1]);var ok=Math.abs(c-Math.round(c))<1e-9;
+    out.innerHTML=B[0]+'² + '+B[1]+'² = '+(B[0]*B[0]+B[1]*B[1])+' → gipotenuza c = √'+(B[0]*B[0]+B[1]*B[1])+' = <b>'+fmt(c)+'</b>'+(ok?' <span class="alert">Butun sonlarga aniq toʻgʻri keladigan juftlik!</span>':'');}
+  draw();};
+P.o3=function(h){var W=520,H=400;var inp=h.parentNode.querySelector('input');var out=readout(h);
+  function draw(){var t=+inp.value;var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-1.3,x1:1.3,y0:-1.3,y1:1.3,equal:true,step:.5,label:.5,grid:true});
+    el('circle',{cx:p.X(0),cy:p.Y(0),r:p.sx,fill:'none',stroke:C.teal,'stroke-width':2},s);
+    var a=t*Math.PI/180,cx=Math.cos(a),sy=Math.sin(a);
+    arrow(s,p.X(0),p.Y(0),p.X(cx),p.Y(sy),'blue');
+    el('line',{x1:p.X(0),y1:p.Y(0),x2:p.X(cx),y2:p.Y(0),stroke:C.orange,'stroke-width':4},s);
+    el('line',{x1:p.X(cx),y1:p.Y(0),x2:p.X(cx),y2:p.Y(sy),stroke:C.green,'stroke-width':4},s);
+    txt(s,p.X(cx/2),p.Y(0)+(sy>=0?20:-8),'cos θ',{anchor:'middle',fill:C.orange});txt(s,p.X(cx)+6,p.Y(sy/2),'sin θ',{fill:C.green});
+    out.innerHTML='θ = '+t+'° → gorizontal cos θ = <b>'+num(cx)+'</b>, vertikal sin θ = <b>'+num(sy)+'</b> (ikkalasining kvadratlari yigʻindisi doim 1)';}
+  inp.addEventListener('input',draw);draw();};
+
+P.o4=function(h){var W=520,H=400,u=[1,2],v=[3,1];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:6,y0:0,y1:4.5,equal:true});var w=[u[0]+v[0],u[1]+v[1]];
+    dash(s,p.X(u[0]),p.Y(u[1]),p.X(w[0]),p.Y(w[1]),'teal');dash(s,p.X(v[0]),p.Y(v[1]),p.X(w[0]),p.Y(w[1]),'blue');
+    arrow(s,p.X(0),p.Y(0),p.X(u[0]),p.Y(u[1]),'blue',3.5);arrow(s,p.X(0),p.Y(0),p.X(v[0]),p.Y(v[1]),'teal',3.5);
+    if(w[0]<=6&&w[1]<=4.5)arrow(s,p.X(0),p.Y(0),p.X(w[0]),p.Y(w[1]),'orange',4);
+    txt(s,p.X(u[0])-8,p.Y(u[1])-8,'u = ('+u[0]+', '+u[1]+')',{fill:C.blue,anchor:'end'});txt(s,p.X(w[0])+8,p.Y(w[1])-8,'u + v',{fill:C.orange,size:16});
+    var g=handle(s,p.X(v[0]),p.Y(v[1]),'teal');txt(s,p.X(v[0])+12,p.Y(v[1])+20,'v = ('+v[0]+', '+v[1]+')',{fill:C.teal});
+    drag(s,g,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],1),0,5),clamp(snap(q[1],1),0,2)];if(n[0]!==v[0]||n[1]!==v[1]){v=n;draw();}});
+    out.innerHTML='u + v = ('+u[0]+' + '+v[0]+', '+u[1]+' + '+v[1]+') = <b>('+w[0]+', '+w[1]+')</b> · 2 marta choʻzsak, 2u = <b>('+2*u[0]+', '+2*u[1]+')</b> — oʻrinma-oʻrin qoʻshiladi, har bir oʻrin koʻpaytiriladi.';}
+  draw();};
+
+/* ===== 1번 방: 칸 수 1·2·3 ===== */
+P.p01=function(h){var W=600,H=360;var inp=h.parentNode.querySelector('input');var out=readout(h);
+  var A=[160,50,64],B=[163,54,76],names=['Boʻy','Vazn','Bel'],units=['cm','kg','cm'];
+  function draw(){var n=+inp.value;var s=svgOf(h,W,H);
+    if(n===1){var y=H/2;el('line',{x1:40,y1:y,x2:W-40,y2:y,stroke:C.navy,'stroke-width':2,'marker-end':'url(#ah-navy-'+h.id+')','marker-start':'url(#ah-navy-'+h.id+')'},s);
+      for(var v=155;v<=170;v++){var X=40+(v-155)*(W-80)/15;el('line',{x1:X,y1:y-5,x2:X,y2:y+5,stroke:C.navy},s);if(v%5===0)txt(s,X,y+24,v,{anchor:'middle',italic:false,size:13,fill:C.muted});}
+      var xa=40+5*(W-80)/15,xb=40+8*(W-80)/15;el('line',{x1:xa,y1:y-18,x2:xb,y2:y-18,stroke:C.orange,'stroke-width':3},s);
+      dot(s,xa,y,'teal',8);dot(s,xb,y,'orange',8);ktxt(s,xa,y+48,'Sia 160',{anchor:'middle',fill:C.teal});ktxt(s,xb,y+48,'Moa 163',{anchor:'middle',fill:C.orange});
+      txt(s,(xa+xb)/2,y-28,'|163 − 160| = 3',{anchor:'middle',size:15});ktxt(s,W-40,y-14,'Boʻy (cm)',{anchor:'end',size:13,fill:C.muted});
+    }else if(n===2){var p=plane(s,{W:W,H:H,x0:158,x1:166,y0:48,y1:56,ax:158,ay:48,xl:'Boʻy (cm)',yl:'Vazn (kg)',equal:true,zeroX:true,pad:54});
+      el('line',{x1:p.X(160),y1:p.Y(50),x2:p.X(163),y2:p.Y(50),stroke:C.green,'stroke-width':2.5,'stroke-dasharray':'6 4'},s);
+      el('line',{x1:p.X(163),y1:p.Y(50),x2:p.X(163),y2:p.Y(54),stroke:C.green,'stroke-width':2.5,'stroke-dasharray':'6 4'},s);
+      el('line',{x1:p.X(160),y1:p.Y(50),x2:p.X(163),y2:p.Y(54),stroke:C.blue,'stroke-width':3},s);
+      dot(s,p.X(160),p.Y(50),'teal',8);dot(s,p.X(163),p.Y(54),'orange',8);
+      ktxt(s,p.X(160)-10,p.Y(50)-12,'Sia (160, 50)',{fill:C.teal,size:13,anchor:'end'});ktxt(s,p.X(163)+10,p.Y(54)-8,'Moa (163, 54)',{fill:C.orange,size:13});
+      txt(s,p.X(161.5),p.Y(50)+18,'3',{fill:C.orange,anchor:'middle'});txt(s,p.X(163)+8,p.Y(52),'4',{fill:C.orange});txt(s,p.X(161.3)-10,p.Y(52.5),'5',{fill:C.blue,size:16});
+    }else{var o=[W*0.42,H*0.70],k=12;function pr(x,y,z){return[o[0]-x*k*0.62+y*k*1.25,o[1]+x*k*0.48-z*k*1.25*0.55];}
+      var ax=[[6,0,0,'Boʻy'],[0,10,0,'Vazn'],[0,0,16,'Bel']];ax.forEach(function(a){var q=pr(a[0],a[1],a[2]);el('line',{x1:o[0],y1:o[1],x2:q[0],y2:q[1],stroke:C.navy,'stroke-width':2,'marker-end':'url(#ah-navy-'+h.id+')'},s);ktxt(s,q[0]+(a[0]?-10:6),q[1]+(a[2]?-6:14),a[3],{size:13,fill:C.navy,anchor:a[0]?'end':'start'});});
+      var path=[[0,0,0],[3,0,0],[3,4,0],[3,4,12]];for(var i=0;i<3;i++){var a1=pr.apply(null,path[i]),b1=pr.apply(null,path[i+1]);el('line',{x1:a1[0],y1:a1[1],x2:b1[0],y2:b1[1],stroke:C.green,'stroke-width':2.5,'stroke-dasharray':'6 4'},s);}
+      var a0=pr(0,0,0),b0=pr(3,4,12);el('line',{x1:a0[0],y1:a0[1],x2:b0[0],y2:b0[1],stroke:C.blue,'stroke-width':3},s);
+      dot(s,a0[0],a0[1],'teal',8);dot(s,b0[0],b0[1],'orange',8);ktxt(s,a0[0]-10,a0[1]+20,'Sia',{anchor:'end',fill:C.teal,size:13});ktxt(s,b0[0]+10,b0[1],'Moa',{fill:C.orange,size:13});
+      var m1=pr(1.5,0,0),m2=pr(3,2,0),m3=pr(3,4,6);txt(s,m1[0]-8,m1[1]+16,'3',{fill:C.orange,anchor:'end'});txt(s,m2[0],m2[1]+18,'4',{fill:C.orange});txt(s,m3[0]+8,m3[1],'12',{fill:C.orange});
+      ktxt(s,14,22,'Siani koordinata boshiga qoʻyib chizilgan farq (gorizontal 3 · vertikal 4 · balandlik 12)',{size:12.5,fill:C.muted});}
+    var terms=[],sum=0,diff=[3,4,12];for(var i=0;i<n;i++){terms.push(diff[i]+'²');sum+=diff[i]*diff[i];}
+    var used=[];for(var j=0;j<n;j++)used.push(names[j]);
+    out.innerHTML='Kataklar: '+n+'D ('+used.join('·')+') → masofa = √('+terms.join(' + ')+') = √'+sum+' = <b>'+fmt(Math.sqrt(sum))+'</b>. Har bir katak qoʻshilganda yana bitta kvadrat had qoʻshiladi.';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 2번 방: 점과 화살표 ===== */
+P.p02=function(h){h.dataset.ksnap='0.5';var W=520,H=440,A=[1,1],B=[4,3];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:5,y0:0,y1:4.5,equal:true});
+    dash(s,p.X(B[0]),p.Y(B[1]),p.X(B[0]),p.Y(0),'#8a96a3');dash(s,p.X(B[0]),p.Y(B[1]),p.X(0),p.Y(B[1]),'#8a96a3');
+    arrow(s,p.X(0),p.Y(0),p.X(A[0]),p.Y(A[1]),'blue',2.5);arrow(s,p.X(0),p.Y(0),p.X(B[0]),p.Y(B[1]),'blue',2);
+    if(B[0]!==A[0]||B[1]!==A[1])arrow(s,p.X(A[0]),p.Y(A[1]),p.X(B[0]),p.Y(B[1]),'teal',3.5);
+    dot(s,p.X(0),p.Y(0),'navy',5);txt(s,p.X(0)-18,p.Y(0)+20,'O',{size:16});
+    dot(s,p.X(A[0]),p.Y(A[1]),'blue',7);txt(s,p.X(A[0])-8,p.Y(A[1])-12,'A = (1, 1)',{anchor:'end',fill:C.blue});
+    var v=[B[0]-A[0],B[1]-A[1]];
+    txt(s,(p.X(A[0])+p.X(B[0]))/2-6,(p.Y(A[1])+p.Y(B[1]))/2-12,'v = ('+num(v[0])+', '+num(v[1])+')',{fill:C.teal,anchor:'end',size:15});
+    var g=handle(s,p.X(B[0]),p.Y(B[1]),'blue');txt(s,p.X(B[0])+12,p.Y(B[1])-12,'B = ('+fmt(B[0])+', '+fmt(B[1])+')',{fill:C.blue});
+    drag(s,g,function(x,y){var q=p.inv(x,y);var nb=[clamp(snap(q[0],.5),0,5),clamp(snap(q[1],.5),0,4.5)];if(nb[0]!==B[0]||nb[1]!==B[1]){B=nb;draw();}});
+    out.innerHTML='B − A = ('+fmt(B[0])+' − 1, '+fmt(B[1])+' − 1) = <b>('+num(v[0])+', '+num(v[1])+')</b> → uydan (A) sharqqa '+num(v[0])+', shimolga '+num(v[1])+' yursangiz, B ga yetasiz.';}
+  draw();};
+
+/* ===== 3번 방: 거리 ===== */
+P.p03=function(h){var W=520,H=440,A=[1,1],B=[4,5];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:6,y0:0,y1:6,equal:true});
+    var dx=B[0]-A[0],dy=B[1]-A[1];
+    el('line',{x1:p.X(A[0]),y1:p.Y(A[1]),x2:p.X(B[0]),y2:p.Y(A[1]),stroke:C.green,'stroke-width':3},s);
+    el('line',{x1:p.X(B[0]),y1:p.Y(A[1]),x2:p.X(B[0]),y2:p.Y(B[1]),stroke:C.green,'stroke-width':3},s);
+    if(dx&&dy)rightMark(s,p.X(B[0]),p.Y(A[1]),dx>0?-1:1,0,0,dy>0?-1:1,11);
+    el('line',{x1:p.X(A[0]),y1:p.Y(A[1]),x2:p.X(B[0]),y2:p.Y(B[1]),stroke:C.blue,'stroke-width':3.5},s);
+    if(dx)txt(s,p.X((A[0]+B[0])/2),p.Y(A[1])+(dy>=0?22:-10),fmt(Math.abs(dx)),{fill:C.orange,anchor:'middle',size:17});
+    if(dy)txt(s,p.X(B[0])+(dx>=0?10:-10),p.Y((A[1]+B[1])/2),fmt(Math.abs(dy)),{fill:C.orange,anchor:dx>=0?'start':'end',size:17});
+    var gA=handle(s,p.X(A[0]),p.Y(A[1]),'blue'),gB=handle(s,p.X(B[0]),p.Y(B[1]),'blue');
+    txt(s,p.X(A[0])-10,p.Y(A[1])+24,'A = ('+A[0]+', '+A[1]+')',{anchor:'end',size:14});txt(s,p.X(B[0])+12,p.Y(B[1])-12,'B = ('+B[0]+', '+B[1]+')',{size:14});
+    drag(s,gA,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],1),0,6),clamp(snap(q[1],1),0,6)];if(n[0]!==A[0]||n[1]!==A[1]){A=n;draw();}});
+    drag(s,gB,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],1),0,6),clamp(snap(q[1],1),0,6)];if(n[0]!==B[0]||n[1]!==B[1]){B=n;draw();}});
+    var d2=dx*dx+dy*dy,d=Math.sqrt(d2);
+    out.innerHTML='Gorizontal farq '+Math.abs(dx)+', vertikal farq '+Math.abs(dy)+' → masofa = √('+(dx*dx)+' + '+(dy*dy)+') = √'+d2+' = <b>'+fmt(d)+'</b> · tor koʻchalar boʻylab (gorizontal + vertikal) bosib oʻtilgan kataklar: '+(Math.abs(dx)+Math.abs(dy))+'.';}
+  draw();};
+
+/* ===== 4번 방: 겹침 점수와 각도 ===== */
+P.p04=function(h){h.dataset.ksnap='0.5';var W=540,H=420,u=[3,0],v=[2,2];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-3,x1:4,y0:-2,y1:3.5,equal:true});
+    var dt=u[0]*v[0]+u[1]*v[1],nu=3,nv=Math.hypot(v[0],v[1]);
+    if(nv>0){var th=Math.acos(clamp(dt/(nu*nv),-1,1));var ang=Math.atan2(v[1],v[0]);var r=34;
+      var large=th>Math.PI?1:0,sw=ang>=0?0:1;
+      el('path',{d:'M'+(p.X(0)+r)+','+p.Y(0)+' A'+r+','+r+' 0 0,'+sw+' '+(p.X(0)+r*Math.cos(ang))+','+(p.Y(0)-r*Math.sin(ang))+' L'+p.X(0)+','+p.Y(0)+' Z',fill:C.orange,'fill-opacity':.18,stroke:C.orange},s);
+      txt(s,p.X(0)+r+10,p.Y(0)+(ang>=0?-12:22),'θ = '+fmt(th*180/Math.PI,1)+'°',{fill:C.orange,size:15});}
+    if(Math.abs(dt)<1e-9&&nv>0)rightMark(s,p.X(0),p.Y(0),1,0,0,v[1]>0?-1:1,14);
+    arrow(s,p.X(0),p.Y(0),p.X(3),p.Y(0),'blue',3.5);txt(s,p.X(3)+6,p.Y(0)-12,'u = (3, 0)',{fill:C.blue});
+    if(nv>0)arrow(s,p.X(0),p.Y(0),p.X(v[0]),p.Y(v[1]),'teal',3.5);
+    var g=handle(s,p.X(v[0]),p.Y(v[1]),'teal');txt(s,p.X(v[0])+12,p.Y(v[1])-12,'v = ('+num(v[0])+', '+num(v[1])+')',{fill:C.teal});
+    drag(s,g,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],.5),-3,4),clamp(snap(q[1],.5),-2,3.5)];if(n[0]!==v[0]||n[1]!==v[1]){v=n;draw();}});
+    var msg='Moslik balli u·v = 3×'+num(v[0])+' + 0×'+num(v[1])+' = <b>'+num(dt)+'</b>';
+    if(nv>0){msg+=' · uzunlik ‖v‖ = '+fmt(nv)+' · cos θ = '+num(dt)+' ÷ (3 × '+fmt(nv)+') = <b>'+num(dt/(nu*nv))+'</b>';
+      if(Math.abs(dt)<1e-9)msg+=' <span class="alert">→ toʻgʻri burchak! Bir-biriga taʼsir qilmaydigan yoʻnalishlar</span>';else if(dt<0)msg+=' → qarama-qarshi tomonga qaraydi (ball manfiy)';}
+    out.innerHTML=msg;}
+  draw();};
+
+/* ===== 5번 방: 자 세트 돌리기 ===== */
+P.p05=function(h){var W=520,H=420,v=[3,2];var inp=h.parentNode.querySelector('input');var out=readout(h);
+  function draw(){var f=+inp.value*Math.PI/180;var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-1.5,x1:4,y0:-1,y1:3.5,equal:true,grid:false});
+    var e1=[Math.cos(f),Math.sin(f)],e2=[-Math.sin(f),Math.cos(f)];
+    for(var k=-6;k<=6;k++){el('line',{x1:p.X(k*e1[0]-8*e2[0]),y1:p.Y(k*e1[1]-8*e2[1]),x2:p.X(k*e1[0]+8*e2[0]),y2:p.Y(k*e1[1]+8*e2[1]),stroke:'#dfe6f0'},s);
+      el('line',{x1:p.X(k*e2[0]-8*e1[0]),y1:p.Y(k*e2[1]-8*e1[1]),x2:p.X(k*e2[0]+8*e1[0]),y2:p.Y(k*e2[1]+8*e1[1]),stroke:'#dfe6f0'},s);}
+    var c1=v[0]*e1[0]+v[1]*e1[1],c2=v[0]*e2[0]+v[1]*e2[1];
+    dash(s,p.X(v[0]),p.Y(v[1]),p.X(c1*e1[0]),p.Y(c1*e1[1]),'teal');dash(s,p.X(v[0]),p.Y(v[1]),p.X(c2*e2[0]),p.Y(c2*e2[1]),'teal');
+    arrow(s,p.X(0),p.Y(0),p.X(e1[0]),p.Y(e1[1]),'blue',4);arrow(s,p.X(0),p.Y(0),p.X(e2[0]),p.Y(e2[1]),'blue',4);
+    rightMark(s,p.X(0),p.Y(0),e1[0],-e1[1],e2[0],-e2[1],12);
+    txt(s,p.X(e1[0]*1.15)+4,p.Y(e1[1]*1.15)+18,'e₁',{fill:C.blue,size:17});txt(s,p.X(e2[0]*1.1)+8,p.Y(e2[1]*1.1),'e₂',{fill:C.blue,size:17});
+    arrow(s,p.X(0),p.Y(0),p.X(v[0]),p.Y(v[1]),'teal',3.5);dot(s,p.X(v[0]),p.Y(v[1]),'teal',6);txt(s,p.X(v[0])+8,p.Y(v[1])-10,'v',{fill:C.teal,size:17});
+    out.innerHTML='Chizgʻichlar toʻplamini '+inp.value+'° burdik → v = <b>'+num(c1)+'</b> e₁ + <b>'+num(c2)+'</b> e₂ · koordinata sonlari oʻzgarsa ham, '+fmt(c1)+'² + '+num(c2)+'² = <b>'+fmt(c1*c1+c2*c2)+'</b> (= 3² + 2² = 13, uzunlik '+fmt(Math.sqrt(13))+' oʻzgarmaydi)';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 6번 방: 그림자 ===== */
+P.p06=function(h){var W=520,H=420,v=[3,2];var inp=h.parentNode.querySelector('input');var out=readout(h);
+  var pre=h.parentNode.querySelector('[data-preset]');if(pre)pre.addEventListener('click',function(){inp.value=(Math.atan2(1,2)*180/Math.PI).toFixed(1);draw();});
+  function draw(){var a=+inp.value*Math.PI/180;var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-.5,x1:4,y0:-.5,y1:3.2,equal:true});
+    var u=[Math.cos(a),Math.sin(a)];var c=v[0]*u[0]+v[1]*u[1];var pp=[c*u[0],c*u[1]],r=[v[0]-pp[0],v[1]-pp[1]];
+    el('line',{x1:p.X(-1*u[0]),y1:p.Y(-1*u[1]),x2:p.X(5*u[0]),y2:p.Y(5*u[1]),stroke:C.orange,'stroke-width':2,'stroke-opacity':.5},s);
+    el('line',{x1:p.X(0),y1:p.Y(0),x2:p.X(pp[0]),y2:p.Y(pp[1]),stroke:C.orange,'stroke-width':5},s);
+    arrow(s,p.X(0),p.Y(0),p.X(u[0]),p.Y(u[1]),'green',3.5);
+    arrow(s,p.X(0),p.Y(0),p.X(v[0]),p.Y(v[1]),'blue',3.5);
+    if(Math.hypot(r[0],r[1])>0.05){arrow(s,p.X(pp[0]),p.Y(pp[1]),p.X(v[0]),p.Y(v[1]),'green',3);var rl=Math.hypot(r[0],r[1]);rightMark(s,p.X(pp[0]),p.Y(pp[1]),-u[0],u[1],r[0]/rl,-r[1]/rl,11);}
+    dot(s,p.X(pp[0]),p.Y(pp[1]),'orange',7);
+    txt(s,p.X(v[0])+8,p.Y(v[1])-8,'v = (3, 2)',{fill:C.blue});txt(s,p.X(pp[0])+(a<0.3?0:12),p.Y(pp[1])+(a<0.3?24:14),'p',{fill:C.orange,size:17});
+    txt(s,p.X(u[0])-4,p.Y(u[1])+(a<0.3?24:-10),'u',{fill:C.green,size:16,anchor:'end'});txt(s,p.X((pp[0]+v[0])/2)+8,p.Y((pp[1]+v[1])/2),'r',{fill:C.green,size:17});
+    var dot_=r[0]*u[0]+r[1]*u[1];
+    out.innerHTML='Soya p = (<b>'+num(pp[0])+', '+num(pp[1])+'</b>) · chetga ogʻish r = ('+num(r[0])+', '+num(r[1])+'), uzunligi <b>'+fmt(Math.hypot(r[0],r[1]))+'</b> · r·u = '+num(Math.abs(dot_)<5e-3?0:dot_)+' <span class="alert">(toʻgʻri burchak)</span>';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 7번 방: 칸막이 x₁+2x₂+2x₃=6 ===== */
+P.p07=function(h){var W=560,H=440;var ins=h.parentNode.querySelectorAll('input');var out=readout(h);
+  var o=[W*0.40,H*0.70],k=30;function pr(x,y,z){return[o[0]-x*k*0.62+y*k*1.15,o[1]+x*k*0.46-z*k*1.0];}
+  function draw(){var P_=[+ins[0].value,+ins[1].value,+ins[2].value];var s=svgOf(h,W,H);
+    [[6.6,0,0,'x₁'],[0,5,0,'x₂'],[0,0,5,'x₃']].forEach(function(a){var q=pr(a[0],a[1],a[2]);var q0=pr(0,0,0);el('line',{x1:q0[0],y1:q0[1],x2:q[0],y2:q[1],stroke:C.navy,'stroke-width':2,'marker-end':'url(#ah-navy-'+h.id+')'},s);txt(s,q[0]+(a[0]?-14:8),q[1]+(a[3]==='x₃'?-4:16),a[3],{size:16});});
+    var t1=pr(6,0,0),t2=pr(0,3,0),t3=pr(0,0,3);
+    el('path',{d:'M'+t1+' L'+t2+' L'+t3+' Z',fill:C.teal,'fill-opacity':.22,stroke:C.teal,'stroke-width':2},s);
+    [[6,0,0],[0,3,0],[0,0,3]].forEach(function(q){var z=pr(q[0],q[1],q[2]);dot(s,z[0],z[1],'orange',5);});
+    var sc=P_[0]+2*P_[1]+2*P_[2];var t=(sc-6)/9;var F=[P_[0]-t,P_[1]-2*t,P_[2]-2*t];
+    var cpt=pr(4,0.5,0.5);var ntip=pr(4+0.6,0.5+1.2,0.5+1.2);arrow(s,cpt[0],cpt[1],ntip[0],ntip[1],'orange',2.5);txt(s,ntip[0]+6,ntip[1],'n = (1, 2, 2)',{fill:C.orange,size:14});
+    var b0=pr(P_[0],P_[1],0),pp=pr(P_[0],P_[1],P_[2]),ff=pr(F[0],F[1],F[2]);
+    dash(s,b0[0],b0[1],pp[0],pp[1],'#9aa5b1');
+    if(Math.abs(t)>1e-9)el('line',{x1:pp[0],y1:pp[1],x2:ff[0],y2:ff[1],stroke:C.orange,'stroke-width':2.5,'stroke-dasharray':'2 3'},s);
+    var col=sc>6?'blue':(sc<6?'red':'green');dot(s,pp[0],pp[1],col,8);txt(s,pp[0]+10,pp[1]-8,'P('+P_.join(', ')+')',{fill:C[col],size:14});
+    var side=sc>6?'<b>Koordinata boshining narigi tomoni</b> (masalan: spam)':(sc<6?'<b>Koordinata boshi tomoni</b> (masalan: oddiy xat)':'<b>Toʻsiq ustida (chegara)</b> — qaror kechiktiriladi');
+    out.innerHTML='Ball x₁ + 2x₂ + 2x₃ = '+P_[0]+' + '+(2*P_[1])+' + '+(2*P_[2])+' = <b>'+sc+'</b> → 6 bilan solishtirsak, '+side+' · toʻsiqqacha masofa = |'+sc+' − 6| ÷ 3 = <b>'+fmt(Math.abs(sc-6)/3)+'</b>';}
+  ins.forEach(function(i){i.addEventListener('input',draw);});draw();};
+
+/* ===== 8번 방: 밀고 돌리고 뒤집기 ===== */
+P.p08=function(h){var W=540,H=440;var host=h.parentNode;var ang=host.querySelector('input');var out=readout(h);
+  var st={t:[0,0],m:1,s:1};var T=[[0,0],[3,0],[3,4]];
+  host.querySelectorAll('[data-op]').forEach(function(b){b.addEventListener('click',function(){var op=b.getAttribute('data-op');
+    if(op==='reset'){st={t:[0,0],m:1,s:1};ang.value=0;}if(op==='slide'){st.t=[st.t[0]-2,st.t[1]+1];if(st.t[0]<-6)st.t=[0,0];}
+    if(op==='mirror')st.m*=-1;if(op==='scale')st.s=st.s===1?2:1;draw();});});
+  function tr(q){var a=+ang.value*Math.PI/180;var x=q[0]*st.m,y=q[1];var rx=x*Math.cos(a)-y*Math.sin(a),ry=x*Math.sin(a)+y*Math.cos(a);return[st.s*rx+st.t[0],st.s*ry+st.t[1]];}
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-10,x1:10,y0:-9,y1:9,equal:true,step:2,label:4});
+    el('path',{d:'M'+T.map(function(q){return p.X(q[0])+','+p.Y(q[1]);}).join(' L')+' Z',fill:'#9db7f0','fill-opacity':.35,stroke:C.blue,'stroke-dasharray':'5 4'},s);
+    var U=T.map(tr);el('path',{d:'M'+U.map(function(q){return p.X(q[0])+','+p.Y(q[1]);}).join(' L')+' Z',fill:C.teal,'fill-opacity':.3,stroke:C.teal,'stroke-width':2.5},s);
+    U.forEach(function(q){dot(s,p.X(q[0]),p.Y(q[1]),'teal',4);});
+    var L=[0,1,2].map(function(i){var a=U[i],b=U[(i+1)%3];return Math.hypot(a[0]-b[0],a[1]-b[1]);});L.sort(function(a,b){return a-b;});
+    host.querySelectorAll('[data-op]').forEach(function(b){var op=b.getAttribute('data-op');b.classList.toggle('on',(op==='mirror'&&st.m<0)||(op==='scale'&&st.s===2));});
+    out.innerHTML='Uch tomon uzunligi: <b>'+L.map(function(x){return fmt(x);}).join(' · ')+'</b> (aslida 3 · 4 · 5) → '+(st.s===1?'<span class="alert">Masofalar oʻzgarmaydi — surish, burish va agʻdarish shaklni oʻzgartirmaydi</span>':'Barcha masofalar <b>2 marta</b> ortadi — choʻzish masofani oʻzgartiradi');}
+  ang.addEventListener('input',draw);draw();};
+
+/* ===== 9번 방 ①: 반지름 안 이웃 ===== */
+P.p09a=function(h){var W=500,H=440;var inp=h.parentNode.querySelector('input');var out=readout(h);
+  var pts=[[0.3,0.4],[-0.6,0.2],[0.9,-0.5],[-0.2,-1.1],[1.3,0.9],[-1.4,-0.3],[0.5,1.6],[-1.0,1.3],[1.7,-0.4],[-1.6,-1.4],[1.2,-1.5],[0.0,-1.9],[-0.4,0.9],[2.0,1.2]];
+  function draw(){var r=+inp.value;var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-2.3,x1:2.3,y0:-2.3,y1:2.3,equal:true,step:.5,label:1});
+    el('circle',{cx:p.X(0),cy:p.Y(0),r:r*p.sx,fill:C.teal,'fill-opacity':.13,stroke:C.teal,'stroke-width':2},s);
+    var inn=0,ds=pts.map(function(q){return Math.hypot(q[0],q[1]);});
+    pts.forEach(function(q,i){var ins_=ds[i]<=r+1e-9;if(ins_)inn++;el('rect',{x:p.X(q[0])-6,y:p.Y(q[1])-6,width:12,height:12,rx:2,fill:ins_?C.orange:'#b6c0cb'},s);});
+    dot(s,p.X(0),p.Y(0),'navy',7);ktxt(s,p.X(0)+8,p.Y(0)+20,'Uy',{size:13});
+    if(r>0){arrow(s,p.X(0),p.Y(0),p.X(r*Math.cos(.6)),p.Y(r*Math.sin(.6)),'orange',2);txt(s,p.X(r*Math.cos(.6)/2)-4,p.Y(r*Math.sin(.6)/2)-8,'r',{fill:C.orange,size:16});}
+    var mn=Math.min.apply(null,ds);
+    out.innerHTML='Radius r = '+fmt(r,1)+'km ichidagi doʻkonlar: <b>'+inn+'ta</b> (doira yuzi πr² = '+fmt(Math.PI*r*r)+'km²) · eng yaqini: '+fmt(mn)+'km';}
+  inp.addEventListener('input',draw);draw();};
+/* ===== 9번 방 ②: 칸이 늘면 껍질로 ===== */
+P.p09b=function(h){var W=560,H=230;var inp=h.parentNode.querySelector('input');var out=readout(h);var ns=[1,2,3,5,10,20,50,100];
+  function draw(){var n=ns[+inp.value];var f=Math.pow(0.9,n);var s=svgOf(h,W,H);
+    var x0=30,w=W-60,y=60,bh=46;el('rect',{x:x0,y:y,width:w,height:bh,fill:C.orange,'fill-opacity':.85,rx:6},s);
+    el('rect',{x:x0,y:y,width:Math.max(w*f,1),height:bh,fill:C.teal,rx:6},s);
+    ktxt(s,x0,y-12,'Ichki qism (radius 0.9 ichida)',{size:13,fill:C.teal});ktxt(s,x0+w,y-12,'Tashqi qobiq (0.9 ~ 1)',{size:13,fill:C.orange,anchor:'end'});
+    ktxt(s,x0,y+bh+30,'Kataklar soni n = '+n,{size:16,fill:C.navy,weight:'bold'});
+    var ins=(f*100),sh=100-ins;
+    ktxt(s,x0+w,y+bh+30,'Ichki qism '+(ins>=1?fmt(ins,1):ins.toPrecision(2))+'% · qobiq '+fmt(sh,ins>=1?1:4)+'%',{size:15,fill:C.navy,anchor:'end'});
+    ktxt(s,x0,y+bh+62,'Radiusi 1 boʻlgan sharda radius 0.9 ichki qismi egallagan hajm ulushi = 0.9ⁿ',{size:13,fill:C.muted});
+    out.innerHTML=n+'ta katakli xona: 0.9<sup>'+n+'</sup> = <b>'+(f>=0.01?fmt(f,3):f.toExponential(2))+'</b> → tashqi qobiqdagi hajm ulushi: '+(sh>=99?'<b>deyarli hammasi</b>':'<b>'+fmt(sh,1)+'%</b>')+'.';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 10번 방 ①: 단위 맞추기 ===== */
+var CUST=[{n:'Mijoz A',h:160,w:56},{n:'Mijoz B',h:166,w:48},{n:'Mijoz C',h:170,w:62}],NEWC={h:165,w:55};
+P.p10a=function(h){var W=520,H=440;var host=h.parentNode;var mode='cm';var out=readout(h);
+  host.querySelectorAll('[data-unit]').forEach(function(b){b.addEventListener('click',function(){mode=b.getAttribute('data-unit');draw();});});
+  function draw(){host.querySelectorAll('[data-unit]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-unit')===mode);});
+    var f=mode==='cm'?1:10;var s=svgOf(h,W,H);var p;
+    if(mode==='cm')p=plane(s,{W:W,H:H,x0:155,x1:175,y0:45,y1:65,equal:true,step:5,ax:155,ay:45,xl:'Boʻy (cm)',yl:'Vazn (kg)',zeroX:true});
+    else p=plane(s,{W:W,H:H,x0:1550,x1:1750,y0:0,y1:200,equal:true,step:50,ax:1550,ay:0,xl:'Boʻy (mm)',yl:'Vazn (kg)',zeroX:true});
+    var ds=CUST.map(function(c){return Math.hypot((c.h-NEWC.h)*f,c.w-NEWC.w);});var best=ds.indexOf(Math.min.apply(null,ds));
+    el('circle',{cx:p.X(NEWC.h*f),cy:p.Y(NEWC.w),r:ds[best]*p.sx,fill:C.orange,'fill-opacity':.08,stroke:C.orange,'stroke-dasharray':'5 4'},s);
+    CUST.forEach(function(c,i){var X=p.X(c.h*f),Y=p.Y(c.w);dot(s,X,Y,i===best?'orange':'blue',i===best?8:6);ktxt(s,X+(i===1?-8:9),Y+(i===1?18:-8),c.n,{size:12.5,anchor:i===1?'end':'start',fill:i===best?C.orange:C.blue});});
+    dot(s,p.X(NEWC.h*f),p.Y(NEWC.w),'navy',7);ktxt(s,p.X(NEWC.h*f)+8,p.Y(NEWC.w)+18,'Yangi mijoz',{size:12.5});
+    out.innerHTML='Boʻyni <b>'+(mode==='cm'?'cm':'mm')+'</b> bilan yozilsa, masofalar: '+CUST.map(function(c,i){return c.n+' '+fmt(ds[i])+(i===best?' ★':'');}).join(' · ')+' → eng yaqin qoʻshni: <b>'+CUST[best].n+'</b>'+(mode==='mm'?' (boʻy sonlari 10 barobar kattalashib, masofani yolgʻiz egallab oladi)':'');}
+  draw();};
+/* ===== 10번 방 ②: 호와 현 ===== */
+P.p10b=function(h){var W=520,H=400;var inp=h.parentNode.querySelector('input');var out=readout(h);var R=6371;
+  function draw(){var t=+inp.value*Math.PI/180;var s=svgOf(h,W,H);var cx=W/2,cy=H/2+20,rr=150;
+    el('circle',{cx:cx,cy:cy,r:rr,fill:'#e8f0fd',stroke:C.blue,'stroke-width':2},s);
+    for(var i=-2;i<=2;i++)el('ellipse',{cx:cx,cy:cy-i*rr*0.33,rx:rr*Math.sqrt(1-Math.pow(i*0.33,2)),ry:12,fill:'none',stroke:'#c8d6f2'},s);
+    var a0=Math.PI/2+t/2,a1=Math.PI/2-t/2;var A=[cx+rr*Math.cos(a0),cy-rr*Math.sin(a0)],B=[cx+rr*Math.cos(a1),cy-rr*Math.sin(a1)];
+    dash(s,cx,cy,A[0],A[1],'#8a96a3');dash(s,cx,cy,B[0],B[1],'#8a96a3');
+    if(t>0){el('path',{d:'M'+A[0]+','+A[1]+' A'+rr+','+rr+' 0 '+(t>Math.PI?1:0)+',1 '+B[0]+','+B[1],fill:'none',stroke:C.orange,'stroke-width':4},s);
+      el('line',{x1:A[0],y1:A[1],x2:B[0],y2:B[1],stroke:C.teal,'stroke-width':3.5},s);}
+    dot(s,A[0],A[1],'navy',7);dot(s,B[0],B[1],'navy',7);dot(s,cx,cy,'navy',4);
+    txt(s,A[0]-10,A[1]-8,'A',{anchor:'end',size:17});txt(s,B[0]+10,B[1]-8,'B',{size:17});txt(s,cx+6,cy+20,'O',{size:15});
+    var arc=R*t,ch=2*R*Math.sin(t/2);
+    out.innerHTML='Markaziy burchak '+inp.value+'° · Yer radiusi 6,371km → sirt boʻylab (yoy) <b>'+Math.round(arc).toLocaleString()+'km</b>, yer ostidan toʻgʻri chiziq (vatar) <b>'+Math.round(ch).toLocaleString()+'km</b> · farq '+Math.round(arc-ch).toLocaleString()+'km';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 대결: 가장 가까운 이웃 찾기 ===== */
+var DUELC=[{n:'Mijoz D',h:155,w:51},{n:'Mijoz E',h:159,w:43},{n:'Mijoz F',h:163,w:48}],DUELN={h:158,w:49};
+P.duel=function(h){var host=h.parentNode;var out=readout(h);var shown={sia:false,moa:false,ans:false};
+  host.querySelectorAll('[data-duel]').forEach(function(b){b.addEventListener('click',function(){shown[b.getAttribute('data-duel')]=true;b.classList.add('on');draw();});});
+  function draw(){var rows=DUELC.map(function(c){var s1=Math.hypot((c.h-DUELN.h)*10,c.w-DUELN.w),s2=Math.hypot((c.h-DUELN.h)/5,(c.w-DUELN.w)/5);return[c,s1,s2];});
+    var b1=0,b2=0;rows.forEach(function(r,i){if(r[1]<rows[b1][1])b1=i;if(r[2]<rows[b2][2])b2=i;});
+    var t='<div class="tbl"><table><thead><tr><th>Nomzod</th><th>Boʻy · vazn</th><th>Sia usuli (boʻy mm, vazn kg oʻzgarishsiz)</th><th>Moa usuli (boʻy ÷ 5cm, vazn ÷ 5kg)</th></tr></thead><tbody>';
+    rows.forEach(function(r,i){t+='<tr><td>'+r[0].n+'</td><td>'+r[0].h+'cm · '+r[0].w+'kg</td><td>'+(shown.sia?fmt(r[1])+(i===b1?' ★':''):'?')+'</td><td>'+(shown.moa?fmt(r[2])+(i===b2?' ★':''):'?')+'</td></tr>';});
+    t+='</tbody></table></div>';h.innerHTML=t;
+    var m='Yangi mijoz: 158cm · 49kg. ';
+    if(shown.sia)m+='Sianing javobi: <b>'+DUELC[b1].n+'</b>. ';if(shown.moa)m+='Moaning javobi: <b>'+DUELC[b2].n+'</b>. ';
+    if(shown.ans)m+='<br>Javob (namunaviy maʼlumot): yangi mijoz aslida tanlagan kiyim oʻlchami <b>D mijoz</b>niki bilan bir xil chiqdi → <span class="alert">Moa gʻolib!</span> Birliklarni moslashtirmasangiz, katta sonli ustun (boʻy, mm) masofani butunlay egallab oladi.';
+    out.innerHTML=m;}
+  draw();};
+
+/* ===== 끝맺음: 칸 수 → 끝없이 ===== */
+P.outro=function(h){var W=600,H=320;var inp=h.parentNode.querySelector('input');var out=readout(h);var ns=[2,3,10,100,Infinity];
+  function f(x){return 0.55*Math.sin(2*Math.PI*x)+0.3*Math.sin(6*Math.PI*x+0.6)+0.15*Math.cos(10*Math.PI*x);}
+  function draw(){var n=ns[+inp.value];var s=svgOf(h,W,H);var x0=40,x1=W-40,y0=H/2,amp=110;
+    el('line',{x1:x0,y1:y0,x2:x1,y2:y0,stroke:C.grid,'stroke-width':1.5},s);
+    if(isFinite(n)){var bw=(x1-x0)/n;for(var i=0;i<n;i++){var x=(i+.5)/n,v=f(x);el('rect',{x:x0+i*bw+bw*0.15,y:v>0?y0-v*amp:y0,width:Math.max(bw*0.7,1),height:Math.abs(v)*amp,fill:C.teal,'fill-opacity':.8},s);if(n<=10)dot(s,x0+(i+.5)*bw,y0-v*amp,'orange',5);}
+      ktxt(s,x0,28,'Sonlar: '+n+'ta sonli xona = '+n+'ta ustun',{size:14,fill:C.navy});}
+    else{var d='';for(var j=0;j<=400;j++){var xx=j/400;d+=(j?'L':'M')+(x0+xx*(x1-x0))+','+(y0-f(xx)*amp);}el('path',{d:d,fill:'none',stroke:C.orange,'stroke-width':3.5},s);
+      ktxt(s,x0,28,'Cheksiz xona — bitta egri chiziq bitta nuqta',{size:14,fill:C.orange,weight:'bold'});}
+    var door=h.parentNode.parentNode.querySelector('.door');if(door)door.classList.toggle('open',!isFinite(n));
+    out.innerHTML=isFinite(n)?'Kataklar: '+n+'ta: egri chiziqni '+n+'ta son bilan yozib oldik. Kataklarni koʻpaytirsangiz, oʻxshashlik ortadi, lekin bu baribir egri chiziqning oʻzi emas.':'Kataklar soni <b>cheksiz</b>: butun egri chiziq bitta nuqta sifatida qaraladi. Chizgʻich va transportir oʻzgarmaydi — bu <b>Gilbert fazosi</b>. Yoʻlak oxiridagi eshik ochildi.';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 퀴즈 ===== */
+function quiz(q){var ans=+q.getAttribute('data-ans');var fb=q.querySelector('.fb');var OK=q.querySelector('.qok'),NO=q.querySelector('.qno');q.querySelectorAll('.opts button').forEach(function(b,i){b.addEventListener('click',function(){q.querySelectorAll('.opts button').forEach(function(x){x.classList.remove('ok','no');});b.classList.add(i===ans?'ok':'no');fb.innerHTML=i===ans?'⭕ '+(OK?OK.innerHTML:q.getAttribute('data-ok')):'❌ '+(NO?NO.innerHTML:q.getAttribute('data-no'));});});}
+
+/* ===== 지식 색인·꾸러미 ===== */
+function kg(){var raw=document.getElementById('kg-raw');var mount=document.getElementById('kg-mount');if(!raw||!mount)return;var K=JSON.parse(raw.textContent);
+  mount.innerHTML='<input class="kg-search" type="search"><div class="kg-list"></div>';
+  var list=mount.querySelector('.kg-list'),inp=mount.querySelector('input');inp.placeholder='Tushuncha qidirish (masalan: masofa, soya, toʻsiq)';inp.setAttribute('aria-label','Bilimlar indeksida qidirish');
+  var TY={Concept:'Tushuncha',Method:'Usul',Analogy:'Oʻxshatish',Application:'Qoʻllanishi',OpenQuestion:'Ochiq savollar'};
+  var LG=(document.documentElement.lang||'ko').slice(0,2);function L_(o){return o?(o[LG]||o.en||o.ko||''):'';}
+  K.nodes.forEach(function(n){if(n.desc&&!n.definition)n.definition={ko:n.desc};});
+  function render(){var q=inp.value.trim().toLowerCase();list.innerHTML=K.nodes.filter(function(n){return !q||(L_(n.label)+' '+n.label.en+' '+n.label.ko+' '+L_(n.definition)).toLowerCase().indexOf(q)>=0;}).map(function(n){
+    var nb=K.edges.filter(function(e){return e.s===n.id||e.o===n.id;}).map(function(e){var o=e.s===n.id?e.o:e.s;var m=K.nodes.filter(function(x){return x.id===o;})[0];return m?L_(m.label):'';}).filter(Boolean);
+    return '<div class="kg-item"><span class="t">'+(TY[n.type]||n.type)+'</span><b>'+L_(n.label)+'</b><span class="muted">'+(LG==='en'?'':n.label.en)+'</span><div>'+L_(n.definition)+'</div>'+(nb.length?'<div class="muted" style="font-size:12.5px">Qoʻshnilar: '+nb.join(', ')+'</div>':'')+'<a href="'+(n.page?n.page+'.html':'')+n.anchor+'">Tushuntirishni koʻrish →</a></div>';}).join('');}
+  inp.addEventListener('input',render);render();
+  var ex=document.getElementById('export-mount');if(!ex)return;
+  ex.innerHTML='<div class="exp-btns"><button class="btn" data-x="json">kg.json</button><button class="btn" data-x="ld">JSON-LD</button><button class="btn" data-x="ttl">Turtle (Protégé)</button><button class="btn" data-x="csv">CSV (Neo4j·Gephi)</button><button class="btn" data-x="bib">BibTeX</button><button class="btn" data-x="ris">RIS</button></div>';
+  function dl(name,text,type){var b=new Blob([text],{type:type||'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);}
+  var base=K.page;var refs=JSON.parse((document.getElementById('refs-csl')||{textContent:'[]'}).textContent);
+  ex.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){var x=b.getAttribute('data-x');
+    if(x==='json')dl(base+'.kg.json',JSON.stringify(K,null,2),'application/json');
+    if(x==='ld')dl(base+'.jsonld',document.getElementById('kg-ld').textContent,'application/ld+json');
+    if(x==='ttl'){var t='@prefix lab: <urn:lab:> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix skos: <http://www.w3.org/2004/02/skos/core#> .\n\n';
+      K.nodes.forEach(function(n){t+='<urn:'+n.id+'> a lab:'+n.type+' ;\n  skos:prefLabel "'+n.label.ko+'"@ko , "'+n.label.en+'"@en ;\n  rdfs:comment "'+L_(n.definition).replace(/"/g,'\\"')+'"@ko .\n\n';});
+      K.edges.forEach(function(e){t+='<urn:'+e.s+'> lab:'+e.p+' <urn:'+e.o+'> .\n';});dl(base+'.ttl',t,'text/turtle');}
+    if(x==='csv'){var c='id,type,label_ko,label_en,anchor\n'+K.nodes.map(function(n){return [n.id,n.type,n.label.ko,n.label.en,(n.page||base)+'.html'+n.anchor].map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+      c+='\n\nsource,relation,target\n'+K.edges.map(function(e){return [e.s,e.p,e.o].join(',');}).join('\n');dl(base+'.csv',c,'text/csv');}
+    if(x==='bib')dl(base+'.bib',refs.map(function(r){return '@misc{'+r.id+',\n  title = {'+r.title+'},\n  author = {'+r.author[0].literal+'},\n  howpublished = {'+(r.note||'')+'},\n  note = {accessed '+r.accessed['date-parts'][0].join('-')+'}\n}';}).join('\n\n'));
+    if(x==='ris')dl(base+'.ris',refs.map(function(r){return 'TY  - GEN\nTI  - '+r.title+'\nAU  - '+r.author[0].literal+'\nN1  - '+(r.note||'')+'\nER  - ';}).join('\n'));});});}
+
+function boot(){document.querySelectorAll('[data-panel]').forEach(function(h){var k=h.getAttribute('data-panel');if(P[k])P[k](h);});
+  document.querySelectorAll('.quiz').forEach(quiz);kg();
+  var pr=document.getElementById('prog');if(pr)window.addEventListener('scroll',function(){var d=document.documentElement;pr.style.width=(100*d.scrollTop/Math.max(1,d.scrollHeight-d.clientHeight))+'%';},{passive:true});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+
+</script>
+</body></html>

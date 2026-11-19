@@ -30,17 +30,41 @@
   },
   "i18n": {
     "langs": [
-      "ko"
+      "ko",
+      "en",
+      "zh",
+      "ja",
+      "uz",
+      "ru",
+      "vi"
     ],
     "pages": {
-      "ko": 4
+      "ko": 4,
+      "en": 4,
+      "zh": 4,
+      "ja": 4,
+      "uz": 4,
+      "ru": 4,
+      "vi": 4
     },
     "readme_langs": [
-      "ko"
+      "ko",
+      "en",
+      "zh",
+      "ja",
+      "uz",
+      "ru",
+      "vi"
     ]
   },
   "languages": [
-    "ko"
+    "ko",
+    "en",
+    "zh",
+    "ja",
+    "uz",
+    "ru",
+    "vi"
   ],
   "items": [
     {

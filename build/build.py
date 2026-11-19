@@ -122,14 +122,14 @@ def panel(r):
     p = r["panel"]
     def one(key, note, ctrl, n):
         return (f'<div class="panel"><div class="ph"><b>실험 패널 {r["no"]}{n}</b><small>{E(note)}</small></div>'
-                f'<div id="pp-{key}" data-panel="{key}" data-label="{E(note)}"></div><div class="ctrl">{ctrl}</div><div class="readout" aria-live="polite"></div></div>')
+                f'<div id="pp-{key}" data-panel="{key}"></div><div class="ctrl">{ctrl}</div><div class="readout" aria-live="polite"></div></div>')
     if p["kind"] == "double":
         return one(p["key"], p["note"], p["ctrl"], "-①") + one(p["key2"], p["note2"], p["ctrl2"], "-②")
     return one(p["key"], p["note"], p["ctrl"], "")
 
 def quiz(q, ans, ok, no, opts):
     b = "".join(f'<button type="button">{E(o)}</button>' for o in opts)
-    return f'<div class="quiz" data-ans="{ans}" data-ok="{E(ok)}" data-no="{E(no)}"><div class="qq">확인 퀴즈 — {E(q)}</div><div class="opts">{b}</div><div class="fb" aria-live="polite"></div></div>'
+    return f'<div class="quiz" data-ans="{ans}"><div class="qq">확인 퀴즈 — {E(q)}</div><div class="opts">{b}</div><div class="fb" aria-live="polite"></div><span class="qok" hidden>{E(ok)}</span><span class="qno" hidden>{E(no)}</span></div>'
 
 def room(r):
     why = "".join(f"<li>{E(x)}</li>" for x in r["why"])
@@ -205,14 +205,14 @@ KG_EDGES = [("concept/coordinate-plane","motivates","concept/euclidean-space"),(
  ("analogy/shadow","explains","concept/projection"),("method/feature-scaling","usedIn","application/knn")]
 
 def kg_block(page, pages):
-    nodes = [dict(id="lab:" + i, type=t, label=dict(ko=ko, en=en), anchor=a, desc=d, page=p, source="lab:work/eeanimation_euclidean_space")
+    nodes = [dict(id="lab:" + i, type=t, label=dict(ko=ko, en=en), anchor=a, definition=dict(ko=d), page=p, source="lab:work/eeanimation_euclidean_space")
              for i, t, ko, en, a, d, p in KG_NODES if p in pages]
     ids = {n["id"] for n in nodes}
     edges = [dict(s="lab:" + s, p=p, o="lab:" + o) for s, p, o in KG_EDGES if "lab:" + s in ids and "lab:" + o in ids]
     raw = dict(version="1.3", page=page, series="자와 각도기의 방", nodes=nodes, edges=edges)
     ld = {"@context": {"@vocab": "urn:lab:", "skos": "http://www.w3.org/2004/02/skos/core#", "schema": "https://schema.org/"},
           "@graph": [{"@id": "urn:" + n["id"], "@type": n["type"], "skos:prefLabel": [{"@value": n["label"]["ko"], "@language": "ko"}, {"@value": n["label"]["en"], "@language": "en"}],
-                      "skos:definition": n["desc"], "schema:url": SITE + n["page"] + ".html" + n["anchor"]} for n in nodes]}
+                      "skos:definition": n["definition"]["ko"], "schema:url": SITE + n["page"] + ".html" + n["anchor"]} for n in nodes]}
     refs = [dict(id="eeanimation_euclidean_space", type="graphic", title="EUCLIDEAN SPACE 01–10 (infographic series)", author=[dict(literal="@eeanimation")],
                  accessed={"date-parts": [[2026, 11, 19]]}, note="사용자 제공 이미지. 차트를 SVG로 다시 그려 실험 패널로 바꿈")]
     meta = dict(title=page, series="자와 각도기의 방", creator=[dict(name="안상선", role="author", affiliation="(주)M-Robo")], date=DATE, version=VER, license="캐릭터·그림 무단 사용 금지")
@@ -228,7 +228,7 @@ def kg_block(page, pages):
 """
 
 def footer(extra_links):
-    JS = open(os.path.join(ROOT, "assets", "panels.js")).read().replace("</", "<\\/")
+    JS = open(os.path.join(ROOT, "assets", "panels.js")).read().replace("</script", "<\\/script")
     links = " · ".join(f'<a href="{h}">{E(t)}</a>' for h, t in extra_links)
     return f"""<footer><div class="wrap">
 <h3>출처</h3>
@@ -309,7 +309,7 @@ def build_orient():
         li = "".join(f"<li>{E(x)}</li>" for x in lines)
         s += f"""<section class="room" id="{bid}"><div class="wrap"><h2>{E(title)}</h2>
 <div class="box"><h4>요약 3줄</h4><ol>{li}</ol></div>
-<div class="panel"><div class="ph"><b>실험</b><small>{E(note)}</small></div><div id="pp-{key}" data-panel="{key}" data-label="{E(note)}"></div><div class="ctrl">{ctrl}</div><div class="readout" aria-live="polite"></div></div>
+<div class="panel"><div class="ph"><b>실험</b><small>{E(note)}</small></div><div id="pp-{key}" data-panel="{key}"></div><div class="ctrl">{ctrl}</div><div class="readout" aria-live="polite"></div></div>
 <p class="muted">더 보기: {link}</p></div></section>
 """
     s += """<section id="symbols"><div class="wrap"><h2>기호 읽는 법 — 방에서 만날 기호 7개</h2>
@@ -427,7 +427,7 @@ def outro_section():
 <p>자(거리)로 얼마나 먼지, 각도기(겹침 점수)로 얼마나 닮았는지, 그림자로 가장 가까운 답이 어디인지 쟀습니다.</p>
 <h3>② 이 방이 못 하는 것</h3>
 <p>칸 수가 정해져 있어야 합니다. 소리·센서 곡선·주가 흐름처럼 끝없이 이어지는 데이터는 담지 못합니다.</p>
-<p>1초짜리 음악만 해도 CD 음질로 받아 적으면 숫자가 4만 4천 1백 개입니다. 그래도 소리 곡선 자체는 끝없이 이어집니다.</p>
+<p>1초짜리 음악만 해도 CD 음질로 받아 적으면 숫자가 44100개입니다. 그래도 소리 곡선 자체는 끝없이 이어집니다.</p>
 <h3>③ 힐베르트 공간이란</h3>
 <div class="three" style="border-color:var(--orange);background:var(--orange-soft)"><ul>
 <li>자와 각도기는 그대로 두고, 방을 <b>끝없이</b> 넓힌 것입니다.</li>

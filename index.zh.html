@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><!-- i18n:switcher --><style data-i18n-sw>.i18n-pick{display:inline-flex;align-items:center;gap:4px;margin:0 8px;font:inherit;font-size:13px;white-space:nowrap}.i18n-pick select{font:inherit;font-size:13px;padding:3px 6px;border-radius:8px;border:1px solid var(--rule,rgba(128,128,128,.5));background:var(--panel,Canvas);color:var(--text,CanvasText)}.i18n-pick.float{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));right:max(8px,env(safe-area-inset-right,0px));z-index:9998}#i18nBanner{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));z-index:9999;font:14px/1.3 var(--font,system-ui,sans-serif)}#i18nBanner>button{border-radius:999px;padding:9px 14px;border:1px solid var(--rule,#363a52);background:var(--panel,#1c1e2d);color:var(--text,#eceaf3);box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;font:inherit}#i18nBanner ul{position:absolute;right:0;bottom:calc(100% + 8px);margin:0;padding:6px;list-style:none;min-width:150px;border-radius:12px;border:1px solid var(--rule,#363a52);background:var(--panel,#1c1e2d);box-shadow:0 8px 24px rgba(0,0,0,.4)}#i18nBanner ul[hidden]{display:none}#i18nBanner a{display:block;padding:7px 10px;border-radius:8px;color:var(--text,#eceaf3);text-decoration:none}#i18nBanner a:hover,#i18nBanner a:focus-visible{background:var(--panel2,#25283a)}#i18nBanner a[aria-current]{color:var(--amber,#f1b646);font-weight:700}@media print{#i18nBanner,.i18n-pick{display:none!important}}</style><script data-i18n-skip>(function(){var C={"langs": [["ko", "한국어"], ["en", "English"], ["zh", "中文"], ["ja", "日本語"], ["uz", "Oʻzbekcha"], ["ru", "Русский"], ["vi", "Tiếng Việt"]], "urls": {"ko": "index.html", "en": "index.en.html", "zh": "index.zh.html", "ja": "index.ja.html", "uz": "index.uz.html", "ru": "index.ru.html", "vi": "index.vi.html"}, "cur": "zh", "auto": true, "key": "euclid_lab_lang", "hosts": [["nav.top .logo", "after"], ["#langSw", "append"], ["nav.top .brand", "after"], ["nav .in", "append"], ["nav", "append"]], "banner": true, "select": true},cur=C.cur,ok={},de=document.documentElement;C.langs.forEach(function(l){ok[l[0]]=1});
+function U(l){return C.urls[l]}
+function save(l){try{localStorage.setItem(C.key,l)}catch(e){}}
+function saved(){try{return localStorage.getItem(C.key)}catch(e){return null}}
+function go(l){location.replace(U(l)+'?lang='+l+location.hash)}
+var shown=function(){de.style.visibility=''};
+function tryGo(l){if(location.protocol==='file:'){go(l);return}
+ de.style.visibility='hidden';var t=setTimeout(shown,2500);
+ try{fetch(U(l),{method:'HEAD',cache:'no-store'}).then(function(r){if(r.ok)go(l);else{clearTimeout(t);shown()}},function(){clearTimeout(t);shown()})}catch(e){clearTimeout(t);shown()}}
+var q=null;try{q=new URLSearchParams(location.search).get('lang')}catch(e){}
+if(q&&ok[q]){save(q);if(q!==cur){tryGo(q);}}
+else if(cur==='ko'&&C.auto){var s=saved(),to=null;
+ if(s&&ok[s]){if(s!=='ko')to=s;}
+ else if(location.protocol!=='file:'){var same=false;try{same=!!document.referrer&&new URL(document.referrer).origin===location.origin}catch(e){}
+  if(!same){var nav=(navigator.languages||[navigator.language||'']).map(function(x){return String(x).slice(0,2).toLowerCase()});
+   for(var i=0;i<nav.length;i++){if(nav[i]==='ko')break;if(ok[nav[i]]){to=nav[i];break;}}}}
+ if(to)tryGo(to);}
+function pick(l){save(l);location.href=U(l)+'?lang='+l+location.hash;}
+function name(l){for(var i=0;i<C.langs.length;i++)if(C.langs[i][0]===l)return C.langs[i][1];return l}
+function mount(){if(document.getElementById('i18nSel'))return;
+ if(C.select){var w=document.createElement('span');w.className='i18n-pick';w.innerHTML='<span aria-hidden="true">🌐</span>';
+  var s=document.createElement('select');s.id='i18nSel';s.setAttribute('aria-label','Language');
+  C.langs.forEach(function(l){var o=document.createElement('option');o.value=l[0];o.textContent=l[1];if(l[0]===cur)o.selected=true;s.appendChild(o);});
+  s.addEventListener('change',function(){pick(s.value)});w.appendChild(s);var put=false;
+  for(var i=0;i<C.hosts.length&&!put;i++){var h=document.querySelector(C.hosts[i][0]);if(!h)continue;var m=C.hosts[i][1];
+   if(m==='after')h.insertAdjacentElement('afterend',w);else if(m==='before')h.insertAdjacentElement('beforebegin',w);else h.appendChild(w);put=true;}
+  if(!put){w.classList.add('float');document.body.appendChild(w);}}
+ if(C.banner&&!document.getElementById('i18nBanner')){var b=document.createElement('div');b.id='i18nBanner';
+  var bt=document.createElement('button');bt.type='button';bt.setAttribute('aria-haspopup','true');bt.setAttribute('aria-expanded','false');bt.textContent='🌐 '+name(cur);
+  var ul=document.createElement('ul');ul.hidden=true;ul.setAttribute('role','menu');
+  C.langs.forEach(function(l){var li=document.createElement('li'),a=document.createElement('a');a.href=U(l[0])+'?lang='+l[0];a.textContent=l[1];a.lang=l[0];a.setAttribute('role','menuitem');
+   if(l[0]===cur)a.setAttribute('aria-current','true');a.addEventListener('click',function(e){e.preventDefault();pick(l[0])});li.appendChild(a);ul.appendChild(li);});
+  function close(){ul.hidden=true;bt.setAttribute('aria-expanded','false')}
+  bt.addEventListener('click',function(e){e.stopPropagation();ul.hidden=!ul.hidden;bt.setAttribute('aria-expanded',String(!ul.hidden))});
+  document.addEventListener('click',function(e){if(!b.contains(e.target))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){close();bt.focus&&!ul.hidden&&bt.focus()}});
+  b.appendChild(ul);b.appendChild(bt);document.body.appendChild(b);}}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();})();</script><!-- /i18n:switcher -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>尺子与量角器的房间 — 西娅·茉雅的欧几里得空间</title>
+<meta name="description" content="把一行数据当作房间里的一个点，测量距离和角度的方法。将原始资料 @eeanimation 信息图 10 张重新制作成密室逃脱式的研究室讲解。">
+<meta property="og:type" content="article"><meta property="og:title" content="尺子与量角器的房间 — 西娅·茉雅的欧几里得空间"><meta property="og:description" content="把一行数据当作房间里的一个点，测量距离和角度的方法。将原始资料 @eeanimation 信息图 10 张重新制作成密室逃脱式的研究室讲解。">
+<meta property="og:image" content="https://adminmrobo.github.io/euclidean_space_lab/assets/og/og_index.jpg"><meta property="og:url" content="https://adminmrobo.github.io/euclidean_space_lab/index.html"><meta name="twitter:card" content="summary_large_image">
+<meta name="author" content="Ahn Sangsun">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/lab.css">
+<link rel="alternate" hreflang="ko" href="index.html"><link rel="alternate" hreflang="en" href="index.en.html"><link rel="alternate" hreflang="zh-CN" href="index.zh.html"><link rel="alternate" hreflang="ja" href="index.ja.html"><link rel="alternate" hreflang="uz" href="index.uz.html"><link rel="alternate" hreflang="ru" href="index.ru.html"><link rel="alternate" hreflang="vi" href="index.vi.html"><link rel="alternate" hreflang="x-default" href="index.html"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"><style data-i18n-font>body,button,input,select,textarea{font-family:"Noto Sans SC",system-ui,sans-serif}</style><style data-i18n-cjk>*{word-break:normal!important;line-break:strict}</style>
+</head>
+<body>
+<div id="prog"></div>
+<nav class="top"><div class="row"><a class="logo" href="index.html">尺子与量角器的<i>房间</i></a><div class="links"><a href="#parts">篇目</a><a href="#map">全景</a><a href="#cast">登场人物</a><a href="#source">原始资料</a></div></div></nav>
+<div class="cover"><div class="frame"><svg class="grid" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><line x1="0" y1="0" x2="0" y2="900" stroke="#dbe5ee"/><line x1="80" y1="0" x2="80" y2="900" stroke="#dbe5ee"/><line x1="160" y1="0" x2="160" y2="900" stroke="#dbe5ee"/><line x1="240" y1="0" x2="240" y2="900" stroke="#dbe5ee"/><line x1="320" y1="0" x2="320" y2="900" stroke="#dbe5ee"/><line x1="400" y1="0" x2="400" y2="900" stroke="#dbe5ee"/><line x1="480" y1="0" x2="480" y2="900" stroke="#dbe5ee"/><line x1="560" y1="0" x2="560" y2="900" stroke="#dbe5ee"/><line x1="640" y1="0" x2="640" y2="900" stroke="#dbe5ee"/><line x1="720" y1="0" x2="720" y2="900" stroke="#dbe5ee"/><line x1="800" y1="0" x2="800" y2="900" stroke="#dbe5ee"/><line x1="880" y1="0" x2="880" y2="900" stroke="#dbe5ee"/><line x1="960" y1="0" x2="960" y2="900" stroke="#dbe5ee"/><line x1="1040" y1="0" x2="1040" y2="900" stroke="#dbe5ee"/><line x1="1120" y1="0" x2="1120" y2="900" stroke="#dbe5ee"/><line x1="1200" y1="0" x2="1200" y2="900" stroke="#dbe5ee"/><line x1="1280" y1="0" x2="1280" y2="900" stroke="#dbe5ee"/><line x1="1360" y1="0" x2="1360" y2="900" stroke="#dbe5ee"/><line x1="1440" y1="0" x2="1440" y2="900" stroke="#dbe5ee"/><line x1="1520" y1="0" x2="1520" y2="900" stroke="#dbe5ee"/><line x1="1600" y1="0" x2="1600" y2="900" stroke="#dbe5ee"/><line x1="0" y1="0" x2="1600" y2="0" stroke="#dbe5ee"/><line x1="0" y1="80" x2="1600" y2="80" stroke="#dbe5ee"/><line x1="0" y1="160" x2="1600" y2="160" stroke="#dbe5ee"/><line x1="0" y1="240" x2="1600" y2="240" stroke="#dbe5ee"/><line x1="0" y1="320" x2="1600" y2="320" stroke="#dbe5ee"/><line x1="0" y1="400" x2="1600" y2="400" stroke="#dbe5ee"/><line x1="0" y1="480" x2="1600" y2="480" stroke="#dbe5ee"/><line x1="0" y1="560" x2="1600" y2="560" stroke="#dbe5ee"/><line x1="0" y1="640" x2="1600" y2="640" stroke="#dbe5ee"/><line x1="0" y1="720" x2="1600" y2="720" stroke="#dbe5ee"/><line x1="0" y1="800" x2="1600" y2="800" stroke="#dbe5ee"/><line x1="0" y1="880" x2="1600" y2="880" stroke="#dbe5ee"/><line x1="160" y1="740" x2="1440" y2="740" stroke="#1e2f6e" stroke-width="4"/><line x1="160" y1="740" x2="160" y2="120" stroke="#1e2f6e" stroke-width="4"/><line x1="400" y1="560" x2="1100" y2="240" stroke="#2458d6" stroke-width="6"/><line x1="400" y1="560" x2="1100" y2="560" stroke="#13733a" stroke-width="4" stroke-dasharray="14 10"/><line x1="1100" y1="560" x2="1100" y2="240" stroke="#13733a" stroke-width="4" stroke-dasharray="14 10"/><path d="M1070 560 L1070 530 L1100 530" fill="none" stroke="#e8731a" stroke-width="4"/><circle cx="400" cy="560" r="16" fill="#0f8f84"/><circle cx="1100" cy="240" r="16" fill="#e8731a"/><path d="M470 560 A70 70 0 0 0 464 528" fill="none" stroke="#e8731a" stroke-width="5"/></svg>
+<span class="cap">研究室走廊 · 10 个编号房间</span><span class="badge">封面图准备中</span><div class="cast"><img src="assets/chars/doctor_e08.webp" alt="博士" width="96" height="96" loading="lazy" class=s><img src="assets/chars/sia_e19.webp" alt="西娅" width="96" height="96" loading="lazy"><img src="assets/chars/moa_e09.webp" alt="茉雅" width="96" height="96" loading="lazy"><img src="assets/chars/haru_e01.webp" alt="助手 Haru" width="96" height="96" loading="lazy" class=s></div></div></div>
+<header class="hero"><div class="wrap"><span class="kicker">空间坐标讲解 · 欧几里得空间</span>
+<h1>尺子与量角器的房间<br><span style="font-size:.55em;color:var(--muted)">西娅·茉雅的欧几里得空间</span></h1>
+<p class="lead">把一行数据当作<b>房间里的一个点</b>。这样就能用尺子和量角器测量“有多远”和“有多像”。找相似的东西、画预测线、画分类线，都在这个房间里进行。</p>
+<p class="byline">文 · Ahn Sangsun（M-Robo 公司 CEO） · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">作者介绍</a> · 2026-11-19 · v1.3</p></div></header>
+<section><div class="wrap"><div class="three"><h2>写给初次到访的你 — 用 3 行概括本页</h2><ul>
+<li><b>学什么</b>：把身高、体重这样的数字组合标成点，学习测量点与点之间的距离和角度。</li><li><b>为什么重要</b>：推荐（“相似的人看过的商品”）、画预测线、垃圾邮件分类，都是距离和角度的计算。</li><li><b>工作中</b>：可直接用于寻找相似客户、挑出异常值、统一单位不同的列。</li></ul>
+<p>不懂代码和公式也没关系。本页只处理实数（普通的数字）。</p>
+<details class="abbr"><summary>原文·缩写释义（展开）</summary><dl><dt>ℝⁿ</dt><dd>由 n 个实数组成的行的全体 — 有尺子和量角器的 n 格房间（欧几里得空间）</dd><dt>点积</dt><dd>重叠分数 — 同位置相乘后相加的值</dd><dt>范数 ‖x‖</dt><dd>箭头的长度</dd><dt>标准正交基</dt><dd>长度为 1 且互相垂直的尺子组</dd><dt>正交投影</dt><dd>影子 — 从点垂直落到线·平面上的垂足</dd><dt>超平面·法线</dt><dd>隔板（n 格房间中少一格的板） · 插在隔板上的箭头</dd><dt>等距变换</dt><dd>平移·旋转·翻转 — 距离保持不变的移动</dd><dt>KNN</dt><dd>寻找最近邻</dd><dt>MSE</dt><dd>平方误差 — 偏离距离的平方的平均</dd><dt>特征缩放</dt><dd>统一单位</dd></dl></details></div>
+</div></section>
+<section id="parts"><div class="wrap"><h2>篇目</h2>
+<p class="muted">博士在研究室走廊里建了 10 个房间。每扇门上贴着一张原始资料卡片，用实验面板答对后，下一扇门才会打开。</p>
+<div class="cards">
+<a class="card" href="00_orientation.html"><img src="assets/chars/doctor_e08.webp" alt="博士" width="96" height="96" loading="lazy"><span class="n">第 0 篇 · 入门导览</span><h3>检查背包</h3><p>用 4 个小节简短复习坐标平面·勾股定理·sin·cos·箭头。可以跳过。</p></a>
+<a class="card" href="01_ruler_rooms.html"><img src="assets/chars/sia_e01.webp" alt="西娅" width="96" height="96" loading="lazy"><span class="n">第①篇 · 1~5 号房间</span><h3>尺子与量角器的房间</h3><p>点·移动·距离·重叠分数·尺子组。把数据当作点来测量的方法。</p></a>
+<a class="card" href="02_shadow_rooms.html"><img src="assets/chars/moa_e16.webp" alt="茉雅" width="96" height="96" loading="lazy"><span class="n">第②篇 · 6~10 号房间 + 对决</span><h3>影子与隔板的房间</h3><p>影子·隔板·移动·球·统一单位。寻找最近邻对决。</p></a>
+<div class="card soon"><img src="assets/chars/haru_e09.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><span class="n">下一篇 · 即将开放</span><h3>无尽的房间 — 希尔伯特空间</h3><p>格数无穷多会怎样？如果是曲线呢？在第②篇结尾先行介绍。</p></div>
+</div></div></section>
+<section id="map"><div class="wrap"><h2>全景 — 前一个房间的局限就是下一个房间的理由</h2><div class="ladder"><a href="01_ruler_rooms.html#r01"><b>1 号房间</b>1 格·2 格·3 格房间，以及 n 格房间</a><a href="01_ruler_rooms.html#r02"><b>2 号房间</b>点是位置，箭头是移动</a><a href="01_ruler_rooms.html#r03"><b>3 号房间</b>不论几格都是勾股定理</a><a href="01_ruler_rooms.html#r04"><b>4 号房间</b>重叠分数与角度</a><a href="01_ruler_rooms.html#r05"><b>5 号房间</b>长度为 1 且互相垂直的尺子组</a><a href="02_shadow_rooms.html#r06"><b>6 号房间</b>影子是最接近的答案</a><a href="02_shadow_rooms.html#r07"><b>7 号房间</b>线·平面·隔板</a><a href="02_shadow_rooms.html#r08"><b>8 号房间</b>平移·旋转·翻转，距离都不变</a><a href="02_shadow_rooms.html#r09"><b>9 号房间</b>半径 r 以内 = 邻居</a><a href="02_shadow_rooms.html#r10"><b>10 号房间</b>这个房间的用途与直尺的局限</a></div><div style="height:16px"></div><div class="tbl"><table><thead><tr><th>房间</th><th>简单标题</th><th>前一个房间的局限 → 需要这个房间的理由</th><th>在机器学习中</th></tr></thead><tbody><tr><td>1</td><td>1 格·2 格·3 格房间，以及 n 格房间</td><td>想把数据当作点放进去</td><td>一行数据 = 一个点（特征空间）</td></tr><tr><td>2</td><td>点是位置，箭头是移动</td><td>只有点，说不出&quot;往哪里、走多少&quot;</td><td>嵌入差值、变化量</td></tr><tr><td>3</td><td>不论几格都是勾股定理</td><td>知道了移动，还需要用一个数字表示&quot;有多远&quot;</td><td>KNN、K-means、平方误差</td></tr><tr><td>4</td><td>重叠分数与角度</td><td>只靠距离量不出&quot;是否朝同一方向&quot;</td><td>余弦相似度、推荐、注意力</td></tr><tr><td>5</td><td>长度为 1 且互相垂直的尺子组</td><td>坐标数字随用哪把尺子来读而变化</td><td>独热编码、PCA</td></tr><tr><td>6</td><td>影子是最接近的答案</td><td>无法正好命中正确答案时，需要错得最少的答案</td><td>画预测线、平均值</td></tr><tr><td>7</td><td>线·平面·隔板</td><td>需要一块底面和划分阵营的板</td><td>分类器的决策边界</td></tr><tr><td>8</td><td>平移·旋转·翻转，距离都不变</td><td>移动点之后，关系还保持不变吗</td><td>数据增强（照片旋转）</td></tr><tr><td>9</td><td>半径 r 以内 = 邻居</td><td>想确定邻居的范围 / 格数增加会出现怪事</td><td>半径邻居、格数多时的陷阱（维度灾难）</td></tr><tr><td>10</td><td>这个房间的用途与直尺的局限</td><td>单位混杂或表面弯曲时，直尺会出错</td><td>统一单位，→ 希尔伯特空间</td></tr></tbody></table></div></div></section>
+<section id="cast"><div class="wrap"><h2>登场人物</h2><p class="muted">正文中直接称呼西娅·茉雅的名字。观众 X1~X3 本篇休息。</p><div class="cast-grid"><div class="who"><img src="assets/chars/sia_e01.webp" alt="西娅" width="96" height="96" loading="lazy"><b>西娅</b><span>实习生（No.005） · 直觉派。先拿出比喻</span></div><div class="who"><img src="assets/chars/moa_e01.webp" alt="茉雅" width="96" height="96" loading="lazy"><b>茉雅</b><span>实习生（No.006） · 细致派。追问条件和例外</span></div><div class="who"><img src="assets/chars/doctor_e13.webp" alt="博士" width="96" height="96" loading="lazy"><b>博士</b><span>建造房间的人。每个房间都整理&quot;在机器学习中&quot;</span></div><div class="who"><img src="assets/chars/haru_e13.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><b>助手 Haru</b><span>负责公式框。代为提问难懂的公式，并用数字演算。对决裁判</span></div><div class="who"><img src="assets/chars/fruitfly_e13.webp" alt="果蝇研究员" width="96" height="96" loading="lazy"><b>果蝇研究员</b><span>负责质疑。用&quot;按一下这个&quot;推荐实验面板</span></div><div class="who"><img src="assets/chars/jupanbot_e13.webp" alt="算盘宝" width="96" height="96" loading="lazy"><b>算盘宝</b><span>以草率的自信代表常见的误解</span></div></div></div></section>
+
+<section id="source"><div class="wrap"><h2>原始资料与本讲解</h2>
+<p>原始资料是 @eeanimation 的信息图「EUCLIDEAN SPACE 01~10」共 10 张。保留图表的构图·颜色·符号重新绘制，并改成可以亲手操作的实验面板。</p>
+<p>所有数字都已验算。没有计算错误，只改写了符号重叠或缺漏的 4 处（各房间的 📝 标记）。</p>
+<p>建议先看「坐标轴上的碗」系列：<a href="https://adminmrobo.github.io/optimization_3d_map/">坐标轴上的碗 — 用 3D 地图看模型优化</a></p></div></section>
+<section id="kg"><div class="wrap"><h2>知识索引 — 在本页查找</h2>
+<p class="muted">汇集了本页出现的概念·方法·比喻·用途。可以搜索，并通过“查看讲解”回到正文。</p><div id="kg-mount"></div></div></section>
+<section id="export"><div class="wrap"><h2>本体·文献包 — 带走本页的知识</h2>
+<p class="muted">将知识索引连同出处下载为文件。文献管理用 BibTeX·RIS，本体编辑用 Turtle。图工具用 CSV，合并多个页面用 kg.json。</p><div id="export-mount"></div></div></section>
+<script type="application/json" id="kg-raw">{"version": "1.3", "page": "index", "series": "자와 각도기의 방", "nodes": [{"id": "lab:concept/euclidean-space", "type": "Concept", "label": {"ko": "유클리드 공간(자와 각도기가 있는 방)", "en": "Euclidean space ℝⁿ", "zh": "欧几里得空间（有尺子和量角器的房间）"}, "anchor": "#r01", "definition": {"ko": "숫자 n개 묶음을 점으로 보고 거리·각도를 재는 방", "zh": "把 n 个数字的组合看成一个点，并测量距离与角度的房间"}, "page": "01_ruler_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/point-vector", "type": "Concept", "label": {"ko": "점과 화살표", "en": "Point and vector", "zh": "点与箭头"}, "anchor": "#r02", "definition": {"ko": "점은 자리, 화살표는 이동. B − A = 이동", "zh": "点是位置，箭头是移动。B − A = 移动"}, "page": "01_ruler_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/distance", "type": "Concept", "label": {"ko": "두 점 사이 거리", "en": "Euclidean distance", "zh": "两点间距离"}, "anchor": "#r03", "definition": {"ko": "차를 제곱해 더하고 루트 — 몇 칸이든 피타고라스", "zh": "把差平方后相加再开根号——无论多少格都是毕达哥拉斯"}, "page": "01_ruler_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/dot-product", "type": "Concept", "label": {"ko": "겹침 점수(내적)와 각도", "en": "Dot product and angle", "zh": "重叠分数（点积）与角度"}, "anchor": "#r04", "definition": {"ko": "같은 자리끼리 곱해 더한 값. cos θ로 방향의 닮음을 잰다", "zh": "同位置相乘再相加。用 cos θ 衡量方向的相似程度"}, "page": "01_ruler_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/orthonormal-basis", "type": "Concept", "label": {"ko": "길이 1이고 서로 직각인 자 세트", "en": "Orthonormal basis", "zh": "长度为 1 且互相垂直的尺子组"}, "anchor": "#r05", "definition": {"ko": "좌표 = 그 자와의 겹침 점수. 자를 돌려도 길이는 그대로", "zh": "坐标 = 与那把尺子的重叠分数。转动尺子，长度不变"}, "page": "01_ruler_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/projection", "type": "Concept", "label": {"ko": "그림자(정사영)", "en": "Orthogonal projection", "zh": "影子（正交投影）"}, "anchor": "#r06", "definition": {"ko": "점에서 선으로 똑바로 내린 발밑이 가장 가까운 점", "zh": "从点笔直落到直线上的垂足就是最近的点"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/hyperplane", "type": "Concept", "label": {"ko": "선·평면·칸막이", "en": "Lines, planes, hyperplanes", "zh": "线·平面·隔板"}, "anchor": "#r07", "definition": {"ko": "n칸 방의 칸막이는 n − 1칸. 꽂힌 화살표와의 점수로 편을 가른다", "zh": "n 格房间的隔板有 n − 1 格。用与插在上面的箭头的分数来分边"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/isometry", "type": "Concept", "label": {"ko": "밀고·돌리고·뒤집기", "en": "Isometry", "zh": "平移·旋转·翻转"}, "anchor": "#r08", "definition": {"ko": "거리와 각도를 지키는 움직임. 늘리기는 거리를 바꾼다", "zh": "保持距离和角度的移动。放大会改变距离"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/ball", "type": "Concept", "label": {"ko": "원·구·공", "en": "Circles, spheres, n-balls", "zh": "圆·球面·球"}, "anchor": "#r09", "definition": {"ko": "중심에서 r 안쪽 = 이웃 범위", "zh": "离中心 r 以内 = 邻居范围"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/curse-of-dimensionality", "type": "Concept", "label": {"ko": "칸이 너무 많으면 모두 비슷하게 멀어진다", "en": "Curse of dimensionality", "zh": "格数太多时，所有点都变得差不多远"}, "anchor": "#r09", "definition": {"ko": "n칸 공의 부피가 겉껍질에 몰린다(0.9ⁿ)", "zh": "n 格球的体积集中在外壳（0.9ⁿ）"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:method/feature-scaling", "type": "Method", "label": {"ko": "단위 맞추기", "en": "Feature scaling", "zh": "统一单位"}, "anchor": "#r10", "definition": {"ko": "열마다 단위를 맞춰야 거리가 공정해진다", "zh": "每一列的单位要统一，距离才公平"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/arc-chord", "type": "Concept", "label": {"ko": "호와 현", "en": "Intrinsic vs Euclidean distance", "zh": "弧与弦"}, "anchor": "#r10", "definition": {"ko": "휜 표면에서는 곧은 자가 실제 길보다 짧게 잰다", "zh": "在弯曲的表面上，直尺量出的比实际路程短"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:application/knn", "type": "Application", "label": {"ko": "가장 가까운 이웃 찾기", "en": "k-nearest neighbors", "zh": "寻找最近邻"}, "anchor": "#r03", "definition": {"ko": "거리가 가장 짧은 데이터를 찾는다", "zh": "找出距离最短的数据"}, "page": "01_ruler_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:application/cosine-similarity", "type": "Application", "label": {"ko": "코사인 유사도·추천", "en": "Cosine similarity", "zh": "余弦相似度·推荐"}, "anchor": "#r04", "definition": {"ko": "취향표의 방향이 닮은 정도", "zh": "两张喜好表方向相似的程度"}, "page": "01_ruler_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:application/least-squares", "type": "Application", "label": {"ko": "예측선 긋기(최소제곱)", "en": "Least squares", "zh": "画预测线（最小二乘）"}, "anchor": "#r06", "definition": {"ko": "정답의 그림자를 고른다", "zh": "选出正确答案的影子"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:application/linear-classifier", "type": "Application", "label": {"ko": "분류기의 결정 경계", "en": "Linear classifier", "zh": "分类器的决策边界"}, "anchor": "#r07", "definition": {"ko": "칸막이로 스팸·정상을 가른다", "zh": "用隔板分开垃圾邮件和正常邮件"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:analogy/shadow", "type": "Analogy", "label": {"ko": "정오의 막대 그림자", "en": "Noon shadow", "zh": "正午的竿影"}, "anchor": "#r06", "definition": {"ko": "그림자 = 가장 가까운 답", "zh": "影子 = 最近的答案"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/coordinate-plane", "type": "Concept", "label": {"ko": "좌표평면 — 숫자 두 개 = 점 하나", "en": "Coordinate plane", "zh": "坐标平面 — 两个数字 = 一个点"}, "anchor": "#bag1", "definition": {"ko": "가로·세로 숫자로 점의 자리를 정한다", "zh": "用横、竖两个数字确定点的位置"}, "page": "00_orientation", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/pythagoras", "type": "Concept", "label": {"ko": "피타고라스 정리", "en": "Pythagorean theorem", "zh": "勾股定理"}, "anchor": "#bag2", "definition": {"ko": "빗변² = 가로² + 세로² — 3번 방 거리의 바탕", "zh": "斜边² = 横² + 竖²——第 3 号房间距离的基础"}, "page": "00_orientation", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/sin-cos", "type": "Concept", "label": {"ko": "sin·cos — 원 위의 가로·세로", "en": "Sine and cosine", "zh": "sin·cos — 圆上的横与纵"}, "anchor": "#bag3", "definition": {"ko": "반지름 1인 원 위의 점 (cos θ, sin θ)", "zh": "半径为 1 的圆上的点 (cos θ, sin θ)"}, "page": "00_orientation", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:concept/vector-add", "type": "Concept", "label": {"ko": "화살표 더하기·늘리기", "en": "Vector addition and scaling", "zh": "箭头相加·伸长"}, "anchor": "#bag4", "definition": {"ko": "자리끼리 더하고 자리마다 곱한다", "zh": "按位置相加，每个位置都乘"}, "page": "00_orientation", "source": "lab:work/eeanimation_euclidean_space"}, {"id": "lab:open/hilbert", "type": "OpenQuestion", "label": {"ko": "칸 수가 끝없으면? 곡선이라면?", "en": "Infinite dimensions → Hilbert space", "zh": "格数无穷多会怎样？如果是曲线呢？"}, "anchor": "#outro", "definition": {"ko": "다음 편 힐베르트 공간에서 다룬다", "zh": "在下一篇希尔伯特空间中讲解"}, "page": "02_shadow_rooms", "source": "lab:work/eeanimation_euclidean_space"}], "edges": [{"s": "lab:concept/coordinate-plane", "p": "motivates", "o": "lab:concept/euclidean-space"}, {"s": "lab:concept/pythagoras", "p": "explains", "o": "lab:concept/distance"}, {"s": "lab:concept/sin-cos", "p": "explains", "o": "lab:concept/dot-product"}, {"s": "lab:concept/vector-add", "p": "explains", "o": "lab:concept/point-vector"}, {"s": "lab:concept/euclidean-space", "p": "motivates", "o": "lab:concept/point-vector"}, {"s": "lab:concept/point-vector", "p": "motivates", "o": "lab:concept/distance"}, {"s": "lab:concept/distance", "p": "motivates", "o": "lab:concept/dot-product"}, {"s": "lab:concept/dot-product", "p": "motivates", "o": "lab:concept/orthonormal-basis"}, {"s": "lab:concept/orthonormal-basis", "p": "motivates", "o": "lab:concept/projection"}, {"s": "lab:concept/projection", "p": "motivates", "o": "lab:concept/hyperplane"}, {"s": "lab:concept/hyperplane", "p": "motivates", "o": "lab:concept/isometry"}, {"s": "lab:concept/isometry", "p": "motivates", "o": "lab:concept/ball"}, {"s": "lab:concept/ball", "p": "motivates", "o": "lab:method/feature-scaling"}, {"s": "lab:concept/ball", "p": "hasPart", "o": "lab:concept/curse-of-dimensionality"}, {"s": "lab:method/feature-scaling", "p": "motivates", "o": "lab:open/hilbert"}, {"s": "lab:concept/arc-chord", "p": "motivates", "o": "lab:open/hilbert"}, {"s": "lab:concept/distance", "p": "usedIn", "o": "lab:application/knn"}, {"s": "lab:concept/dot-product", "p": "usedIn", "o": "lab:application/cosine-similarity"}, {"s": "lab:concept/projection", "p": "usedIn", "o": "lab:application/least-squares"}, {"s": "lab:concept/hyperplane", "p": "usedIn", "o": "lab:application/linear-classifier"}, {"s": "lab:analogy/shadow", "p": "explains", "o": "lab:concept/projection"}, {"s": "lab:method/feature-scaling", "p": "usedIn", "o": "lab:application/knn"}]}</script>
+<script type="application/ld+json" id="kg-ld">{"@context": {"@vocab": "urn:lab:", "skos": "http://www.w3.org/2004/02/skos/core#", "schema": "https://schema.org/"}, "@graph": [{"@id": "urn:lab:concept/euclidean-space", "@type": "Concept", "skos:prefLabel": [{"@value": "유클리드 공간(자와 각도기가 있는 방)", "@language": "ko"}, {"@value": "Euclidean space ℝⁿ", "@language": "en"}], "skos:definition": "숫자 n개 묶음을 점으로 보고 거리·각도를 재는 방", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/01_ruler_rooms.html#r01"}, {"@id": "urn:lab:concept/point-vector", "@type": "Concept", "skos:prefLabel": [{"@value": "점과 화살표", "@language": "ko"}, {"@value": "Point and vector", "@language": "en"}], "skos:definition": "점은 자리, 화살표는 이동. B − A = 이동", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/01_ruler_rooms.html#r02"}, {"@id": "urn:lab:concept/distance", "@type": "Concept", "skos:prefLabel": [{"@value": "두 점 사이 거리", "@language": "ko"}, {"@value": "Euclidean distance", "@language": "en"}], "skos:definition": "차를 제곱해 더하고 루트 — 몇 칸이든 피타고라스", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/01_ruler_rooms.html#r03"}, {"@id": "urn:lab:concept/dot-product", "@type": "Concept", "skos:prefLabel": [{"@value": "겹침 점수(내적)와 각도", "@language": "ko"}, {"@value": "Dot product and angle", "@language": "en"}], "skos:definition": "같은 자리끼리 곱해 더한 값. cos θ로 방향의 닮음을 잰다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/01_ruler_rooms.html#r04"}, {"@id": "urn:lab:concept/orthonormal-basis", "@type": "Concept", "skos:prefLabel": [{"@value": "길이 1이고 서로 직각인 자 세트", "@language": "ko"}, {"@value": "Orthonormal basis", "@language": "en"}], "skos:definition": "좌표 = 그 자와의 겹침 점수. 자를 돌려도 길이는 그대로", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/01_ruler_rooms.html#r05"}, {"@id": "urn:lab:concept/projection", "@type": "Concept", "skos:prefLabel": [{"@value": "그림자(정사영)", "@language": "ko"}, {"@value": "Orthogonal projection", "@language": "en"}], "skos:definition": "점에서 선으로 똑바로 내린 발밑이 가장 가까운 점", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r06"}, {"@id": "urn:lab:concept/hyperplane", "@type": "Concept", "skos:prefLabel": [{"@value": "선·평면·칸막이", "@language": "ko"}, {"@value": "Lines, planes, hyperplanes", "@language": "en"}], "skos:definition": "n칸 방의 칸막이는 n − 1칸. 꽂힌 화살표와의 점수로 편을 가른다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r07"}, {"@id": "urn:lab:concept/isometry", "@type": "Concept", "skos:prefLabel": [{"@value": "밀고·돌리고·뒤집기", "@language": "ko"}, {"@value": "Isometry", "@language": "en"}], "skos:definition": "거리와 각도를 지키는 움직임. 늘리기는 거리를 바꾼다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r08"}, {"@id": "urn:lab:concept/ball", "@type": "Concept", "skos:prefLabel": [{"@value": "원·구·공", "@language": "ko"}, {"@value": "Circles, spheres, n-balls", "@language": "en"}], "skos:definition": "중심에서 r 안쪽 = 이웃 범위", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r09"}, {"@id": "urn:lab:concept/curse-of-dimensionality", "@type": "Concept", "skos:prefLabel": [{"@value": "칸이 너무 많으면 모두 비슷하게 멀어진다", "@language": "ko"}, {"@value": "Curse of dimensionality", "@language": "en"}], "skos:definition": "n칸 공의 부피가 겉껍질에 몰린다(0.9ⁿ)", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r09"}, {"@id": "urn:lab:method/feature-scaling", "@type": "Method", "skos:prefLabel": [{"@value": "단위 맞추기", "@language": "ko"}, {"@value": "Feature scaling", "@language": "en"}], "skos:definition": "열마다 단위를 맞춰야 거리가 공정해진다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r10"}, {"@id": "urn:lab:concept/arc-chord", "@type": "Concept", "skos:prefLabel": [{"@value": "호와 현", "@language": "ko"}, {"@value": "Intrinsic vs Euclidean distance", "@language": "en"}], "skos:definition": "휜 표면에서는 곧은 자가 실제 길보다 짧게 잰다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r10"}, {"@id": "urn:lab:application/knn", "@type": "Application", "skos:prefLabel": [{"@value": "가장 가까운 이웃 찾기", "@language": "ko"}, {"@value": "k-nearest neighbors", "@language": "en"}], "skos:definition": "거리가 가장 짧은 데이터를 찾는다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/01_ruler_rooms.html#r03"}, {"@id": "urn:lab:application/cosine-similarity", "@type": "Application", "skos:prefLabel": [{"@value": "코사인 유사도·추천", "@language": "ko"}, {"@value": "Cosine similarity", "@language": "en"}], "skos:definition": "취향표의 방향이 닮은 정도", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/01_ruler_rooms.html#r04"}, {"@id": "urn:lab:application/least-squares", "@type": "Application", "skos:prefLabel": [{"@value": "예측선 긋기(최소제곱)", "@language": "ko"}, {"@value": "Least squares", "@language": "en"}], "skos:definition": "정답의 그림자를 고른다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r06"}, {"@id": "urn:lab:application/linear-classifier", "@type": "Application", "skos:prefLabel": [{"@value": "분류기의 결정 경계", "@language": "ko"}, {"@value": "Linear classifier", "@language": "en"}], "skos:definition": "칸막이로 스팸·정상을 가른다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r07"}, {"@id": "urn:lab:analogy/shadow", "@type": "Analogy", "skos:prefLabel": [{"@value": "정오의 막대 그림자", "@language": "ko"}, {"@value": "Noon shadow", "@language": "en"}], "skos:definition": "그림자 = 가장 가까운 답", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r06"}, {"@id": "urn:lab:concept/coordinate-plane", "@type": "Concept", "skos:prefLabel": [{"@value": "좌표평면 — 숫자 두 개 = 점 하나", "@language": "ko"}, {"@value": "Coordinate plane", "@language": "en"}], "skos:definition": "가로·세로 숫자로 점의 자리를 정한다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/00_orientation.html#bag1"}, {"@id": "urn:lab:concept/pythagoras", "@type": "Concept", "skos:prefLabel": [{"@value": "피타고라스 정리", "@language": "ko"}, {"@value": "Pythagorean theorem", "@language": "en"}], "skos:definition": "빗변² = 가로² + 세로² — 3번 방 거리의 바탕", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/00_orientation.html#bag2"}, {"@id": "urn:lab:concept/sin-cos", "@type": "Concept", "skos:prefLabel": [{"@value": "sin·cos — 원 위의 가로·세로", "@language": "ko"}, {"@value": "Sine and cosine", "@language": "en"}], "skos:definition": "반지름 1인 원 위의 점 (cos θ, sin θ)", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/00_orientation.html#bag3"}, {"@id": "urn:lab:concept/vector-add", "@type": "Concept", "skos:prefLabel": [{"@value": "화살표 더하기·늘리기", "@language": "ko"}, {"@value": "Vector addition and scaling", "@language": "en"}], "skos:definition": "자리끼리 더하고 자리마다 곱한다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/00_orientation.html#bag4"}, {"@id": "urn:lab:open/hilbert", "@type": "OpenQuestion", "skos:prefLabel": [{"@value": "칸 수가 끝없으면? 곡선이라면?", "@language": "ko"}, {"@value": "Infinite dimensions → Hilbert space", "@language": "en"}], "skos:definition": "다음 편 힐베르트 공간에서 다룬다", "schema:url": "https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#outro"}]}</script>
+<script type="application/json" id="refs-csl">[{"id": "eeanimation_euclidean_space", "type": "graphic", "title": "EUCLIDEAN SPACE 01–10 (infographic series)", "author": [{"literal": "@eeanimation"}], "accessed": {"date-parts": [[2026, 11, 19]]}, "note": "사용자 제공 이미지. 차트를 SVG로 다시 그려 실험 패널로 바꿈"}]</script>
+<script type="application/json" id="page-meta">{"title": "index", "series": "尺子与量角器的房间", "creator": [{"name": "안상선", "role": "author", "affiliation": "(주)M-Robo"}], "date": "2026-11-19", "version": "v1.3", "license": "캐릭터·그림 무단 사용 금지", "series_ko": "자와 각도기의 방", "language": ["zh"], "translationOf": "index.html"}</script>
+<footer><div class="wrap">
+<h3>出处</h3>
+<div class="tbl"><table><thead><tr><th>#</th><th>资料</th><th>本页中的用处</th></tr></thead><tbody>
+<tr><td>[1]</td><td>@eeanimation，信息图「EUCLIDEAN SPACE 01~10」（用户提供的图片，2026-11-19 确认）</td><td>房间 1~10 的原始资料卡片。保留构图·颜色·符号·轴名，用 SVG 重新绘制并改为可手动操作。未直接贴入图片</td></tr>
+<tr><td>[2]</td><td>Ahn Sangsun，「空间坐标讲解制作指南」v1.0 (docs/SPACE_COORDINATE_GUIDE.md)</td><td>术语对照表、空间阶梯、房间结构</td></tr>
+</tbody></table></div>
+<h3>示例值·说明用数字</h3>
+<p>本页中的人物·商店·顾客数字均为说明用的示例值。西娅·茉雅的身高·体重·腰围、喜好表、三次测量的身高都是如此。便利店位置和顾客甲~己的身高·体重也一样。</p>
+<p>角色名称·设定·图画未经著作权人 Ahn Sangsun 许可不得使用。角色图：fruitfly-lab-expressions。</p>
+<p>文 · Ahn Sangsun（M-Robo 公司 CEO） · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">作者介绍</a> · 2026-11-19 · v1.3</p>
+<p><a href="index.html">目录</a> · <a href="00_orientation.html">第 0 篇 检查背包</a> · <a href="01_ruler_rooms.html">第①篇 尺子与量角器的房间</a> · <a href="02_shadow_rooms.html">第②篇 影子与隔板的房间</a> · <a href="https://github.com/adminmrobo/euclidean_space_lab">仓库</a></p>
+</div></footer>
+<script>
+/* 자와 각도기의 방 — 실험 패널 모음. 원자료 @eeanimation 「EUCLIDEAN SPACE 01~10」의 차트를 다시 그려 손으로 움직이게 만든 것 */
+(function(){
+'use strict';
+var NS='http://www.w3.org/2000/svg';
+var C={teal:'#0f8f84',orange:'#e8731a',navy:'#1e2f6e',blue:'#2458d6',green:'#13733a',red:'#c9302c',grid:'#e3e8ee',axis:'#1e2f6e',muted:'#5b6874'};
+function el(tag,a,parent){var e=document.createElementNS(NS,tag);for(var k in a){if(a[k]!=null)e.setAttribute(k,a[k]);}if(parent)parent.appendChild(e);return e;}
+function txt(parent,x,y,s,a){a=a||{};var t=el('text',Object.assign({x:x,y:y,'font-size':a.size||14,fill:a.fill||C.navy,'font-family':a.font||'"Cambria Math","Times New Roman",serif','font-style':a.italic===false?'normal':'italic','text-anchor':a.anchor||'start','font-weight':a.weight||'normal'},{}),parent);t.textContent=s;return t;}
+function ktxt(parent,x,y,s,a){a=a||{};a.font='"IBM Plex Sans KR","Malgun Gothic","Noto Sans KR",sans-serif';a.italic=false;return txt(parent,x,y,s,a);}
+function r2(v){return Math.round(v*100)/100;}
+function r1(v){return Math.round(v*10)/10;}
+function fmt(v,d){d=d==null?2:d;var s=(Math.round(v*Math.pow(10,d))/Math.pow(10,d)).toFixed(d);s=s.replace(/\.?0+$/,'');if(s==='-0')s='0';return s;}
+function num(v){return v<0?'−'+fmt(-v):fmt(v);}
+function svgOf(host,W,H){host.innerHTML='';var s=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'实验面板图： '+(function(){var n=host.parentNode&&host.parentNode.querySelector('.ph small');return n?n.textContent:'';})()},host);var d=el('defs',{},s);
+  ['teal','orange','navy','blue','green','red'].forEach(function(c){var m=el('marker',{id:'ah-'+c+'-'+host.id,viewBox:'0 0 10 10',refX:8.5,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'},d);el('path',{d:'M0,0 L10,5 L0,10 z',fill:C[c]},m);});
+  s._id=host.id;return s;}
+function arrow(s,x1,y1,x2,y2,c,w){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:C[c],'stroke-width':w||3,'marker-end':'url(#ah-'+c+'-'+s._id+')'},s);}
+function dash(s,x1,y1,x2,y2,c){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:C[c]||c,'stroke-width':1.6,'stroke-dasharray':'5 4'},s);}
+/* 좌표평면 */
+function plane(s,o){var W=o.W,H=o.H,p=o.pad||36;var sx=(W-2*p)/(o.x1-o.x0),sy=(H-2*p)/(o.y1-o.y0);
+  if(o.equal){var k=Math.min(sx,sy);sx=sy=k;}
+  var ox=p-o.x0*sx,oy=H-p+o.y0*sy;s._sx=sx;
+  var P={X:function(x){return ox+x*sx;},Y:function(y){return oy-y*sy;},inv:function(px,py){return[(px-ox)/sx,(oy-py)/sy];},sx:sx,sy:sy};
+  var g=el('g',{},s);var st=o.step||1;
+  if(o.grid!==false){for(var x=Math.ceil(o.x0/st)*st;x<=o.x1+1e-9;x+=st)el('line',{x1:P.X(x),y1:P.Y(o.y0),x2:P.X(x),y2:P.Y(o.y1),stroke:C.grid},g);
+  for(var y=Math.ceil(o.y0/st)*st;y<=o.y1+1e-9;y+=st)el('line',{x1:P.X(o.x0),y1:P.Y(y),x2:P.X(o.x1),y2:P.Y(y),stroke:C.grid},g);}
+  var ax0=Math.max(o.x0,Math.min(0,o.x1)),ay0=Math.max(o.y0,Math.min(0,o.y1));
+  if(o.ax!==undefined)ax0=o.ax;if(o.ay!==undefined)ay0=o.ay;
+  el('line',{x1:P.X(o.x0),y1:P.Y(ay0),x2:P.X(o.x1)+14,y2:P.Y(ay0),stroke:C.axis,'stroke-width':2,'marker-end':'url(#ah-navy-'+s._id+')'},g);
+  el('line',{x1:P.X(ax0),y1:P.Y(o.y0),x2:P.X(ax0),y2:P.Y(o.y1)-14,stroke:C.axis,'stroke-width':2,'marker-end':'url(#ah-navy-'+s._id+')'},g);
+  if(/[^\x00-\x7f]/.test((o.xl||'')+(o.yl||''))){ktxt(g,P.X(o.x1)+14,P.Y(ay0)-12,o.xl,{size:13,anchor:'end'});ktxt(g,P.X(ax0)+12,P.Y(o.y1)-2,o.yl,{size:13});}else{txt(g,P.X(o.x1)+10,P.Y(ay0)+20,o.xl||'x',{size:16});txt(g,P.X(ax0)-22,P.Y(o.y1)-8,o.yl||'y',{size:16});}
+  var ls=o.label||st;
+  if(o.ticks!==false){for(var a=Math.ceil(o.x0/ls)*ls;a<=o.x1+1e-9;a+=ls){if(Math.abs(a-ax0)<1e-9&&!o.zeroX)continue;txt(g,P.X(a),P.Y(ay0)+18,fmt(a),{size:12.5,anchor:'middle',italic:false,fill:C.muted});}
+  for(var b=Math.ceil(o.y0/ls)*ls;b<=o.y1+1e-9;b+=ls){if(Math.abs(b-ay0)<1e-9)continue;txt(g,P.X(ax0)-8,P.Y(b)+4,fmt(b),{size:12.5,anchor:'end',italic:false,fill:C.muted});}
+  if(o.x0<=0&&o.y0<=0)txt(g,P.X(0)-14,P.Y(0)+18,'0',{size:12.5,italic:false,fill:C.muted});}
+  return P;}
+/* 끌기 */
+function drag(s,node,onMove){var on=false;var host=s.parentNode;var idx=s.querySelectorAll('g.drag').length;
+  node.setAttribute('tabindex','0');node.setAttribute('role','slider');node.setAttribute('aria-label','可拖动的点（也可用方向键移动）');
+  node.addEventListener('keydown',function(e){var k={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];if(!k)return;e.preventDefault();
+    var c=node.querySelector('circle');var st=(s._sx||24)*(+(host.dataset.ksnap||1));host.dataset.kf=idx;onMove(+c.getAttribute('cx')+k[0]*st,+c.getAttribute('cy')+k[1]*st);});
+  function pt(e){var m=s.getScreenCTM().inverse();var q=s.createSVGPoint();q.x=e.clientX;q.y=e.clientY;q=q.matrixTransform(m);return q;}
+  node.classList.add('drag');
+  node.addEventListener('pointerdown',function(e){on=true;node.setPointerCapture(e.pointerId);e.preventDefault();});
+  node.addEventListener('pointermove',function(e){if(!on)return;var q=pt(e);onMove(q.x,q.y);});
+  node.addEventListener('pointerup',function(){on=false;});node.addEventListener('pointercancel',function(){on=false;});
+  if(host.dataset.kf!=null&&+host.dataset.kf===idx)node.focus({preventScroll:true});}
+function handle(s,x,y,c,label){var g=el('g',{},s);el('circle',{cx:x,cy:y,r:16,fill:C[c],'fill-opacity':.14},g);el('circle',{cx:x,cy:y,r:8,fill:C[c],stroke:'#fff','stroke-width':2},g);return g;}
+function dot(s,x,y,c,r){return el('circle',{cx:x,cy:y,r:r||6,fill:C[c]||c,stroke:'#fff','stroke-width':1.5},s);}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function snap(v,st){return Math.round(v/st)*st;}
+function readout(host){var d=host.parentNode.querySelector('.readout');return d;}
+function rightMark(s,x,y,ux,uy,vx,vy,k){k=k||10;el('path',{d:'M'+(x+ux*k)+','+(y+uy*k)+' L'+(x+ux*k+vx*k)+','+(y+uy*k+vy*k)+' L'+(x+vx*k)+','+(y+vy*k),fill:'none',stroke:C.orange,'stroke-width':1.5},s);}
+
+var P={};
+
+/* ===== 0편 ===== */
+P.o1=function(h){var W=520,H=400,pt=[3,2];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:6,y0:0,y1:4.5,equal:true});
+    var bg=el('rect',{x:0,y:0,width:W,height:H,fill:'transparent'},s);
+    dash(s,p.X(pt[0]),p.Y(pt[1]),p.X(pt[0]),p.Y(0),'teal');dash(s,p.X(pt[0]),p.Y(pt[1]),p.X(0),p.Y(pt[1]),'teal');
+    dot(s,p.X(pt[0]),p.Y(pt[1]),'orange',8);txt(s,p.X(pt[0])+10,p.Y(pt[1])-10,'P('+fmt(pt[0])+', '+fmt(pt[1])+')',{size:16});
+    bg.addEventListener('pointerdown',function(e){var m=s.getScreenCTM().inverse();var q=s.createSVGPoint();q.x=e.clientX;q.y=e.clientY;q=q.matrixTransform(m);var v=p.inv(q.x,q.y);pt=[clamp(snap(v[0],.5),0,6),clamp(snap(v[1],.5),0,4.5)];draw();});
+    out.innerHTML='点 P 是<b>横向 '+fmt(pt[0])+'格、纵向 '+fmt(pt[1])+'格</b>的位置。两个数 = 一个点。';}
+  draw();};
+P.o2=function(h){var W=520,H=400,B=[4,3];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:8,y0:0,y1:6,equal:true});
+    el('line',{x1:p.X(0),y1:p.Y(0),x2:p.X(B[0]),y2:p.Y(0),stroke:C.green,'stroke-width':3},s);
+    el('line',{x1:p.X(B[0]),y1:p.Y(0),x2:p.X(B[0]),y2:p.Y(B[1]),stroke:C.green,'stroke-width':3},s);
+    el('line',{x1:p.X(0),y1:p.Y(0),x2:p.X(B[0]),y2:p.Y(B[1]),stroke:C.blue,'stroke-width':3},s);
+    rightMark(s,p.X(B[0]),p.Y(0),-1,0,0,-1,12);
+    txt(s,p.X(B[0]/2),p.Y(0)-8,'a = '+B[0],{anchor:'middle',fill:C.orange,size:15});txt(s,p.X(B[0])+8,p.Y(B[1]/2),'b = '+B[1],{fill:C.orange,size:15});
+    var g=handle(s,p.X(B[0]),p.Y(B[1]),'blue');drag(s,g,function(x,y){var v=p.inv(x,y);var nb=[clamp(snap(v[0],1),1,8),clamp(snap(v[1],1),1,6)];if(nb[0]!==B[0]||nb[1]!==B[1]){B=nb;draw();}});
+    var c=Math.sqrt(B[0]*B[0]+B[1]*B[1]);var ok=Math.abs(c-Math.round(c))<1e-9;
+    out.innerHTML=B[0]+'² + '+B[1]+'² = '+(B[0]*B[0]+B[1]*B[1])+' → 斜边 c = √'+(B[0]*B[0]+B[1]*B[1])+' = <b>'+fmt(c)+'</b>'+(ok?' <span class="alert">恰好是整数组合！</span>':'');}
+  draw();};
+P.o3=function(h){var W=520,H=400;var inp=h.parentNode.querySelector('input');var out=readout(h);
+  function draw(){var t=+inp.value;var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-1.3,x1:1.3,y0:-1.3,y1:1.3,equal:true,step:.5,label:.5,grid:true});
+    el('circle',{cx:p.X(0),cy:p.Y(0),r:p.sx,fill:'none',stroke:C.teal,'stroke-width':2},s);
+    var a=t*Math.PI/180,cx=Math.cos(a),sy=Math.sin(a);
+    arrow(s,p.X(0),p.Y(0),p.X(cx),p.Y(sy),'blue');
+    el('line',{x1:p.X(0),y1:p.Y(0),x2:p.X(cx),y2:p.Y(0),stroke:C.orange,'stroke-width':4},s);
+    el('line',{x1:p.X(cx),y1:p.Y(0),x2:p.X(cx),y2:p.Y(sy),stroke:C.green,'stroke-width':4},s);
+    txt(s,p.X(cx/2),p.Y(0)+(sy>=0?20:-8),'cos θ',{anchor:'middle',fill:C.orange});txt(s,p.X(cx)+6,p.Y(sy/2),'sin θ',{fill:C.green});
+    out.innerHTML='θ = '+t+'° → 横 cos θ = <b>'+num(cx)+'</b>，纵向 sin θ = <b>'+num(sy)+'</b>（两者的平方和始终为 1）';}
+  inp.addEventListener('input',draw);draw();};
+
+P.o4=function(h){var W=520,H=400,u=[1,2],v=[3,1];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:6,y0:0,y1:4.5,equal:true});var w=[u[0]+v[0],u[1]+v[1]];
+    dash(s,p.X(u[0]),p.Y(u[1]),p.X(w[0]),p.Y(w[1]),'teal');dash(s,p.X(v[0]),p.Y(v[1]),p.X(w[0]),p.Y(w[1]),'blue');
+    arrow(s,p.X(0),p.Y(0),p.X(u[0]),p.Y(u[1]),'blue',3.5);arrow(s,p.X(0),p.Y(0),p.X(v[0]),p.Y(v[1]),'teal',3.5);
+    if(w[0]<=6&&w[1]<=4.5)arrow(s,p.X(0),p.Y(0),p.X(w[0]),p.Y(w[1]),'orange',4);
+    txt(s,p.X(u[0])-8,p.Y(u[1])-8,'u = ('+u[0]+', '+u[1]+')',{fill:C.blue,anchor:'end'});txt(s,p.X(w[0])+8,p.Y(w[1])-8,'u + v',{fill:C.orange,size:16});
+    var g=handle(s,p.X(v[0]),p.Y(v[1]),'teal');txt(s,p.X(v[0])+12,p.Y(v[1])+20,'v = ('+v[0]+', '+v[1]+')',{fill:C.teal});
+    drag(s,g,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],1),0,5),clamp(snap(q[1],1),0,2)];if(n[0]!==v[0]||n[1]!==v[1]){v=n;draw();}});
+    out.innerHTML='u + v = ('+u[0]+' + '+v[0]+', '+u[1]+' + '+v[1]+') = <b>('+w[0]+', '+w[1]+')</b> · 放大 2 倍，则 2u = <b>('+2*u[0]+', '+2*u[1]+')</b> —— 按位置对应相加，每个位置都乘上倍数。';}
+  draw();};
+
+/* ===== 1번 방: 칸 수 1·2·3 ===== */
+P.p01=function(h){var W=600,H=360;var inp=h.parentNode.querySelector('input');var out=readout(h);
+  var A=[160,50,64],B=[163,54,76],names=['身高','体重','腰围'],units=['cm','kg','cm'];
+  function draw(){var n=+inp.value;var s=svgOf(h,W,H);
+    if(n===1){var y=H/2;el('line',{x1:40,y1:y,x2:W-40,y2:y,stroke:C.navy,'stroke-width':2,'marker-end':'url(#ah-navy-'+h.id+')','marker-start':'url(#ah-navy-'+h.id+')'},s);
+      for(var v=155;v<=170;v++){var X=40+(v-155)*(W-80)/15;el('line',{x1:X,y1:y-5,x2:X,y2:y+5,stroke:C.navy},s);if(v%5===0)txt(s,X,y+24,v,{anchor:'middle',italic:false,size:13,fill:C.muted});}
+      var xa=40+5*(W-80)/15,xb=40+8*(W-80)/15;el('line',{x1:xa,y1:y-18,x2:xb,y2:y-18,stroke:C.orange,'stroke-width':3},s);
+      dot(s,xa,y,'teal',8);dot(s,xb,y,'orange',8);ktxt(s,xa,y+48,'西娅 160',{anchor:'middle',fill:C.teal});ktxt(s,xb,y+48,'茉雅 163',{anchor:'middle',fill:C.orange});
+      txt(s,(xa+xb)/2,y-28,'|163 − 160| = 3',{anchor:'middle',size:15});ktxt(s,W-40,y-14,'身高(cm)',{anchor:'end',size:13,fill:C.muted});
+    }else if(n===2){var p=plane(s,{W:W,H:H,x0:158,x1:166,y0:48,y1:56,ax:158,ay:48,xl:'身高(cm)',yl:'体重(kg)',equal:true,zeroX:true,pad:54});
+      el('line',{x1:p.X(160),y1:p.Y(50),x2:p.X(163),y2:p.Y(50),stroke:C.green,'stroke-width':2.5,'stroke-dasharray':'6 4'},s);
+      el('line',{x1:p.X(163),y1:p.Y(50),x2:p.X(163),y2:p.Y(54),stroke:C.green,'stroke-width':2.5,'stroke-dasharray':'6 4'},s);
+      el('line',{x1:p.X(160),y1:p.Y(50),x2:p.X(163),y2:p.Y(54),stroke:C.blue,'stroke-width':3},s);
+      dot(s,p.X(160),p.Y(50),'teal',8);dot(s,p.X(163),p.Y(54),'orange',8);
+      ktxt(s,p.X(160)-10,p.Y(50)-12,'西娅(160, 50)',{fill:C.teal,size:13,anchor:'end'});ktxt(s,p.X(163)+10,p.Y(54)-8,'茉雅(163, 54)',{fill:C.orange,size:13});
+      txt(s,p.X(161.5),p.Y(50)+18,'3',{fill:C.orange,anchor:'middle'});txt(s,p.X(163)+8,p.Y(52),'4',{fill:C.orange});txt(s,p.X(161.3)-10,p.Y(52.5),'5',{fill:C.blue,size:16});
+    }else{var o=[W*0.42,H*0.70],k=12;function pr(x,y,z){return[o[0]-x*k*0.62+y*k*1.25,o[1]+x*k*0.48-z*k*1.25*0.55];}
+      var ax=[[6,0,0,'身高'],[0,10,0,'体重'],[0,0,16,'腰围']];ax.forEach(function(a){var q=pr(a[0],a[1],a[2]);el('line',{x1:o[0],y1:o[1],x2:q[0],y2:q[1],stroke:C.navy,'stroke-width':2,'marker-end':'url(#ah-navy-'+h.id+')'},s);ktxt(s,q[0]+(a[0]?-10:6),q[1]+(a[2]?-6:14),a[3],{size:13,fill:C.navy,anchor:a[0]?'end':'start'});});
+      var path=[[0,0,0],[3,0,0],[3,4,0],[3,4,12]];for(var i=0;i<3;i++){var a1=pr.apply(null,path[i]),b1=pr.apply(null,path[i+1]);el('line',{x1:a1[0],y1:a1[1],x2:b1[0],y2:b1[1],stroke:C.green,'stroke-width':2.5,'stroke-dasharray':'6 4'},s);}
+      var a0=pr(0,0,0),b0=pr(3,4,12);el('line',{x1:a0[0],y1:a0[1],x2:b0[0],y2:b0[1],stroke:C.blue,'stroke-width':3},s);
+      dot(s,a0[0],a0[1],'teal',8);dot(s,b0[0],b0[1],'orange',8);ktxt(s,a0[0]-10,a0[1]+20,'西娅',{anchor:'end',fill:C.teal,size:13});ktxt(s,b0[0]+10,b0[1],'茉雅',{fill:C.orange,size:13});
+      var m1=pr(1.5,0,0),m2=pr(3,2,0),m3=pr(3,4,6);txt(s,m1[0]-8,m1[1]+16,'3',{fill:C.orange,anchor:'end'});txt(s,m2[0],m2[1]+18,'4',{fill:C.orange});txt(s,m3[0]+8,m3[1],'12',{fill:C.orange});
+      ktxt(s,14,22,'以西娅为原点画出的差（横 3 · 纵 4 · 高 12）',{size:12.5,fill:C.muted});}
+    var terms=[],sum=0,diff=[3,4,12];for(var i=0;i<n;i++){terms.push(diff[i]+'²');sum+=diff[i]*diff[i];}
+    var used=[];for(var j=0;j<n;j++)used.push(names[j]);
+    out.innerHTML='共 '+n+'格('+used.join('·')+') → 距离 = √('+terms.join(' + ')+') = √'+sum+' = <b>'+fmt(Math.sqrt(sum))+'</b>。每多一格，就多一个平方项。';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 2번 방: 점과 화살표 ===== */
+P.p02=function(h){h.dataset.ksnap='0.5';var W=520,H=440,A=[1,1],B=[4,3];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:5,y0:0,y1:4.5,equal:true});
+    dash(s,p.X(B[0]),p.Y(B[1]),p.X(B[0]),p.Y(0),'#8a96a3');dash(s,p.X(B[0]),p.Y(B[1]),p.X(0),p.Y(B[1]),'#8a96a3');
+    arrow(s,p.X(0),p.Y(0),p.X(A[0]),p.Y(A[1]),'blue',2.5);arrow(s,p.X(0),p.Y(0),p.X(B[0]),p.Y(B[1]),'blue',2);
+    if(B[0]!==A[0]||B[1]!==A[1])arrow(s,p.X(A[0]),p.Y(A[1]),p.X(B[0]),p.Y(B[1]),'teal',3.5);
+    dot(s,p.X(0),p.Y(0),'navy',5);txt(s,p.X(0)-18,p.Y(0)+20,'O',{size:16});
+    dot(s,p.X(A[0]),p.Y(A[1]),'blue',7);txt(s,p.X(A[0])-8,p.Y(A[1])-12,'A = (1, 1)',{anchor:'end',fill:C.blue});
+    var v=[B[0]-A[0],B[1]-A[1]];
+    txt(s,(p.X(A[0])+p.X(B[0]))/2-6,(p.Y(A[1])+p.Y(B[1]))/2-12,'v = ('+num(v[0])+', '+num(v[1])+')',{fill:C.teal,anchor:'end',size:15});
+    var g=handle(s,p.X(B[0]),p.Y(B[1]),'blue');txt(s,p.X(B[0])+12,p.Y(B[1])-12,'B = ('+fmt(B[0])+', '+fmt(B[1])+')',{fill:C.blue});
+    drag(s,g,function(x,y){var q=p.inv(x,y);var nb=[clamp(snap(q[0],.5),0,5),clamp(snap(q[1],.5),0,4.5)];if(nb[0]!==B[0]||nb[1]!==B[1]){B=nb;draw();}});
+    out.innerHTML='B − A = ('+fmt(B[0])+' − 1, '+fmt(B[1])+' − 1) = <b>('+num(v[0])+', '+num(v[1])+')</b> → 从家（A）向东走 '+num(v[0])+'、向北走 '+num(v[1])+' 就到 B。';}
+  draw();};
+
+/* ===== 3번 방: 거리 ===== */
+P.p03=function(h){var W=520,H=440,A=[1,1],B=[4,5];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:6,y0:0,y1:6,equal:true});
+    var dx=B[0]-A[0],dy=B[1]-A[1];
+    el('line',{x1:p.X(A[0]),y1:p.Y(A[1]),x2:p.X(B[0]),y2:p.Y(A[1]),stroke:C.green,'stroke-width':3},s);
+    el('line',{x1:p.X(B[0]),y1:p.Y(A[1]),x2:p.X(B[0]),y2:p.Y(B[1]),stroke:C.green,'stroke-width':3},s);
+    if(dx&&dy)rightMark(s,p.X(B[0]),p.Y(A[1]),dx>0?-1:1,0,0,dy>0?-1:1,11);
+    el('line',{x1:p.X(A[0]),y1:p.Y(A[1]),x2:p.X(B[0]),y2:p.Y(B[1]),stroke:C.blue,'stroke-width':3.5},s);
+    if(dx)txt(s,p.X((A[0]+B[0])/2),p.Y(A[1])+(dy>=0?22:-10),fmt(Math.abs(dx)),{fill:C.orange,anchor:'middle',size:17});
+    if(dy)txt(s,p.X(B[0])+(dx>=0?10:-10),p.Y((A[1]+B[1])/2),fmt(Math.abs(dy)),{fill:C.orange,anchor:dx>=0?'start':'end',size:17});
+    var gA=handle(s,p.X(A[0]),p.Y(A[1]),'blue'),gB=handle(s,p.X(B[0]),p.Y(B[1]),'blue');
+    txt(s,p.X(A[0])-10,p.Y(A[1])+24,'A = ('+A[0]+', '+A[1]+')',{anchor:'end',size:14});txt(s,p.X(B[0])+12,p.Y(B[1])-12,'B = ('+B[0]+', '+B[1]+')',{size:14});
+    drag(s,gA,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],1),0,6),clamp(snap(q[1],1),0,6)];if(n[0]!==A[0]||n[1]!==A[1]){A=n;draw();}});
+    drag(s,gB,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],1),0,6),clamp(snap(q[1],1),0,6)];if(n[0]!==B[0]||n[1]!==B[1]){B=n;draw();}});
+    var d2=dx*dx+dy*dy,d=Math.sqrt(d2);
+    out.innerHTML='横向差 '+Math.abs(dx)+'，纵向差 '+Math.abs(dy)+' → 距离 = √('+(dx*dx)+' + '+(dy*dy)+') = √'+d2+' = <b>'+fmt(d)+'</b> · 走小巷（横 + 竖）要走 '+(Math.abs(dx)+Math.abs(dy))+'格';}
+  draw();};
+
+/* ===== 4번 방: 겹침 점수와 각도 ===== */
+P.p04=function(h){h.dataset.ksnap='0.5';var W=540,H=420,u=[3,0],v=[2,2];var out=readout(h);
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-3,x1:4,y0:-2,y1:3.5,equal:true});
+    var dt=u[0]*v[0]+u[1]*v[1],nu=3,nv=Math.hypot(v[0],v[1]);
+    if(nv>0){var th=Math.acos(clamp(dt/(nu*nv),-1,1));var ang=Math.atan2(v[1],v[0]);var r=34;
+      var large=th>Math.PI?1:0,sw=ang>=0?0:1;
+      el('path',{d:'M'+(p.X(0)+r)+','+p.Y(0)+' A'+r+','+r+' 0 0,'+sw+' '+(p.X(0)+r*Math.cos(ang))+','+(p.Y(0)-r*Math.sin(ang))+' L'+p.X(0)+','+p.Y(0)+' Z',fill:C.orange,'fill-opacity':.18,stroke:C.orange},s);
+      txt(s,p.X(0)+r+10,p.Y(0)+(ang>=0?-12:22),'θ = '+fmt(th*180/Math.PI,1)+'°',{fill:C.orange,size:15});}
+    if(Math.abs(dt)<1e-9&&nv>0)rightMark(s,p.X(0),p.Y(0),1,0,0,v[1]>0?-1:1,14);
+    arrow(s,p.X(0),p.Y(0),p.X(3),p.Y(0),'blue',3.5);txt(s,p.X(3)+6,p.Y(0)-12,'u = (3, 0)',{fill:C.blue});
+    if(nv>0)arrow(s,p.X(0),p.Y(0),p.X(v[0]),p.Y(v[1]),'teal',3.5);
+    var g=handle(s,p.X(v[0]),p.Y(v[1]),'teal');txt(s,p.X(v[0])+12,p.Y(v[1])-12,'v = ('+num(v[0])+', '+num(v[1])+')',{fill:C.teal});
+    drag(s,g,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],.5),-3,4),clamp(snap(q[1],.5),-2,3.5)];if(n[0]!==v[0]||n[1]!==v[1]){v=n;draw();}});
+    var msg='重叠分数 u·v = 3×'+num(v[0])+' + 0×'+num(v[1])+' = <b>'+num(dt)+'</b>';
+    if(nv>0){msg+=' · 长度 ‖v‖ = '+fmt(nv)+' · cos θ = '+num(dt)+' ÷ (3 × '+fmt(nv)+') = <b>'+num(dt/(nu*nv))+'</b>';
+      if(Math.abs(dt)<1e-9)msg+=' <span class="alert">→ 直角！互不影响的方向</span>';else if(dt<0)msg+=' → 朝向相反（分数为负）';}
+    out.innerHTML=msg;}
+  draw();};
+
+/* ===== 5번 방: 자 세트 돌리기 ===== */
+P.p05=function(h){var W=520,H=420,v=[3,2];var inp=h.parentNode.querySelector('input');var out=readout(h);
+  function draw(){var f=+inp.value*Math.PI/180;var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-1.5,x1:4,y0:-1,y1:3.5,equal:true,grid:false});
+    var e1=[Math.cos(f),Math.sin(f)],e2=[-Math.sin(f),Math.cos(f)];
+    for(var k=-6;k<=6;k++){el('line',{x1:p.X(k*e1[0]-8*e2[0]),y1:p.Y(k*e1[1]-8*e2[1]),x2:p.X(k*e1[0]+8*e2[0]),y2:p.Y(k*e1[1]+8*e2[1]),stroke:'#dfe6f0'},s);
+      el('line',{x1:p.X(k*e2[0]-8*e1[0]),y1:p.Y(k*e2[1]-8*e1[1]),x2:p.X(k*e2[0]+8*e1[0]),y2:p.Y(k*e2[1]+8*e1[1]),stroke:'#dfe6f0'},s);}
+    var c1=v[0]*e1[0]+v[1]*e1[1],c2=v[0]*e2[0]+v[1]*e2[1];
+    dash(s,p.X(v[0]),p.Y(v[1]),p.X(c1*e1[0]),p.Y(c1*e1[1]),'teal');dash(s,p.X(v[0]),p.Y(v[1]),p.X(c2*e2[0]),p.Y(c2*e2[1]),'teal');
+    arrow(s,p.X(0),p.Y(0),p.X(e1[0]),p.Y(e1[1]),'blue',4);arrow(s,p.X(0),p.Y(0),p.X(e2[0]),p.Y(e2[1]),'blue',4);
+    rightMark(s,p.X(0),p.Y(0),e1[0],-e1[1],e2[0],-e2[1],12);
+    txt(s,p.X(e1[0]*1.15)+4,p.Y(e1[1]*1.15)+18,'e₁',{fill:C.blue,size:17});txt(s,p.X(e2[0]*1.1)+8,p.Y(e2[1]*1.1),'e₂',{fill:C.blue,size:17});
+    arrow(s,p.X(0),p.Y(0),p.X(v[0]),p.Y(v[1]),'teal',3.5);dot(s,p.X(v[0]),p.Y(v[1]),'teal',6);txt(s,p.X(v[0])+8,p.Y(v[1])-10,'v',{fill:C.teal,size:17});
+    out.innerHTML='把尺子组旋转 '+inp.value+'° → v = <b>'+num(c1)+'</b> e₁ + <b>'+num(c2)+'</b> e₂ · 坐标数字虽然变了，'+fmt(c1)+'² + '+num(c2)+'² = <b>'+fmt(c1*c1+c2*c2)+'</b> (= 3² + 2² = 13，长度 '+fmt(Math.sqrt(13))+' 不变）';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 6번 방: 그림자 ===== */
+P.p06=function(h){var W=520,H=420,v=[3,2];var inp=h.parentNode.querySelector('input');var out=readout(h);
+  var pre=h.parentNode.querySelector('[data-preset]');if(pre)pre.addEventListener('click',function(){inp.value=(Math.atan2(1,2)*180/Math.PI).toFixed(1);draw();});
+  function draw(){var a=+inp.value*Math.PI/180;var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-.5,x1:4,y0:-.5,y1:3.2,equal:true});
+    var u=[Math.cos(a),Math.sin(a)];var c=v[0]*u[0]+v[1]*u[1];var pp=[c*u[0],c*u[1]],r=[v[0]-pp[0],v[1]-pp[1]];
+    el('line',{x1:p.X(-1*u[0]),y1:p.Y(-1*u[1]),x2:p.X(5*u[0]),y2:p.Y(5*u[1]),stroke:C.orange,'stroke-width':2,'stroke-opacity':.5},s);
+    el('line',{x1:p.X(0),y1:p.Y(0),x2:p.X(pp[0]),y2:p.Y(pp[1]),stroke:C.orange,'stroke-width':5},s);
+    arrow(s,p.X(0),p.Y(0),p.X(u[0]),p.Y(u[1]),'green',3.5);
+    arrow(s,p.X(0),p.Y(0),p.X(v[0]),p.Y(v[1]),'blue',3.5);
+    if(Math.hypot(r[0],r[1])>0.05){arrow(s,p.X(pp[0]),p.Y(pp[1]),p.X(v[0]),p.Y(v[1]),'green',3);var rl=Math.hypot(r[0],r[1]);rightMark(s,p.X(pp[0]),p.Y(pp[1]),-u[0],u[1],r[0]/rl,-r[1]/rl,11);}
+    dot(s,p.X(pp[0]),p.Y(pp[1]),'orange',7);
+    txt(s,p.X(v[0])+8,p.Y(v[1])-8,'v = (3, 2)',{fill:C.blue});txt(s,p.X(pp[0])+(a<0.3?0:12),p.Y(pp[1])+(a<0.3?24:14),'p',{fill:C.orange,size:17});
+    txt(s,p.X(u[0])-4,p.Y(u[1])+(a<0.3?24:-10),'u',{fill:C.green,size:16,anchor:'end'});txt(s,p.X((pp[0]+v[0])/2)+8,p.Y((pp[1]+v[1])/2),'r',{fill:C.green,size:17});
+    var dot_=r[0]*u[0]+r[1]*u[1];
+    out.innerHTML='影子 p = (<b>'+num(pp[0])+', '+num(pp[1])+'</b>) · 偏离部分 r = ('+num(r[0])+', '+num(r[1])+')，长度 <b>'+fmt(Math.hypot(r[0],r[1]))+'</b> · r·u = '+num(Math.abs(dot_)<5e-3?0:dot_)+' <span class="alert">（直角）</span>';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 7번 방: 칸막이 x₁+2x₂+2x₃=6 ===== */
+P.p07=function(h){var W=560,H=440;var ins=h.parentNode.querySelectorAll('input');var out=readout(h);
+  var o=[W*0.40,H*0.70],k=30;function pr(x,y,z){return[o[0]-x*k*0.62+y*k*1.15,o[1]+x*k*0.46-z*k*1.0];}
+  function draw(){var P_=[+ins[0].value,+ins[1].value,+ins[2].value];var s=svgOf(h,W,H);
+    [[6.6,0,0,'x₁'],[0,5,0,'x₂'],[0,0,5,'x₃']].forEach(function(a){var q=pr(a[0],a[1],a[2]);var q0=pr(0,0,0);el('line',{x1:q0[0],y1:q0[1],x2:q[0],y2:q[1],stroke:C.navy,'stroke-width':2,'marker-end':'url(#ah-navy-'+h.id+')'},s);txt(s,q[0]+(a[0]?-14:8),q[1]+(a[3]==='x₃'?-4:16),a[3],{size:16});});
+    var t1=pr(6,0,0),t2=pr(0,3,0),t3=pr(0,0,3);
+    el('path',{d:'M'+t1+' L'+t2+' L'+t3+' Z',fill:C.teal,'fill-opacity':.22,stroke:C.teal,'stroke-width':2},s);
+    [[6,0,0],[0,3,0],[0,0,3]].forEach(function(q){var z=pr(q[0],q[1],q[2]);dot(s,z[0],z[1],'orange',5);});
+    var sc=P_[0]+2*P_[1]+2*P_[2];var t=(sc-6)/9;var F=[P_[0]-t,P_[1]-2*t,P_[2]-2*t];
+    var cpt=pr(4,0.5,0.5);var ntip=pr(4+0.6,0.5+1.2,0.5+1.2);arrow(s,cpt[0],cpt[1],ntip[0],ntip[1],'orange',2.5);txt(s,ntip[0]+6,ntip[1],'n = (1, 2, 2)',{fill:C.orange,size:14});
+    var b0=pr(P_[0],P_[1],0),pp=pr(P_[0],P_[1],P_[2]),ff=pr(F[0],F[1],F[2]);
+    dash(s,b0[0],b0[1],pp[0],pp[1],'#9aa5b1');
+    if(Math.abs(t)>1e-9)el('line',{x1:pp[0],y1:pp[1],x2:ff[0],y2:ff[1],stroke:C.orange,'stroke-width':2.5,'stroke-dasharray':'2 3'},s);
+    var col=sc>6?'blue':(sc<6?'red':'green');dot(s,pp[0],pp[1],col,8);txt(s,pp[0]+10,pp[1]-8,'P('+P_.join(', ')+')',{fill:C[col],size:14});
+    var side=sc>6?'<b>原点的另一侧</b>（例：垃圾邮件）':(sc<6?'<b>原点一侧</b>（例：正常邮件）':'<b>在隔板上（边界）</b> —— 暂不判断');
+    out.innerHTML='分数 x₁ + 2x₂ + 2x₃ = '+P_[0]+' + '+(2*P_[1])+' + '+(2*P_[2])+' = <b>'+sc+'</b> → 与 6 比较，'+side+' · 到隔板的距离 = |'+sc+' − 6| ÷ 3 = <b>'+fmt(Math.abs(sc-6)/3)+'</b>';}
+  ins.forEach(function(i){i.addEventListener('input',draw);});draw();};
+
+/* ===== 8번 방: 밀고 돌리고 뒤집기 ===== */
+P.p08=function(h){var W=540,H=440;var host=h.parentNode;var ang=host.querySelector('input');var out=readout(h);
+  var st={t:[0,0],m:1,s:1};var T=[[0,0],[3,0],[3,4]];
+  host.querySelectorAll('[data-op]').forEach(function(b){b.addEventListener('click',function(){var op=b.getAttribute('data-op');
+    if(op==='reset'){st={t:[0,0],m:1,s:1};ang.value=0;}if(op==='slide'){st.t=[st.t[0]-2,st.t[1]+1];if(st.t[0]<-6)st.t=[0,0];}
+    if(op==='mirror')st.m*=-1;if(op==='scale')st.s=st.s===1?2:1;draw();});});
+  function tr(q){var a=+ang.value*Math.PI/180;var x=q[0]*st.m,y=q[1];var rx=x*Math.cos(a)-y*Math.sin(a),ry=x*Math.sin(a)+y*Math.cos(a);return[st.s*rx+st.t[0],st.s*ry+st.t[1]];}
+  function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-10,x1:10,y0:-9,y1:9,equal:true,step:2,label:4});
+    el('path',{d:'M'+T.map(function(q){return p.X(q[0])+','+p.Y(q[1]);}).join(' L')+' Z',fill:'#9db7f0','fill-opacity':.35,stroke:C.blue,'stroke-dasharray':'5 4'},s);
+    var U=T.map(tr);el('path',{d:'M'+U.map(function(q){return p.X(q[0])+','+p.Y(q[1]);}).join(' L')+' Z',fill:C.teal,'fill-opacity':.3,stroke:C.teal,'stroke-width':2.5},s);
+    U.forEach(function(q){dot(s,p.X(q[0]),p.Y(q[1]),'teal',4);});
+    var L=[0,1,2].map(function(i){var a=U[i],b=U[(i+1)%3];return Math.hypot(a[0]-b[0],a[1]-b[1]);});L.sort(function(a,b){return a-b;});
+    host.querySelectorAll('[data-op]').forEach(function(b){var op=b.getAttribute('data-op');b.classList.toggle('on',(op==='mirror'&&st.m<0)||(op==='scale'&&st.s===2));});
+    out.innerHTML='三边长度：<b>'+L.map(function(x){return fmt(x);}).join(' · ')+'</b>（原来是 3 · 4 · 5）→ '+(st.s===1?'<span class="alert">距离不变 —— 平移、旋转、翻转都不会改变形状</span>':'所有距离都变为 <b>2 倍</b> —— 拉伸会改变距离');}
+  ang.addEventListener('input',draw);draw();};
+
+/* ===== 9번 방 ①: 반지름 안 이웃 ===== */
+P.p09a=function(h){var W=500,H=440;var inp=h.parentNode.querySelector('input');var out=readout(h);
+  var pts=[[0.3,0.4],[-0.6,0.2],[0.9,-0.5],[-0.2,-1.1],[1.3,0.9],[-1.4,-0.3],[0.5,1.6],[-1.0,1.3],[1.7,-0.4],[-1.6,-1.4],[1.2,-1.5],[0.0,-1.9],[-0.4,0.9],[2.0,1.2]];
+  function draw(){var r=+inp.value;var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:-2.3,x1:2.3,y0:-2.3,y1:2.3,equal:true,step:.5,label:1});
+    el('circle',{cx:p.X(0),cy:p.Y(0),r:r*p.sx,fill:C.teal,'fill-opacity':.13,stroke:C.teal,'stroke-width':2},s);
+    var inn=0,ds=pts.map(function(q){return Math.hypot(q[0],q[1]);});
+    pts.forEach(function(q,i){var ins_=ds[i]<=r+1e-9;if(ins_)inn++;el('rect',{x:p.X(q[0])-6,y:p.Y(q[1])-6,width:12,height:12,rx:2,fill:ins_?C.orange:'#b6c0cb'},s);});
+    dot(s,p.X(0),p.Y(0),'navy',7);ktxt(s,p.X(0)+8,p.Y(0)+20,'家',{size:13});
+    if(r>0){arrow(s,p.X(0),p.Y(0),p.X(r*Math.cos(.6)),p.Y(r*Math.sin(.6)),'orange',2);txt(s,p.X(r*Math.cos(.6)/2)-4,p.Y(r*Math.sin(.6)/2)-8,'r',{fill:C.orange,size:16});}
+    var mn=Math.min.apply(null,ds);
+    out.innerHTML='半径 r = '+fmt(r,1)+'km 内的便利店 <b>'+inn+'家</b> (圆面积 πr² = '+fmt(Math.PI*r*r)+'km²） · 最近的是 '+fmt(mn)+'km';}
+  inp.addEventListener('input',draw);draw();};
+/* ===== 9번 방 ②: 칸이 늘면 껍질로 ===== */
+P.p09b=function(h){var W=560,H=230;var inp=h.parentNode.querySelector('input');var out=readout(h);var ns=[1,2,3,5,10,20,50,100];
+  function draw(){var n=ns[+inp.value];var f=Math.pow(0.9,n);var s=svgOf(h,W,H);
+    var x0=30,w=W-60,y=60,bh=46;el('rect',{x:x0,y:y,width:w,height:bh,fill:C.orange,'fill-opacity':.85,rx:6},s);
+    el('rect',{x:x0,y:y,width:Math.max(w*f,1),height:bh,fill:C.teal,rx:6},s);
+    ktxt(s,x0,y-12,'内部（半径 0.9 以内）',{size:13,fill:C.teal});ktxt(s,x0+w,y-12,'外壳（0.9 ~ 1）',{size:13,fill:C.orange,anchor:'end'});
+    ktxt(s,x0,y+bh+30,'格数 n = '+n,{size:16,fill:C.navy,weight:'bold'});
+    var ins=(f*100),sh=100-ins;
+    ktxt(s,x0+w,y+bh+30,'内部 '+(ins>=1?fmt(ins,1):ins.toPrecision(2))+'% · 外壳 '+fmt(sh,ins>=1?1:4)+'%',{size:15,fill:C.navy,anchor:'end'});
+    ktxt(s,x0,y+bh+62,'半径为 1 的球中，半径 0.9 以内部分所占的体积比例 = 0.9ⁿ',{size:13,fill:C.muted});
+    out.innerHTML=n+'格房间：0.9<sup>'+n+'</sup> = <b>'+(f>=0.01?fmt(f,3):f.toExponential(2))+'</b> → 体积的 '+(sh>=99?'<b>几乎全部</b>':'<b>'+fmt(sh,1)+'%</b>')+'都在外壳上。';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 10번 방 ①: 단위 맞추기 ===== */
+var CUST=[{n:'顾客甲',h:160,w:56},{n:'顾客乙',h:166,w:48},{n:'顾客丙',h:170,w:62}],NEWC={h:165,w:55};
+P.p10a=function(h){var W=520,H=440;var host=h.parentNode;var mode='cm';var out=readout(h);
+  host.querySelectorAll('[data-unit]').forEach(function(b){b.addEventListener('click',function(){mode=b.getAttribute('data-unit');draw();});});
+  function draw(){host.querySelectorAll('[data-unit]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-unit')===mode);});
+    var f=mode==='cm'?1:10;var s=svgOf(h,W,H);var p;
+    if(mode==='cm')p=plane(s,{W:W,H:H,x0:155,x1:175,y0:45,y1:65,equal:true,step:5,ax:155,ay:45,xl:'身高(cm)',yl:'体重(kg)',zeroX:true});
+    else p=plane(s,{W:W,H:H,x0:1550,x1:1750,y0:0,y1:200,equal:true,step:50,ax:1550,ay:0,xl:'身高(mm)',yl:'体重(kg)',zeroX:true});
+    var ds=CUST.map(function(c){return Math.hypot((c.h-NEWC.h)*f,c.w-NEWC.w);});var best=ds.indexOf(Math.min.apply(null,ds));
+    el('circle',{cx:p.X(NEWC.h*f),cy:p.Y(NEWC.w),r:ds[best]*p.sx,fill:C.orange,'fill-opacity':.08,stroke:C.orange,'stroke-dasharray':'5 4'},s);
+    CUST.forEach(function(c,i){var X=p.X(c.h*f),Y=p.Y(c.w);dot(s,X,Y,i===best?'orange':'blue',i===best?8:6);ktxt(s,X+(i===1?-8:9),Y+(i===1?18:-8),c.n,{size:12.5,anchor:i===1?'end':'start',fill:i===best?C.orange:C.blue});});
+    dot(s,p.X(NEWC.h*f),p.Y(NEWC.w),'navy',7);ktxt(s,p.X(NEWC.h*f)+8,p.Y(NEWC.w)+18,'新顾客',{size:12.5});
+    out.innerHTML='身高用 <b>'+(mode==='cm'?'cm':'mm')+'</b> 记录时，距离为：'+CUST.map(function(c,i){return c.n+' '+fmt(ds[i])+(i===best?' ★':'');}).join(' · ')+' → 最近邻是 <b>'+CUST[best].n+'</b>'+(mode==='mm'?' （身高数字变大 10 倍，独占了距离）':'');}
+  draw();};
+/* ===== 10번 방 ②: 호와 현 ===== */
+P.p10b=function(h){var W=520,H=400;var inp=h.parentNode.querySelector('input');var out=readout(h);var R=6371;
+  function draw(){var t=+inp.value*Math.PI/180;var s=svgOf(h,W,H);var cx=W/2,cy=H/2+20,rr=150;
+    el('circle',{cx:cx,cy:cy,r:rr,fill:'#e8f0fd',stroke:C.blue,'stroke-width':2},s);
+    for(var i=-2;i<=2;i++)el('ellipse',{cx:cx,cy:cy-i*rr*0.33,rx:rr*Math.sqrt(1-Math.pow(i*0.33,2)),ry:12,fill:'none',stroke:'#c8d6f2'},s);
+    var a0=Math.PI/2+t/2,a1=Math.PI/2-t/2;var A=[cx+rr*Math.cos(a0),cy-rr*Math.sin(a0)],B=[cx+rr*Math.cos(a1),cy-rr*Math.sin(a1)];
+    dash(s,cx,cy,A[0],A[1],'#8a96a3');dash(s,cx,cy,B[0],B[1],'#8a96a3');
+    if(t>0){el('path',{d:'M'+A[0]+','+A[1]+' A'+rr+','+rr+' 0 '+(t>Math.PI?1:0)+',1 '+B[0]+','+B[1],fill:'none',stroke:C.orange,'stroke-width':4},s);
+      el('line',{x1:A[0],y1:A[1],x2:B[0],y2:B[1],stroke:C.teal,'stroke-width':3.5},s);}
+    dot(s,A[0],A[1],'navy',7);dot(s,B[0],B[1],'navy',7);dot(s,cx,cy,'navy',4);
+    txt(s,A[0]-10,A[1]-8,'A',{anchor:'end',size:17});txt(s,B[0]+10,B[1]-8,'B',{size:17});txt(s,cx+6,cy+20,'O',{size:15});
+    var arc=R*t,ch=2*R*Math.sin(t/2);
+    out.innerHTML='圆心角 '+inp.value+'° · 地球半径 6,371km → 沿表面（弧） <b>'+Math.round(arc).toLocaleString()+'km</b>，穿过地下的直线（弦）<b>'+Math.round(ch).toLocaleString()+'km</b> · 差 '+Math.round(arc-ch).toLocaleString()+'km';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 대결: 가장 가까운 이웃 찾기 ===== */
+var DUELC=[{n:'顾客丁',h:155,w:51},{n:'顾客戊',h:159,w:43},{n:'顾客己',h:163,w:48}],DUELN={h:158,w:49};
+P.duel=function(h){var host=h.parentNode;var out=readout(h);var shown={sia:false,moa:false,ans:false};
+  host.querySelectorAll('[data-duel]').forEach(function(b){b.addEventListener('click',function(){shown[b.getAttribute('data-duel')]=true;b.classList.add('on');draw();});});
+  function draw(){var rows=DUELC.map(function(c){var s1=Math.hypot((c.h-DUELN.h)*10,c.w-DUELN.w),s2=Math.hypot((c.h-DUELN.h)/5,(c.w-DUELN.w)/5);return[c,s1,s2];});
+    var b1=0,b2=0;rows.forEach(function(r,i){if(r[1]<rows[b1][1])b1=i;if(r[2]<rows[b2][2])b2=i;});
+    var t='<div class="tbl"><table><thead><tr><th>候选</th><th>身高·体重</th><th>西娅的方式（身高 mm、体重 kg 原样）</th><th>茉雅的方式（身高 ÷ 5cm、体重 ÷ 5kg）</th></tr></thead><tbody>';
+    rows.forEach(function(r,i){t+='<tr><td>'+r[0].n+'</td><td>'+r[0].h+'cm · '+r[0].w+'kg</td><td>'+(shown.sia?fmt(r[1])+(i===b1?' ★':''):'?')+'</td><td>'+(shown.moa?fmt(r[2])+(i===b2?' ★':''):'?')+'</td></tr>';});
+    t+='</tbody></table></div>';h.innerHTML=t;
+    var m='新顾客：158cm · 49kg。 ';
+    if(shown.sia)m+='西娅的答案：<b>'+DUELC[b1].n+'</b>. ';if(shown.moa)m+='茉雅的答案：<b>'+DUELC[b2].n+'</b>. ';
+    if(shown.ans)m+='<br>答案（示例数据）：新顾客实际选的衣服尺码与<b>顾客丁</b>相同 → <span class="alert">茉雅胜！</span>如果不统一单位，数值大的那一列（身高 mm）就会独占距离。';
+    out.innerHTML=m;}
+  draw();};
+
+/* ===== 끝맺음: 칸 수 → 끝없이 ===== */
+P.outro=function(h){var W=600,H=320;var inp=h.parentNode.querySelector('input');var out=readout(h);var ns=[2,3,10,100,Infinity];
+  function f(x){return 0.55*Math.sin(2*Math.PI*x)+0.3*Math.sin(6*Math.PI*x+0.6)+0.15*Math.cos(10*Math.PI*x);}
+  function draw(){var n=ns[+inp.value];var s=svgOf(h,W,H);var x0=40,x1=W-40,y0=H/2,amp=110;
+    el('line',{x1:x0,y1:y0,x2:x1,y2:y0,stroke:C.grid,'stroke-width':1.5},s);
+    if(isFinite(n)){var bw=(x1-x0)/n;for(var i=0;i<n;i++){var x=(i+.5)/n,v=f(x);el('rect',{x:x0+i*bw+bw*0.15,y:v>0?y0-v*amp:y0,width:Math.max(bw*0.7,1),height:Math.abs(v)*amp,fill:C.teal,'fill-opacity':.8},s);if(n<=10)dot(s,x0+(i+.5)*bw,y0-v*amp,'orange',5);}
+      ktxt(s,x0,28,'数字 '+n+'个的房间 = 柱 '+n+'根',{size:14,fill:C.navy});}
+    else{var d='';for(var j=0;j<=400;j++){var xx=j/400;d+=(j?'L':'M')+(x0+xx*(x1-x0))+','+(y0-f(xx)*amp);}el('path',{d:d,fill:'none',stroke:C.orange,'stroke-width':3.5},s);
+      ktxt(s,x0,28,'无尽的房间 — 一条曲线就是一个点',{size:14,fill:C.orange,weight:'bold'});}
+    var door=h.parentNode.parentNode.querySelector('.door');if(door)door.classList.toggle('open',!isFinite(n));
+    out.innerHTML=isFinite(n)?'共 '+n+'个：把曲线记成数字 '+n+'个。格数越多越像，但仍不是曲线本身。':'格数<b>无穷无尽</b>：把整条曲线当作一个点来处理。尺子和量角器照旧——这就是<b>希尔伯特空间</b>。走廊尽头的门打开了。';}
+  inp.addEventListener('input',draw);draw();};
+
+/* ===== 퀴즈 ===== */
+function quiz(q){var ans=+q.getAttribute('data-ans');var fb=q.querySelector('.fb');var OK=q.querySelector('.qok'),NO=q.querySelector('.qno');q.querySelectorAll('.opts button').forEach(function(b,i){b.addEventListener('click',function(){q.querySelectorAll('.opts button').forEach(function(x){x.classList.remove('ok','no');});b.classList.add(i===ans?'ok':'no');fb.innerHTML=i===ans?'⭕ '+(OK?OK.innerHTML:q.getAttribute('data-ok')):'❌ '+(NO?NO.innerHTML:q.getAttribute('data-no'));});});}
+
+/* ===== 지식 색인·꾸러미 ===== */
+function kg(){var raw=document.getElementById('kg-raw');var mount=document.getElementById('kg-mount');if(!raw||!mount)return;var K=JSON.parse(raw.textContent);
+  mount.innerHTML='<input class="kg-search" type="search"><div class="kg-list"></div>';
+  var list=mount.querySelector('.kg-list'),inp=mount.querySelector('input');inp.placeholder='查找概念（例：距离、影子、隔板）';inp.setAttribute('aria-label','搜索知识索引');
+  var TY={Concept:'概念',Method:'方法',Analogy:'比喻',Application:'用途',OpenQuestion:'开放问题'};
+  var LG=(document.documentElement.lang||'ko').slice(0,2);function L_(o){return o?(o[LG]||o.en||o.ko||''):'';}
+  K.nodes.forEach(function(n){if(n.desc&&!n.definition)n.definition={ko:n.desc};});
+  function render(){var q=inp.value.trim().toLowerCase();list.innerHTML=K.nodes.filter(function(n){return !q||(L_(n.label)+' '+n.label.en+' '+n.label.ko+' '+L_(n.definition)).toLowerCase().indexOf(q)>=0;}).map(function(n){
+    var nb=K.edges.filter(function(e){return e.s===n.id||e.o===n.id;}).map(function(e){var o=e.s===n.id?e.o:e.s;var m=K.nodes.filter(function(x){return x.id===o;})[0];return m?L_(m.label):'';}).filter(Boolean);
+    return '<div class="kg-item"><span class="t">'+(TY[n.type]||n.type)+'</span><b>'+L_(n.label)+'</b><span class="muted">'+(LG==='en'?'':n.label.en)+'</span><div>'+L_(n.definition)+'</div>'+(nb.length?'<div class="muted" style="font-size:12.5px">邻居： '+nb.join(', ')+'</div>':'')+'<a href="'+(n.page?n.page+'.html':'')+n.anchor+'">查看说明 →</a></div>';}).join('');}
+  inp.addEventListener('input',render);render();
+  var ex=document.getElementById('export-mount');if(!ex)return;
+  ex.innerHTML='<div class="exp-btns"><button class="btn" data-x="json">kg.json</button><button class="btn" data-x="ld">JSON-LD</button><button class="btn" data-x="ttl">Turtle (Protégé)</button><button class="btn" data-x="csv">CSV (Neo4j·Gephi)</button><button class="btn" data-x="bib">BibTeX</button><button class="btn" data-x="ris">RIS</button></div>';
+  function dl(name,text,type){var b=new Blob([text],{type:type||'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);}
+  var base=K.page;var refs=JSON.parse((document.getElementById('refs-csl')||{textContent:'[]'}).textContent);
+  ex.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){var x=b.getAttribute('data-x');
+    if(x==='json')dl(base+'.kg.json',JSON.stringify(K,null,2),'application/json');
+    if(x==='ld')dl(base+'.jsonld',document.getElementById('kg-ld').textContent,'application/ld+json');
+    if(x==='ttl'){var t='@prefix lab: <urn:lab:> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix skos: <http://www.w3.org/2004/02/skos/core#> .\n\n';
+      K.nodes.forEach(function(n){t+='<urn:'+n.id+'> a lab:'+n.type+' ;\n  skos:prefLabel "'+n.label.ko+'"@ko , "'+n.label.en+'"@en ;\n  rdfs:comment "'+L_(n.definition).replace(/"/g,'\\"')+'"@ko .\n\n';});
+      K.edges.forEach(function(e){t+='<urn:'+e.s+'> lab:'+e.p+' <urn:'+e.o+'> .\n';});dl(base+'.ttl',t,'text/turtle');}
+    if(x==='csv'){var c='id,type,label_ko,label_en,anchor\n'+K.nodes.map(function(n){return [n.id,n.type,n.label.ko,n.label.en,(n.page||base)+'.html'+n.anchor].map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+      c+='\n\nsource,relation,target\n'+K.edges.map(function(e){return [e.s,e.p,e.o].join(',');}).join('\n');dl(base+'.csv',c,'text/csv');}
+    if(x==='bib')dl(base+'.bib',refs.map(function(r){return '@misc{'+r.id+',\n  title = {'+r.title+'},\n  author = {'+r.author[0].literal+'},\n  howpublished = {'+(r.note||'')+'},\n  note = {accessed '+r.accessed['date-parts'][0].join('-')+'}\n}';}).join('\n\n'));
+    if(x==='ris')dl(base+'.ris',refs.map(function(r){return 'TY  - GEN\nTI  - '+r.title+'\nAU  - '+r.author[0].literal+'\nN1  - '+(r.note||'')+'\nER  - ';}).join('\n'));});});}
+
+function boot(){document.querySelectorAll('[data-panel]').forEach(function(h){var k=h.getAttribute('data-panel');if(P[k])P[k](h);});
+  document.querySelectorAll('.quiz').forEach(quiz);kg();
+  var pr=document.getElementById('prog');if(pr)window.addEventListener('scroll',function(){var d=document.documentElement;pr.style.width=(100*d.scrollTop/Math.max(1,d.scrollHeight-d.clientHeight))+'%';},{passive:true});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+
+</script>
+</body></html>
