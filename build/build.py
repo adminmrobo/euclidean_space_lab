@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from content_rooms import ROOMS
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VER = "v1.1"
+VER = "v1.2"
 DATE = "2026-11-19"
 SITE = "https://adminmrobo.github.io/euclidean_space_lab/"
 AUTHOR_URL = "https://adminmrobo.github.io/who_am_i/who_am_i.html"
@@ -26,10 +26,10 @@ def face(k, e="e13", cls=""):
     return f'<img src="assets/chars/{f}_{e}.webp" alt="{E(n)}" width="96" height="96" loading="lazy"{(" class=%s" % cls) if cls else ""}>'
 
 CHANGES = {
- 1: "원자료 결론의 affine structure(아핀 구조)는 이 페이지에서 \"점과 이동(화살표)\"으로 풀어 씁니다. 원어는 약어 상자에만 둡니다.",
+ 1: "원자료 결론의 affine structure(아핀 구조)를 이 페이지에서는 \"점과 이동\"으로 풀어 씁니다. 원어는 약어 상자에만 둡니다.",
  6: "원자료는 u를 굵은 글씨와 기울임 글씨로 섞어 씁니다. 이 페이지에서는 한 가지 글씨로 맞춥니다.",
  7: "원자료는 축 이름 x와 점 이름 x가 겹칩니다(x = p + tv와 x축). 이 페이지에서는 축을 x₁·x₂·x₃으로 바꾸고, 칸막이 식도 x₁ + 2x₂ + 2x₃ = 6으로 씁니다. 원자료의 \"Hyperplane in ℝ³\"는 3칸 방에서는 평면과 같은 것입니다.",
- 9: "원자료의 머리 상자는 중심 c를 쓰지만 아래 식 x² + y² = r²은 중심이 원점일 때입니다. 이 페이지에서는 \"중심을 원점에 둔 경우\"라고 밝힙니다. 칸 수에 따른 껍질 비율 실험(0.9ⁿ)은 이 페이지에서 더한 것입니다.",
+ 9: "원자료의 머리 상자는 중심 c를 씁니다. 그런데 아래 식 x² + y² = r²은 중심이 원점일 때입니다. 이 페이지에서는 \"중심을 원점에 둔 경우\"라고 밝힙니다. 칸 수에 따른 껍질 비율 실험(0.9ⁿ)은 이 페이지에서 더한 것입니다.",
 }
 
 ABBR = [("ℝⁿ", "실수 n개짜리 줄 전체 — 자와 각도기가 있는 n칸짜리 방(유클리드 공간)"),
@@ -122,7 +122,7 @@ def panel(r):
     p = r["panel"]
     def one(key, note, ctrl, n):
         return (f'<div class="panel"><div class="ph"><b>실험 패널 {r["no"]}{n}</b><small>{E(note)}</small></div>'
-                f'<div id="pp-{key}" data-panel="{key}"></div><div class="ctrl">{ctrl}</div><div class="readout" aria-live="polite"></div></div>')
+                f'<div id="pp-{key}" data-panel="{key}" data-label="{E(note)}"></div><div class="ctrl">{ctrl}</div><div class="readout" aria-live="polite"></div></div>')
     if p["kind"] == "double":
         return one(p["key"], p["note"], p["ctrl"], "-①") + one(p["key2"], p["note2"], p["ctrl2"], "-②")
     return one(p["key"], p["note"], p["ctrl"], "")
@@ -219,7 +219,7 @@ def kg_block(page, pages):
     return f"""<section id="kg"><div class="wrap"><h2>지식 색인 — 이 페이지에서 찾아보기</h2>
 <p class="muted">이 페이지에 나온 개념·방법·비유·쓰임을 모았습니다. 검색하고, "설명 보러 가기"로 본문에 돌아갑니다.</p><div id="kg-mount"></div></div></section>
 <section id="export"><div class="wrap"><h2>온톨로지·서지 꾸러미 — 이 페이지의 지식을 가져가기</h2>
-<p class="muted">지식 색인을 출처와 함께 파일로 내려받습니다. Zotero(BibTeX·RIS), Protégé(Turtle), Neo4j·Gephi(CSV), 여러 페이지 합치기(kg.json)에 씁니다.</p><div id="export-mount"></div></div></section>
+<p class="muted">지식 색인을 출처와 함께 파일로 내려받습니다. 서지 관리는 BibTeX·RIS, 온톨로지 편집은 Turtle을 씁니다. 그래프 도구는 CSV, 여러 페이지 합치기는 kg.json입니다.</p><div id="export-mount"></div></div></section>
 <script type="application/json" id="kg-raw">{J(raw)}</script>
 <script type="application/ld+json" id="kg-ld">{J(ld)}</script>
 <script type="application/json" id="refs-csl">{J(refs)}</script>
@@ -235,7 +235,7 @@ def footer(extra_links):
 <tr><td>[2]</td><td>안상선, 「공간 좌표 해설 제작 지침서」 v1.0 (docs/SPACE_COORDINATE_GUIDE.md)</td><td>용어 대조표, 공간 사다리, 방 짜임</td></tr>
 </tbody></table></div>
 <h3>예시값·설명용 숫자</h3>
-<p>시아·모아의 키·몸무게·허리, 취향표, 키 세 번 잰 값, 편의점 위치, 고객 가~바와 새 고객의 키·몸무게는 설명을 위해 만든 예시값입니다.</p>
+<p>이 페이지의 사람·가게·고객 숫자는 모두 설명용 예시값입니다. 시아·모아의 키·몸무게·허리, 취향표, 키 세 번 잰 값이 그렇습니다. 편의점 위치와 고객 가~바의 키·몸무게도 마찬가지입니다.</p>
 <p>캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다. 캐릭터 그림: fruitfly-lab-expressions.</p>
 <p>글 · 안상선 ((주)M-Robo 대표) · <a href="{AUTHOR_URL}">저자 소개</a> · {DATE} · {VER}</p>
 <p>{links}</p>
@@ -255,7 +255,7 @@ def build_index():
     s += cover("연구실 복도 · 번호 붙은 방 10개", [("doctor","e08"),("sia","e19"),("moa","e09"),("haru","e01")])
     s += f"""<header class="hero"><div class="wrap"><span class="kicker">공간 좌표 해설 · 유클리드 공간</span>
 <h1>자와 각도기의 방<br><span style="font-size:.55em;color:var(--muted)">시아·모아의 유클리드 공간</span></h1>
-<p class="lead">데이터 한 줄을 <b>방 안의 점 하나</b>로 놓으면, "얼마나 먼가"와 "얼마나 닮았나"를 자와 각도기로 잴 수 있습니다. 비슷한 것 찾기·예측선 긋기·분류선 긋기가 모두 이 방에서 돌아갑니다.</p>
+<p class="lead">데이터 한 줄을 <b>방 안의 점 하나</b>로 놓아 봅니다. 그러면 "얼마나 먼가"와 "얼마나 닮았나"를 자와 각도기로 잴 수 있습니다. 비슷한 것 찾기·예측선 긋기·분류선 긋기가 모두 이 방에서 돌아갑니다.</p>
 <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="{AUTHOR_URL}">저자 소개</a> · {DATE} · {VER}</p></div></header>
 <section><div class="wrap">{three("키·몸무게 같은 숫자 묶음을 점으로 찍고, 점 사이 거리와 각도를 재는 법을 배웁니다.", "추천(\"비슷한 사람이 본 상품\"), 예측선 긋기, 스팸 분류가 모두 거리와 각도 계산입니다.", "비슷한 고객 찾기, 이상한 값 골라내기, 단위가 다른 열을 맞추는 일에 바로 쓰입니다.")}</div></section>
 <section id="parts"><div class="wrap"><h2>편 목록</h2>
@@ -303,7 +303,7 @@ def build_orient():
         li = "".join(f"<li>{E(x)}</li>" for x in lines)
         s += f"""<section class="room" id="{bid}"><div class="wrap"><h2>{E(title)}</h2>
 <div class="box"><h4>요약 3줄</h4><ol>{li}</ol></div>
-<div class="panel"><div class="ph"><b>실험</b><small>{E(note)}</small></div><div id="pp-{key}" data-panel="{key}"></div><div class="ctrl">{ctrl}</div><div class="readout" aria-live="polite"></div></div>
+<div class="panel"><div class="ph"><b>실험</b><small>{E(note)}</small></div><div id="pp-{key}" data-panel="{key}" data-label="{E(note)}"></div><div class="ctrl">{ctrl}</div><div class="readout" aria-live="polite"></div></div>
 <p class="muted">더 보기: {link}</p></div></section>
 """
     qs = [("점 (3, 4)와 원점 사이 거리는?", ["7", "5", "12"], 1, "√(9 + 16) = 5입니다.", "피타고라스: √(3² + 4²)."),
