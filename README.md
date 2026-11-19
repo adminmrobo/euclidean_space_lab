@@ -1,10 +1,5 @@
 **[한국어](#ko) · [English](#en) · [中文](#zh) · [日本語](#ja) · [Oʻzbekcha](#uz) · [Русский](#ru) · [Tiếng Việt](#vi)**
 
-## 다시 만들기와 번역
-1. `python3 build/build.py` — 한국어 4쪽을 다시 만듭니다.
-2. 언어팩(https://github.com/adminmrobo/ahnboat_lab_langpack)을 `langpack/`에 복사하고 `extract → pending → 번역 → check → merge` 순서로 돌립니다(설정은 `docs/langpack_config.json`).
-3. `dist/`의 HTML과 README.md를 맨 위 폴더로 복사합니다. 실험 패널 스크립트는 번역되도록 페이지 안에 들어 있습니다(`assets/panels.js`가 원본).
-
 ---
 
 <a id="ko"></a>
@@ -67,9 +62,15 @@ docs/                 공간 좌표 해설 제작 지침서, 기획안
 
 숫자 계산 오류는 없었습니다.
 
+## 다시 만들기와 번역
+1. `python3 build/build.py` — 한국어 4쪽을 다시 만듭니다.
+2. 언어팩(https://github.com/adminmrobo/ahnboat_lab_langpack)을 `langpack/`에 복사하고 `extract → pending → 번역 → check → merge` 순서로 돌립니다(설정은 `docs/langpack_config.json`).
+3. `dist/`의 HTML과 README.md를 맨 위 폴더로 복사합니다. 실험 패널 스크립트는 번역되도록 페이지 안에 들어 있습니다(`assets/panels.js`가 원본).
+
+
 ## 남은 일
 - 표지·장면 그림(지금은 CSS 대체 표지) — 요청 목록·프롬프트는 `docs/IMAGE_PROMPTS.md`
-- 번역(언어팩 en·zh·ja·uz·ru·vi), ahnboat_lab_cover_status 명부 등록
+- 번역판 원어민 검수(특히 uz·ru·vi)
 
 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.
 
