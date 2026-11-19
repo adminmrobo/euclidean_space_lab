@@ -77,7 +77,7 @@
       ],
       "characters": [],
       "robot": "none",
-      "prompt_en": "Bright daytime research lab corridor, clean white walls, ten numbered doors (1–10), each engraved with a geometry symbol (ruler, protractor, right-angle mark, circle, dashed projection line). Two young female interns in maid-style lab outfits — black hair with a transparent ruler, beige hair with a protractor and notebook — in front of door 1. Cute anime style, teal/orange/navy accents, white background, empty space on the right for title. 16:9.",
+      "prompt_en": "Wide 16:9. Match the art style, proportions and colors of the attached reference images exactly (if there are no reference images: 16-bit RPG style pixel art, bold dark outline, 2-3 tone shading, small highlights). Bright daytime laboratory mood, soft natural sunlight, clean white walls, teal, orange and navy accents. Scene: a lab corridor with ten numbered doors marked with pixel geometry symbols; in front of the first door a calm girl intern with long straight jet-black hair, charcoal-black maid dress with large gray bow holding a transparent ruler and a gentle girl intern with long ash-beige wavy hair, white frilled maid headband, camel cardigan holding a protractor. Keep the right third plain for title text. No text, no letters, no numbers, no logos.",
       "source_of": null,
       "status": "redraw"
     },
@@ -91,7 +91,7 @@
       ],
       "characters": [],
       "robot": "none",
-      "prompt_en": "White lab corridor entrance, a doctor in a lab coat with glasses opening two backpacks on a white table; graph paper, a ruler and a protractor come out. Black-haired intern smiling, beige-haired intern curious. White background, 16:9.",
+      "prompt_en": "Wide 16:9. Match the art style, proportions and colors of the attached reference images exactly (if there are no reference images: 16-bit RPG style pixel art, bold dark outline, 2-3 tone shading, small highlights). Bright daytime laboratory mood, soft natural sunlight, clean white walls, teal, orange and navy accents. Scene: two backpacks opened on a white table, graph paper, a ruler, a protractor and an arrow card coming out; a calm girl intern with long straight jet-black hair, charcoal-black maid dress with large gray bow smiling and a gentle girl intern with long ash-beige wavy hair, white frilled maid headband, camel cardigan looking curious. Keep the right third plain for title text. No text, no letters, no numbers, no logos.",
       "source_of": null,
       "status": "redraw"
     },
@@ -107,7 +107,7 @@
         "jupanbot"
       ],
       "robot": "jupanbot-v2",
-      "prompt_en": "White lab room with a large floor grid, two glowing points joined by a teal straight line and dashed right-triangle legs (3 and 4), soft orange angle arc; black-haired intern points, beige-haired intern measures with a ruler. Minimal, white background, 16:9.",
+      "prompt_en": "Wide 16:9. Match the art style, proportions and colors of the attached reference images exactly (if there are no reference images: 16-bit RPG style pixel art, bold dark outline, 2-3 tone shading, small highlights). Bright daytime laboratory mood, soft natural sunlight, clean white walls, teal, orange and navy accents. Scene: a floor grid with two glowing points joined by a teal line and dashed right-triangle legs; a calm girl intern with long straight jet-black hair, charcoal-black maid dress with large gray bow pointing at it and a boxy beige retro CRT-monitor robot with a short antenna topped with an abacus bead looking confident. Keep the right third plain for title text. No text, no letters, no numbers, no logos.",
       "source_of": null,
       "status": "redraw"
     },
@@ -121,7 +121,7 @@
       ],
       "characters": [],
       "robot": "none",
-      "prompt_en": "White lab room, an orange arrow casting a sharp shadow straight down onto a translucent teal plane, a thin dividing panel splitting blue dots into two groups; beige-haired intern proud, black-haired intern sheepish. Minimal, white background, 16:9.",
+      "prompt_en": "Wide 16:9. Match the art style, proportions and colors of the attached reference images exactly (if there are no reference images: 16-bit RPG style pixel art, bold dark outline, 2-3 tone shading, small highlights). Bright daytime laboratory mood, soft natural sunlight, clean white walls, teal, orange and navy accents. Scene: an orange arrow casting a shadow straight down onto a teal floor plane and a glass divider splitting blue dots into two groups; a gentle girl intern with long ash-beige wavy hair, white frilled maid headband, camel cardigan looking proud and a calm girl intern with long straight jet-black hair, charcoal-black maid dress with large gray bow looking sheepish. Keep the right third plain for title text. No text, no letters, no numbers, no logos.",
       "source_of": null,
       "status": "redraw"
     }

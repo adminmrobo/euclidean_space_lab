@@ -137,8 +137,8 @@
 | 표지에서 자름 | 목차 썸네일, og:image | 별도 폴더 |
 | 재사용 | 박사·조수·초파리·주판봇·X1~X3 | fruitfly-lab-expressions |
 
-### 표지 프롬프트 (초안)
-> Bright daytime research lab corridor, clean white walls, ten numbered doors (1–10), each door engraved with a simple geometry symbol — a ruler, a protractor, a right-angle mark, a circle, a dashed projection line. Faint floating coordinate axes and dotted grid lines in the air. Two young female interns in maid-style lab outfits — one with black hair holding a large transparent ruler, one with beige hair holding a protractor and a notebook — stand in front of door 1. Cute anime style matching the reference character sheet, soft teal, orange and navy accents, white background dominant, generous empty space on the right for title text. 16:9.
+### 표지 프롬프트 (초안 — 픽셀풍. 전체 목록은 docs/IMAGE_PROMPTS.md)
+> Bright daytime research lab corridor, clean white walls, ten numbered doors (1–10), each door engraved with a simple geometry symbol — a ruler, a protractor, a right-angle mark, a circle, a dashed projection line. Faint floating coordinate axes and dotted grid lines in the air. Two young female interns in maid-style lab outfits — one with black hair holding a large transparent ruler, one with beige hair holding a protractor and a notebook — stand in front of door 1. 16-bit RPG style pixel art matching the attached reference images exactly (bold dark outline, 2-3 tone shading), soft teal, orange and navy accents, white background dominant, generous empty space on the right for title text. 16:9.
 
 ### 첫 화면 배경 프롬프트 (편별)
 - ①편: white lab room with a large floor grid, two glowing points connected by a teal straight line and dashed right-triangle legs (3 and 4), soft orange angle arc, minimal, lots of white space, 16:9.
