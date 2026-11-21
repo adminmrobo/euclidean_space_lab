@@ -70,10 +70,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>なぜこの方法を使うのか</h4><ol><li><b>問題</b> — モデルが出せる答えが1本の線（直線）の上にしかないとき、正解はたいていその線の外にあります。</li><li><b>前の部屋の限界</b> — 5号室で座標は読めましたが、線上のどの点が正解にいちばん近いかはわかりません。</li><li><b>解決法</b> — 正解から線へ直角に下ろした足もと（影）が、いちばん近い点です。</li></ol><div class="easy"><b>かんたんに言うと</b> — 斜めに下ろすと斜辺になって必ず長くなります。まっすぐ下ろした足もとがいちばん短いのです。</div></div>
 <div class="box mathbox"><h4>数式が苦手な助手が代わりに尋ねます</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> この式は、直線上でいちばん近い点（影）を探す式だそうです。proj_u(v) = (v·u ÷ u·u) u…分数の中に点が2つもあります！</div></div>
-<p><b>学校数学で見ると</b> — 正射影、垂線の足</p>
-<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>v·u</td><td>v と u の重なりスコア</td></tr><tr><td class='m'>u·u</td><td>u の長さの二乗</td></tr><tr><td class='m'>v·u ÷ u·u</td><td>u を何倍に伸ばせば影になるか</td></tr><tr><td class='m'>p</td><td>影（いちばん近い点）</td></tr><tr><td class='m'>r = v − p</td><td>ずれた分 — いつも u と直角</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 線の上でいちばん近い点はどうやって見つけるんですか？1つずつ測らないといけませんか？</div></div>
+<div class="easy"><b>ことばで言うと</b> — v が u の方向にどれだけ重なるかを測り、u をその分だけ伸ばすと影になります。残りの部分はいつも線と直角です。</div>
 <div class="try"><b>数字で一度やってみる</b><div>v = (3, 2)、u = (1, 0) → 3 ÷ 1 = 3倍 → p = (3, 0)、r = (0, 2)、r·u = 0</div><div>u = (2, 1) → v·u = 8, u·u = 5 → p = 1.6 × (2, 1) = (3.2, 1.6), r = (−0.2, 0.4), r·u = 0</div><div>身長 160・162・164 を数字1つで：162なら誤差の二乗和 4 + 0 + 4 = 8、161なら 1 + 1 + 9 = 11 → 平均162が影</div></div>
+<p><b>学校数学で見ると</b> — 正射影、垂線の足</p>
+<details class="code"><summary>式で見ると（開く — わからなくても大丈夫です）</summary><div class="fx">p = (v·u ÷ u·u) × u,   r = v − p,   r·u = 0</div>
+<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>v·u</td><td>v と u の重なりスコア</td></tr><tr><td class='m'>u·u</td><td>u の長さの二乗</td></tr><tr><td class='m'>v·u ÷ u·u</td><td>u を何倍に伸ばせば影になるか</td></tr><tr><td class='m'>p</td><td>影（いちばん近い点）</td></tr><tr><td class='m'>r = v − p</td><td>ずれた分 — いつも u と直角</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> ずれた分がいつも直角、というのが要なんですね。だからいちばん短いと。</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>日常でいえば</h4><p>正午に棒を立てると、影はちょうど足もとにできます。日が斜めになるほど影は長くなります。</p></div><div class="box ml"><h4>機械学習では</h4><p>予測線引き（最小二乗回帰）は、正解を &quot;モデルが出せる答えたち&quot; へ影として落とす作業です。いくつかの値の平均も影です。</p></div></div>
@@ -93,14 +95,16 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>なぜこの方法を使うのか</h4><ol><li><b>問題</b> — スパムメールと正常なメールを分けるには、部屋の中に仕切り板を立てる必要があります。</li><li><b>前の部屋の限界</b> — 6号室の床は線1本でした。もっと広い床と、陣営を分ける板が必要です。</li><li><b>解き方</b> — 仕切り板に刺さった矢印（法線）nとの重なりスコアで&quot;どちら側か&quot;を判定します。</li></ol><div class="easy"><b>かんたんに言うと</b> — 運動場の真ん中の線1本で、紅組・白組を分けるのと同じです。</div></div>
 <div class="box mathbox"><h4>数式が苦手な助手が代わりに尋ねます</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> この式は、点が仕切り板のどちら側にあるかを分ける式だそうです。n·(x − p) = 0、ℝⁿの超平面はn − 1次元…nが2つの意味で出てきます！</div></div>
-<p><b>学校数学で見ると</b> — 直線・平面の方程式、点と平面の距離</p>
-<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>x = p + tv</td><td>出発点 p から v の方向に t だけ進む = 直線</td></tr><tr><td class='m'>n</td><td>仕切り板に刺さった矢印（法線）</td></tr><tr><td class='m'>n·(x − p) = 0</td><td>仕切り板の上のすべての点はnと直角</td></tr><tr><td class='m'>x₁ + 2x₂ + 2x₃ = 6</td><td>n = (1, 2, 2)の仕切り板</td></tr><tr><td class='m'>n − 1</td><td>軸の数nの部屋の仕切り板は、軸が1つ少ない</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 点が仕切り板のどちら側にあるかは、どうやってわかるんですか？</div></div>
+<div class="easy"><b>ことばで言うと</b> — 座標に決まった数を掛けて足したスコアを、基準値（6）と比べます。大きければ向こう側、小さければこちら側、等しければ仕切り板の上です。</div>
 <div class="try"><b>数字で一度やってみる</b><div>軸と交わる点：(6, 0, 0)、(0, 3, 0)、(0, 0, 3) — 原資料と同じ</div><div>点(2, 2, 2): 2 + 4 + 4 = 10 &gt; 6 → 原点の反対側、仕切り板まで(10 − 6) ÷ 3 ≈ 1.33</div><div>原点: 0 &lt; 6 → 原点側、仕切り板まで6 ÷ 3 = 2（nの長さ√(1 + 4 + 4) = 3）</div></div>
+<p><b>学校数学で見ると</b> — 直線・平面の方程式、点と平面の距離</p>
+<details class="code"><summary>式で見ると（開く — わからなくても大丈夫です）</summary><div class="fx">x₁ + 2x₂ + 2x₃ = 6   (刺さった矢印 n = (1, 2, 2)),   n·(x − p) = 0</div>
+<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>x = p + tv</td><td>出発点 p から v の方向に t だけ進む = 直線</td></tr><tr><td class='m'>n</td><td>仕切り板に刺さった矢印（法線）</td></tr><tr><td class='m'>n·(x − p) = 0</td><td>仕切り板の上のすべての点はnと直角</td></tr><tr><td class='m'>x₁ + 2x₂ + 2x₃ = 6</td><td>n = (1, 2, 2)の仕切り板</td></tr><tr><td class='m'>n − 1</td><td>軸の数nの部屋の仕切り板は、軸が1つ少ない</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> スコアを6と比べれば終わりですね。スパム判定器は思ったより単純です。</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>日常でいえば</h4><p>運動場の線の左は紅組、右は白組です。線から遠いほど、はっきりその組です。</p></div><div class="box ml"><h4>機械学習では</h4><p>ロジスティック回帰・SVMのような分類器は、仕切り板（決定境界）を立てます。仕切り板から遠い点ほど、確信の大きい判定です。</p></div></div>
-<div class="talk"><div class="line"><img src="assets/chars/sia_e01.webp" alt="シア" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">シア</b>仕切り板1枚で側が分かれるなんて、真ん中の線ですね！</div></div><div class="line r"><img src="assets/chars/moa_e09.webp" alt="モア" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">モア</b>仕切り板にぴったりくっついた点は、どちら側ですか？</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="ショウジョウバエ研究員" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">ショウジョウバエ研究員</b>点 P の3つの座標を変えて、スコアが6になる位置を探してみて。</div></div></div>
+<div class="talk"><div class="line"><img src="assets/chars/doctor_e08.webp" alt="博士" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">博士</b>迷惑メールを仕分ける機械を作るとしたら、何を基準に分けるでしょう？スコア1つと基準値1つがあれば十分です。</div></div><div class="line"><img src="assets/chars/sia_e01.webp" alt="シア" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">シア</b>仕切り板1枚で側が分かれるなんて、真ん中の線ですね！</div></div><div class="line r"><img src="assets/chars/moa_e09.webp" alt="モア" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">モア</b>仕切り板にぴったりくっついた点は、どちら側ですか？</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="ショウジョウバエ研究員" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">ショウジョウバエ研究員</b>点 P の3つの座標を変えて、スコアが6になる位置を探してみて。</div></div></div>
 <div class="panel"><div class="ph"><b>実験パネル 7</b><small>元資料カード07の仕切り板を描き直したもの · 点Pの座標を変えてみてください</small></div><div id="pp-p07" data-panel="p07"></div><div class="ctrl"><label>x₁ <input type="range" min="0" max="6" step="1" value="2" aria-label="x1"></label><label>x₂ <input type="range" min="0" max="4" step="1" value="2" aria-label="x2"></label><label>x₃ <input type="range" min="0" max="4" step="1" value="2" aria-label="x3"></label></div><div class="readout" aria-live="polite"></div></div>
 <div class="solve"><h4>解説</h4><p>スコアが6より大きければ原点の反対側、小さければ原点側、同じなら仕切り板の上（境界）です。</p><p>仕切り板の上の点は判断を保留します。実際の分類器も、境界近くの点にいちばん迷います。</p><p>3軸の部屋の仕切り板は平面（2軸）です。n軸の部屋ならn − 1軸の板です。</p></div>
 
@@ -116,10 +120,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>なぜこの方法を使うのか</h4><ol><li><b>問題</b> — 写真を回したり座標の原点を動かしたりしても、データどうしの関係は同じでなければなりません。</li><li><b>前の部屋の限界</b> — 7号室までは、点をその場に置いたまま測っただけでした。動かすとどうなるかはわかりません。</li><li><b>解決法</b> — ずらす・回す・裏返すは距離と角度を守ります。伸ばすだけが距離を変えます。</li></ol><div class="easy"><b>かんたんに言うと</b> — 紙の上の三角形をずらしても回しても裏返しても、同じ三角形です。拡大コピーだけが大きさを変えます。</div></div>
 <div class="box mathbox"><h4>数式が苦手な助手が代わりに尋ねます</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> この式は、距離を変えずに点たちを動かす規則だそうです。x′ = Qx + t、QᵀQ = I…右上のTとIはまた何ですか？</div></div>
-<p><b>学校数学で見ると</b> — 平行移動、回転、対称移動、相似</p>
-<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>t</td><td>ずらす — すべての点に同じ矢印を足す</td></tr><tr><td class='m'>Q</td><td>回す・裏返すの表</td></tr><tr><td class='m'>QᵀQ = I</td><td>回す・裏返すの表の条件：長さと角度を変えない</td></tr><tr><td class='m'>s倍に伸ばす</td><td>すべての距離が |s|倍</td></tr><tr><td class='m'>|s| = 1</td><td>このときだけ、伸ばしても距離を守る</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 点を動かしたときに距離が変わるかどうか、計算しなくてもわかりますか？</div></div>
+<div class="easy"><b>ことばで言うと</b> — ずらす・回す・裏返すは距離を保ち、伸ばすだけが距離を変えます。s倍に伸ばせば、すべての距離がs倍になります。</div>
 <div class="try"><b>数字で一度やってみる</b><div>(0, 0) から (3, 4) まで長さ5 → 90° 回すと (0, 0) から (−4, 3) まで長さ5</div><div>ずらす：2点に (−2, 1) を同じように足すと、差 B − A はそのまま → 距離もそのまま</div><div>2倍に伸ばす：長さ 5 → 10</div></div>
+<p><b>学校数学で見ると</b> — 平行移動、回転、対称移動、相似</p>
+<details class="code"><summary>式で見ると（開く — わからなくても大丈夫です）</summary><div class="fx">x′ = Qx + t,   QᵀQ = I (回す・裏返す表の条件)</div>
+<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>t</td><td>ずらす — すべての点に同じ矢印を足す</td></tr><tr><td class='m'>Q</td><td>回す・裏返すの表</td></tr><tr><td class='m'>QᵀQ = I</td><td>回す・裏返すの表の条件：長さと角度を変えない</td></tr><tr><td class='m'>s倍に伸ばす</td><td>すべての距離が |s|倍</td></tr><tr><td class='m'>|s| = 1</td><td>このときだけ、伸ばしても距離を守る</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 回転の表は、距離を守る表だけを選んで使うんですね。</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>日常でいえば</h4><p>スマホの写真を回しても、顔は同じ顔です。拡大すると大きさだけが変わります。</p></div><div class="box ml"><h4>機械学習では</h4><p>写真を回したり裏返したりして学習データを増やします（データ拡張）。形がそのままなので、正解ラベルもそのままです。</p></div></div>
@@ -139,10 +145,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>なぜこの方法を使うのか</h4><ol><li><b>問題</b> — &quot;近い顧客を何人か&quot; ではなく、&quot;距離 r 以内の顧客全員&quot; を探したいときがあります。</li><li><b>前の部屋の限界</b> — 8号室までは、2点間の距離を測っただけでした。範囲を描いてはいません。</li><li><b>解き方</b> — 中心から距離r以下の点を集めると、2軸の部屋では円、3軸の部屋では球になります。</li></ol><div class="easy"><b>かんたんに言うと</b> — 家を中心に半径1kmの円を描けば、その中の店が &quot;近所の店&quot; です。</div></div>
 <div class="box mathbox"><h4>数式が苦手な助手が代わりに尋ねます</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> この式は、中心から距離rまでの範囲を決める式だそうです。‖x − c‖ = rと‖x − c‖ ≤ r…等号1つの違いで名前が変わるんですか？</div></div>
-<p><b>学校数学で見ると</b> — 円の方程式、球の方程式、指数</p>
-<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>c</td><td>中心</td></tr><tr><td class='m'>‖x − c‖ = r</td><td>中心からちょうど r 離れた点たち = 外殻（円・球面）</td></tr><tr><td class='m'>‖x − c‖ ≤ r</td><td>r の内側全体 = 中身の詰まった球</td></tr><tr><td class='m'>x² + y² = r²</td><td>中心が原点のときの円</td></tr><tr><td class='m'>0.9ⁿ</td><td>n軸の球で半径0.9の内側が占める体積の割合</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> &quot;半径の内側&quot;は式ではどう書くんですか？</div></div>
+<div class="easy"><b>ことばで言うと</b> — 中心までの距離が r と等しければ外側の殻、r 以下なら内側全体です。軸が増えるほど、内側の体積は 0.9ⁿ のように急速に小さくなります。</div>
 <div class="try"><b>数字で一度やってみる</b><div>半径1：円の面積 π × 1² ≈ 3.14、球の体積 4π ÷ 3 ≈ 4.19</div><div>半径0.9の内側の割合: 2軸 0.81（81%）、3軸 0.729（73%）</div><div>10軸 0.9¹⁰ ≈ 0.349（35%）、100軸 0.9¹⁰⁰ ≈ 0.0000266 — ほぼすべてが外側の殻</div></div>
+<p><b>学校数学で見ると</b> — 円の方程式、球の方程式、指数</p>
+<details class="code"><summary>式で見ると（開く — わからなくても大丈夫です）</summary><div class="fx">‖x − c‖ = r (外側の殻),   ‖x − c‖ ≤ r (内側全体),   0.9ⁿ</div>
+<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>c</td><td>中心</td></tr><tr><td class='m'>‖x − c‖ = r</td><td>中心からちょうど r 離れた点たち = 外殻（円・球面）</td></tr><tr><td class='m'>‖x − c‖ ≤ r</td><td>r の内側全体 = 中身の詰まった球</td></tr><tr><td class='m'>x² + y² = r²</td><td>中心が原点のときの円</td></tr><tr><td class='m'>0.9ⁿ</td><td>n軸の球で半径0.9の内側が占める体積の割合</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 軸が多いと、球の中が空っぽになったみたいですね。不思議です。</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>日常でいえば</h4><p>配達アプリの &quot;半径2km以内の店&quot; がこの円です。</p></div><div class="box ml"><h4>機械学習では</h4><p>半径による近傍探し、異常値探し（半径の中に近傍がなければ怪しい）に使います。軸がとても多いと、すべての点が同じくらい遠くなります（次元の呪い）。</p></div></div>
@@ -162,10 +170,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>なぜこの方法を使うのか</h4><ol><li><b>問題</b> — 工学（位置）、グラフィックス（回転）、データ分析（最近傍）は、すべてこの部屋の距離を使います。</li><li><b>前の部屋の限界</b> — ただし9番の部屋までは、すべての軸の単位が同じだと仮定していました。</li><li><b>解決法</b> — 単位をそろえ（特徴量スケーリング）、曲がった表面では表面に沿って測ります。</li></ol><div class="easy"><b>かんたんに言うと</b> — 身長を mm で書くと、身長の数字が10倍になって距離を独り占めします。</div></div>
 <div class="box mathbox"><h4>数式が苦手な助手が代わりに尋ねます</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> この式は、曲がった表面に沿って測った長さと、まっすぐ測った長さを比べる式だそうです。d_surf = Rθ、d_Euc = 2R sin(θ/2)…どうして急にサインが出てくるんですか？</div></div>
-<p><b>学校数学で見ると</b> — 単位の変換、弧の長さ、三角関数</p>
-<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>‖x − y‖₂</td><td>3号室のまっすぐな定規の距離</td></tr><tr><td class='m'>y* = argmin</td><td>距離がいちばん小さい y を選ぶ（最近傍）</td></tr><tr><td class='m'>Rθ</td><td>表面に沿って進んだ長さ（弧）— 半径 × 中心角</td></tr><tr><td class='m'>2R sin(θ/2)</td><td>地中をまっすぐ掘った長さ（弦）</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 地球上の2つの都市の間の距離が、測り方によって違うのはなぜですか？</div></div>
+<div class="easy"><b>ことばで言うと</b> — 表面に沿って進めば半径 × 角度（弧）、地中をまっすぐ掘り抜けばそれより短い直線（弦）です。</div>
 <div class="try"><b>数字で一度やってみる</b><div>新しい顧客（165cm、55kg）と顧客ア（160, 56）：cm で √(5² + 1²) ≈ 5.10、顧客イ（166, 48）：√(1² + 7²) ≈ 7.07 → 最近傍はア</div><div>身長を mm で：ア √(50² + 1²) ≈ 50.01、イ √(10² + 7²) ≈ 12.21 → 最近傍がイに変わる</div><div>地球 R = 6,371km、中心角 90°：弧 ≈ 10,008km、弦 ≈ 9,010km</div></div>
+<p><b>学校数学で見ると</b> — 単位の変換、弧の長さ、三角関数</p>
+<details class="code"><summary>式で見ると（開く — わからなくても大丈夫です）</summary><div class="fx">d_表面 = Rθ,   d_まっすぐな物差し = 2R sin(θ/2)</div>
+<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>‖x − y‖₂</td><td>3号室のまっすぐな定規の距離</td></tr><tr><td class='m'>y* = argmin</td><td>距離がいちばん小さい y を選ぶ（最近傍）</td></tr><tr><td class='m'>Rθ</td><td>表面に沿って進んだ長さ（弧）— 半径 × 中心角</td></tr><tr><td class='m'>2R sin(θ/2)</td><td>地中をまっすぐ掘った長さ（弦）</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 同じ人たちなのに、単位1つで最近傍が変わるなんて、怖いことです。</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>日常でいえば</h4><p>ソウルからニューヨークへの飛行機は、地図上の直線ではなく地球の表面に沿って飛びます。</p></div><div class="box ml"><h4>機械学習では</h4><p>最近傍探索・クラスタリングの前に、列ごとに単位をそろえます（標準化）。単語の点のように方向が大事なデータには、距離の代わりに4号室のコサインを使います。</p></div></div>

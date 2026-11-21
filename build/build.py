@@ -2,7 +2,7 @@
 """자와 각도기의 방 — 페이지 빌드. python3 build/build.py 로 index.html, 00~02 페이지를 다시 만든다."""
 import json, os, html, sys
 sys.path.insert(0, os.path.dirname(__file__))
-from content_rooms import ROOMS, EXTRA
+from content_rooms import ROOMS, EXTRA, EASY
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VER = "v1.4"
@@ -133,6 +133,7 @@ def quiz(q, ans, ok, no, opts):
 
 def room(r):
     x = EXTRA.get(r['no'], {})
+    ez = EASY[r['no']]
     why = "".join(f"<li>{E(x)}</li>" for x in r["why"])
     labels = ["문제", "앞 방의 한계", "해법"]
     why = "".join(f"<li><b>{labels[i]}</b> — {E(x)}</li>" for i, x in enumerate(r["why"]))
@@ -157,10 +158,12 @@ def room(r):
 <div class="duo">
 <div class="box why"><h4>왜 이 방법을 쓰나</h4><ol>{why}</ol><div class="easy"><b>쉽게 말하면</b> — {E(r['easy'])}</div></div>
 <div class="box mathbox"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
-<div class="q">{face('haru','e04')}<div><b>조수</b> {E(x.get('intro', ''))} {E(r['haru_q'])}</div></div>
-<p><b>학교 수학으로 보면</b> — {E(r['school'])}</p>
-<table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>{pcs}</tbody></table>
+<div class="q">{face('haru','e04')}<div><b>조수</b> {E(ez['ask'])}</div></div>
+<div class="easy"><b>말로 하면</b> — {E(ez['words'])}</div>
 <div class="try"><b>숫자로 한 번 해 보기</b>{tries}</div>
+<p><b>학교 수학으로 보면</b> — {E(r['school'])}</p>
+<details class="code"><summary>식으로 보면 (펼치기 — 몰라도 됩니다)</summary><div class="fx">{E(ez['formula'])}</div>
+<table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>{pcs}</tbody></table></details>
 <div class="q">{face('haru','e16')}<div><b>조수</b> {E(r['haru_c'])}</div></div></div>
 </div>
 {talk(r['aside']) + chr(10) if r.get('aside') else ''}<div class="pair"><div class="box"><h4>일상으로 치면</h4><p>{E(r['daily'])}</p></div><div class="box ml"><h4>머신러닝에서는</h4><p>{E(r['ml'])}</p></div></div>

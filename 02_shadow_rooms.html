@@ -70,10 +70,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>왜 이 방법을 쓰나</h4><ol><li><b>문제</b> — 모델이 낼 수 있는 답이 한 줄(직선) 위에만 있을 때, 정답은 대개 그 줄 밖에 있습니다.</li><li><b>앞 방의 한계</b> — 5번 방에서 좌표는 읽었지만, 줄 위의 어느 점이 정답에 가장 가까운지는 모릅니다.</li><li><b>해법</b> — 정답에서 줄로 직각으로 내린 발밑(그림자)이 가장 가까운 점입니다.</li></ol><div class="easy"><b>쉽게 말하면</b> — 비스듬히 내리면 빗변이 되어 늘 더 깁니다. 똑바로 내린 발밑이 가장 짧습니다.</div></div>
 <div class="box mathbox"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 이 식은 선 위에서 가장 가까운 점(그림자)을 찾는 식이래요. proj_u(v) = (v·u ÷ u·u) u… 분수 안에 점이 두 개나 있어요!</div></div>
-<p><b>학교 수학으로 보면</b> — 정사영, 수선의 발</p>
-<table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody><tr><td class='m'>v·u</td><td>v와 u의 겹침 점수</td></tr><tr><td class='m'>u·u</td><td>u 길이의 제곱</td></tr><tr><td class='m'>v·u ÷ u·u</td><td>u를 몇 배 늘리면 그림자가 되나</td></tr><tr><td class='m'>p</td><td>그림자(가장 가까운 점)</td></tr><tr><td class='m'>r = v − p</td><td>빗나간 만큼 — 늘 u와 직각</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 선 위에서 가장 가까운 점은 어떻게 찾아요? 하나하나 재 봐야 해요?</div></div>
+<div class="easy"><b>말로 하면</b> — v가 u 쪽으로 얼마나 겹치는지 재서, u를 그만큼 늘리면 그림자가 됩니다. 남은 부분은 늘 선과 직각입니다.</div>
 <div class="try"><b>숫자로 한 번 해 보기</b><div>v = (3, 2), u = (1, 0) → 3 ÷ 1 = 3배 → p = (3, 0), r = (0, 2), r·u = 0</div><div>u = (2, 1) → v·u = 8, u·u = 5 → p = 1.6 × (2, 1) = (3.2, 1.6), r = (−0.2, 0.4), r·u = 0</div><div>키 160·162·164를 숫자 하나로: 162면 오차 제곱 합 4 + 0 + 4 = 8, 161이면 1 + 1 + 9 = 11 → 평균 162가 그림자</div></div>
+<p><b>학교 수학으로 보면</b> — 정사영, 수선의 발</p>
+<details class="code"><summary>식으로 보면 (펼치기 — 몰라도 됩니다)</summary><div class="fx">p = (v·u ÷ u·u) × u,   r = v − p,   r·u = 0</div>
+<table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody><tr><td class='m'>v·u</td><td>v와 u의 겹침 점수</td></tr><tr><td class='m'>u·u</td><td>u 길이의 제곱</td></tr><tr><td class='m'>v·u ÷ u·u</td><td>u를 몇 배 늘리면 그림자가 되나</td></tr><tr><td class='m'>p</td><td>그림자(가장 가까운 점)</td></tr><tr><td class='m'>r = v − p</td><td>빗나간 만큼 — 늘 u와 직각</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 빗나간 만큼이 늘 직각이라는 게 핵심이군요. 그래서 가장 짧고요.</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>일상으로 치면</h4><p>정오에 막대를 세우면 그림자는 바로 발밑에 생깁니다. 비스듬한 해일수록 그림자가 길어집니다.</p></div><div class="box ml"><h4>머신러닝에서는</h4><p>예측선 긋기(최소제곱 회귀)는 정답을 &quot;모델이 낼 수 있는 답들&quot;에 그림자로 떨어뜨리는 일입니다. 여러 값의 평균도 그림자입니다.</p></div></div>
@@ -93,14 +95,16 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>왜 이 방법을 쓰나</h4><ol><li><b>문제</b> — 스팸 메일과 정상 메일을 가르려면 방 안에 가름판를 세워야 합니다.</li><li><b>앞 방의 한계</b> — 6번 방의 바닥은 선 하나였습니다. 더 넓은 바닥과 편을 가르는 판이 필요합니다.</li><li><b>해법</b> — 가름판에 꽂힌 화살표(법선) n과의 겹침 점수로 &quot;어느 쪽인가&quot;를 판정합니다.</li></ol><div class="easy"><b>쉽게 말하면</b> — 운동장 가운데 줄 하나로 청팀·백팀을 가르는 것과 같습니다.</div></div>
 <div class="box mathbox"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 이 식은 점이 가름판 어느 쪽에 있는지 가르는 식이래요. n·(x − p) = 0, ℝⁿ의 초평면은 n − 1 차원… n이 두 가지 뜻으로 나와요!</div></div>
-<p><b>학교 수학으로 보면</b> — 직선·평면의 방정식, 점과 평면 사이의 거리</p>
-<table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody><tr><td class='m'>x = p + tv</td><td>출발점 p에서 v 방향으로 t만큼 가기 = 직선</td></tr><tr><td class='m'>n</td><td>가름판에 꽂힌 화살표(법선)</td></tr><tr><td class='m'>n·(x − p) = 0</td><td>가름판 위의 모든 점은 n과 직각</td></tr><tr><td class='m'>x₁ + 2x₂ + 2x₃ = 6</td><td>n = (1, 2, 2)인 가름판</td></tr><tr><td class='m'>n − 1</td><td>축 수 n인 방의 가름판는 한 축 적다</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 점이 가름판의 어느 쪽에 있는지 어떻게 알아요?</div></div>
+<div class="easy"><b>말로 하면</b> — 좌표에 정해진 수를 곱해 더한 점수를 기준값(6)과 비교합니다. 크면 저쪽, 작으면 이쪽, 같으면 가름판 위입니다.</div>
 <div class="try"><b>숫자로 한 번 해 보기</b><div>축과 만나는 점: (6, 0, 0), (0, 3, 0), (0, 0, 3) — 원자료와 같음</div><div>점 (2, 2, 2): 2 + 4 + 4 = 10 &gt; 6 → 원점 반대편, 가름판까지 (10 − 6) ÷ 3 ≈ 1.33</div><div>원점: 0 &lt; 6 → 원점 쪽, 가름판까지 6 ÷ 3 = 2 (n의 길이 √(1 + 4 + 4) = 3)</div></div>
+<p><b>학교 수학으로 보면</b> — 직선·평면의 방정식, 점과 평면 사이의 거리</p>
+<details class="code"><summary>식으로 보면 (펼치기 — 몰라도 됩니다)</summary><div class="fx">x₁ + 2x₂ + 2x₃ = 6   (꽂힌 화살표 n = (1, 2, 2)),   n·(x − p) = 0</div>
+<table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody><tr><td class='m'>x = p + tv</td><td>출발점 p에서 v 방향으로 t만큼 가기 = 직선</td></tr><tr><td class='m'>n</td><td>가름판에 꽂힌 화살표(법선)</td></tr><tr><td class='m'>n·(x − p) = 0</td><td>가름판 위의 모든 점은 n과 직각</td></tr><tr><td class='m'>x₁ + 2x₂ + 2x₃ = 6</td><td>n = (1, 2, 2)인 가름판</td></tr><tr><td class='m'>n − 1</td><td>축 수 n인 방의 가름판는 한 축 적다</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 점수를 6과 비교하면 끝이네요. 스팸 판정기가 생각보다 단순해요.</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>일상으로 치면</h4><p>운동장 줄의 왼쪽은 청팀, 오른쪽은 백팀입니다. 줄에서 멀수록 확실한 편입니다.</p></div><div class="box ml"><h4>머신러닝에서는</h4><p>로지스틱 회귀·SVM 같은 분류기는 가름판(결정 경계)를 세웁니다. 가름판에서 먼 점일수록 확신이 큰 판정입니다.</p></div></div>
-<div class="talk"><div class="line"><img src="assets/chars/sia_e01.webp" alt="시아" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">시아</b>가름판 하나로 편이 갈리다니, 가운데 줄이네요!</div></div><div class="line r"><img src="assets/chars/moa_e09.webp" alt="모아" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">모아</b>가름판에 딱 붙은 점은 어느 편이에요?</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="초파리 연구원" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">초파리 연구원</b>점 P의 세 좌표를 바꿔서 점수가 6이 되는 자리를 찾아 봐.</div></div></div>
+<div class="talk"><div class="line"><img src="assets/chars/doctor_e08.webp" alt="박사" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">박사</b>스팸 메일을 가르는 기계를 만든다면, 무엇을 기준으로 가를까? 점수 하나와 기준값 하나면 된다.</div></div><div class="line"><img src="assets/chars/sia_e01.webp" alt="시아" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">시아</b>가름판 하나로 편이 갈리다니, 가운데 줄이네요!</div></div><div class="line r"><img src="assets/chars/moa_e09.webp" alt="모아" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">모아</b>가름판에 딱 붙은 점은 어느 편이에요?</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="초파리 연구원" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">초파리 연구원</b>점 P의 세 좌표를 바꿔서 점수가 6이 되는 자리를 찾아 봐.</div></div></div>
 <div class="panel"><div class="ph"><b>실험 패널 7</b><small>원자료 카드 07의 가름판 다시 그림 · 점 P의 좌표를 바꿔 보세요</small></div><div id="pp-p07" data-panel="p07"></div><div class="ctrl"><label>x₁ <input type="range" min="0" max="6" step="1" value="2" aria-label="x1"></label><label>x₂ <input type="range" min="0" max="4" step="1" value="2" aria-label="x2"></label><label>x₃ <input type="range" min="0" max="4" step="1" value="2" aria-label="x3"></label></div><div class="readout" aria-live="polite"></div></div>
 <div class="solve"><h4>풀이</h4><p>점수가 6보다 크면 원점 반대편, 작으면 원점 쪽, 같으면 가름판 위(경계)입니다.</p><p>가름판 위의 점은 판단을 미룹니다. 실제 분류기도 경계 근처 점을 가장 헷갈려 합니다.</p><p>3축 방의 가름판는 평면(2축)입니다. n축 방이면 n − 1축짜리 판입니다.</p></div>
 
@@ -116,10 +120,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>왜 이 방법을 쓰나</h4><ol><li><b>문제</b> — 사진을 돌리거나 좌표의 원점을 옮겨도 데이터 사이 관계는 같아야 합니다.</li><li><b>앞 방의 한계</b> — 7번 방까지는 점을 제자리에 두고만 쟀습니다. 옮기면 어떻게 될지 모릅니다.</li><li><b>해법</b> — 밀기·돌리기·뒤집기는 거리와 각도를 지킵니다. 늘리기만 거리를 바꿉니다.</li></ol><div class="easy"><b>쉽게 말하면</b> — 종이 위 삼각형을 밀고 돌리고 뒤집어도 같은 삼각형입니다. 확대 복사만 크기가 바뀝니다.</div></div>
 <div class="box mathbox"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 이 식은 거리를 바꾸지 않고 점들을 옮기는 규칙이래요. x′ = Qx + t, QᵀQ = I… 위 첨자 T랑 I는 또 뭐예요?</div></div>
-<p><b>학교 수학으로 보면</b> — 평행이동, 회전, 대칭이동, 닮음</p>
-<table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody><tr><td class='m'>t</td><td>밀기 — 모든 점에 같은 화살표를 더한다</td></tr><tr><td class='m'>Q</td><td>돌리기·뒤집기 표</td></tr><tr><td class='m'>QᵀQ = I</td><td>돌리기·뒤집기 표의 조건: 길이와 각도를 바꾸지 않는다</td></tr><tr><td class='m'>s배 늘리기</td><td>모든 거리가 |s|배</td></tr><tr><td class='m'>|s| = 1</td><td>이때만 늘리기도 거리를 지킨다</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 점들을 옮기면 거리가 바뀌는지, 계산 안 하고 알 수 있어요?</div></div>
+<div class="easy"><b>말로 하면</b> — 밀기·돌리기·뒤집기는 거리를 지키고, 늘리기만 거리를 바꿉니다. s배 늘리면 모든 거리가 s배입니다.</div>
 <div class="try"><b>숫자로 한 번 해 보기</b><div>(0, 0)에서 (3, 4)까지 길이 5 → 90° 돌리면 (0, 0)에서 (−4, 3)까지 길이 5</div><div>밀기: 두 점에 (−2, 1)을 똑같이 더하면 차 B − A는 그대로 → 거리 그대로</div><div>2배 늘리기: 길이 5 → 10</div></div>
+<p><b>학교 수학으로 보면</b> — 평행이동, 회전, 대칭이동, 닮음</p>
+<details class="code"><summary>식으로 보면 (펼치기 — 몰라도 됩니다)</summary><div class="fx">x′ = Qx + t,   QᵀQ = I (돌리기·뒤집기 표의 조건)</div>
+<table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody><tr><td class='m'>t</td><td>밀기 — 모든 점에 같은 화살표를 더한다</td></tr><tr><td class='m'>Q</td><td>돌리기·뒤집기 표</td></tr><tr><td class='m'>QᵀQ = I</td><td>돌리기·뒤집기 표의 조건: 길이와 각도를 바꾸지 않는다</td></tr><tr><td class='m'>s배 늘리기</td><td>모든 거리가 |s|배</td></tr><tr><td class='m'>|s| = 1</td><td>이때만 늘리기도 거리를 지킨다</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 돌리기 표는 거리를 지키는 표만 골라 쓰는 거였군요.</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>일상으로 치면</h4><p>휴대폰 사진을 돌려도 얼굴은 같은 얼굴입니다. 확대하면 크기만 바뀝니다.</p></div><div class="box ml"><h4>머신러닝에서는</h4><p>사진을 돌리고 뒤집어 학습 데이터를 늘립니다(데이터 늘리기). 모양이 그대로라 정답 이름표도 그대로입니다.</p></div></div>
@@ -139,10 +145,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>왜 이 방법을 쓰나</h4><ol><li><b>문제</b> — &quot;가까운 고객 몇 명&quot; 말고 &quot;거리 r 안의 고객 모두&quot;를 찾고 싶을 때가 있습니다.</li><li><b>앞 방의 한계</b> — 8번 방까지는 두 점 사이 거리만 쟀습니다. 범위를 그리지는 않았습니다.</li><li><b>해법</b> — 중심에서 거리 r 이하인 점을 모으면 2축 방에서는 원, 3축 방에서는 공이 됩니다.</li></ol><div class="easy"><b>쉽게 말하면</b> — 집을 중심으로 반경 1km 원을 그리면 그 안의 가게가 &quot;동네 가게&quot;입니다.</div></div>
 <div class="box mathbox"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 이 식은 중심에서 거리 r까지의 범위를 정하는 식이래요. ‖x − c‖ = r이랑 ‖x − c‖ ≤ r… 등호 하나 차이로 이름이 달라요?</div></div>
-<p><b>학교 수학으로 보면</b> — 원의 방정식, 구의 방정식, 지수</p>
-<table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody><tr><td class='m'>c</td><td>중심</td></tr><tr><td class='m'>‖x − c‖ = r</td><td>중심에서 딱 r 떨어진 점들 = 겉껍질(원·구면)</td></tr><tr><td class='m'>‖x − c‖ ≤ r</td><td>r 안쪽 전체 = 꽉 찬 공</td></tr><tr><td class='m'>x² + y² = r²</td><td>중심이 원점일 때의 원</td></tr><tr><td class='m'>0.9ⁿ</td><td>n축 공에서 반지름 0.9 안쪽이 차지하는 부피 비율</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> &quot;반지름 안쪽&quot;을 식으로는 어떻게 적어요?</div></div>
+<div class="easy"><b>말로 하면</b> — 중심까지 거리가 r과 같으면 겉껍질, r 이하면 안쪽 전체입니다. 축이 많아질수록 안쪽 부피는 0.9ⁿ처럼 빠르게 줄어듭니다.</div>
 <div class="try"><b>숫자로 한 번 해 보기</b><div>반지름 1: 원 넓이 π × 1² ≈ 3.14, 공 부피 4π ÷ 3 ≈ 4.19</div><div>반지름 0.9 안쪽 비율: 2축 0.81(81%), 3축 0.729(73%)</div><div>10축 0.9¹⁰ ≈ 0.349(35%), 100축 0.9¹⁰⁰ ≈ 0.0000266 — 거의 전부 겉껍질</div></div>
+<p><b>학교 수학으로 보면</b> — 원의 방정식, 구의 방정식, 지수</p>
+<details class="code"><summary>식으로 보면 (펼치기 — 몰라도 됩니다)</summary><div class="fx">‖x − c‖ = r (겉껍질),   ‖x − c‖ ≤ r (안쪽 전체),   0.9ⁿ</div>
+<table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody><tr><td class='m'>c</td><td>중심</td></tr><tr><td class='m'>‖x − c‖ = r</td><td>중심에서 딱 r 떨어진 점들 = 겉껍질(원·구면)</td></tr><tr><td class='m'>‖x − c‖ ≤ r</td><td>r 안쪽 전체 = 꽉 찬 공</td></tr><tr><td class='m'>x² + y² = r²</td><td>중심이 원점일 때의 원</td></tr><tr><td class='m'>0.9ⁿ</td><td>n축 공에서 반지름 0.9 안쪽이 차지하는 부피 비율</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 축이 많으면 공의 속이 텅 빈 것처럼 되네요. 신기해요.</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>일상으로 치면</h4><p>배달 앱의 &quot;반경 2km 안 가게&quot;가 이 원입니다.</p></div><div class="box ml"><h4>머신러닝에서는</h4><p>반경 이웃 찾기, 이상한 값 찾기(반경 안에 이웃이 없으면 수상)에 씁니다. 축이 아주 많으면 모든 점이 비슷하게 멀어집니다(차원의 저주).</p></div></div>
@@ -162,10 +170,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>왜 이 방법을 쓰나</h4><ol><li><b>문제</b> — 공학(위치), 그래픽(회전), 데이터 분석(가장 가까운 이웃)이 모두 이 방의 거리를 씁니다.</li><li><b>앞 방의 한계</b> — 하지만 9번 방까지는 모든 축의 단위가 같다고 가정했습니다.</li><li><b>해법</b> — 단위를 맞추고(특성 스케일링), 휜 표면에서는 표면을 따라 잽니다.</li></ol><div class="easy"><b>쉽게 말하면</b> — 키를 mm로 적으면 키 숫자가 10배 커져 거리를 혼자 차지합니다.</div></div>
 <div class="box mathbox"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 이 식은 휜 표면을 따라 잰 길이와 곧게 잰 길이를 비교하는 식이래요. d_surf = Rθ, d_Euc = 2R sin(θ/2)… 사인이 왜 갑자기 나와요?</div></div>
-<p><b>학교 수학으로 보면</b> — 단위 변환, 호의 길이, 삼각함수</p>
-<table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody><tr><td class='m'>‖x − y‖₂</td><td>3번 방의 곧은 자 거리</td></tr><tr><td class='m'>y* = argmin</td><td>거리가 가장 작은 y를 고른다(가장 가까운 이웃)</td></tr><tr><td class='m'>Rθ</td><td>표면을 따라 간 길이(호) — 반지름 × 중심각</td></tr><tr><td class='m'>2R sin(θ/2)</td><td>땅속을 곧게 뚫은 길이(현)</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 지구 위 두 도시 사이 거리가 재는 방법에 따라 왜 달라요?</div></div>
+<div class="easy"><b>말로 하면</b> — 표면을 따라가면 반지름 × 각도(호), 땅속을 곧게 뚫으면 그보다 짧은 직선(현)입니다.</div>
 <div class="try"><b>숫자로 한 번 해 보기</b><div>새 고객(165cm, 55kg)과 고객 가(160, 56): cm로 √(5² + 1²) ≈ 5.10, 고객 나(166, 48): √(1² + 7²) ≈ 7.07 → 가장 가까운 이웃은 가</div><div>키를 mm로: 가 √(50² + 1²) ≈ 50.01, 나 √(10² + 7²) ≈ 12.21 → 이웃이 나로 바뀜</div><div>지구 R = 6,371km, 중심각 90°: 호 ≈ 10,008km, 현 ≈ 9,010km</div></div>
+<p><b>학교 수학으로 보면</b> — 단위 변환, 호의 길이, 삼각함수</p>
+<details class="code"><summary>식으로 보면 (펼치기 — 몰라도 됩니다)</summary><div class="fx">d_표면 = Rθ,   d_곧은 자 = 2R sin(θ/2)</div>
+<table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody><tr><td class='m'>‖x − y‖₂</td><td>3번 방의 곧은 자 거리</td></tr><tr><td class='m'>y* = argmin</td><td>거리가 가장 작은 y를 고른다(가장 가까운 이웃)</td></tr><tr><td class='m'>Rθ</td><td>표면을 따라 간 길이(호) — 반지름 × 중심각</td></tr><tr><td class='m'>2R sin(θ/2)</td><td>땅속을 곧게 뚫은 길이(현)</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="조수 하루" width="96" height="96" loading="lazy"><div><b>조수</b> 같은 사람들인데 단위 하나로 이웃이 바뀌다니, 무서운 일이에요.</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>일상으로 치면</h4><p>서울에서 뉴욕까지 비행기는 지도 위 직선이 아니라 지구 표면을 따라 갑니다.</p></div><div class="box ml"><h4>머신러닝에서는</h4><p>가장 가까운 이웃 찾기·군집 전에 열마다 단위를 맞춥니다(표준화). 단어 점처럼 방향이 중요한 데이터는 거리 대신 4번 방의 코사인을 씁니다.</p></div></div>

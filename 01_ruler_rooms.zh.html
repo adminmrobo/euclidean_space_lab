@@ -71,10 +71,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>为什么用这个方法</h4><ol><li><b>问题</b> — 客户记录表的一行是多个数字。想测量这些行之间有多相似。</li><li><b>前一个房间的局限</b> — 只把数字看成表格，很难一眼说出&quot;近·远&quot;。</li><li><b>解法</b>——把一个数看作一个轴，把一行数据画成房间里的一个点。</li></ol><div class="easy"><b>简单来说</b> — 只记身高是数轴，身高·体重是坐标平面，再加一个就是空间坐标。</div></div>
 <div class="box mathbox"><h4>由害怕数学公式的助手代为提问</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b>听说这个式子是测两点相距多远的。欧几里得空间、ℝⁿ……光名字就好吓人。这是什么？</div></div>
-<p><b>用学校数学来看</b> — 数轴、坐标平面、空间坐标 — 以及两点间的距离</p>
-<table><thead><tr><th>公式片段</th><th>含义</th></tr></thead><tbody><tr><td class='m'>ℝ</td><td>实数（带小数点的普通数字）的全体</td></tr><tr><td class='m'>ℝⁿ</td><td>把 n 个实数排成一行的全体 = n 轴房间</td></tr><tr><td class='m'>(x₁, …, xₙ)</td><td>每个轴写一个数的一个点</td></tr><tr><td class='m'>d(a, b) = |b − a|</td><td>1轴房间的距离 = 两数之差</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b> 这个名字好难。写下几个数字就成了一个房间，这是什么意思呀？</div></div>
+<div class="easy"><b>用话来说</b> — 一个数字对应一根轴。写几个数字，就是房间的轴数；一行就是那个房间里的一个点。</div>
 <div class="try"><b>用数字算一遍</b><div>1轴（身高）：西娅 160，茉雅 163 → |163 − 160| = 3</div><div>2轴（身高、体重）：(160, 50) 和 (163, 54) → √(3² + 4²) = √25 = 5</div><div>3轴（+腰围）：加上腰围 64 和 76 → √(3² + 4² + 12²) = √169 = 13</div></div>
+<p><b>用学校数学来看</b> — 数轴、坐标平面、空间坐标 — 以及两点间的距离</p>
+<details class="code"><summary>用公式来看（展开 — 不懂也没关系）</summary><div class="fx">ℝⁿ = {(x₁, …, xₙ)}  ·  1轴房间的距离 d(a, b) = |b − a|</div>
+<table><thead><tr><th>公式片段</th><th>含义</th></tr></thead><tbody><tr><td class='m'>ℝ</td><td>实数（带小数点的普通数字）的全体</td></tr><tr><td class='m'>ℝⁿ</td><td>把 n 个实数排成一行的全体 = n 轴房间</td></tr><tr><td class='m'>(x₁, …, xₙ)</td><td>每个轴写一个数的一个点</td></tr><tr><td class='m'>d(a, b) = |b − a|</td><td>1轴房间的距离 = 两数之差</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b>轴变多了，做法还是一样。差值平方、相加、开方！</div></div></div>
 </div>
 <div class="talk"><div class="line"><img src="assets/chars/sia_e04.webp" alt="西娅" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">西娅</b>等一下！我的体重被公开了！！！</div></div><div class="line r"><img src="assets/chars/moa_e15.webp" alt="茉雅" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">茉雅</b>连我的腰围都出来了……</div></div><div class="line"><img src="assets/chars/doctor_e10.webp" alt="博士" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">博士</b>别担心。这一页的数字全是用于讲解的示例值。</div></div><div class="line"><img src="assets/chars/haru_e24.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-asst)">助手 Haru</b>举这个例子的是我……我已经在担心下次会轮到我的体重了。</div></div></div>
@@ -95,10 +97,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>为什么用这个方法</h4><ol><li><b>问题</b> — 有两个点，就会想说&quot;从哪里到哪里、走多少&quot;。</li><li><b>前一个房间的局限</b> — 1 号房间的点只告诉位置。装不下移动。</li><li><b>解法</b> — 终点减去起点，就得到移动箭头（向量）。</li></ol><div class="easy"><b>简单来说</b> — 点是地址，箭头是&quot;向东 3、向北 2&quot;这样的指路。</div></div>
 <div class="box mathbox"><h4>由害怕数学公式的助手代为提问</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b>听说这个式子写的是从一个点到另一个点的路线。点和向量都写成 (3, 2) 这样，有什么不同？</div></div>
-<p><b>用学校数学来看</b> — 向量的加减法、位置向量</p>
-<table><thead><tr><th>公式片段</th><th>含义</th></tr></thead><tbody><tr><td class='m'>A, B</td><td>位置（点）</td></tr><tr><td class='m'>v⃗ = B − A</td><td>从 A 到 B 的移动（箭头）</td></tr><tr><td class='m'>B = A + v⃗</td><td>起点加上移动就是终点</td></tr><tr><td class='m'>OA⃗</td><td>从原点 O 到 A 的箭头（位置向量）</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b> 点和箭头看起来都像 (3, 2)，到底有什么不同呢？</div></div>
+<div class="easy"><b>用话来说</b> — 用到达的位置减去出发的位置，就得到连接两者的箭头。</div>
 <div class="try"><b>用数字算一遍</b><div>A = (1, 1), B = (4, 3) → v⃗ = (4 − 1, 3 − 1) = (3, 2)</div><div>反向验证：A + v⃗ = (1 + 3, 1 + 2) = (4, 3) = B</div></div>
+<p><b>用学校数学来看</b> — 向量的加减法、位置向量</p>
+<details class="code"><summary>用公式来看（展开 — 不懂也没关系）</summary><div class="fx">v⃗ = B − A,   B = A + v⃗</div>
+<table><thead><tr><th>公式片段</th><th>含义</th></tr></thead><tbody><tr><td class='m'>A, B</td><td>位置（点）</td></tr><tr><td class='m'>v⃗ = B − A</td><td>从 A 到 B 的移动（箭头）</td></tr><tr><td class='m'>B = A + v⃗</td><td>起点加上移动就是终点</td></tr><tr><td class='m'>OA⃗</td><td>从原点 O 到 A 的箭头（位置向量）</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b> 数字形状一样，但点是&quot;这里&quot;，箭头是&quot;往那边这么多&quot;啊。</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>用日常来比喻</h4><p>家的地址（点）和&quot;向东 3 个街区、向北 2 个街区&quot;（箭头）是不同的信息。</p></div><div class="box ml"><h4>在机器学习中</h4><p>用箭头看两个数据之差。在词语点上，&quot;国王 − 男人 + 女人 ≈ 女王&quot;这样的计算就是本房间的减法·加法。</p></div></div>
@@ -118,10 +122,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>为什么用这个方法</h4><ol><li><b>问题</b> — 要找&quot;与这位客户最相似的客户&quot;，就得用一个数字确定远近。</li><li><b>前一个房间的局限</b> — 2 号房间的箭头有两个以上的数字，无法直接比较大小。</li><li><b>解法</b> — 把箭头看作斜边，用勾股定理算出一个长度。</li></ol><div class="easy"><b>简单来说</b>——横走 3、竖走 4，到出发点的直线距离就是 5。</div></div>
 <div class="box mathbox"><h4>由害怕数学公式的助手代为提问</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b>听说这个式子能测任意轴数房间里两点之间的直线距离。d(A, B) = √((b₁ − a₁)² + … + (bₙ − aₙ)²)……这些点点点是什么？</div></div>
-<p><b>用学校数学来看</b> — 两点间距离、勾股定理</p>
-<table><thead><tr><th>公式片段</th><th>含义</th></tr></thead><tbody><tr><td class='m'>bᵢ − aᵢ</td><td>第 i 个轴上的差</td></tr><tr><td class='m'>( )²</td><td>差取平方 — 负数也变成正数</td></tr><tr><td class='m'>+ ⋯ +</td><td>按轴的个数一直加下去</td></tr><tr><td class='m'>√</td><td>解开平方，回到原来的单位</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b> 轴变多了，距离要怎么量呢？图都画不出来了。</div></div>
+<div class="easy"><b>用话来说</b> — 在每根轴上求出差值并平方，全部加起来后再开根号。不管有几根轴，步骤都一样。</div>
 <div class="try"><b>用数字算一遍</b><div>A = (1, 1)，B = (4, 5) → 横 3，纵 4 → √(9 + 16) = √25 = 5</div><div>3轴例子：(1, 1, 1) 和 (3, 3, 2) → √(2² + 2² + 1²) = √9 = 3</div><div>走小巷的话是 3 + 4 = 7。直线永远最短</div></div>
+<p><b>用学校数学来看</b> — 两点间距离、勾股定理</p>
+<details class="code"><summary>用公式来看（展开 — 不懂也没关系）</summary><div class="fx">d(A, B) = √((b₁ − a₁)² + (b₂ − a₂)² + ⋯ + (bₙ − aₙ)²)</div>
+<table><thead><tr><th>公式片段</th><th>含义</th></tr></thead><tbody><tr><td class='m'>bᵢ − aᵢ</td><td>第 i 个轴上的差</td></tr><tr><td class='m'>( )²</td><td>差取平方 — 负数也变成正数</td></tr><tr><td class='m'>+ ⋯ +</td><td>按轴的个数一直加下去</td></tr><tr><td class='m'>√</td><td>解开平方，回到原来的单位</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b> 原来省略号的意思是&quot;按轴的个数重复&quot;。现在不怕了。</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>用日常来比喻</h4><p>地图应用的&quot;直线距离 5km&quot;就是这个计算。实际道路距离比它长。</p></div><div class="box ml"><h4>在机器学习中</h4><p>最近邻查找（KNN）、把相似的归为一组（K-means）都用这个距离。把预测偏离的距离平方后除以个数，就是均方误差（MSE）。</p></div></div>
@@ -141,14 +147,16 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>为什么用这个方法</h4><ol><li><b>问题</b> — 推荐应用要找&quot;喜好相似的人&quot;。方向比量更重要。</li><li><b>前一个房间的局限</b> — 3 号房间的距离会把看得多的人和看得少的人视为相距很远。即使喜好相同。</li><li><b>解法</b> — 用同位置相乘后相加的重叠分数，测量两个箭头之间的角度。</li></ol><div class="easy"><b>简单来说</b> — 两个箭头朝同一方向，分数就大；垂直为 0；相反则为负数。</div></div>
 <div class="box mathbox"><h4>由害怕数学公式的助手代为提问</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b>听说这个式子测的是两个箭头朝向有多一致。u·v = Σuᵢvᵢ = ‖u‖‖v‖cos θ……西格玛和双竖线一起出现了！</div></div>
-<p><b>用学校数学来看</b> — 向量的点积、余弦</p>
-<table><thead><tr><th>公式片段</th><th>含义</th></tr></thead><tbody><tr><td class='m'>u·v</td><td>重叠分数（点积） — 同位置相乘后相加的值</td></tr><tr><td class='m'>Σuᵢvᵢ</td><td>u₁v₁ + u₂v₂ + …（每个位置相乘后全部相加）</td></tr><tr><td class='m'>‖u‖</td><td>箭头 u 的长度（3 号房间的距离）</td></tr><tr><td class='m'>θ（西塔）</td><td>两个箭头之间的角度</td></tr><tr><td class='m'>cos θ</td><td>把角度换成 −1 ~ 1 的分数。同方向 1，垂直 0，相反 −1</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b> 两个箭头&quot;朝同一个方向&quot;，用数字要怎么表达呢？</div></div>
+<div class="easy"><b>用话来说</b> — 把相同位置的数字相乘再全部加起来，就是重叠分数。再除以两个长度，就得到 −1~1 之间的分数（cos θ）。</div>
 <div class="try"><b>用数字算一遍</b><div>u = (3, 0), v = (2, 2) → u·v = 3×2 + 0×2 = 6</div><div>长度：‖u‖ = 3，‖v‖ = √8 ≈ 2.83 → cos θ = 6 ÷ (3 × 2.83) ≈ 0.707 → θ = 45°</div><div>喜好表（看过的动作片、爱情片部数）：西娅 (5, 1)，茉雅 (4, 2) → 22 ÷ (5.10 × 4.47) ≈ 0.965</div></div>
+<p><b>用学校数学来看</b> — 向量的点积、余弦</p>
+<details class="code"><summary>用公式来看（展开 — 不懂也没关系）</summary><div class="fx">u·v = Σ uᵢvᵢ = ‖u‖ ‖v‖ cos θ</div>
+<table><thead><tr><th>公式片段</th><th>含义</th></tr></thead><tbody><tr><td class='m'>u·v</td><td>重叠分数（点积） — 同位置相乘后相加的值</td></tr><tr><td class='m'>Σuᵢvᵢ</td><td>u₁v₁ + u₂v₂ + …（每个位置相乘后全部相加）</td></tr><tr><td class='m'>‖u‖</td><td>箭头 u 的长度（3 号房间的距离）</td></tr><tr><td class='m'>θ（西塔）</td><td>两个箭头之间的角度</td></tr><tr><td class='m'>cos θ</td><td>把角度换成 −1 ~ 1 的分数。同方向 1，垂直 0，相反 −1</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b> cos θ 接近 1，就表示&quot;喜好几乎相同&quot;。</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>用日常来比喻</h4><p>看了 5 部动作片·1 部爱情片的人，和看了 4 部·2 部的人非常相似。0.965 分。</p></div><div class="box ml"><h4>在机器学习中</h4><p>用余弦相似度寻找相似的商品·文档·客户。语言模型的注意力分数也是从重叠分数出发的。</p></div></div>
-<div class="talk"><div class="line"><img src="assets/chars/sia_e19.webp" alt="西娅" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">西娅</b>朝同一方向分数就大，这是箭头的默契度啊！</div></div><div class="line"><img src="assets/chars/jupanbot_e16.webp" alt="算盘宝" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-robo)">算盘宝</b>分数为 0 就是毫无关系，直接止损扔掉就行吧？</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="果蝇研究员" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">果蝇研究员</b>找找变成 0 的位置。拖动 v，让它和 u 垂直。</div></div></div>
+<div class="talk"><div class="line"><img src="assets/chars/doctor_e10.webp" alt="博士" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">博士</b>公式不展开也没关系。先用数字试一试，好奇的时候再打开公式看看吧。</div></div><div class="line"><img src="assets/chars/sia_e19.webp" alt="西娅" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">西娅</b>朝同一方向分数就大，这是箭头的默契度啊！</div></div><div class="line"><img src="assets/chars/jupanbot_e16.webp" alt="算盘宝" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-robo)">算盘宝</b>分数为 0 就是毫无关系，直接止损扔掉就行吧？</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="果蝇研究员" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">果蝇研究员</b>找找变成 0 的位置。拖动 v，让它和 u 垂直。</div></div></div>
 <div class="panel"><div class="ph"><b>实验面板 4</b><small>重绘原始资料卡片 04 · 拖动绿色箭头 v 的末端试试</small></div><div id="pp-p04" data-panel="p04"></div><div class="ctrl"></div><div class="readout" aria-live="polite"></div></div>
 <div class="solve"><h4>解说</h4><p>把 v 移到 (0, 2)，分数为 0，并出现直角标记。</p><p>分数 0 不是&quot;没用&quot;，而是&quot;互不影响&quot;的意思。就像东西方向和南北方向。</p><p>只有当两个箭头的长度都不为 0 时，0 分才表示垂直（原始资料：nonzero vectors）。</p><p><b>一句话说</b>——西娅和茉雅的喜好表得分 0.965——非常接近 1，喜好几乎朝着同一方向。</p></div>
 <div class="solve"><h4>AI 判断角——可以直接相信吗？</h4><p>AI 回答两位客户的余弦相似度（cos θ）是 1.3。可以相信吗？</p><details class="code"><summary>检查一下</summary><p>cos θ 永远在 −1 到 1 之间。1.3 是不可能出现的值，请让它重新计算。很可能漏掉了除以长度这一步。</p></details></div>
@@ -164,10 +172,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>为什么用这个方法</h4><ol><li><b>问题</b> — 同样的数据，用什么基准（轴）来看，数字就不同。</li><li><b>前一个房间的局限</b> — 到 4 号房间为止，都理所当然地用&quot;横·纵&quot;尺子。用别的尺子会怎样？</li><li><b>解法</b> — 使用长度为 1 且互相垂直的尺子组（标准正交基），读坐标只需算一次重叠分数。</li></ol><div class="easy"><b>简单来说</b> — 不论用东西·南北指路，还是用&quot;沿河·过河&quot;指路，目的地都一样。</div></div>
 <div class="box mathbox"><h4>由害怕数学公式的助手代为提问</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b>听说这个式子是用尺子组读坐标的规则。eᵢ·eⱼ = 1 或 0……这个大括号是什么规则？</div></div>
-<p><b>用学校数学来看</b> — 坐标、向量的分量、单位向量</p>
-<table><thead><tr><th>公式片段</th><th>含义</th></tr></thead><tbody><tr><td class='m'>e₁, e₂</td><td>尺子组中的两把尺子</td></tr><tr><td class='m'>v = 3e₁ + 2e₂</td><td>沿 e₁ 方向 3，沿 e₂ 方向 2</td></tr><tr><td class='m'>eᵢ·eᵢ = 1</td><td>每把尺子长度为 1</td></tr><tr><td class='m'>eᵢ·eⱼ = 0 (i ≠ j)</td><td>不同的尺子互相垂直</td></tr><tr><td class='m'>坐标 = v·eᵢ</td><td>与那把尺子的重叠分数就是坐标</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b> 听说换了尺子，坐标数字也会变，那还是同一个箭头吗？</div></div>
+<div class="easy"><b>用话来说</b> — 放上两把长度为 1、互相垂直的尺子，读出与每把尺子的重叠分数，那就是坐标。箭头的长度保持不变。</div>
 <div class="try"><b>用数字算一遍</b><div>基本尺子：v = (3, 2) → v·e₁ = 3，v·e₂ = 2</div><div>旋转 45° 的尺子：e₁ = (0.71, 0.71)，e₂ = (−0.71, 0.71) → 坐标 (3.54, −0.71)</div><div>长度确认：3.54² + 0.71² ≈ 12.5 + 0.5 = 13 = 3² + 2²</div></div>
+<p><b>用学校数学来看</b> — 坐标、向量的分量、单位向量</p>
+<details class="code"><summary>用公式来看（展开 — 不懂也没关系）</summary><div class="fx">v = 3e₁ + 2e₂,   eᵢ·eⱼ = 1 (同一把尺子), 0 (不同尺子)</div>
+<table><thead><tr><th>公式片段</th><th>含义</th></tr></thead><tbody><tr><td class='m'>e₁, e₂</td><td>尺子组中的两把尺子</td></tr><tr><td class='m'>v = 3e₁ + 2e₂</td><td>沿 e₁ 方向 3，沿 e₂ 方向 2</td></tr><tr><td class='m'>eᵢ·eᵢ = 1</td><td>每把尺子长度为 1</td></tr><tr><td class='m'>eᵢ·eⱼ = 0 (i ≠ j)</td><td>不同的尺子互相垂直</td></tr><tr><td class='m'>坐标 = v·eᵢ</td><td>与那把尺子的重叠分数就是坐标</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手 Haru" width="96" height="96" loading="lazy"><div><b>助手</b> 数字变了，平方和 13 却没变。因为箭头本身没变！</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>用日常来比喻</h4><p>同一个地点，也可以分别用&quot;向东 3、向北 2&quot;和&quot;沿河 3.5、过河 −0.7&quot;来指路。</p></div><div class="box ml"><h4>在机器学习中</h4><p>独热编码给每个类别一把长度为 1 的垂直尺子。主成分分析（PCA）把尺子组转向数据分布最广的方向。</p></div></div>

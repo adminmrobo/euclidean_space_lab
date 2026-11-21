@@ -71,10 +71,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>なぜこの方法を使うのか</h4><ol><li><b>問題</b> — 顧客記録表の1行には数字がいくつも並んでいます。この行どうしがどれだけ似ているかを測りたいのです。</li><li><b>前の部屋の限界</b> — 数字を表で見るだけでは、&quot;近い・遠い&quot; をひと目で言うのは難しいです。</li><li><b>解き方</b> — 数字1つを軸1つと見なし、1行を部屋の中の点1つとして打ちます。</li></ol><div class="easy"><b>かんたんに言うと</b> — 身長だけなら数直線、身長・体重なら座標平面、もう1つ足せば空間座標です。</div></div>
 <div class="box mathbox"><h4>数式が苦手な助手が代わりに尋ねます</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> この式は、2つの点がどれだけ離れているかを測る式だそうです。ユークリッド空間、ℝⁿ…名前からして怖いです。これは何ですか？</div></div>
-<p><b>学校数学で見ると</b> — 数直線、座標平面、空間座標 — そして2点間の距離</p>
-<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>ℝ</td><td>実数（小数点のあるふつうの数）全体</td></tr><tr><td class='m'>ℝⁿ</td><td>実数n個を1列に並べたもの全体 = n軸の部屋</td></tr><tr><td class='m'>(x₁, …, xₙ)</td><td>軸ごとに数字を1つずつ書いた点1つ</td></tr><tr><td class='m'>d(a, b) = |b − a|</td><td>1軸の部屋の距離 = 2つの数の差</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 名前が難しいです。数字をいくつか書くとそれが部屋になる、というのはどういう意味ですか？</div></div>
+<div class="easy"><b>ことばで言うと</b> — 数字1つに軸1本。数字をいくつ書くかが部屋の軸の数で、1行はその部屋の点1つです。</div>
 <div class="try"><b>数字で一度やってみる</b><div>1軸（身長）: シア 160、モア 163 → |163 − 160| = 3</div><div>2軸（身長・体重）: (160, 50)と(163, 54) → √(3² + 4²) = √25 = 5</div><div>3軸（＋ウエスト）: ウエスト64と76を加えると → √(3² + 4² + 12²) = √169 = 13</div></div>
+<p><b>学校数学で見ると</b> — 数直線、座標平面、空間座標 — そして2点間の距離</p>
+<details class="code"><summary>式で見ると（開く — わからなくても大丈夫です）</summary><div class="fx">ℝⁿ = {(x₁, …, xₙ)}  ·  1軸の部屋の距離 d(a, b) = |b − a|</div>
+<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>ℝ</td><td>実数（小数点のあるふつうの数）全体</td></tr><tr><td class='m'>ℝⁿ</td><td>実数n個を1列に並べたもの全体 = n軸の部屋</td></tr><tr><td class='m'>(x₁, …, xₙ)</td><td>軸ごとに数字を1つずつ書いた点1つ</td></tr><tr><td class='m'>d(a, b) = |b − a|</td><td>1軸の部屋の距離 = 2つの数の差</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 軸が増えてもやることは同じですね。差を2乗して足して、ルート！</div></div></div>
 </div>
 <div class="talk"><div class="line"><img src="assets/chars/sia_e04.webp" alt="シア" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">シア</b>ちょっと待ってください！私の体重が公開されるなんて！！！</div></div><div class="line r"><img src="assets/chars/moa_e15.webp" alt="モア" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-moa)">モア</b>私なんてウエストまで出ちゃいました…</div></div><div class="line"><img src="assets/chars/doctor_e10.webp" alt="博士" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">博士</b>心配いりませんよ。このページの数字はすべて説明用の例示値です。</div></div><div class="line"><img src="assets/chars/haru_e24.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-asst)">助手 ハル</b>例を出したのは私です…次は私の体重が出そうで、もう憂うつです。</div></div></div>
@@ -95,10 +97,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>なぜこの方法を使うのか</h4><ol><li><b>問題</b> — 点が2つあると、&quot;どこからどこへどれだけ&quot; を言いたくなります。</li><li><b>前の部屋の限界</b> — 1号室の点は位置しか教えてくれません。動きは表せません。</li><li><b>解決法</b> — 終点から出発点を引くと、移動の矢印（ベクトル）が出てきます。</li></ol><div class="easy"><b>かんたんに言うと</b> — 点は住所、矢印は &quot;東へ3、北へ2&quot; のような道案内です。</div></div>
 <div class="box mathbox"><h4>数式が苦手な助手が代わりに尋ねます</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> この式は、ある点から別の点へ行く道のりを書く式だそうです。点もベクトルも(3, 2)のように書きますが、何が違うんですか？</div></div>
-<p><b>学校数学で見ると</b> — ベクトルの足し算・引き算、位置ベクトル</p>
-<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>A, B</td><td>位置（点）</td></tr><tr><td class='m'>v⃗ = B − A</td><td>A から B へ行く移動（矢印）</td></tr><tr><td class='m'>B = A + v⃗</td><td>出発点に移動を足すと到着点</td></tr><tr><td class='m'>OA⃗</td><td>原点 O から A までの矢印（位置ベクトル）</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 点も矢印もどちらも (3, 2) のような形ですが、何が違うんですか？</div></div>
+<div class="easy"><b>ことばで言うと</b> — 着いた場所から出発した場所を引くと、その間を進む矢印が出てきます。</div>
 <div class="try"><b>数字で一度やってみる</b><div>A = (1, 1), B = (4, 3) → v⃗ = (4 − 1, 3 − 1) = (3, 2)</div><div>戻してみる：A + v⃗ = (1 + 3, 1 + 2) = (4, 3) = B</div></div>
+<p><b>学校数学で見ると</b> — ベクトルの足し算・引き算、位置ベクトル</p>
+<details class="code"><summary>式で見ると（開く — わからなくても大丈夫です）</summary><div class="fx">v⃗ = B − A,   B = A + v⃗</div>
+<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>A, B</td><td>位置（点）</td></tr><tr><td class='m'>v⃗ = B − A</td><td>A から B へ行く移動（矢印）</td></tr><tr><td class='m'>B = A + v⃗</td><td>出発点に移動を足すと到着点</td></tr><tr><td class='m'>OA⃗</td><td>原点 O から A までの矢印（位置ベクトル）</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 数字の形は同じでも、点は &quot;ここ&quot;、矢印は &quot;これだけあっちへ&quot; なんですね。</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>日常でいえば</h4><p>家の住所（点）と &quot;東へ3ブロック、北へ2ブロック&quot;（矢印）は別の情報です。</p></div><div class="box ml"><h4>機械学習では</h4><p>2つのデータの差を矢印として見ます。単語の点で &quot;王 − 男 + 女 ≈ 女王&quot; のような計算をするのが、この部屋の引き算・足し算です。</p></div></div>
@@ -118,10 +122,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>なぜこの方法を使うのか</h4><ol><li><b>問題</b> — &quot;この顧客にいちばん似た顧客&quot; を探すには、遠い・近いを数字1つで決める必要があります。</li><li><b>前の部屋の限界</b> — 2号室の矢印は数字が2つ以上なので、大きさをすぐには比べられません。</li><li><b>解決法</b> — 矢印を斜辺と見て、ピタゴラスの定理で長さを1つ出します。</li></ol><div class="easy"><b>かんたんに言うと</b> — 横に3、縦に4歩いたなら、出発点までの直線距離は5です。</div></div>
 <div class="box mathbox"><h4>数式が苦手な助手が代わりに尋ねます</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> この式は、何軸の部屋でも2点間の直線距離を測る式だそうです。d(A, B) = √((b₁ − a₁)² + … + (bₙ − aₙ)²)…この点々は何ですか？</div></div>
-<p><b>学校数学で見ると</b> — 2点間の距離、ピタゴラスの定理</p>
-<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>bᵢ − aᵢ</td><td>i番目の軸の差</td></tr><tr><td class='m'>( )²</td><td>差を二乗 — 負の数も正になる</td></tr><tr><td class='m'>+ ⋯ +</td><td>軸の数だけ足し続けます</td></tr><tr><td class='m'>√</td><td>二乗をほどいて元の単位に戻す</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 軸が増えたら距離はどうやって測るんですか？図が描けませんよね。</div></div>
+<div class="easy"><b>ことばで言うと</b> — 軸ごとに差を求めて2乗し、すべて足してからルートをかけます。軸がいくつあっても同じ手順です。</div>
 <div class="try"><b>数字で一度やってみる</b><div>A = (1, 1)、B = (4, 5) → 横 3、縦 4 → √(9 + 16) = √25 = 5</div><div>3軸の例: (1, 1, 1)と(3, 3, 2) → √(2² + 2² + 1²) = √9 = 3</div><div>路地を通ると 3 + 4 = 7 になります。直線がいつもいちばん短いです</div></div>
+<p><b>学校数学で見ると</b> — 2点間の距離、ピタゴラスの定理</p>
+<details class="code"><summary>式で見ると（開く — わからなくても大丈夫です）</summary><div class="fx">d(A, B) = √((b₁ − a₁)² + (b₂ − a₂)² + ⋯ + (bₙ − aₙ)²)</div>
+<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>bᵢ − aᵢ</td><td>i番目の軸の差</td></tr><tr><td class='m'>( )²</td><td>差を二乗 — 負の数も正になる</td></tr><tr><td class='m'>+ ⋯ +</td><td>軸の数だけ足し続けます</td></tr><tr><td class='m'>√</td><td>二乗をほどいて元の単位に戻す</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 点々は&quot;軸の数だけくり返す&quot;だったんですね。もう怖くありません。</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>日常でいえば</h4><p>地図アプリの &quot;直線距離 5km&quot; がこの計算です。実際の道路距離はそれより長くなります。</p></div><div class="box ml"><h4>機械学習では</h4><p>最近傍探し（KNN）、似たもの同士をまとめる（K-means）がこの距離を使います。予測が外れた距離を2乗して軸の数で割ると、平均二乗誤差（MSE）になります。</p></div></div>
@@ -141,14 +147,16 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>なぜこの方法を使うのか</h4><ol><li><b>問題</b> — おすすめアプリは &quot;好みが似た人&quot; を探します。量より方向が大事です。</li><li><b>前の部屋の限界</b> — 3号室の距離は、たくさん見た人と少し見た人を遠いと判断します。好みは同じでもです。</li><li><b>解決法</b> — 同じ位置どうしを掛けて足した重なりスコアで、2本の矢印の間の角度を測ります。</li></ol><div class="easy"><b>かんたんに言うと</b> — 2本の矢印が同じ方向ならスコアは大きく、直角なら0、反対なら負になります。</div></div>
 <div class="box mathbox"><h4>数式が苦手な助手が代わりに尋ねます</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> この式は、2本の矢印がどれだけ同じ方向を向いているかを測る式だそうです。u·v = Σuᵢvᵢ = ‖u‖‖v‖cos θ…シグマと二重線がいっぺんに出てきます！</div></div>
-<p><b>学校数学で見ると</b> — ベクトルの内積、コサイン</p>
-<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>u·v</td><td>重なりスコア（内積）— 同じ位置どうしを掛けて足した値</td></tr><tr><td class='m'>Σuᵢvᵢ</td><td>u₁v₁ + u₂v₂ + …（位置ごとに掛けてすべて足す）</td></tr><tr><td class='m'>‖u‖</td><td>矢印 u の長さ（3号室の距離）</td></tr><tr><td class='m'>θ（シータ）</td><td>2本の矢印の間の角度</td></tr><tr><td class='m'>cos θ</td><td>角度を −1 〜 1 のスコアに変えたもの。同じ方向 1、直角 0、反対 −1</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 2つの矢印が&quot;同じ方を向いている&quot;ことは、数字でどう言うんですか？</div></div>
+<div class="easy"><b>ことばで言うと</b> — 同じ位置の数字どうしを掛けてすべて足すと、重なりスコアになります。2つの長さで割ると、−1~1 の間のスコア（cos θ）になります。</div>
 <div class="try"><b>数字で一度やってみる</b><div>u = (3, 0), v = (2, 2) → u·v = 3×2 + 0×2 = 6</div><div>長さ：‖u‖ = 3、‖v‖ = √8 ≈ 2.83 → cos θ = 6 ÷ (3 × 2.83) ≈ 0.707 → θ = 45°</div><div>好み表（アクション、ロマンスを見た本数）：シア (5, 1)、モア (4, 2) → 22 ÷ (5.10 × 4.47) ≈ 0.965</div></div>
+<p><b>学校数学で見ると</b> — ベクトルの内積、コサイン</p>
+<details class="code"><summary>式で見ると（開く — わからなくても大丈夫です）</summary><div class="fx">u·v = Σ uᵢvᵢ = ‖u‖ ‖v‖ cos θ</div>
+<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>u·v</td><td>重なりスコア（内積）— 同じ位置どうしを掛けて足した値</td></tr><tr><td class='m'>Σuᵢvᵢ</td><td>u₁v₁ + u₂v₂ + …（位置ごとに掛けてすべて足す）</td></tr><tr><td class='m'>‖u‖</td><td>矢印 u の長さ（3号室の距離）</td></tr><tr><td class='m'>θ（シータ）</td><td>2本の矢印の間の角度</td></tr><tr><td class='m'>cos θ</td><td>角度を −1 〜 1 のスコアに変えたもの。同じ方向 1、直角 0、反対 −1</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> cos θ が1に近ければ &quot;好みがほぼ同じ&quot; という意味なんですね。</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>日常でいえば</h4><p>アクション5本・ロマンス1本を見た人と、4本・2本を見た人はとても似ています。0.965点です。</p></div><div class="box ml"><h4>機械学習では</h4><p>コサイン類似度で、似た商品・文書・顧客を探します。言語モデルのアテンションスコアも重なりスコアから出発しています。</p></div></div>
-<div class="talk"><div class="line"><img src="assets/chars/sia_e19.webp" alt="シア" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">シア</b>同じ方向を向くとスコアが大きいなんて、矢印の相性ですね！</div></div><div class="line"><img src="assets/chars/jupanbot_e16.webp" alt="アバボット" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-robo)">アバボット</b>スコアが0なら関係ないってことだから、損切りしていいよね？</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="ショウジョウバエ研究員" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">ショウジョウバエ研究員</b>0になる位置を探してみて。v をドラッグして u と直角にしてみて。</div></div></div>
+<div class="talk"><div class="line"><img src="assets/chars/doctor_e10.webp" alt="博士" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-doc)">博士</b>式は開かなくても大丈夫です。まず数字でやってみて、気になったときだけ式を開いてみましょう。</div></div><div class="line"><img src="assets/chars/sia_e19.webp" alt="シア" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-sia)">シア</b>同じ方向を向くとスコアが大きいなんて、矢印の相性ですね！</div></div><div class="line"><img src="assets/chars/jupanbot_e16.webp" alt="アバボット" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-robo)">アバボット</b>スコアが0なら関係ないってことだから、損切りしていいよね？</div></div><div class="line"><img src="assets/chars/fruitfly_e09.webp" alt="ショウジョウバエ研究員" width="96" height="96" loading="lazy"><div class="bub"><b style="color:var(--c-fly)">ショウジョウバエ研究員</b>0になる位置を探してみて。v をドラッグして u と直角にしてみて。</div></div></div>
 <div class="panel"><div class="ph"><b>実験パネル 4</b><small>原資料カード04の描き直し · 緑の矢印 v の先をドラッグしてみてください</small></div><div id="pp-p04" data-panel="p04"></div><div class="ctrl"></div><div class="readout" aria-live="polite"></div></div>
 <div class="solve"><h4>解説</h4><p>v を (0, 2) に動かすとスコアが0になり、直角マークが出ます。</p><p>スコア0は &quot;役に立たない&quot; ではなく &quot;互いに影響しない&quot; という意味です。東西と南北のように。</p><p>0点が直角を意味するのは、長さが0でない2本の矢印のときだけです（原資料：nonzero vectors）。</p><p><b>一文で言うと</b> — シアとモアの好み表は0.965点 — 1にとても近いので、好みはほぼ同じ方向です。</p></div>
 <div class="solve"><h4>AI判定コーナー — そのまま信じていいでしょうか？</h4><p>AIが2人の顧客のコサイン類似度（cos θ）を1.3だと答えました。信じていいでしょうか？</p><details class="code"><summary>確かめてみる</summary><p>cos θはいつも−1から1の間です。1.3はありえない値なので、計算をやり直させてください。長さで割る段階を抜かした可能性が高いです。</p></details></div>
@@ -164,10 +172,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="duo">
 <div class="box why"><h4>なぜこの方法を使うのか</h4><ol><li><b>問題</b> — 同じデータでも、どの基準（軸）で見るかによって数字が変わります。</li><li><b>前の部屋の限界</b> — 4号室までは &quot;横・縦&quot; の定規を当たり前に使ってきました。別の定規を使うとどうなるでしょう？</li><li><b>解決法</b> — 長さ1で互いに直角な定規セット（正規直交基底）を使えば、座標読みは重なりスコア1回で終わります。</li></ol><div class="easy"><b>かんたんに言うと</b> — 東西・南北で案内しても、&quot;川沿い・川向こう&quot; で案内しても、目的地は同じです。</div></div>
 <div class="box mathbox"><h4>数式が苦手な助手が代わりに尋ねます</h4>
-<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> この式は、定規セットで座標を読む規則だそうです。eᵢ·eⱼ = 1か0…この波かっこはどんな規則ですか？</div></div>
-<p><b>学校数学で見ると</b> — 座標、ベクトルの成分、単位ベクトル</p>
-<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>e₁, e₂</td><td>定規セットの定規2本</td></tr><tr><td class='m'>v = 3e₁ + 2e₂</td><td>e₁ 方向に 3、e₂ 方向に 2</td></tr><tr><td class='m'>eᵢ·eᵢ = 1</td><td>定規ごとに長さ1</td></tr><tr><td class='m'>eᵢ·eⱼ = 0 (i ≠ j)</td><td>別々の定規は直角</td></tr><tr><td class='m'>座標 = v·eᵢ</td><td>その定規との重なりスコアがそのまま座標</td></tr></tbody></table>
+<div class="q"><img src="assets/chars/haru_e04.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 物差しを変えると座標の数字も変わるそうですが、それでも同じ矢印なんですか？</div></div>
+<div class="easy"><b>ことばで言うと</b> — 長さ1で互いに直角な物差しを2本当てて、それぞれの物差しとの重なりスコアを読むと、それが座標です。矢印の長さはそのままです。</div>
 <div class="try"><b>数字で一度やってみる</b><div>基本の定規：v = (3, 2) → v·e₁ = 3、v·e₂ = 2</div><div>45° 回した定規：e₁ = (0.71, 0.71)、e₂ = (−0.71, 0.71) → 座標 (3.54, −0.71)</div><div>長さの確認：3.54² + 0.71² ≈ 12.5 + 0.5 = 13 = 3² + 2²</div></div>
+<p><b>学校数学で見ると</b> — 座標、ベクトルの成分、単位ベクトル</p>
+<details class="code"><summary>式で見ると（開く — わからなくても大丈夫です）</summary><div class="fx">v = 3e₁ + 2e₂,   eᵢ·eⱼ = 1 (同じ物差し), 0 (違う物差し)</div>
+<table><thead><tr><th>式のかけら</th><th>意味</th></tr></thead><tbody><tr><td class='m'>e₁, e₂</td><td>定規セットの定規2本</td></tr><tr><td class='m'>v = 3e₁ + 2e₂</td><td>e₁ 方向に 3、e₂ 方向に 2</td></tr><tr><td class='m'>eᵢ·eᵢ = 1</td><td>定規ごとに長さ1</td></tr><tr><td class='m'>eᵢ·eⱼ = 0 (i ≠ j)</td><td>別々の定規は直角</td></tr><tr><td class='m'>座標 = v·eᵢ</td><td>その定規との重なりスコアがそのまま座標</td></tr></tbody></table></details>
 <div class="q"><img src="assets/chars/haru_e16.webp" alt="助手ハル" width="96" height="96" loading="lazy"><div><b>助手</b> 数字は変わっても、二乗和13はそのままですね。矢印そのものは変わらないからです！</div></div></div>
 </div>
 <div class="pair"><div class="box"><h4>日常でいえば</h4><p>同じ場所でも、&quot;東へ3、北へ2&quot; と &quot;川沿いに3.5、川向こうへ −0.7&quot; のように違う案内ができます。</p></div><div class="box ml"><h4>機械学習では</h4><p>ワンホットエンコーディングは、カテゴリーごとに長さ1の直角な定規を1本ずつ与えます。主成分分析（PCA）は、データがいちばん広く散らばった方向へ定規セットを回します。</p></div></div>
