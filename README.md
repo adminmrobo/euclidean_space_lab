@@ -37,10 +37,10 @@
 ## 편 구성
 | 파일 | 편 | 내용 |
 |---|---|---|
-| `index.html` | 목차 | 편 목록, 큰 그림(방 10개 사다리), 등장인물 |
+| `index.html` | 목차 | 편 목록, 큰 그림(방 10개의 흐름), 등장인물 |
 | `00_orientation.html` | 0편 가방 점검 | 좌표평면·피타고라스·sin·cos 복습 실험 3개 + 퀴즈 3문항 (건너뛰기 가능) |
 | `01_ruler_rooms.html` | ①편 자와 각도기의 방 | 1~5번 방: 점·이동·거리·겹침 점수·자 세트 |
-| `02_shadow_rooms.html` | ②편 그림자와 칸막이의 방 | 6~10번 방: 그림자·칸막이·움직임·공·단위 맞추기 + 가장 가까운 이웃 찾기 대결 + 끝맺음(힐베르트 공간 소개) |
+| `02_shadow_rooms.html` | ②편 그림자와 가름판의 방 | 6~10번 방: 그림자·가름판·움직임·공·단위 맞추기 + 가장 가까운 이웃 찾기 대결 + 끝맺음(힐베르트 공간 소개) |
 
 ## 폴더
 ```
@@ -56,14 +56,14 @@ docs/                 공간 좌표 해설 제작 지침서, 기획안
 
 ## 원자료와 다르게 쓴 곳
 1. 카드 07 — 축 이름 x와 점 이름 x가 겹쳐 축을 x₁·x₂·x₃으로 바꿈
-2. 카드 09 — 머리 상자는 중심 c, 아래 식은 중심이 원점일 때 → "중심을 원점에 둔 경우"로 밝힘. 칸 수 껍질 비율 실험(0.9ⁿ)은 이 페이지에서 더함
+2. 카드 09 — 머리 상자는 중심 c, 아래 식은 중심이 원점일 때 → "중심을 원점에 둔 경우"로 밝힘. 축 수 껍질 비율 실험(0.9ⁿ)은 이 페이지에서 더함
 3. 카드 06 — u의 글씨체를 한 가지로 맞춤
 4. 카드 01 — affine structure를 "점과 이동(화살표)"으로 풀어 씀
 
 숫자 계산 오류는 없었습니다.
 
 ## 다시 만들기와 번역
-1. `python3 build/build.py` — 한국어 4쪽을 다시 만듭니다.
+1. `python3 build/build.py` — 한국어 4쪽을 다시 만듭니다. README 원본은 `build/README.ko.md`입니다.
 2. 언어팩(https://github.com/adminmrobo/ahnboat_lab_langpack)을 `langpack/`에 복사하고 `extract → pending → 번역 → check → merge` 순서로 돌립니다(설정은 `docs/langpack_config.json`).
 3. `dist/`의 HTML과 README.md를 맨 위 폴더로 복사합니다. 실험 패널 스크립트는 번역되도록 페이지 안에 들어 있습니다(`assets/panels.js`가 원본).
 
@@ -111,10 +111,10 @@ This series is available in the Korean original and 6 translated editions.
 ## Parts
 | Files | Part | Content |
 |---|---|---|
-| `index.html` | Contents | Parts list, big picture (ladder of 10 rooms), cast |
+| `index.html` | Contents | List of parts, big picture (flow of the 10 rooms), cast |
 | `00_orientation.html` | Part 0 Bag check | 3 review experiments on the coordinate plane, Pythagoras, sin, and cos + 3 quiz questions (skippable) |
 | `01_ruler_rooms.html` | Part ① The Room of Rulers and Protractors | Rooms 1–5: points, moves, distance, overlap score, ruler set |
-| `02_shadow_rooms.html` | Part ② The Room of Shadows and Dividers | Rooms 6–10: shadows, dividers, moves, balls, matching units + nearest-neighbor Showdown + ending (introducing Hilbert space) |
+| `02_shadow_rooms.html` | Part ② The room of shadows and dividers | Rooms 6–10: shadows, dividers, moves, balls, and matching units + nearest-neighbor Showdown + close (introducing Hilbert space) |
 
 ## Folder
 ```
@@ -130,15 +130,21 @@ Rebuild: `python3 build/build.py` · Check numbers: `python3 build/check_numbers
 
 ## Where we differ from the source
 1. Card 07 — the axis name x and the point name x overlapped, so the axes were renamed x₁, x₂, x₃
-2. Card 09 — the header box uses center c, but the formula below assumes a center at the origin → stated as "the case with the center at the origin." The shell-share experiment by number of squares (0.9ⁿ) was added by this page
+2. Card 09 — header box uses center c, equation below assumes center at origin → stated as "the case with the center at the origin". Shell-share experiment by number of axes (0.9ⁿ) added on this page
 3. Card 06 — u is set in a single typeface
 4. Card 01 — affine structure is explained as "points and moves (arrows)"
 
 There were no calculation errors.
 
+## Rebuilding and translation
+1. `python3 build/build.py` — rebuilds the 4 Korean pages. The README source is `build/README.ko.md`.
+2. Copy the language pack (https://github.com/adminmrobo/ahnboat_lab_langpack) into `langpack/` and run it in the order `extract → pending → translate → check → merge` (settings in `docs/langpack_config.json`).
+3. Copy the HTML and README.md in `dist/` to the top-level folder. The lab panel scripts are embedded in the pages so they can be translated (`assets/panels.js` is the source).
+
+
 ## Remaining work
 - Cover and scene art (currently a CSS placeholder cover) — request list and prompts in `docs/IMAGE_PROMPTS.md`
-- Translation (langpack en, zh, ja, uz, ru, vi), registration in the ahnboat_lab_cover_status list
+- Native-speaker review of translations (especially uz, ru, vi)
 
 Character names, settings, and artwork may not be used without permission from the copyright holder, Ahn Sangsun.
 
@@ -179,10 +185,10 @@ Character names, settings, and artwork may not be used without permission from t
 ## 篇章构成
 | 文件 | 篇 | 内容 |
 |---|---|---|
-| `index.html` | 目录 | 篇目、全景（10 个房间的阶梯）、登场人物 |
+| `index.html` | 目录 | 篇目列表、全景（10 个房间的流程）、登场人物 |
 | `00_orientation.html` | 第 0 篇 检查背包 | 坐标平面·勾股定理·sin·cos 复习实验 3 个 + 测验 3 题（可跳过） |
 | `01_ruler_rooms.html` | 第①篇 尺子与量角器的房间 | 1~5 号房间：点·移动·距离·重叠分数·尺子组 |
-| `02_shadow_rooms.html` | 第②篇 影子与隔板的房间 | 6~10 号房间：影子·隔板·移动·球·统一单位 + 寻找最近邻对决 + 结尾（介绍希尔伯特空间） |
+| `02_shadow_rooms.html` | 第②篇 影子与隔板的房间 | 6~10号房间：影子、隔板、移动、球、统一单位 + 最近邻查找对决 + 收尾（介绍希尔伯特空间） |
 
 ## 文件夹
 ```
@@ -198,15 +204,21 @@ docs/                 공간 좌표 해설 제작 지침서, 기획안
 
 ## 与原始资料写法不同之处
 1. 卡片 07 — 轴名 x 与点名 x 重叠，将轴改为 x₁·x₂·x₃
-2. 卡片 09 — 标题框用中心 c，下面的式子是中心为原点时的情况 → 明确注明“中心在原点的情况”。随格数变化的外壳比例实验（0.9ⁿ）为本页新增
+2. 卡 09——标题框用中心 c，下面的式子是中心在原点时 → 注明为"中心放在原点的情况"。按轴数的外壳比例实验（0.9ⁿ）为本页新增
 3. 卡片 06 — 统一 u 的字体
 4. 卡片 01 — 将 affine structure 解释为“点与移动（箭头）”
 
 没有数字计算错误。
 
+## 重新生成与翻译
+1. `python3 build/build.py`——重新生成 4 个韩语页面。README 原文是 `build/README.ko.md`。
+2. 把语言包（https://github.com/adminmrobo/ahnboat_lab_langpack）复制到 `langpack/`，按 `extract → pending → translate → check → merge` 的顺序运行（设置见 `docs/langpack_config.json`）。
+3. 把 `dist/` 中的 HTML 和 README.md 复制到最上层文件夹。实验面板脚本内嵌在页面里以便翻译（`assets/panels.js` 为原文件）。
+
+
 ## 待办事项
 - 封面·场景图（目前为 CSS 替代封面） — 需求列表·提示词见 `docs/IMAGE_PROMPTS.md`
-- 翻译（语言包 en·zh·ja·uz·ru·vi），登记到 ahnboat_lab_cover_status 名册
+- 译本的母语者审校（尤其是 uz、ru、vi）
 
 角色名称·设定·图画未经著作权人 Ahn Sangsun 许可不得使用。
 
@@ -247,10 +259,10 @@ docs/                 공간 좌표 해설 제작 지침서, 기획안
 ## 編の構成
 | ファイル | 編 | 内容 |
 |---|---|---|
-| `index.html` | 目次 | 編の一覧、全体像（部屋10室のはしご）、登場人物 |
+| `index.html` | 目次 | 編の一覧、全体像（部屋10個の流れ）、登場人物 |
 | `00_orientation.html` | 第0編 かばんの点検 | 座標平面・ピタゴラス・sin・cos の復習実験3つ + クイズ3問（飛ばしても可） |
 | `01_ruler_rooms.html` | 第①編 定規と分度器の部屋 | 1〜5号室：点・移動・距離・重なりスコア・定規セット |
-| `02_shadow_rooms.html` | 第②編 影と仕切りの部屋 | 6〜10号室：影・仕切り・動き・球・単位合わせ + 最近傍探索の対決 + 結び（ヒルベルト空間の紹介） |
+| `02_shadow_rooms.html` | ②編 影と仕切り板の部屋 | 6〜10番の部屋: 影・仕切り板・動き・球・単位合わせ ＋ 最近傍探しの対決 ＋ 締めくくり（ヒルベルト空間の紹介） |
 
 ## フォルダ
 ```
@@ -266,15 +278,21 @@ docs/                 공간 좌표 해설 제작 지침서, 기획안
 
 ## 原資料と違う書き方をした箇所
 1. カード07 — 軸の名前 x と点の名前 x が重なるため、軸を x₁・x₂・x₃ に変更
-2. カード09 — 見出しボックスは中心 c、下の式は中心が原点のとき → 「中心を原点に置いた場合」と明記。マスの数による殻の割合の実験（0.9ⁿ）はこのページで追加
+2. カード09 — 見出しボックスは中心c、下の式は中心が原点のとき → "中心を原点に置いた場合"と明記。軸の数による殻の割合の実験（0.9ⁿ）はこのページで追加
 3. カード06 — u の書体を1種類にそろえた
 4. カード01 — affine structure を「点と移動（矢印）」と言い換えた
 
 数字の計算ミスはありませんでした。
 
+## 再ビルドと翻訳
+1. `python3 build/build.py` — 韓国語の4ページを作り直します。READMEの原本は`build/README.ko.md`です。
+2. 言語パック（https://github.com/adminmrobo/ahnboat_lab_langpack）を`langpack/`にコピーし、`extract → pending → 翻訳 → check → merge`の順に実行します（設定は`docs/langpack_config.json`）。
+3. `dist/`のHTMLとREADME.mdをいちばん上のフォルダにコピーします。実験パネルのスクリプトは翻訳されるようにページ内に入っています（`assets/panels.js`が原本）。
+
+
 ## 残りの作業
 - 表紙・場面イラスト（今は CSS の代替表紙）— 依頼リスト・プロンプトは `docs/IMAGE_PROMPTS.md`
-- 翻訳（言語パック en·zh·ja·uz·ru·vi）、ahnboat_lab_cover_status の名簿への登録
+- 翻訳版のネイティブチェック（特にuz・ru・vi）
 
 キャラクターの名前・設定・イラストは、著作権者 Ahn Sangsun の許可なく使用できません。
 
@@ -315,10 +333,10 @@ Bu turkumni koreyscha asl nusxada va 6 ta chet tilidagi versiyada oʻqish mumkin
 ## Qismlar tuzilishi
 | Fayllar | Qism | Mazmun |
 |---|---|---|
-| `index.html` | Mundarija | Qismlar roʻyxati, umumiy manzara (10 ta xona zinapoyasi), qahramonlar |
+| `index.html` | Mundarija | Qismlar roʻyxati, umumiy manzara (10 ta xona oqimi), qahramonlar |
 | `00_orientation.html` | 0-qism Sumkani tekshirish | Koordinata tekisligi, Pifagor, sin, cos boʻyicha 3 ta takrorlash tajribasi + 3 ta savol (oʻtkazib yuborish mumkin) |
 | `01_ruler_rooms.html` | ①-qism Chizgʻich va transportir xonasi | 1–5-xonalar: nuqta, siljish, masofa, moslik balli, chizgʻichlar toʻplami |
-| `02_shadow_rooms.html` | ②-qism Soya va toʻsiq xonasi | 6–10-xonalar: soya, toʻsiq, harakat, shar, birliklarni moslashtirish + eng yaqin qoʻshnini topish bellashuvi + yakun (Hilbert fazosi bilan tanishuv) |
+| `02_shadow_rooms.html` | ②-qism: soya va toʻsiq xonasi | 6–10-xonalar: soya·toʻsiq·harakat·shar·birliklarni moslash + eng yaqin qoʻshnini topish bellashuvi + yakun (Gilbert fazosi bilan tanishuv) |
 
 ## Papkalar
 ```
@@ -334,15 +352,21 @@ Qayta yigʻish: `python3 build/build.py` · Tekshirish: `python3 build/check_num
 
 ## Asl manbadan farqli yozilgan joylar
 1. Karta 07 — oʻq nomi x va nuqta nomi x ustma-ust tushgani uchun oʻqlar x₁·x₂·x₃ ga almashtirildi
-2. Karta 09 — sarlavha qutisida markaz c, quyidagi formula esa markaz koordinata boshida boʻlgan hol uchun → "markazi koordinata boshiga qoʻyilgan hol" deb aniq koʻrsatildi. Kataklar soniga qarab qobiq ulushi tajribasi (0.9ⁿ) bu sahifada qoʻshildi
+2. Karta 09 — bosh qutida markaz c, pastdagi tenglama markaz koordinata boshida boʻlgan holat uchun → "markaz koordinata boshiga qoʻyilgan holat" deb aniq koʻrsatildi. Oʻqlar soniga qarab qobiq ulushi tajribasi (0.9ⁿ) bu sahifada qoʻshilgan
 3. Karta 06 — u ning shrifti bittaga keltirildi
 4. Karta 01 — affine structure "nuqta va siljish (strelka)" deb ochib yozildi
 
 Sonlarni hisoblashda xato topilmadi.
 
+## Qayta yaratish va tarjima
+1. `python3 build/build.py` — koreyscha 4 ta sahifani qayta yaratadi. README asli — `build/README.ko.md`.
+2. Til paketini (https://github.com/adminmrobo/ahnboat_lab_langpack) `langpack/` ga nusxalang va `extract → pending → tarjima → check → merge` tartibida ishga tushiring (sozlamalar `docs/langpack_config.json` da).
+3. `dist/` dagi HTML va README.md ni eng yuqori papkaga nusxalang. Tajriba paneli skriptlari tarjima qilinishi uchun sahifa ichiga joylangan (asli `assets/panels.js`).
+
+
 ## Qolgan ishlar
 - Muqova va sahna rasmlari (hozircha CSS bilan yasalgan oʻrinbosar muqova) — soʻrovlar roʻyxati va promptlar: `docs/IMAGE_PROMPTS.md`
-- Tarjima (til paketi en·zh·ja·uz·ru·vi), ahnboat_lab_cover_status roʻyxatiga qoʻshish
+- Tarjimalarni ona tili egalari tomonidan tekshirish (ayniqsa uz·ru·vi)
 
 Qahramonlarning ismlari, tavsifi va rasmlaridan mualliflik huquqi egasi Ahn Sangsun ruxsatisiz foydalanish mumkin emas.
 
@@ -383,10 +407,10 @@ Qahramonlarning ismlari, tavsifi va rasmlaridan mualliflik huquqi egasi Ahn Sang
 ## Состав частей
 | Файлы | Часть | Содержание |
 |---|---|---|
-| `index.html` | Оглавление | Список частей, общая картина (лестница из 10 комнат), персонажи |
+| `index.html` | Оглавление | Список частей, общая картина (ход 10 комнат), персонажи |
 | `00_orientation.html` | Часть 0 «Проверка рюкзака» | 3 эксперимента для повторения координатной плоскости, Пифагора, sin и cos + квиз из 3 вопросов (можно пропустить) |
 | `01_ruler_rooms.html` | Часть ① «Комната линейки и транспортира» | Комнаты 1~5: точки, перемещения, расстояния, оценка совпадения, набор линеек |
-| `02_shadow_rooms.html` | Часть ② «Комната теней и перегородок» | Комнаты 6~10: тени, перегородки, движения, шары, выравнивание единиц + Поединок по поиску ближайших соседей + финал (знакомство с гильбертовым пространством) |
+| `02_shadow_rooms.html` | Часть ②. Комната теней и перегородок | Комнаты 6–10: тень, перегородка, движение, шар, приведение единиц + поединок по поиску ближайшего соседа + финал (знакомство с гильбертовым пространством) |
 
 ## Папка
 ```
@@ -402,15 +426,21 @@ docs/                 공간 좌표 해설 제작 지침서, 기획안
 
 ## Отличия от исходного материала
 1. Карточка 07 — название оси x совпадало с названием точки x, поэтому оси переименованы в x₁·x₂·x₃
-2. Карточка 09 — в заголовке центр c, а формула ниже для центра в начале координат → явно указано как «случай с центром в начале координат». Эксперимент с долей оболочки в зависимости от числа клеток (0.9ⁿ) добавлен на этой странице
+2. Карточка 09 — в заголовочном блоке центр c, а формула ниже — для центра в начале координат → явно указано «случай, когда центр помещён в начало координат». Эксперимент с долей оболочки по числу осей (0.9ⁿ) добавлен на этой странице
 3. Карточка 06 — начертание u приведено к одному виду
 4. Карточка 01 — affine structure пересказана как «точки и перемещения (стрелки)»
 
 Ошибок в числовых расчётах не было.
 
+## Пересборка и перевод
+1. `python3 build/build.py` — заново собирает 4 страницы на корейском. Исходник README — `build/README.ko.md`.
+2. Скопируйте языковой пакет (https://github.com/adminmrobo/ahnboat_lab_langpack) в `langpack/` и запустите по порядку `extract → pending → перевод → check → merge` (настройки — `docs/langpack_config.json`).
+3. Скопируйте HTML и README.md из `dist/` в корневую папку. Скрипты экспериментальных панелей встроены в страницы, чтобы их можно было перевести (исходник — `assets/panels.js`).
+
+
 ## Что осталось
 - Обложка и иллюстрации сцен (сейчас обложка-заменитель на CSS) — список запросов и промпты в `docs/IMAGE_PROMPTS.md`
-- Перевод (языковой пакет en·zh·ja·uz·ru·vi), регистрация в реестре ahnboat_lab_cover_status
+- Проверка переводов носителями языка (особенно uz·ru·vi)
 
 Имена, характеристики и изображения персонажей нельзя использовать без разрешения правообладателя Ahn Sangsun.
 
@@ -451,10 +481,10 @@ Loạt bài này có thể xem bằng bản gốc tiếng Hàn và 6 bản ngo�
 ## Cấu trúc các phần
 | Tệp | Phần | Nội dung |
 |---|---|---|
-| `index.html` | Mục lục | Danh sách phần, bức tranh lớn (thang 10 căn phòng), nhân vật |
+| `index.html` | Mục lục | Danh sách các phần, bức tranh tổng thể (dòng chảy của 10 phòng), nhân vật |
 | `00_orientation.html` | Phần 0 Kiểm tra ba lô | 3 thí nghiệm ôn mặt phẳng tọa độ · Pythagoras · sin · cos + 3 câu đố (có thể bỏ qua) |
 | `01_ruler_rooms.html` | Phần ① Căn phòng của thước kẻ và thước đo góc | Phòng 1~5: điểm · dịch chuyển · khoảng cách · điểm chồng khớp · bộ thước |
-| `02_shadow_rooms.html` | Phần ② Căn phòng của bóng và vách ngăn | Phòng 6~10: bóng · vách ngăn · chuyển động · quả cầu · đồng bộ đơn vị + Đối đầu tìm láng giềng gần nhất + phần kết (giới thiệu không gian Hilbert) |
+| `02_shadow_rooms.html` | Phần ②: Phòng của bóng và vách ngăn | Phòng 6–10: bóng·vách ngăn·chuyển động·khối cầu·đồng bộ đơn vị + đối đầu tìm láng giềng gần nhất + phần kết (giới thiệu không gian Hilbert) |
 
 ## Thư mục
 ```
@@ -470,14 +500,20 @@ Tạo lại: `python3 build/build.py` · Kiểm tra số: `python3 build/check_n
 
 ## Chỗ viết khác tài liệu gốc
 1. Thẻ 07 — tên trục x trùng với tên điểm x nên đổi trục thành x₁·x₂·x₃
-2. Thẻ 09 — hộp tiêu đề dùng tâm c, công thức bên dưới là khi tâm ở gốc tọa độ → ghi rõ "trường hợp đặt tâm ở gốc tọa độ". Thí nghiệm tỉ lệ lớp vỏ theo số ô (0.9ⁿ) do trang này thêm vào
+2. Thẻ 09 — hộp tiêu đề dùng tâm c, phương trình bên dưới là khi tâm ở gốc tọa độ → ghi rõ "trường hợp đặt tâm ở gốc tọa độ". Thí nghiệm tỉ lệ lớp vỏ theo số trục (0.9ⁿ) do trang này thêm vào
 3. Thẻ 06 — thống nhất một kiểu chữ cho u
 4. Thẻ 01 — diễn giải affine structure thành "điểm và dịch chuyển (mũi tên)"
 
 Không có lỗi tính toán số nào.
 
+## Tạo lại và dịch
+1. `python3 build/build.py` — tạo lại 4 trang tiếng Hàn. Bản gốc README là `build/README.ko.md`.
+2. Sao chép gói ngôn ngữ (https://github.com/adminmrobo/ahnboat_lab_langpack) vào `langpack/` rồi chạy theo thứ tự `extract → pending → dịch → check → merge` (cấu hình ở `docs/langpack_config.json`).
+3. Sao chép HTML và README.md trong `dist/` lên thư mục trên cùng. Script của bảng thí nghiệm được nhúng trong trang để có thể dịch (bản gốc là `assets/panels.js`).
+
+
 ## Việc còn lại
 - Hình bìa · hình cảnh (hiện dùng bìa thay thế bằng CSS) — danh sách yêu cầu · prompt ở `docs/IMAGE_PROMPTS.md`
-- Bản dịch (gói ngôn ngữ en·zh·ja·uz·ru·vi), đăng ký vào danh mục ahnboat_lab_cover_status
+- Người bản ngữ rà soát bản dịch (đặc biệt uz·ru·vi)
 
 Không được sử dụng tên, thiết lập và hình vẽ nhân vật khi chưa có sự cho phép của chủ sở hữu bản quyền Ahn Sangsun.

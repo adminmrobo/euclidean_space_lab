@@ -60,7 +60,7 @@ P.o1=function(h){var W=520,H=400,pt=[3,2];var out=readout(h);
     dash(s,p.X(pt[0]),p.Y(pt[1]),p.X(pt[0]),p.Y(0),'teal');dash(s,p.X(pt[0]),p.Y(pt[1]),p.X(0),p.Y(pt[1]),'teal');
     dot(s,p.X(pt[0]),p.Y(pt[1]),'orange',8);txt(s,p.X(pt[0])+10,p.Y(pt[1])-10,'P('+fmt(pt[0])+', '+fmt(pt[1])+')',{size:16});
     bg.addEventListener('pointerdown',function(e){var m=s.getScreenCTM().inverse();var q=s.createSVGPoint();q.x=e.clientX;q.y=e.clientY;q=q.matrixTransform(m);var v=p.inv(q.x,q.y);pt=[clamp(snap(v[0],.5),0,6),clamp(snap(v[1],.5),0,4.5)];draw();});
-    out.innerHTML='점 P는 <b>가로로 '+fmt(pt[0])+'칸, 세로로 '+fmt(pt[1])+'칸</b> 간 자리입니다. 숫자 두 개 = 점 하나.';}
+    out.innerHTML='점 P는 <b>가로로 '+fmt(pt[0])+'만큼, 세로로 '+fmt(pt[1])+'만큼</b> 간 자리입니다. 숫자 두 개 = 점 하나.';}
   draw();};
 P.o2=function(h){var W=520,H=400,B=[4,3];var out=readout(h);
   function draw(){var s=svgOf(h,W,H);var p=plane(s,{W:W,H:H,x0:0,x1:8,y0:0,y1:6,equal:true});
@@ -95,7 +95,7 @@ P.o4=function(h){var W=520,H=400,u=[1,2],v=[3,1];var out=readout(h);
     out.innerHTML='u + v = ('+u[0]+' + '+v[0]+', '+u[1]+' + '+v[1]+') = <b>('+w[0]+', '+w[1]+')</b> · 2배 늘리면 2u = <b>('+2*u[0]+', '+2*u[1]+')</b> — 자리끼리 더하고, 자리마다 곱합니다.';}
   draw();};
 
-/* ===== 1번 방: 칸 수 1·2·3 ===== */
+/* ===== 1번 방: 축 수 1·2·3 ===== */
 P.p01=function(h){var W=600,H=360;var inp=h.parentNode.querySelector('input');var out=readout(h);
   var A=[160,50,64],B=[163,54,76],names=['키','몸무게','허리'],units=['cm','kg','cm'];
   function draw(){var n=+inp.value;var s=svgOf(h,W,H);
@@ -120,7 +120,7 @@ P.p01=function(h){var W=600,H=360;var inp=h.parentNode.querySelector('input');va
       ktxt(s,14,22,'시아를 원점에 두고 그린 차이(가로 3 · 세로 4 · 높이 12)',{size:12.5,fill:C.muted});}
     var terms=[],sum=0,diff=[3,4,12];for(var i=0;i<n;i++){terms.push(diff[i]+'²');sum+=diff[i]*diff[i];}
     var used=[];for(var j=0;j<n;j++)used.push(names[j]);
-    out.innerHTML='칸 '+n+'개('+used.join('·')+') → 거리 = √('+terms.join(' + ')+') = √'+sum+' = <b>'+fmt(Math.sqrt(sum))+'</b>. 칸이 하나 늘 때마다 제곱 항이 하나 더 붙습니다.';}
+    out.innerHTML='축 '+n+'개('+used.join('·')+') → 거리 = √('+terms.join(' + ')+') = √'+sum+' = <b>'+fmt(Math.sqrt(sum))+'</b>. 축이 하나 늘 때마다 제곱 항이 하나 더 붙습니다.';}
   inp.addEventListener('input',draw);draw();};
 
 /* ===== 2번 방: 점과 화살표 ===== */
@@ -153,7 +153,7 @@ P.p03=function(h){var W=520,H=440,A=[1,1],B=[4,5];var out=readout(h);
     drag(s,gA,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],1),0,6),clamp(snap(q[1],1),0,6)];if(n[0]!==A[0]||n[1]!==A[1]){A=n;draw();}});
     drag(s,gB,function(x,y){var q=p.inv(x,y);var n=[clamp(snap(q[0],1),0,6),clamp(snap(q[1],1),0,6)];if(n[0]!==B[0]||n[1]!==B[1]){B=n;draw();}});
     var d2=dx*dx+dy*dy,d=Math.sqrt(d2);
-    out.innerHTML='가로 차 '+Math.abs(dx)+', 세로 차 '+Math.abs(dy)+' → 거리 = √('+(dx*dx)+' + '+(dy*dy)+') = √'+d2+' = <b>'+fmt(d)+'</b> · 골목길(가로+세로)로 가면 '+(Math.abs(dx)+Math.abs(dy))+'칸';}
+    out.innerHTML='가로 차 '+Math.abs(dx)+', 세로 차 '+Math.abs(dy)+' → 거리 = √('+(dx*dx)+' + '+(dy*dy)+') = √'+d2+' = <b>'+fmt(d)+'</b> · 골목길(가로+세로)로 가면 '+(Math.abs(dx)+Math.abs(dy))+'만큼';}
   draw();};
 
 /* ===== 4번 방: 겹침 점수와 각도 ===== */
@@ -207,7 +207,7 @@ P.p06=function(h){var W=520,H=420,v=[3,2];var inp=h.parentNode.querySelector('in
     out.innerHTML='그림자 p = (<b>'+num(pp[0])+', '+num(pp[1])+'</b>) · 빗나간 만큼 r = ('+num(r[0])+', '+num(r[1])+'), 길이 <b>'+fmt(Math.hypot(r[0],r[1]))+'</b> · r·u = '+num(Math.abs(dot_)<5e-3?0:dot_)+' <span class="alert">(직각)</span>';}
   inp.addEventListener('input',draw);draw();};
 
-/* ===== 7번 방: 칸막이 x₁+2x₂+2x₃=6 ===== */
+/* ===== 7번 방: 가름판 x₁+2x₂+2x₃=6 ===== */
 P.p07=function(h){var W=560,H=440;var ins=h.parentNode.querySelectorAll('input');var out=readout(h);
   var o=[W*0.40,H*0.70],k=30;function pr(x,y,z){return[o[0]-x*k*0.62+y*k*1.15,o[1]+x*k*0.46-z*k*1.0];}
   function draw(){var P_=[+ins[0].value,+ins[1].value,+ins[2].value];var s=svgOf(h,W,H);
@@ -221,8 +221,8 @@ P.p07=function(h){var W=560,H=440;var ins=h.parentNode.querySelectorAll('input')
     dash(s,b0[0],b0[1],pp[0],pp[1],'#9aa5b1');
     if(Math.abs(t)>1e-9)el('line',{x1:pp[0],y1:pp[1],x2:ff[0],y2:ff[1],stroke:C.orange,'stroke-width':2.5,'stroke-dasharray':'2 3'},s);
     var col=sc>6?'blue':(sc<6?'red':'green');dot(s,pp[0],pp[1],col,8);txt(s,pp[0]+10,pp[1]-8,'P('+P_.join(', ')+')',{fill:C[col],size:14});
-    var side=sc>6?'<b>원점 반대편</b>(예: 스팸)':(sc<6?'<b>원점 쪽</b>(예: 정상 메일)':'<b>칸막이 위(경계)</b> — 판단 보류');
-    out.innerHTML='점수 x₁ + 2x₂ + 2x₃ = '+P_[0]+' + '+(2*P_[1])+' + '+(2*P_[2])+' = <b>'+sc+'</b> → 6과 비교하면 '+side+' · 칸막이까지 거리 = |'+sc+' − 6| ÷ 3 = <b>'+fmt(Math.abs(sc-6)/3)+'</b>';}
+    var side=sc>6?'<b>원점 반대편</b>(예: 스팸)':(sc<6?'<b>원점 쪽</b>(예: 정상 메일)':'<b>가름판 위(경계)</b> — 판단 보류');
+    out.innerHTML='점수 x₁ + 2x₂ + 2x₃ = '+P_[0]+' + '+(2*P_[1])+' + '+(2*P_[2])+' = <b>'+sc+'</b> → 6과 비교하면 '+side+' · 가름판까지 거리 = |'+sc+' − 6| ÷ 3 = <b>'+fmt(Math.abs(sc-6)/3)+'</b>';}
   ins.forEach(function(i){i.addEventListener('input',draw);});draw();};
 
 /* ===== 8번 방: 밀고 돌리고 뒤집기 ===== */
@@ -253,17 +253,17 @@ P.p09a=function(h){var W=500,H=440;var inp=h.parentNode.querySelector('input');v
     var mn=Math.min.apply(null,ds);
     out.innerHTML='반지름 r = '+fmt(r,1)+'km 안 편의점 <b>'+inn+'곳</b> (원 넓이 πr² = '+fmt(Math.PI*r*r)+'km²) · 가장 가까운 곳은 '+fmt(mn)+'km';}
   inp.addEventListener('input',draw);draw();};
-/* ===== 9번 방 ②: 칸이 늘면 껍질로 ===== */
+/* ===== 9번 방 ②: 축이 늘면 껍질로 ===== */
 P.p09b=function(h){var W=560,H=230;var inp=h.parentNode.querySelector('input');var out=readout(h);var ns=[1,2,3,5,10,20,50,100];
   function draw(){var n=ns[+inp.value];var f=Math.pow(0.9,n);var s=svgOf(h,W,H);
     var x0=30,w=W-60,y=60,bh=46;el('rect',{x:x0,y:y,width:w,height:bh,fill:C.orange,'fill-opacity':.85,rx:6},s);
     el('rect',{x:x0,y:y,width:Math.max(w*f,1),height:bh,fill:C.teal,rx:6},s);
     ktxt(s,x0,y-12,'안쪽(반지름 0.9 안)',{size:13,fill:C.teal});ktxt(s,x0+w,y-12,'겉껍질(0.9 ~ 1)',{size:13,fill:C.orange,anchor:'end'});
-    ktxt(s,x0,y+bh+30,'칸 수 n = '+n,{size:16,fill:C.navy,weight:'bold'});
+    ktxt(s,x0,y+bh+30,'축 수 n = '+n,{size:16,fill:C.navy,weight:'bold'});
     var ins=(f*100),sh=100-ins;
     ktxt(s,x0+w,y+bh+30,'안쪽 '+(ins>=1?fmt(ins,1):ins.toPrecision(2))+'% · 껍질 '+fmt(sh,ins>=1?1:4)+'%',{size:15,fill:C.navy,anchor:'end'});
     ktxt(s,x0,y+bh+62,'반지름 1인 공에서 반지름 0.9 안쪽이 차지하는 부피 비율 = 0.9ⁿ',{size:13,fill:C.muted});
-    out.innerHTML=n+'칸 방: 0.9<sup>'+n+'</sup> = <b>'+(f>=0.01?fmt(f,3):f.toExponential(2))+'</b> → 부피의 '+(sh>=99?'<b>거의 전부</b>':'<b>'+fmt(sh,1)+'%</b>')+'가 겉껍질에 있습니다.';}
+    out.innerHTML=n+'축 방: 0.9<sup>'+n+'</sup> = <b>'+(f>=0.01?fmt(f,3):f.toExponential(2))+'</b> → 부피의 '+(sh>=99?'<b>거의 전부</b>':'<b>'+fmt(sh,1)+'%</b>')+'가 겉껍질에 있습니다.';}
   inp.addEventListener('input',draw);draw();};
 
 /* ===== 10번 방 ①: 단위 맞추기 ===== */
@@ -310,7 +310,7 @@ P.duel=function(h){var host=h.parentNode;var out=readout(h);var shown={sia:false
     out.innerHTML=m;}
   draw();};
 
-/* ===== 끝맺음: 칸 수 → 끝없이 ===== */
+/* ===== 끝맺음: 축 수 → 끝없이 ===== */
 P.outro=function(h){var W=600,H=320;var inp=h.parentNode.querySelector('input');var out=readout(h);var ns=[2,3,10,100,Infinity];
   function f(x){return 0.55*Math.sin(2*Math.PI*x)+0.3*Math.sin(6*Math.PI*x+0.6)+0.15*Math.cos(10*Math.PI*x);}
   function draw(){var n=ns[+inp.value];var s=svgOf(h,W,H);var x0=40,x1=W-40,y0=H/2,amp=110;
@@ -320,7 +320,7 @@ P.outro=function(h){var W=600,H=320;var inp=h.parentNode.querySelector('input');
     else{var d='';for(var j=0;j<=400;j++){var xx=j/400;d+=(j?'L':'M')+(x0+xx*(x1-x0))+','+(y0-f(xx)*amp);}el('path',{d:d,fill:'none',stroke:C.orange,'stroke-width':3.5},s);
       ktxt(s,x0,28,'끝없는 방 — 곡선 하나가 점 하나',{size:14,fill:C.orange,weight:'bold'});}
     var door=h.parentNode.parentNode.querySelector('.door');if(door)door.classList.toggle('open',!isFinite(n));
-    out.innerHTML=isFinite(n)?'칸 '+n+'개: 곡선을 숫자 '+n+'개로 받아 적었습니다. 칸을 늘리면 더 닮지만 곡선 자체는 아닙니다.':'칸 수 <b>끝없이</b>: 곡선을 통째로 점 하나로 다룹니다. 자와 각도기는 그대로 — 이것이 <b>힐베르트 공간</b>입니다. 복도 끝 문이 열렸습니다.';}
+    out.innerHTML=isFinite(n)?'축 '+n+'개: 곡선을 숫자 '+n+' 개로 받아 적었습니다. 축을 늘리면 더 닮지만 곡선 자체는 아닙니다.':'축 수 <b>끝없이</b>: 곡선을 통째로 점 하나로 다룹니다. 자와 각도기는 그대로 — 이것이 <b>힐베르트 공간</b>입니다. 복도 끝 문이 열렸습니다.';}
   inp.addEventListener('input',draw);draw();};
 
 /* ===== 퀴즈 ===== */
@@ -329,7 +329,7 @@ function quiz(q){var ans=+q.getAttribute('data-ans');var fb=q.querySelector('.fb
 /* ===== 지식 색인·꾸러미 ===== */
 function kg(){var raw=document.getElementById('kg-raw');var mount=document.getElementById('kg-mount');if(!raw||!mount)return;var K=JSON.parse(raw.textContent);
   mount.innerHTML='<input class="kg-search" type="search"><div class="kg-list"></div>';
-  var list=mount.querySelector('.kg-list'),inp=mount.querySelector('input');inp.placeholder='개념 찾기 (예: 거리, 그림자, 칸막이)';inp.setAttribute('aria-label','지식 색인 검색');
+  var list=mount.querySelector('.kg-list'),inp=mount.querySelector('input');inp.placeholder='개념 찾기 (예: 거리, 그림자, 가름판)';inp.setAttribute('aria-label','지식 색인 검색');
   var TY={Concept:'개념',Method:'방법',Analogy:'비유',Application:'쓰임',OpenQuestion:'열린 질문'};
   var LG=(document.documentElement.lang||'ko').slice(0,2);function L_(o){return o?(o[LG]||o.en||o.ko||''):'';}
   K.nodes.forEach(function(n){if(n.desc&&!n.definition)n.definition={ko:n.desc};});

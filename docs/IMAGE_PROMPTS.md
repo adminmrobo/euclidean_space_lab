@@ -67,7 +67,7 @@ Scene: a white lab room with a large floor grid; two glowing points joined by a 
 [공통 끝머리]
 ```
 
-## 4. ②편 표지 — 그림자와 칸막이의 방 (16:9)
+## 4. ②편 표지 — 그림자와 가름판의 방 (16:9)
 ```
 Website top cover illustration, wide 16:9.
 [공통 첫머리]

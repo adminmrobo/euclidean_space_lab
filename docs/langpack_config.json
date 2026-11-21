@@ -179,7 +179,7 @@
  },
  "apiMaxTokens": 32000,
  "apiBatch": true,
- "readme": "README.md",
+ "readme": "build/README.ko.md",
  "readmeLangSection": true,
  "readmeIndex": "index.html",
  "siteUrl": "https://adminmrobo.github.io/euclidean_space_lab/"

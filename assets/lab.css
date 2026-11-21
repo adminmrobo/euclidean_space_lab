@@ -154,7 +154,7 @@ details.code p{font-size:14px;color:var(--muted);margin:0 0 6px}
 .quiz button.no{border-color:var(--red);background:#fdeceb}
 .quiz .fb{margin-top:8px;font-size:14.5px;min-height:1.5em}
 
-/* 사다리·목차 카드 */
+/* 흐름·목차 카드 */
 .ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 @media (max-width:860px){.ladder{grid-template-columns:repeat(2,1fr)}}
 .ladder a{display:block;text-decoration:none;color:var(--text);border:1px solid var(--rule);border-radius:10px;padding:10px;background:var(--panel);font-size:14px;line-height:1.5}

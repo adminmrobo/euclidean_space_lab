@@ -2,10 +2,10 @@
 """자와 각도기의 방 — 페이지 빌드. python3 build/build.py 로 index.html, 00~02 페이지를 다시 만든다."""
 import json, os, html, sys
 sys.path.insert(0, os.path.dirname(__file__))
-from content_rooms import ROOMS
+from content_rooms import ROOMS, EXTRA
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VER = "v1.3"
+VER = "v1.4"
 DATE = "2026-11-19"
 SITE = "https://adminmrobo.github.io/euclidean_space_lab/"
 AUTHOR_URL = "https://adminmrobo.github.io/who_am_i/who_am_i.html"
@@ -28,16 +28,16 @@ def face(k, e="e13", cls=""):
 CHANGES = {
  1: "원자료 결론의 affine structure(아핀 구조)를 이 페이지에서는 \"점과 이동\"으로 풀어 씁니다. 원어는 약어 상자에만 둡니다.",
  6: "원자료는 u를 굵은 글씨와 기울임 글씨로 섞어 씁니다. 이 페이지에서는 한 가지 글씨로 맞춥니다.",
- 7: "원자료는 축 이름 x와 점 이름 x가 겹칩니다(x = p + tv와 x축). 이 페이지에서는 축을 x₁·x₂·x₃으로 바꾸고, 칸막이 식도 x₁ + 2x₂ + 2x₃ = 6으로 씁니다. 원자료의 \"Hyperplane in ℝ³\"는 3칸 방에서는 평면과 같은 것입니다.",
- 9: "원자료의 머리 상자는 중심 c를 씁니다. 그런데 아래 식 x² + y² = r²은 중심이 원점일 때입니다. 이 페이지에서는 \"중심을 원점에 둔 경우\"라고 밝힙니다. 칸 수에 따른 껍질 비율 실험(0.9ⁿ)은 이 페이지에서 더한 것입니다.",
+ 7: "원자료는 축 이름 x와 점 이름 x가 겹칩니다(x = p + tv와 x축). 이 페이지에서는 축을 x₁·x₂·x₃으로 바꾸고, 가름판 식도 x₁ + 2x₂ + 2x₃ = 6으로 씁니다. 원자료의 \"Hyperplane in ℝ³\"는 3축 방에서는 평면과 같은 것입니다.",
+ 9: "원자료의 머리 상자는 중심 c를 씁니다. 그런데 아래 식 x² + y² = r²은 중심이 원점일 때입니다. 이 페이지에서는 \"중심을 원점에 둔 경우\"라고 밝힙니다. 축 수에 따른 껍질 비율 실험(0.9ⁿ)은 이 페이지에서 더한 것입니다.",
 }
 
-ABBR = [("ℝⁿ", "실수 n개짜리 줄 전체 — 자와 각도기가 있는 n칸짜리 방(유클리드 공간)"),
+ABBR = [("ℝⁿ", "실수 n개짜리 줄 전체 — 자와 각도기가 있는 n축짜리 방(유클리드 공간)"),
         ("내적", "겹침 점수 — 같은 자리끼리 곱해서 더한 값"),
         ("노름 ‖x‖", "화살표의 길이"),
         ("정규직교기저", "길이 1이고 서로 직각인 자 세트"),
         ("정사영", "그림자 — 점에서 선·평면으로 똑바로 내린 발밑"),
-        ("초평면·법선", "칸막이(n칸 방에서 한 칸 적은 판) · 칸막이에 꽂힌 화살표"),
+        ("초평면·법선", "가름판(n축 방에서 축이 하나 적은 판) · 가름판에 꽂힌 화살표"),
         ("등거리 변환", "밀고·돌리고·뒤집기 — 거리가 그대로인 움직임"),
         ("KNN", "가장 가까운 이웃 찾기"),
         ("MSE", "제곱 오차 — 빗나간 거리의 제곱 평균"),
@@ -104,7 +104,7 @@ LADDER_TABLE = [
  (6, "정답에 딱 못 맞출 때 가장 덜 틀린 답이 필요", "예측선 긋기, 평균"),
  (7, "바닥과 편을 가르는 판이 필요", "분류기의 결정 경계"),
  (8, "점을 옮겨도 관계가 그대로인가", "데이터 늘리기(사진 회전)"),
- (9, "이웃의 범위를 정하고 싶다 / 칸이 늘면 이상한 일", "반경 이웃, 칸이 많을 때의 함정(차원의 저주)"),
+ (9, "이웃의 범위를 정하고 싶다 / 축이 늘면 이상한 일", "반경 이웃, 축이 많을 때의 함정(차원의 저주)"),
  (10, "단위가 섞이거나 표면이 휘면 곧은 자가 틀린다", "단위 맞추기, → 힐베르트 공간"),
 ]
 def ladder_table():
@@ -132,6 +132,7 @@ def quiz(q, ans, ok, no, opts):
     return f'<div class="quiz" data-ans="{ans}"><div class="qq">확인 퀴즈 — {E(q)}</div><div class="opts">{b}</div><div class="fb" aria-live="polite"></div><span class="qok" hidden>{E(ok)}</span><span class="qno" hidden>{E(no)}</span></div>'
 
 def room(r):
+    x = EXTRA.get(r['no'], {})
     why = "".join(f"<li>{E(x)}</li>" for x in r["why"])
     labels = ["문제", "앞 방의 한계", "해법"]
     why = "".join(f"<li><b>{labels[i]}</b> — {E(x)}</li>" for i, x in enumerate(r["why"]))
@@ -140,11 +141,15 @@ def room(r):
     solve = "".join(f"<p>{E(s)}</p>" for s in r["solve"])
     code = ""
     if r["code"]:
-        code = f'<details class="code"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary><pre><code>{E(r["code"][0])}</code></pre><p>{E(r["code"][1])}</p></details>'
+        res = f'<p><b>{E(x["result"])}</b></p>' if x.get("result") else ""
+        code = f'<details class="code"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary><pre><code>{E(r["code"][0])}</code></pre><p>{E(r["code"][1])}</p>{res}</details>'
     ch = ""
     if r["no"] in CHANGES:
         ch = f'<p class="hint">📝 원자료와 다르게 쓴 곳 — {E(CHANGES[r["no"]])}</p>'
     q = r["quiz"]
+    say = f'<p><b>한 문장으로 말하면</b> — {E(x["say"])}</p>' if x.get('say') else ''
+    ai = (f'<div class="solve"><h4>AI 판단 코너 — 그대로 믿어도 될까?</h4><p>{E(x["ai"][0])}</p>'
+          f'<details class="code"><summary>확인해 보기</summary><p>{E(x["ai"][1])}</p></details></div>') if x.get('ai') else ''
     return f"""<section class="room" id="{r['id']}"><div class="wrap">
 <div class="roomno">{r['no']}번 방</div>
 <h2>{E(r['title'])}</h2><p class="muted">{E(r['sub'])}</p>
@@ -152,7 +157,7 @@ def room(r):
 <div class="duo">
 <div class="box why"><h4>왜 이 방법을 쓰나</h4><ol>{why}</ol><div class="easy"><b>쉽게 말하면</b> — {E(r['easy'])}</div></div>
 <div class="box mathbox"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
-<div class="q">{face('haru','e04')}<div><b>조수</b> {E(r['haru_q'])}</div></div>
+<div class="q">{face('haru','e04')}<div><b>조수</b> {E(x.get('intro', ''))} {E(r['haru_q'])}</div></div>
 <p><b>학교 수학으로 보면</b> — {E(r['school'])}</p>
 <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>{pcs}</tbody></table>
 <div class="try"><b>숫자로 한 번 해 보기</b>{tries}</div>
@@ -161,7 +166,8 @@ def room(r):
 {talk(r['aside']) + chr(10) if r.get('aside') else ''}<div class="pair"><div class="box"><h4>일상으로 치면</h4><p>{E(r['daily'])}</p></div><div class="box ml"><h4>머신러닝에서는</h4><p>{E(r['ml'])}</p></div></div>
 {talk(r['talk'])}
 {panel(r)}
-<div class="solve"><h4>풀이</h4>{solve}</div>
+<div class="solve"><h4>풀이</h4>{solve}{say}</div>
+{ai}
 {ch}
 <div class="limit"><b>이 방의 한계</b> — {E(r['limit'])}</div>
 {code}
@@ -173,26 +179,26 @@ def room(r):
 KG_NODES = [
  ("concept/euclidean-space", "Concept", "유클리드 공간(자와 각도기가 있는 방)", "Euclidean space ℝⁿ", "#r01", "숫자 n개 묶음을 점으로 보고 거리·각도를 재는 방", "01_ruler_rooms"),
  ("concept/point-vector", "Concept", "점과 화살표", "Point and vector", "#r02", "점은 자리, 화살표는 이동. B − A = 이동", "01_ruler_rooms"),
- ("concept/distance", "Concept", "두 점 사이 거리", "Euclidean distance", "#r03", "차를 제곱해 더하고 루트 — 몇 칸이든 피타고라스", "01_ruler_rooms"),
+ ("concept/distance", "Concept", "두 점 사이 거리", "Euclidean distance", "#r03", "차를 제곱해 더하고 루트 — 몇 축이든 피타고라스", "01_ruler_rooms"),
  ("concept/dot-product", "Concept", "겹침 점수(내적)와 각도", "Dot product and angle", "#r04", "같은 자리끼리 곱해 더한 값. cos θ로 방향의 닮음을 잰다", "01_ruler_rooms"),
  ("concept/orthonormal-basis", "Concept", "길이 1이고 서로 직각인 자 세트", "Orthonormal basis", "#r05", "좌표 = 그 자와의 겹침 점수. 자를 돌려도 길이는 그대로", "01_ruler_rooms"),
  ("concept/projection", "Concept", "그림자(정사영)", "Orthogonal projection", "#r06", "점에서 선으로 똑바로 내린 발밑이 가장 가까운 점", "02_shadow_rooms"),
- ("concept/hyperplane", "Concept", "선·평면·칸막이", "Lines, planes, hyperplanes", "#r07", "n칸 방의 칸막이는 n − 1칸. 꽂힌 화살표와의 점수로 편을 가른다", "02_shadow_rooms"),
+ ("concept/hyperplane", "Concept", "선·평면·가름판", "Lines, planes, hyperplanes", "#r07", "n축 방의 가름판는 n − 1축. 꽂힌 화살표와의 점수로 편을 가른다", "02_shadow_rooms"),
  ("concept/isometry", "Concept", "밀고·돌리고·뒤집기", "Isometry", "#r08", "거리와 각도를 지키는 움직임. 늘리기는 거리를 바꾼다", "02_shadow_rooms"),
  ("concept/ball", "Concept", "원·구·공", "Circles, spheres, n-balls", "#r09", "중심에서 r 안쪽 = 이웃 범위", "02_shadow_rooms"),
- ("concept/curse-of-dimensionality", "Concept", "칸이 너무 많으면 모두 비슷하게 멀어진다", "Curse of dimensionality", "#r09", "n칸 공의 부피가 겉껍질에 몰린다(0.9ⁿ)", "02_shadow_rooms"),
+ ("concept/curse-of-dimensionality", "Concept", "축이 너무 많으면 모두 비슷하게 멀어진다", "Curse of dimensionality", "#r09", "n축 공의 부피가 겉껍질에 몰린다(0.9ⁿ)", "02_shadow_rooms"),
  ("method/feature-scaling", "Method", "단위 맞추기", "Feature scaling", "#r10", "열마다 단위를 맞춰야 거리가 공정해진다", "02_shadow_rooms"),
  ("concept/arc-chord", "Concept", "호와 현", "Intrinsic vs Euclidean distance", "#r10", "휜 표면에서는 곧은 자가 실제 길보다 짧게 잰다", "02_shadow_rooms"),
  ("application/knn", "Application", "가장 가까운 이웃 찾기", "k-nearest neighbors", "#r03", "거리가 가장 짧은 데이터를 찾는다", "01_ruler_rooms"),
  ("application/cosine-similarity", "Application", "코사인 유사도·추천", "Cosine similarity", "#r04", "취향표의 방향이 닮은 정도", "01_ruler_rooms"),
  ("application/least-squares", "Application", "예측선 긋기(최소제곱)", "Least squares", "#r06", "정답의 그림자를 고른다", "02_shadow_rooms"),
- ("application/linear-classifier", "Application", "분류기의 결정 경계", "Linear classifier", "#r07", "칸막이로 스팸·정상을 가른다", "02_shadow_rooms"),
+ ("application/linear-classifier", "Application", "분류기의 결정 경계", "Linear classifier", "#r07", "가름판로 스팸·정상을 가른다", "02_shadow_rooms"),
  ("analogy/shadow", "Analogy", "정오의 막대 그림자", "Noon shadow", "#r06", "그림자 = 가장 가까운 답", "02_shadow_rooms"),
  ("concept/coordinate-plane", "Concept", "좌표평면 — 숫자 두 개 = 점 하나", "Coordinate plane", "#bag1", "가로·세로 숫자로 점의 자리를 정한다", "00_orientation"),
  ("concept/pythagoras", "Concept", "피타고라스 정리", "Pythagorean theorem", "#bag2", "빗변² = 가로² + 세로² — 3번 방 거리의 바탕", "00_orientation"),
  ("concept/sin-cos", "Concept", "sin·cos — 원 위의 가로·세로", "Sine and cosine", "#bag3", "반지름 1인 원 위의 점 (cos θ, sin θ)", "00_orientation"),
  ("concept/vector-add", "Concept", "화살표 더하기·늘리기", "Vector addition and scaling", "#bag4", "자리끼리 더하고 자리마다 곱한다", "00_orientation"),
- ("open/hilbert", "OpenQuestion", "칸 수가 끝없으면? 곡선이라면?", "Infinite dimensions → Hilbert space", "#outro", "다음 편 힐베르트 공간에서 다룬다", "02_shadow_rooms"),
+ ("open/hilbert", "OpenQuestion", "축 수가 끝없으면? 곡선이라면?", "Infinite dimensions → Hilbert space", "#outro", "다음 편 힐베르트 공간에서 다룬다", "02_shadow_rooms"),
 ]
 KG_EDGES = [("concept/coordinate-plane","motivates","concept/euclidean-space"),("concept/pythagoras","explains","concept/distance"),("concept/sin-cos","explains","concept/dot-product"),("concept/vector-add","explains","concept/point-vector"),("concept/euclidean-space","motivates","concept/point-vector"),("concept/point-vector","motivates","concept/distance"),
  ("concept/distance","motivates","concept/dot-product"),("concept/dot-product","motivates","concept/orthonormal-basis"),
@@ -234,7 +240,7 @@ def footer(extra_links):
 <h3>출처</h3>
 <div class="tbl"><table><thead><tr><th>#</th><th>자료</th><th>이 페이지에서 쓴 곳</th></tr></thead><tbody>
 <tr><td>[1]</td><td>@eeanimation, 인포그래픽 「EUCLIDEAN SPACE 01~10」 (사용자 제공 이미지, 2026-11-19 확인)</td><td>방 1~10의 원자료 카드. 구도·색·기호·축 이름을 살려 SVG로 다시 그리고 손으로 움직이게 바꿈. 이미지는 붙여 넣지 않음</td></tr>
-<tr><td>[2]</td><td>안상선, 「공간 좌표 해설 제작 지침서」 v1.0 (docs/SPACE_COORDINATE_GUIDE.md)</td><td>용어 대조표, 공간 사다리, 방 짜임</td></tr>
+<tr><td>[2]</td><td>안상선, 「공간 좌표 해설 제작 지침서」 v1.0 (docs/SPACE_COORDINATE_GUIDE.md)</td><td>용어 대조표, 공간 순서, 방 짜임</td></tr>
 </tbody></table></div>
 <h3>예시값·설명용 숫자</h3>
 <p>이 페이지의 사람·가게·고객 숫자는 모두 설명용 예시값입니다. 시아·모아의 키·몸무게·허리, 취향표, 키 세 번 잰 값이 그렇습니다. 편의점 위치와 고객 가~바의 키·몸무게도 마찬가지입니다.</p>
@@ -248,7 +254,7 @@ def footer(extra_links):
 </body></html>
 """
 
-FOOT_LINKS = [("index.html", "목차"), ("00_orientation.html", "0편 가방 점검"), ("01_ruler_rooms.html", "①편 자와 각도기의 방"), ("02_shadow_rooms.html", "②편 그림자와 칸막이의 방"), ("https://github.com/adminmrobo/euclidean_space_lab", "저장소")]
+FOOT_LINKS = [("index.html", "목차"), ("00_orientation.html", "0편 가방 점검"), ("01_ruler_rooms.html", "①편 자와 각도기의 방"), ("02_shadow_rooms.html", "②편 그림자와 가름판의 방"), ("https://github.com/adminmrobo/euclidean_space_lab", "저장소")]
 
 # ======================================================== index
 def build_index():
@@ -267,8 +273,8 @@ def build_index():
 <div class="cards">
 <a class="card" href="00_orientation.html">{face("doctor","e08")}<span class="n">0편 · 오리엔테이션</span><h3>가방 점검</h3><p>좌표평면·피타고라스·sin·cos·화살표를 4장으로 짧게 복습합니다. 건너뛰어도 됩니다.</p></a>
 <a class="card" href="01_ruler_rooms.html">{face("sia","e01")}<span class="n">①편 · 1~5번 방</span><h3>자와 각도기의 방</h3><p>점·이동·거리·겹침 점수·자 세트. 데이터를 점으로 놓고 재는 법.</p></a>
-<a class="card" href="02_shadow_rooms.html">{face("moa","e16")}<span class="n">②편 · 6~10번 방 + 대결</span><h3>그림자와 칸막이의 방</h3><p>그림자·칸막이·움직임·공·단위 맞추기. 가장 가까운 이웃 찾기 대결.</p></a>
-<div class="card soon">{face("haru","e09")}<span class="n">다음 편 · 곧 열립니다</span><h3>끝없는 방 — 힐베르트 공간</h3><p>칸 수가 끝없으면? 곡선이라면? ②편 끝맺음에서 미리 소개합니다.</p></div>
+<a class="card" href="02_shadow_rooms.html">{face("moa","e16")}<span class="n">②편 · 6~10번 방 + 대결</span><h3>그림자와 가름판의 방</h3><p>그림자·가름판·움직임·공·단위 맞추기. 가장 가까운 이웃 찾기 대결.</p></a>
+<div class="card soon">{face("haru","e09")}<span class="n">다음 편 · 곧 열립니다</span><h3>끝없는 방 — 힐베르트 공간</h3><p>축 수가 끝없으면? 곡선이라면? ②편 끝맺음에서 미리 소개합니다.</p></div>
 </div></div></section>
 <section id="map"><div class="wrap"><h2>큰 그림 — 앞 방의 한계가 다음 방의 이유</h2>{ladder()}<div style="height:16px"></div>{ladder_table()}</div></section>
 {cast_section()}
@@ -349,11 +355,11 @@ def build_part(no):
         three_ = three("숫자 묶음을 점으로 찍고, 화살표로 이동을 말하고, 거리와 각도를 잽니다.", "비슷한 고객 찾기(거리)와 취향이 닮은 사람 찾기(각도)가 여기서 나옵니다.", "고객·제품 데이터 한 줄을 점으로 보면 \"가장 비슷한 것\"을 숫자로 고를 수 있습니다.")
         intro = talk([("doctor","e08","복도에 방이 열 개 있다. 오늘은 앞의 다섯 개다."),("sia","e01","자와 각도기만 있으면 된다면서요? 쉬워 보여요!"),("moa","e09","방마다 실험을 맞혀야 문이 열린다고 들었어요."),("jupanbot","e16","저는 다 맞힐 자신이 있습니다!")])
     else:
-        fn, og, t = "02_shadow_rooms.html", "og_02.jpg", "자와 각도기의 방 ②편 — 그림자·칸막이·움직임·공·단위 맞추기"
-        d = "6~10번 방과 대결: 그림자로 가장 가까운 답을 고르고, 칸막이로 편을 가르고, 단위를 맞춰 이웃을 찾습니다. 끝맺음에서 힐베르트 공간을 소개합니다."
+        fn, og, t = "02_shadow_rooms.html", "og_02.jpg", "자와 각도기의 방 ②편 — 그림자·가름판·움직임·공·단위 맞추기"
+        d = "6~10번 방과 대결: 그림자로 가장 가까운 답을 고르고, 가름판로 편을 가르고, 단위를 맞춰 이웃을 찾습니다. 끝맺음에서 힐베르트 공간을 소개합니다."
         cast = [("moa","e16"),("doctor","e10"),("sia","e14"),("haru","e07")]
-        hero = ("②편 · 6~10번 방 + 대결", "그림자와 칸막이의 방", "가장 가까운 답(그림자), 편 가르기(칸막이), 이웃 범위(공), 단위 맞추기까지. 마지막에 가장 가까운 이웃 찾기 대결이 있습니다.")
-        three_ = three("그림자로 가장 덜 틀린 답을 고르고, 칸막이로 편을 가르고, 단위를 맞춰 이웃을 찾습니다.", "예측선 긋기, 스팸 분류, 추천 전 단위 맞추기가 모두 이 방들의 규칙입니다.", "\"모델이 낼 수 있는 답 중 정답에 가장 가까운 것\"과 \"공정한 거리\"를 고르는 법을 압니다.")
+        hero = ("②편 · 6~10번 방 + 대결", "그림자와 가름판의 방", "가장 가까운 답(그림자), 편 가르기(가름판), 이웃 범위(공), 단위 맞추기까지. 마지막에 가장 가까운 이웃 찾기 대결이 있습니다.")
+        three_ = three("그림자로 가장 덜 틀린 답을 고르고, 가름판로 편을 가르고, 단위를 맞춰 이웃을 찾습니다.", "예측선 긋기, 스팸 분류, 추천 전 단위 맞추기가 모두 이 방들의 규칙입니다.", "\"모델이 낼 수 있는 답 중 정답에 가장 가까운 것\"과 \"공정한 거리\"를 고르는 법을 압니다.")
         intro = talk([("doctor","e07","①편에서 자와 각도기를 손에 익혔다. 이제 그걸로 답을 고른다."),("moa","e09","그림자로 답을 고른다는 게 무슨 뜻이에요?"),("sia","e19","6번 방에 가 보면 알겠죠!")])
     s = head(t, d, og, fn)
     navl = [(f"#{r['id']}", f"{r['no']}번 방") for r in rooms]
@@ -394,7 +400,7 @@ def duel_section():
 <p class="muted">심판: 조수 하루 · 같은 고객 데이터에서 새 고객과 가장 닮은 사람을 누가 맞히나</p>
 {talk([("haru","e07","이번엔 10번 방과 다른 손님입니다. 새 고객은 158cm, 49kg! 후보는 고객 라·마·바 세 명입니다. 옷 치수가 같을 사람을 맞혀 주세요."),
        ("sia","e19","측정 장비가 키를 mm로 줬으니 그대로 재면 되죠! 빠른 게 최고!"),
-       ("moa","e09","저는 키는 5cm를, 몸무게는 5kg을 한 칸으로 맞춘 다음 잴게요."),
+       ("moa","e09","저는 키는 5cm를, 몸무게는 5kg을 한 단위로 맞춘 다음 잴게요."),
        ("jupanbot","e16","어차피 같은 사람들이니 답도 같겠죠!"),
        ("fruitfly","e09","정말? 두 사람 답을 차례로 열어 봐.")])}
 <div class="panel"><div class="ph"><b>대결 패널</b><small>버튼을 차례로 누르세요 · 예시 데이터</small></div>
@@ -403,7 +409,7 @@ def duel_section():
 <div class="readout" aria-live="polite"></div></div>
 <div class="solve"><h4>심판 판정</h4>
 <p>시아 방식은 키 차이를 mm로 재서 30·10·50처럼 크게 잡습니다. 몸무게 차이 2·6·1kg은 거의 묻힙니다. 그래서 키만 가까운 고객 마를 골랐습니다.</p>
-<p>모아 방식의 "5cm·5kg"은 이 고객들의 키와 몸무게가 보통 그만큼씩 퍼져 있다는 뜻입니다(예시값). 퍼진 만큼을 한 칸으로 삼으니 두 열이 공평해졌습니다. 고객 라와 거리 0.72로 가장 가깝습니다.</p>
+<p>모아 방식의 "5cm·5kg"은 이 고객들의 키와 몸무게가 보통 그만큼씩 퍼져 있다는 뜻입니다(예시값). 퍼진 만큼을 한 단위로 삼으니 두 열이 공평해졌습니다. 고객 라와 거리 0.72로 가장 가깝습니다.</p>
 <p>실무에서는 이 "퍼진 정도"를 데이터에서 직접 계산합니다. 10번 방 코드 상자의 표준화가 바로 그 일입니다.</p>
 <p>10번 방의 교훈 그대로입니다. 단위를 맞추지 않으면 숫자가 큰 열이 거리를 독차지합니다.</p></div>
 {talk([("haru","e10","판정! 이번 대결은 모아의 승리입니다."),("moa","e16","단위만 맞췄을 뿐인데요."),("sia","e14","빠른 게 최고는 아니었네요… 다음엔 단위부터 볼게요.")])}
@@ -414,9 +420,9 @@ def summary2():
     return f"""<section id="sum"><div class="wrap"><h2>②편 정리</h2>
 <div class="tbl"><table><thead><tr><th>방</th><th>도구</th><th>한 줄</th><th>머신러닝에서는</th></tr></thead><tbody>
 <tr><td>6</td><td>그림자</td><td>똑바로 내린 발밑이 가장 가까운 답</td><td>예측선 긋기, 평균</td></tr>
-<tr><td>7</td><td>칸막이</td><td>꽂힌 화살표와의 점수로 편 가르기</td><td>분류기의 결정 경계</td></tr>
+<tr><td>7</td><td>가름판</td><td>꽂힌 화살표와의 점수로 편 가르기</td><td>분류기의 결정 경계</td></tr>
 <tr><td>8</td><td>밀기·돌리기·뒤집기</td><td>거리를 지키는 움직임</td><td>데이터 늘리기</td></tr>
-<tr><td>9</td><td>공</td><td>반지름 안쪽 = 이웃 / 칸이 많으면 겉껍질에 몰림</td><td>반경 이웃, 칸이 많을 때의 함정(차원의 저주)</td></tr>
+<tr><td>9</td><td>공</td><td>반지름 안쪽 = 이웃 / 축이 많으면 겉껍질에 몰림</td><td>반경 이웃, 축이 많을 때의 함정(차원의 저주)</td></tr>
 <tr><td>10</td><td>단위 맞추기 · 호와 현</td><td>곧은 자가 공정하려면 단위를 맞춘다</td><td>표준화</td></tr></tbody></table></div></div></section>
 """
 
@@ -426,24 +432,24 @@ def outro_section():
 <h3>① 오늘 방의 정리</h3>
 <p>자(거리)로 얼마나 먼지, 각도기(겹침 점수)로 얼마나 닮았는지, 그림자로 가장 가까운 답이 어디인지 쟀습니다.</p>
 <h3>② 이 방이 못 하는 것</h3>
-<p>칸 수가 정해져 있어야 합니다. 소리·센서 곡선·주가 흐름처럼 끝없이 이어지는 데이터는 담지 못합니다.</p>
+<p>축 수가 정해져 있어야 합니다. 소리·센서 곡선·주가 흐름처럼 끝없이 이어지는 데이터는 담지 못합니다.</p>
 <p>1초짜리 음악만 해도 CD 음질로 받아 적으면 숫자가 44100개입니다. 그래도 소리 곡선 자체는 끝없이 이어집니다.</p>
 <h3>③ 힐베르트 공간이란</h3>
 <div class="three" style="border-color:var(--orange);background:var(--orange-soft)"><ul>
 <li>자와 각도기는 그대로 두고, 방을 <b>끝없이</b> 넓힌 것입니다.</li>
 <li>곡선 하나를 점 하나로 보고, 곡선끼리도 "얼마나 먼가·얼마나 닮았나·그림자"를 잽니다.</li>
-<li>오늘 배운 규칙이 거의 그대로 통합니다. 달라지는 것은 칸 수뿐입니다.</li></ul>
+<li>오늘 배운 규칙이 거의 그대로 통합니다. 달라지는 것은 축 수뿐입니다.</li></ul>
 <details class="abbr"><summary>원어 (펼치기)</summary><dl><dt>Hilbert space</dt><dd>힐베르트 공간 — 길이·각도·그림자·극한이 모두 되는 끝없는 방</dd></dl></details></div>
 <h3>④ 어디에 쓰이나 (이름만)</h3>
 <div class="cards">
 <div class="card"><span class="n">음성 인식</span><h3>소리를 물결 조각으로</h3><p>소리를 낮은 소리·높은 소리 조각의 세기로 나눠 봅니다.</p></div>
 <div class="card"><span class="n">압축</span><h3>MP3</h3><p>큰 조각 몇 개만 남기고 작은 조각은 버립니다.</p></div>
-<div class="card"><span class="n">커널 방법</span><h3>SVM</h3><p>닮음 점수표만으로 끝없는 방에 칸막이를 세웁니다.</p></div></div>
-<h3>⑤ 실험 — 칸 수를 끝없이</h3>
-{talk([("moa","e09","칸을 계속 늘리면 어떻게 돼요?"),("fruitfly","e09","끝까지 밀어 봐. \"끝없이\"까지.")])}
-<div class="panel"><div class="ph"><b>끝맺음 실험</b><small>칸 수를 2 → 3 → 10 → 100 → 끝없이로 바꿔 보세요</small></div>
+<div class="card"><span class="n">커널 방법</span><h3>SVM</h3><p>닮음 점수표만으로 끝없는 방에 가름판를 세웁니다.</p></div></div>
+<h3>⑤ 실험 — 축 수를 끝없이</h3>
+{talk([("moa","e09","축을 계속 늘리면 어떻게 돼요?"),("fruitfly","e09","끝까지 밀어 봐. \"끝없이\"까지.")])}
+<div class="panel"><div class="ph"><b>끝맺음 실험</b><small>축 수를 2 → 3 → 10 → 100 → 끝없이로 바꿔 보세요</small></div>
 <div id="pp-outro" data-panel="outro"></div>
-<div class="ctrl"><label>칸 수 <input type="range" min="0" max="4" step="1" value="0" aria-label="칸 수"></label><span class="hint">2 · 3 · 10 · 100 · 끝없이</span></div>
+<div class="ctrl"><label>축 수 <input type="range" min="0" max="4" step="1" value="0" aria-label="축 수"></label><span class="hint">2 · 3 · 10 · 100 · 끝없이</span></div>
 <div class="readout" aria-live="polite"></div></div>
 <h3>⑥ 다음 편으로</h3>
 {talk([("doctor","e08","다음 복도에는 끝없는 방이 열 개 있다. 자와 각도기는 그대로 들고 가라."),("sia","e19","곡선이 점 하나라니, 빨리 들어가 보고 싶어요!"),("moa","e10","오늘 배운 그림자가 거기서도 통하는지 확인할게요.")])}
