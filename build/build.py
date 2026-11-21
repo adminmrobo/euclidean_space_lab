@@ -158,7 +158,7 @@ def room(r):
 <div class="try"><b>숫자로 한 번 해 보기</b>{tries}</div>
 <div class="q">{face('haru','e16')}<div><b>조수</b> {E(r['haru_c'])}</div></div></div>
 </div>
-<div class="pair"><div class="box"><h4>일상으로 치면</h4><p>{E(r['daily'])}</p></div><div class="box ml"><h4>머신러닝에서는</h4><p>{E(r['ml'])}</p></div></div>
+{talk(r['aside']) + chr(10) if r.get('aside') else ''}<div class="pair"><div class="box"><h4>일상으로 치면</h4><p>{E(r['daily'])}</p></div><div class="box ml"><h4>머신러닝에서는</h4><p>{E(r['ml'])}</p></div></div>
 {talk(r['talk'])}
 {panel(r)}
 <div class="solve"><h4>풀이</h4>{solve}</div>
